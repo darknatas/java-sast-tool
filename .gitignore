@@ -1,0 +1,7 @@
+target/
+*.class
+*.jar
+*.war
+.claude_code/
+.DS_Store
+*.log

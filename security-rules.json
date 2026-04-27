@@ -1,0 +1,911 @@
+{
+  "version": "2021.1",
+  "source": "소프트웨어 보안약점 진단가이드 (2021), 행정안전부",
+  "rules": [
+
+    // ────────────────────────────────────────────────
+    // PART3 : 설계단계 보안설계 기준 (총 20개)
+    // ────────────────────────────────────────────────
+    {
+      "ruleId": "DS-1.1",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "DBMS 조회 및 결과 검증",
+      "cwe": ["CWE-89"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "SQL 질의문 내 입력값 유효성 검증 및 바인딩 방식 적용 설계",
+      "relatedImplRules": ["IV-1.1"]
+    },
+    {
+      "ruleId": "DS-1.2",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "XML 조회 및 결과 검증",
+      "cwe": ["CWE-652", "CWE-643"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "XPath·XQuery 질의문에 사용되는 파라미터 필터링 또는 바인딩 설계",
+      "relatedImplRules": ["IV-1.9", "IV-1.10"]
+    },
+    {
+      "ruleId": "DS-1.3",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "디렉토리 서비스 조회 및 결과 검증",
+      "cwe": ["CWE-90"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "LDAP 질의에 사용되는 입력값 필터링 설계",
+      "relatedImplRules": ["IV-1.10"]
+    },
+    {
+      "ruleId": "DS-1.4",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "시스템 자원 접근 및 명령어 수행 입력값 검증",
+      "cwe": ["CWE-78", "CWE-22", "CWE-99"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "파일 경로·OS 명령어에 사용되는 외부 입력값 검증 설계",
+      "relatedImplRules": ["IV-1.3", "IV-1.5"]
+    },
+    {
+      "ruleId": "DS-1.5",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "웹 서비스 요청 및 결과 검증",
+      "cwe": ["CWE-79"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "웹 서비스 응답 데이터 XSS 필터링 및 인코딩 설계",
+      "relatedImplRules": ["IV-1.4"]
+    },
+    {
+      "ruleId": "DS-1.6",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "웹 기반 중요 기능 수행 요청 유효성 검증",
+      "cwe": ["CWE-352"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "CSRF 방지를 위한 토큰 생성 및 검증 메커니즘 설계",
+      "relatedImplRules": ["IV-1.11"]
+    },
+    {
+      "ruleId": "DS-1.7",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "HTTP 프로토콜 유효성 검증",
+      "cwe": ["CWE-113"],
+      "severity": "MEDIUM",
+      "phase": "DESIGN",
+      "description": "HTTP 응답분할 방지를 위한 헤더 값 검증 설계",
+      "relatedImplRules": ["IV-1.13"]
+    },
+    {
+      "ruleId": "DS-1.8",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "허용된 범위내 메모리 접근",
+      "cwe": ["CWE-119", "CWE-190"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "버퍼 접근 범위 제한 및 정수 오버플로우 방지 설계",
+      "relatedImplRules": ["IV-1.14", "IV-1.16"]
+    },
+    {
+      "ruleId": "DS-1.9",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "보안기능 입력값 검증",
+      "cwe": ["CWE-807", "CWE-476"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "보안결정에 사용되는 입력값 검증 로직 설계",
+      "relatedImplRules": ["IV-1.15"]
+    },
+    {
+      "ruleId": "DS-1.10",
+      "part": "PART3",
+      "section": "입력데이터 검증 및 표현",
+      "name": "업로드·다운로드 파일 검증",
+      "cwe": ["CWE-434", "CWE-494"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "업로드 파일 유형·크기 검증 및 다운로드 경로 검증 설계",
+      "relatedImplRules": ["IV-1.6"]
+    },
+    {
+      "ruleId": "DS-2.1",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "인증 대상 및 방식",
+      "cwe": ["CWE-306"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "중요 기능에 대한 적절한 인증 수단 적용 설계",
+      "relatedImplRules": ["IV-2.1"]
+    },
+    {
+      "ruleId": "DS-2.2",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "인증 수행 제한",
+      "cwe": ["CWE-307"],
+      "severity": "MEDIUM",
+      "phase": "DESIGN",
+      "description": "반복 인증 시도 제한(계정 잠금) 메커니즘 설계",
+      "relatedImplRules": ["IV-2.16"]
+    },
+    {
+      "ruleId": "DS-2.3",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "비밀번호 관리",
+      "cwe": ["CWE-521"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "비밀번호 복잡성 정책 및 안전한 저장 방식 설계",
+      "relatedImplRules": ["IV-2.9"]
+    },
+    {
+      "ruleId": "DS-2.4",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "중요자원 접근통제",
+      "cwe": ["CWE-285", "CWE-732"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "중요 자원에 대한 접근권한 최소화 및 통제 설계",
+      "relatedImplRules": ["IV-2.2", "IV-2.3"]
+    },
+    {
+      "ruleId": "DS-2.5",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "암호키 관리",
+      "cwe": ["CWE-321"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "암호키 생성·저장·폐기 생명주기 관리 설계",
+      "relatedImplRules": ["IV-2.6"]
+    },
+    {
+      "ruleId": "DS-2.6",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "암호연산",
+      "cwe": ["CWE-327", "CWE-326"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "안전한 암호 알고리즘 및 충분한 키 길이 사용 설계",
+      "relatedImplRules": ["IV-2.4", "IV-2.7"]
+    },
+    {
+      "ruleId": "DS-2.7",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "중요정보 저장",
+      "cwe": ["CWE-312", "CWE-539"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "중요정보 암호화 저장 및 쿠키 보안 속성 설계",
+      "relatedImplRules": ["IV-2.5", "IV-2.12"]
+    },
+    {
+      "ruleId": "DS-2.8",
+      "part": "PART3",
+      "section": "보안기능",
+      "name": "중요정보 전송",
+      "cwe": ["CWE-319"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "중요정보 전송 시 암호화 채널(TLS) 사용 설계",
+      "relatedImplRules": []
+    },
+    {
+      "ruleId": "DS-3.1",
+      "part": "PART3",
+      "section": "에러처리",
+      "name": "예외처리",
+      "cwe": ["CWE-209", "CWE-390"],
+      "severity": "MEDIUM",
+      "phase": "DESIGN",
+      "description": "예외 발생 시 시스템 정보 미노출 및 안전한 처리 흐름 설계",
+      "relatedImplRules": ["IV-4.1", "IV-4.2", "IV-4.3"]
+    },
+    {
+      "ruleId": "DS-4.1",
+      "part": "PART3",
+      "section": "세션통제",
+      "name": "세션 통제",
+      "cwe": ["CWE-488"],
+      "severity": "HIGH",
+      "phase": "DESIGN",
+      "description": "세션 생성·만료·재사용 방지 메커니즘 설계",
+      "relatedImplRules": ["IV-6.1"]
+    },
+
+    // ────────────────────────────────────────────────
+    // PART4 : 구현단계 보안약점 제거 기준 (총 49개)
+    // ────────────────────────────────────────────────
+
+    // 제1절 입력데이터 검증 및 표현 (17개)
+    {
+      "ruleId": "IV-1.1",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "SQL 삽입",
+      "cwe": ["CWE-89"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": [
+        "request.getParameter",
+        "request.getAttribute",
+        "request.getQueryString",
+        "request.getHeader",
+        "request.getCookies",
+        "getInputStream",
+        "args[]"
+      ],
+      "sinks": [
+        "Statement.executeQuery",
+        "Statement.executeUpdate",
+        "Statement.execute",
+        "Statement.executeBatch",
+        "Connection.prepareStatement",
+        "createNativeQuery",
+        "createQuery"
+      ],
+      "sanitizers": [
+        "PreparedStatement",
+        "setString",
+        "setInt",
+        "setLong",
+        "setParameter",
+        "escapeSQL",
+        "replaceAll"
+      ],
+      "dangerousPatterns": [
+        "String sql = .* \\+ .*",
+        "stmt\\.executeQuery\\(.*\\+.*\\)",
+        "\"SELECT.*\" \\+ .*",
+        "\\$\\{.*\\}"
+      ],
+      "remediation": {
+        "strategy": "USE_PREPARED_STATEMENT",
+        "description": "PreparedStatement를 사용하여 파라미터를 바인딩하고 동적 쿼리 문자열 연결을 제거",
+        "guideRef": "PART4 제1절 1항 (p.180-193)"
+      }
+    },
+    {
+      "ruleId": "IV-1.2",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "코드삽입",
+      "cwe": ["CWE-94", "CWE-95"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter", "request.getAttribute"],
+      "sinks": [
+        "Runtime.exec",
+        "ProcessBuilder",
+        "ScriptEngine.eval",
+        "Class.forName",
+        "Method.invoke",
+        "groovy.lang.GroovyShell.evaluate"
+      ],
+      "sanitizers": ["replaceAll", "matches", "Pattern.compile"],
+      "remediation": {
+        "strategy": "WHITELIST_VALIDATION",
+        "description": "허용된 값 목록(화이트리스트)으로 입력값을 제한하고 동적 코드 실행 금지",
+        "guideRef": "PART4 제1절 2항 (p.194-200)"
+      }
+    },
+    {
+      "ruleId": "IV-1.3",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "경로 조작 및 자원 삽입",
+      "cwe": ["CWE-22", "CWE-99", "CWE-78"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter", "request.getAttribute", "args[]", "getenv"],
+      "sinks": [
+        "new File(",
+        "new FileInputStream(",
+        "new FileOutputStream(",
+        "new FileReader(",
+        "new BufferedReader(new FileReader",
+        "Paths.get(",
+        "new URL(",
+        "openConnection",
+        "ServerSocket",
+        "Socket"
+      ],
+      "sanitizers": [
+        "replaceAll",
+        "getCanonicalPath",
+        "startsWith",
+        "Paths.get.*normalize",
+        "FilenameUtils.getName"
+      ],
+      "dangerousPatterns": [
+        "\\.\\./",
+        "\\.\\.\\\\"
+      ],
+      "remediation": {
+        "strategy": "PATH_CANONICALIZATION",
+        "description": "경로순회 문자열(../, ..\\) 제거 후 정규화된 절대경로 비교 검증",
+        "guideRef": "PART4 제1절 3항 (p.201-210)"
+      }
+    },
+    {
+      "ruleId": "IV-1.4",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "크로스사이트 스크립트",
+      "cwe": ["CWE-79"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter", "request.getAttribute", "request.getCookies"],
+      "sinks": [
+        "response.getWriter().print",
+        "response.getWriter().println",
+        "out.print",
+        "out.println",
+        "setAttribute",
+        "sendRedirect"
+      ],
+      "sanitizers": [
+        "escapeHtml",
+        "encodeForHTML",
+        "StringEscapeUtils",
+        "ESAPI.encoder",
+        "HtmlUtils.htmlEscape"
+      ],
+      "remediation": {
+        "strategy": "OUTPUT_ENCODING",
+        "description": "출력 시 HTML 특수문자 인코딩(OWASP ESAPI 또는 Spring HtmlUtils 사용)",
+        "guideRef": "PART4 제1절 4항 (p.211-222)"
+      }
+    },
+    {
+      "ruleId": "IV-1.5",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "운영체제 명령어 삽입",
+      "cwe": ["CWE-78"],
+      "severity": "CRITICAL",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter", "request.getAttribute", "args[]"],
+      "sinks": [
+        "Runtime.getRuntime().exec",
+        "new ProcessBuilder(",
+        "ProcessBuilder.command"
+      ],
+      "sanitizers": ["replaceAll", "Pattern.matches", "whitelist"],
+      "remediation": {
+        "strategy": "AVOID_OS_COMMAND",
+        "description": "OS 명령어 직접 실행 금지; 불가피한 경우 화이트리스트 기반 입력값 검증 적용",
+        "guideRef": "PART4 제1절 5항 (p.223-231)"
+      }
+    },
+    {
+      "ruleId": "IV-1.6",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "위험한 형식 파일 업로드",
+      "cwe": ["CWE-434"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sources": ["request.getPart", "MultipartFile.getOriginalFilename"],
+      "sinks": ["new File(", "transferTo", "write("],
+      "sanitizers": ["endsWith", "matches", "FilenameUtils.getExtension"],
+      "remediation": {
+        "strategy": "FILE_EXTENSION_WHITELIST",
+        "description": "허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화",
+        "guideRef": "PART4 제1절 6항 (p.232-238)"
+      }
+    },
+    {
+      "ruleId": "IV-1.7",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "신뢰되지 않는 URL 주소로 자동접속 연결",
+      "cwe": ["CWE-601"],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter"],
+      "sinks": ["sendRedirect", "setHeader.*Location", "response.encodeRedirectURL"],
+      "sanitizers": ["startsWith", "matches", "allowedDomains.contains"],
+      "remediation": {
+        "strategy": "REDIRECT_WHITELIST",
+        "description": "리다이렉트 대상 URL을 서버 측에서 허용 목록과 비교 검증",
+        "guideRef": "PART4 제1절 7항 (p.239-243)"
+      }
+    },
+    {
+      "ruleId": "IV-1.8",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "부적절한 XML 외부개체 참조",
+      "cwe": ["CWE-611"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sources": ["request.getInputStream", "request.getReader"],
+      "sinks": [
+        "DocumentBuilderFactory",
+        "SAXParserFactory",
+        "XMLInputFactory",
+        "TransformerFactory"
+      ],
+      "sanitizers": [
+        "setFeature.*DISALLOW_DOCTYPE",
+        "setExpandEntityReferences.*false",
+        "setProperty.*ACCESS_EXTERNAL"
+      ],
+      "remediation": {
+        "strategy": "DISABLE_XML_ENTITY",
+        "description": "XML 파서에서 외부 엔티티 참조 및 DOCTYPE 선언을 비활성화",
+        "guideRef": "PART4 제1절 8항 (p.244-250)"
+      }
+    },
+    {
+      "ruleId": "IV-1.9",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "XML 삽입",
+      "cwe": ["CWE-652", "CWE-643"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter"],
+      "sinks": ["XPath.evaluate", "XQuery.execute", "executeXPath"],
+      "sanitizers": ["replaceAll", "encodeForXPath", "ESAPI.encoder"],
+      "remediation": {
+        "strategy": "PARAMETERIZED_XPATH",
+        "description": "XPath 변수 바인딩 사용 또는 특수문자 필터링 적용",
+        "guideRef": "PART4 제1절 9항 (p.251-263)"
+      }
+    },
+    {
+      "ruleId": "IV-1.10",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "LDAP 삽입",
+      "cwe": ["CWE-90"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter"],
+      "sinks": ["DirContext.search", "InitialDirContext", "NamingEnumeration"],
+      "sanitizers": ["encodeForLDAP", "ESAPI.encoder", "replaceAll"],
+      "remediation": {
+        "strategy": "LDAP_ENCODING",
+        "description": "LDAP 필터에 사용되는 입력값에 LDAP 특수문자 인코딩 적용",
+        "guideRef": "PART4 제1절 10항 (p.264-271)"
+      }
+    },
+    {
+      "ruleId": "IV-1.11",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "크로스사이트 요청 위조",
+      "cwe": ["CWE-352"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sources": [],
+      "sinks": ["doPost", "doPut", "doDelete"],
+      "sanitizers": ["csrfToken", "validateToken", "SynchronizerTokenPattern"],
+      "remediation": {
+        "strategy": "CSRF_TOKEN",
+        "description": "중요 기능 요청에 CSRF 토큰 생성·검증 또는 SameSite 쿠키 속성 적용",
+        "guideRef": "PART4 제1절 11항 (p.272-275)"
+      }
+    },
+    {
+      "ruleId": "IV-1.12",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "서버사이드 요청 위조",
+      "cwe": ["CWE-918"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter"],
+      "sinks": ["new URL(", "openConnection", "HttpClient", "RestTemplate.getForObject"],
+      "sanitizers": ["allowedHosts.contains", "InetAddress.getByName", "URI.getHost"],
+      "remediation": {
+        "strategy": "SSRF_ALLOWLIST",
+        "description": "서버 측에서 허용된 호스트 목록 검증 후 외부 요청 실행",
+        "guideRef": "PART4 제1절 12항 (p.276-283)"
+      }
+    },
+    {
+      "ruleId": "IV-1.13",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "HTTP 응답분할",
+      "cwe": ["CWE-113"],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter", "request.getHeader"],
+      "sinks": ["response.setHeader", "response.addHeader", "response.sendRedirect"],
+      "sanitizers": ["replaceAll.*\\\\r|\\\\n", "encodeForHTTP"],
+      "remediation": {
+        "strategy": "CRLF_REMOVAL",
+        "description": "HTTP 헤더 값에 포함되는 입력값에서 CR(\\r), LF(\\n) 문자 제거",
+        "guideRef": "PART4 제1절 13항 (p.284-289)"
+      }
+    },
+    {
+      "ruleId": "IV-1.14",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "정수형 오버플로우",
+      "cwe": ["CWE-190"],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sources": ["request.getParameter"],
+      "sinks": [],
+      "sanitizers": ["Math.addExact", "StrictMath", "BigInteger", "Integer.MAX_VALUE"],
+      "remediation": {
+        "strategy": "BOUNDS_CHECK",
+        "description": "정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용",
+        "guideRef": "PART4 제1절 14항 (p.290-296)"
+      }
+    },
+    {
+      "ruleId": "IV-1.15",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "보안기능 결정에 사용되는 부적절한 입력값",
+      "cwe": ["CWE-807"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter", "request.getCookies", "request.getHeader"],
+      "sinks": ["if.*isAdmin", "if.*role", "if.*permission", "session.getAttribute.*auth"],
+      "sanitizers": ["session.getAttribute", "SecurityContext"],
+      "remediation": {
+        "strategy": "SERVER_SIDE_AUTH_CHECK",
+        "description": "보안 결정은 서버 측 세션/SecurityContext에서만 수행, 클라이언트 입력값 사용 금지",
+        "guideRef": "PART4 제1절 15항 (p.297-302)"
+      }
+    },
+    {
+      "ruleId": "IV-1.16",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "메모리 버퍼 오버플로우",
+      "cwe": ["CWE-119"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sources": [],
+      "sinks": [],
+      "sanitizers": [],
+      "remediation": {
+        "strategy": "SAFE_ARRAY_ACCESS",
+        "description": "배열·버퍼 접근 전 경계값 검사, Java의 경우 NIO Buffer API 활용",
+        "guideRef": "PART4 제1절 16항 (p.303-308)"
+      }
+    },
+    {
+      "ruleId": "IV-1.17",
+      "part": "PART4",
+      "section": "입력데이터 검증 및 표현",
+      "name": "포맷 스트링 삽입",
+      "cwe": ["CWE-134"],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": ["request.getParameter"],
+      "sinks": ["String.format(", "printf(", "MessageFormat.format(", "logger.*format"],
+      "sanitizers": ["replaceAll.*%", "Pattern.matches"],
+      "remediation": {
+        "strategy": "LITERAL_FORMAT_STRING",
+        "description": "String.format 첫 인자를 리터럴로 고정, 외부 입력값을 포맷 문자열로 사용 금지",
+        "guideRef": "PART4 제1절 17항 (p.309-313)"
+      }
+    },
+
+    // 제2절 보안기능 (16개)
+    {
+      "ruleId": "IV-2.1",  "part": "PART4", "section": "보안기능",
+      "name": "적절한 인증 없는 중요기능 허용", "cwe": ["CWE-306"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "AUTH_GATE_FILTER",
+        "description": "모든 중요 기능 진입 전 인증 상태 확인 필터 적용",
+        "guideRef": "PART4 제2절 1항 (p.314-318)" }
+    },
+    {
+      "ruleId": "IV-2.2",  "part": "PART4", "section": "보안기능",
+      "name": "부적절한 인가", "cwe": ["CWE-285"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "RBAC_CHECK",
+        "description": "기능별 권한 검사 로직 추가(RBAC/ABAC 패턴 적용)",
+        "guideRef": "PART4 제2절 2항 (p.319-324)" }
+    },
+    {
+      "ruleId": "IV-2.3",  "part": "PART4", "section": "보안기능",
+      "name": "중요한 자원에 대한 잘못된 권한 설정", "cwe": ["CWE-732"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "LEAST_PRIVILEGE",
+        "description": "파일·디렉터리 권한을 최소 권한 원칙으로 설정",
+        "guideRef": "PART4 제2절 3항 (p.325-329)" }
+    },
+    {
+      "ruleId": "IV-2.4",  "part": "PART4", "section": "보안기능",
+      "name": "취약한 암호화 알고리즘 사용", "cwe": ["CWE-327"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["DES", "RC4", "MD5", "SHA-1", "Blowfish"],
+      "remediation": { "strategy": "STRONG_CRYPTO",
+        "description": "AES-256, SHA-256 이상의 안전한 알고리즘으로 교체",
+        "guideRef": "PART4 제2절 4항 (p.330-336)" }
+    },
+    {
+      "ruleId": "IV-2.5",  "part": "PART4", "section": "보안기능",
+      "name": "암호화되지 않은 중요정보", "cwe": ["CWE-312"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "ENCRYPT_SENSITIVE_DATA",
+        "description": "중요정보(비밀번호, 주민번호 등) 저장 전 암호화 적용",
+        "guideRef": "PART4 제2절 5항 (p.337-349)" }
+    },
+    {
+      "ruleId": "IV-2.6",  "part": "PART4", "section": "보안기능",
+      "name": "하드코드된 중요정보", "cwe": ["CWE-321"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "dangerousPatterns": ["password\\s*=\\s*\"[^\"]+\"", "secretKey\\s*=\\s*\"[^\"]+\"", "apiKey\\s*=\\s*\"[^\"]+\""],
+      "remediation": { "strategy": "EXTERNALIZE_SECRETS",
+        "description": "소스코드에서 비밀정보 제거, 환경변수·외부 설정 파일·Vault 사용",
+        "guideRef": "PART4 제2절 6항 (p.350-359)" }
+    },
+    {
+      "ruleId": "IV-2.7",  "part": "PART4", "section": "보안기능",
+      "name": "충분하지 않은 키 길이 사용", "cwe": ["CWE-326"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "MIN_KEY_SIZE",
+        "description": "RSA 2048bit 이상, AES 128bit 이상, ECC 224bit 이상 키 길이 사용",
+        "guideRef": "PART4 제2절 7항 (p.360-363)" }
+    },
+    {
+      "ruleId": "IV-2.8",  "part": "PART4", "section": "보안기능",
+      "name": "적절하지 않은 난수 값 사용", "cwe": ["CWE-330"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["new Random(", "Math.random("],
+      "remediation": { "strategy": "SECURE_RANDOM",
+        "description": "java.security.SecureRandom으로 교체",
+        "guideRef": "PART4 제2절 8항 (p.364-369)" }
+    },
+    {
+      "ruleId": "IV-2.9",  "part": "PART4", "section": "보안기능",
+      "name": "취약한 비밀번호 허용", "cwe": ["CWE-521"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "PASSWORD_POLICY",
+        "description": "길이 8자 이상, 대소문자·숫자·특수문자 조합 필수 검증 로직 구현",
+        "guideRef": "PART4 제2절 9항 (p.370-374)" }
+    },
+    {
+      "ruleId": "IV-2.10", "part": "PART4", "section": "보안기능",
+      "name": "부적절한 전자서명 확인", "cwe": ["CWE-347"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "VERIFY_SIGNATURE",
+        "description": "전자서명 검증 실패 시 처리를 중단하고 예외 반환",
+        "guideRef": "PART4 제2절 10항 (p.375-378)" }
+    },
+    {
+      "ruleId": "IV-2.11", "part": "PART4", "section": "보안기능",
+      "name": "부적절한 인증서 유효성 검증", "cwe": ["CWE-295"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["setHostnameVerifier", "TrustManager", "X509TrustManager"],
+      "remediation": { "strategy": "PROPER_CERT_VALIDATION",
+        "description": "사용자 정의 TrustManager 내 인증서 체인 및 호스트명 검증 구현",
+        "guideRef": "PART4 제2절 11항 (p.379-382)" }
+    },
+    {
+      "ruleId": "IV-2.12", "part": "PART4", "section": "보안기능",
+      "name": "사용자 하드디스크에 저장되는 쿠키를 통한 정보 노출", "cwe": ["CWE-539"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["new Cookie(", "addCookie("],
+      "remediation": { "strategy": "SECURE_COOKIE_ATTRIBUTES",
+        "description": "쿠키에 HttpOnly, Secure, SameSite 속성 설정, 중요정보 쿠키 저장 금지",
+        "guideRef": "PART4 제2절 12항 (p.383-386)" }
+    },
+    {
+      "ruleId": "IV-2.13", "part": "PART4", "section": "보안기능",
+      "name": "주석문 안에 포함된 시스템 주요정보", "cwe": ["CWE-615"],
+      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "dangerousPatterns": ["//.*password", "//.*secret", "/\\*.*password.*\\*/"],
+      "remediation": { "strategy": "REMOVE_SENSITIVE_COMMENTS",
+        "description": "소스코드 주석에서 비밀번호·키·경로 등 민감정보 제거",
+        "guideRef": "PART4 제2절 13항 (p.387-390)" }
+    },
+    {
+      "ruleId": "IV-2.14", "part": "PART4", "section": "보안기능",
+      "name": "솔트 없이 일방향 해쉬 함수 사용", "cwe": ["CWE-759"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["MessageDigest.getInstance.*MD5", "MessageDigest.getInstance.*SHA-1"],
+      "remediation": { "strategy": "SALTED_HASH",
+        "description": "bcrypt, PBKDF2, Argon2 등 솔트를 포함하는 해시 함수 사용",
+        "guideRef": "PART4 제2절 14항 (p.391-394)" }
+    },
+    {
+      "ruleId": "IV-2.15", "part": "PART4", "section": "보안기능",
+      "name": "무결성 검사 없는 코드 다운로드", "cwe": ["CWE-494"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "CHECKSUM_VERIFY",
+        "description": "다운로드된 코드·라이브러리에 대해 체크섬(SHA-256) 검증 후 실행",
+        "guideRef": "PART4 제2절 15항 (p.395-399)" }
+    },
+    {
+      "ruleId": "IV-2.16", "part": "PART4", "section": "보안기능",
+      "name": "반복된 인증시도 제한 기능 부재", "cwe": ["CWE-307"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "ACCOUNT_LOCKOUT",
+        "description": "로그인 실패 횟수 임계값 설정 및 계정 잠금/CAPTCHA 메커니즘 구현",
+        "guideRef": "PART4 제2절 16항 (p.400-405)" }
+    },
+
+    // 제3절 시간 및 상태 (2개)
+    {
+      "ruleId": "IV-3.1", "part": "PART4", "section": "시간 및 상태",
+      "name": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)", "cwe": ["CWE-367"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["f.exists()", "f.canRead()", "f.isFile()"],
+      "remediation": { "strategy": "ATOMIC_FILE_OPERATION",
+        "description": "파일 존재 확인과 열기를 원자적으로 처리(try-with-resources 직접 오픈)",
+        "guideRef": "PART4 제3절 1항 (p.406-414)" }
+    },
+    {
+      "ruleId": "IV-3.2", "part": "PART4", "section": "시간 및 상태",
+      "name": "종료되지 않는 반복문 또는 재귀 함수", "cwe": ["CWE-835"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "TERMINATION_CONDITION",
+        "description": "반복문·재귀 함수에 명확한 종료 조건 및 최대 반복 횟수 제한 추가",
+        "guideRef": "PART4 제3절 2항 (p.415-418)" }
+    },
+
+    // 제4절 에러처리 (3개)
+    {
+      "ruleId": "IV-4.1", "part": "PART4", "section": "에러처리",
+      "name": "오류 메시지 정보노출", "cwe": ["CWE-209"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["e.printStackTrace()", "e.getMessage()", "response.getWriter.*Exception"],
+      "remediation": { "strategy": "GENERIC_ERROR_MESSAGE",
+        "description": "사용자에게 일반 오류 메시지만 출력, 상세 오류는 서버 로그에만 기록",
+        "guideRef": "PART4 제4절 1항 (p.419-424)" }
+    },
+    {
+      "ruleId": "IV-4.2", "part": "PART4", "section": "에러처리",
+      "name": "오류상황 대응 부재", "cwe": ["CWE-390"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "dangerousPatterns": ["catch\\s*\\(.*\\)\\s*\\{\\s*\\}"],
+      "remediation": { "strategy": "HANDLE_ALL_EXCEPTIONS",
+        "description": "빈 catch 블록 제거, 모든 예외에 대한 적절한 처리·로깅 구현",
+        "guideRef": "PART4 제4절 2항 (p.425-428)" }
+    },
+    {
+      "ruleId": "IV-4.3", "part": "PART4", "section": "에러처리",
+      "name": "부적절한 예외 처리", "cwe": ["CWE-754"],
+      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "SPECIFIC_EXCEPTION_HANDLING",
+        "description": "포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리",
+        "guideRef": "PART4 제4절 3항 (p.429-432)" }
+    },
+
+    // 제5절 코드오류 (5개)
+    {
+      "ruleId": "IV-5.1", "part": "PART4", "section": "코드오류",
+      "name": "Null Pointer 역참조", "cwe": ["CWE-476"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "NULL_CHECK",
+        "description": "객체 사용 전 null 검사 추가 또는 Optional 패턴 활용",
+        "guideRef": "PART4 제5절 1항 (p.433-444)" }
+    },
+    {
+      "ruleId": "IV-5.2", "part": "PART4", "section": "코드오류",
+      "name": "부적절한 자원 해제", "cwe": ["CWE-772"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["new FileInputStream(", "new Connection(", "getConnection("],
+      "remediation": { "strategy": "TRY_WITH_RESOURCES",
+        "description": "try-with-resources 구문으로 자원 자동 해제 보장",
+        "guideRef": "PART4 제5절 2항 (p.445-453)" }
+    },
+    {
+      "ruleId": "IV-5.3", "part": "PART4", "section": "코드오류",
+      "name": "해제된 자원 사용", "cwe": ["CWE-416"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "NULL_AFTER_CLOSE",
+        "description": "자원 해제 후 변수를 null로 설정하여 재사용 방지",
+        "guideRef": "PART4 제5절 3항 (p.454-458)" }
+    },
+    {
+      "ruleId": "IV-5.4", "part": "PART4", "section": "코드오류",
+      "name": "초기화되지 않은 변수 사용", "cwe": ["CWE-457"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "INITIALIZE_VARIABLES",
+        "description": "모든 변수를 선언 시 명시적으로 초기화",
+        "guideRef": "PART4 제5절 4항 (p.459-461)" }
+    },
+    {
+      "ruleId": "IV-5.5", "part": "PART4", "section": "코드오류",
+      "name": "신뢰할 수 없는 데이터의 역직렬화", "cwe": ["CWE-502"],
+      "severity": "CRITICAL", "phase": "IMPLEMENTATION", "taintAnalysis": true,
+      "sources": ["request.getInputStream", "ObjectInputStream"],
+      "sinks": ["ObjectInputStream.readObject", "readUnshared"],
+      "sanitizers": ["SerialKiller", "ValidatingObjectInputStream", "allowClasses"],
+      "remediation": { "strategy": "SAFE_DESERIALIZATION",
+        "description": "역직렬화 필터(ObjectInputFilter) 적용 또는 JSON/XML 등 안전한 형식으로 교체",
+        "guideRef": "PART4 제5절 5항 (p.462-468)" }
+    },
+
+    // 제6절 캡슐화 (4개)
+    {
+      "ruleId": "IV-6.1", "part": "PART4", "section": "캡슐화",
+      "name": "잘못된 세션에 의한 데이터 정보 노출", "cwe": ["CWE-488"],
+      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "SESSION_ISOLATION",
+        "description": "스레드 로컬 또는 요청별 세션 격리, 공유 객체에 사용자 데이터 저장 금지",
+        "guideRef": "PART4 제6절 1항 (p.469-475)" }
+    },
+    {
+      "ruleId": "IV-6.2", "part": "PART4", "section": "캡슐화",
+      "name": "제거되지 않고 남은 디버그 코드", "cwe": ["CWE-489"],
+      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "dangerousPatterns": ["System\\.out\\.print", "e\\.printStackTrace"],
+      "remediation": { "strategy": "REMOVE_DEBUG_CODE",
+        "description": "배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용",
+        "guideRef": "PART4 제6절 2항 (p.476-480)" }
+    },
+    {
+      "ruleId": "IV-6.3", "part": "PART4", "section": "캡슐화",
+      "name": "Public 메소드부터 반환된 Private 배열", "cwe": ["CWE-495"],
+      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "DEFENSIVE_COPY",
+        "description": "private 배열 반환 시 Arrays.copyOf()로 방어적 복사 후 반환",
+        "guideRef": "PART4 제6절 3항 (p.481-486)" }
+    },
+    {
+      "ruleId": "IV-6.4", "part": "PART4", "section": "캡슐화",
+      "name": "Private 배열에 Public 데이터 할당", "cwe": ["CWE-496"],
+      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "remediation": { "strategy": "DEFENSIVE_COPY_INPUT",
+        "description": "외부 배열을 private 필드에 할당 시 Arrays.copyOf()로 방어적 복사",
+        "guideRef": "PART4 제6절 4항 (p.487-491)" }
+    },
+
+    // 제7절 API 오용 (2개)
+    {
+      "ruleId": "IV-7.1", "part": "PART4", "section": "API 오용",
+      "name": "DNS lookup에 의존한 보안결정", "cwe": ["CWE-350"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["InetAddress.getByName", "getHostName", "getCanonicalHostName"],
+      "remediation": { "strategy": "IP_BASED_CHECK",
+        "description": "DNS 역방향 조회 결과 대신 IP 주소 기반으로 보안 결정 수행",
+        "guideRef": "PART4 제7절 1항 (p.492-496)" }
+    },
+    {
+      "ruleId": "IV-7.2", "part": "PART4", "section": "API 오용",
+      "name": "취약한 API 사용", "cwe": ["CWE-676"],
+      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
+      "sinks": ["Runtime.exec(", "System.loadLibrary("],
+      "remediation": { "strategy": "SAFE_API_REPLACEMENT",
+        "description": "보안 취약점이 알려진 API를 안전한 대체 API로 교체",
+        "guideRef": "PART4 제7절 2항 (p.497-505)" }
+    }
+  ]
+}

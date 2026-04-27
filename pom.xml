@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Spring Boot Parent: 의존성 버전 관리 및 플러그인 기본값 제공 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.sast</groupId>
+    <artifactId>java-sast-engine</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <name>Java SAST Engine</name>
+    <description>
+        Java 소스코드 정적 분석 도구 (보안약점 진단가이드 2021 기반) — Spring Boot 웹 서비스
+    </description>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 라이브러리 버전 -->
+        <javaparser.version>3.25.10</javaparser.version>
+        <commons-io.version>2.16.1</commons-io.version>
+        <commons-compress.version>1.26.2</commons-compress.version>
+        <xz.version>1.9</xz.version>
+        <!-- Spring Boot parent이 Jackson/SLF4J/Logback/JUnit 버전을 관리함 -->
+    </properties>
+
+    <dependencies>
+
+        <!-- ── Spring Boot Web (내장 Tomcat + Spring MVC) ────────────── -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- ── Thymeleaf 템플릿 엔진 ─────────────────────────────────── -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- ── AST 파싱 (핵심) ─────────────────────────────────────── -->
+        <!--
+            JavaParser 선택 이유 (vs Spoon):
+            1. API 직관성: VoidVisitorAdapter 패턴으로 AST 순회가 단순명료
+            2. Symbol Solver 내장: 타입 해석이 별도 설정 없이 가능
+            3. 의존성 경량: Spoon은 Eclipse JDT 의존이 무거움
+        -->
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-symbol-solver-core</artifactId>
+            <version>${javaparser.version}</version>
+        </dependency>
+
+        <!-- ── JSON 처리 (규칙 로드, 리포트 출력) ─────────────────── -->
+        <!-- Spring Boot parent이 jackson-databind 버전을 관리함 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- ── 유틸리티 ─────────────────────────────────────────────── -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- ── 압축 형식 지원 (7z 포함) ─────────────────────────────── -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>${commons-compress.version}</version>
+        </dependency>
+        <!-- 7z LZMA 압축 해제에 필요 -->
+        <dependency>
+            <groupId>org.tukaani</groupId>
+            <artifactId>xz</artifactId>
+            <version>${xz.version}</version>
+        </dependency>
+
+        <!-- ── 테스트 ────────────────────────────────────────────────── -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot 실행 가능한 Fat JAR 생성 -->
+            <!-- java -jar target/sast.jar 로 웹 서버 시작 -->
+            <!-- CLI 모드: java -cp target/sast.jar com.sast.SASTEngine <src> <out> -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.sast.web.SastApplication</mainClass>
+                    <finalName>sast</finalName>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,5 @@
+target/
+.git/
+*.jar
+*.pdf
+*.class
