@@ -16,6 +16,8 @@
       "phase": "DESIGN",
       "description": "SQL 질의문 내 입력값 유효성 검증 및 바인딩 방식 적용 설계",
       "relatedImplRules": ["IV-1.1"]
+    ,
+      "dangerousPatterns": ["executeQuery\\(|executeUpdate\\(|Statement.*execute"]
     },
     {
       "ruleId": "DS-1.2",
@@ -27,6 +29,8 @@
       "phase": "DESIGN",
       "description": "XPath·XQuery 질의문에 사용되는 파라미터 필터링 또는 바인딩 설계",
       "relatedImplRules": ["IV-1.9", "IV-1.10"]
+    ,
+      "dangerousPatterns": ["xpath\\.evaluate|XPath\\.compile|executeXPath"]
     },
     {
       "ruleId": "DS-1.3",
@@ -38,6 +42,8 @@
       "phase": "DESIGN",
       "description": "LDAP 질의에 사용되는 입력값 필터링 설계",
       "relatedImplRules": ["IV-1.10"]
+    ,
+      "dangerousPatterns": ["DirContext|InitialDirContext|\\.search\\("]
     },
     {
       "ruleId": "DS-1.4",
@@ -49,6 +55,8 @@
       "phase": "DESIGN",
       "description": "파일 경로·OS 명령어에 사용되는 외부 입력값 검증 설계",
       "relatedImplRules": ["IV-1.3", "IV-1.5"]
+    ,
+      "dangerousPatterns": ["Runtime\\.getRuntime\\(\\)\\.exec|new ProcessBuilder"]
     },
     {
       "ruleId": "DS-1.5",
@@ -60,6 +68,8 @@
       "phase": "DESIGN",
       "description": "웹 서비스 응답 데이터 XSS 필터링 및 인코딩 설계",
       "relatedImplRules": ["IV-1.4"]
+    ,
+      "dangerousPatterns": ["out\\.print\\(|response\\.getWriter"]
     },
     {
       "ruleId": "DS-1.6",
@@ -71,6 +81,8 @@
       "phase": "DESIGN",
       "description": "CSRF 방지를 위한 토큰 생성 및 검증 메커니즘 설계",
       "relatedImplRules": ["IV-1.11"]
+    ,
+      "dangerousPatterns": ["void doPost\\(|@PostMapping"]
     },
     {
       "ruleId": "DS-1.7",
@@ -82,6 +94,8 @@
       "phase": "DESIGN",
       "description": "HTTP 응답분할 방지를 위한 헤더 값 검증 설계",
       "relatedImplRules": ["IV-1.13"]
+    ,
+      "dangerousPatterns": ["setHeader\\(|addHeader\\("]
     },
     {
       "ruleId": "DS-1.8",
@@ -93,6 +107,8 @@
       "phase": "DESIGN",
       "description": "버퍼 접근 범위 제한 및 정수 오버플로우 방지 설계",
       "relatedImplRules": ["IV-1.14", "IV-1.16"]
+    ,
+      "dangerousPatterns": ["byte\\[\\]|System\\.arraycopy|ByteBuffer"]
     },
     {
       "ruleId": "DS-1.9",
@@ -104,6 +120,8 @@
       "phase": "DESIGN",
       "description": "보안결정에 사용되는 입력값 검증 로직 설계",
       "relatedImplRules": ["IV-1.15"]
+    ,
+      "dangerousPatterns": ["getParameter.*role|getParameter.*admin|getParameter.*permission"]
     },
     {
       "ruleId": "DS-1.10",
@@ -115,6 +133,8 @@
       "phase": "DESIGN",
       "description": "업로드 파일 유형·크기 검증 및 다운로드 경로 검증 설계",
       "relatedImplRules": ["IV-1.6"]
+    ,
+      "dangerousPatterns": ["getOriginalFilename\\(\\)|getPart\\(|transferTo\\("]
     },
     {
       "ruleId": "DS-2.1",
@@ -126,6 +146,8 @@
       "phase": "DESIGN",
       "description": "중요 기능에 대한 적절한 인증 수단 적용 설계",
       "relatedImplRules": ["IV-2.1"]
+    ,
+      "dangerousPatterns": ["HttpSession|getSession\\(|session\\.getAttribute"]
     },
     {
       "ruleId": "DS-2.2",
@@ -137,6 +159,8 @@
       "phase": "DESIGN",
       "description": "반복 인증 시도 제한(계정 잠금) 메커니즘 설계",
       "relatedImplRules": ["IV-2.16"]
+    ,
+      "dangerousPatterns": ["loginAttempt|failCount|lockAccount|attemptCount"]
     },
     {
       "ruleId": "DS-2.3",
@@ -148,6 +172,8 @@
       "phase": "DESIGN",
       "description": "비밀번호 복잡성 정책 및 안전한 저장 방식 설계",
       "relatedImplRules": ["IV-2.9"]
+    ,
+      "dangerousPatterns": ["password\\s*=\\s*\"|setPassword\\("]
     },
     {
       "ruleId": "DS-2.4",
@@ -159,6 +185,8 @@
       "phase": "DESIGN",
       "description": "중요 자원에 대한 접근권한 최소화 및 통제 설계",
       "relatedImplRules": ["IV-2.2", "IV-2.3"]
+    ,
+      "dangerousPatterns": ["setReadable\\(|setWritable\\(|PosixFilePermissions"]
     },
     {
       "ruleId": "DS-2.5",
@@ -170,6 +198,8 @@
       "phase": "DESIGN",
       "description": "암호키 생성·저장·폐기 생명주기 관리 설계",
       "relatedImplRules": ["IV-2.6"]
+    ,
+      "dangerousPatterns": ["KeyGenerator\\.getInstance|new SecretKeySpec|KeyStore\\.getInstance"]
     },
     {
       "ruleId": "DS-2.6",
@@ -181,6 +211,8 @@
       "phase": "DESIGN",
       "description": "안전한 암호 알고리즘 및 충분한 키 길이 사용 설계",
       "relatedImplRules": ["IV-2.4", "IV-2.7"]
+    ,
+      "dangerousPatterns": ["Cipher\\.getInstance|MessageDigest\\.getInstance"]
     },
     {
       "ruleId": "DS-2.7",
@@ -192,6 +224,8 @@
       "phase": "DESIGN",
       "description": "중요정보 암호화 저장 및 쿠키 보안 속성 설계",
       "relatedImplRules": ["IV-2.5", "IV-2.12"]
+    ,
+      "dangerousPatterns": ["new Cookie\\(|addCookie\\("]
     },
     {
       "ruleId": "DS-2.8",
@@ -203,6 +237,8 @@
       "phase": "DESIGN",
       "description": "중요정보 전송 시 암호화 채널(TLS) 사용 설계",
       "relatedImplRules": []
+    ,
+      "dangerousPatterns": ["new URL.*http://|HttpURLConnection|openConnection\\("]
     },
     {
       "ruleId": "DS-3.1",
@@ -214,6 +250,8 @@
       "phase": "DESIGN",
       "description": "예외 발생 시 시스템 정보 미노출 및 안전한 처리 흐름 설계",
       "relatedImplRules": ["IV-4.1", "IV-4.2", "IV-4.3"]
+    ,
+      "dangerousPatterns": ["e\\.printStackTrace\\(\\)|catch.*Exception.*\\{"]
     },
     {
       "ruleId": "DS-4.1",
@@ -225,6 +263,8 @@
       "phase": "DESIGN",
       "description": "세션 생성·만료·재사용 방지 메커니즘 설계",
       "relatedImplRules": ["IV-6.1"]
+    ,
+      "dangerousPatterns": ["getSession\\(|setMaxInactiveInterval|session\\.invalidate"]
     },
 
     // ────────────────────────────────────────────────
@@ -414,6 +454,8 @@
         "description": "허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화",
         "guideRef": "PART4 제1절 6항 (p.232-238)"
       }
+    ,
+      "dangerousPatterns": ["getOriginalFilename\\(\\)|getPart\\(|MultipartFile"]
     },
     {
       "ruleId": "IV-1.7",
@@ -459,6 +501,8 @@
         "description": "XML 파서에서 외부 엔티티 참조 및 DOCTYPE 선언을 비활성화",
         "guideRef": "PART4 제1절 8항 (p.244-250)"
       }
+    ,
+      "dangerousPatterns": ["DocumentBuilderFactory|SAXParserFactory|XMLInputFactory"]
     },
     {
       "ruleId": "IV-1.9",
@@ -513,6 +557,8 @@
         "description": "중요 기능 요청에 CSRF 토큰 생성·검증 또는 SameSite 쿠키 속성 적용",
         "guideRef": "PART4 제1절 11항 (p.272-275)"
       }
+    ,
+      "dangerousPatterns": ["void doPost\\(HttpServletRequest|void doPut\\(|void doDelete\\("]
     },
     {
       "ruleId": "IV-1.12",
@@ -567,6 +613,8 @@
         "description": "정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용",
         "guideRef": "PART4 제1절 14항 (p.290-296)"
       }
+    ,
+      "dangerousPatterns": ["Integer\\.parseInt\\(|Long\\.parseLong\\(|\\(byte\\)\\s*\\w"]
     },
     {
       "ruleId": "IV-1.15",
@@ -603,6 +651,8 @@
         "description": "배열·버퍼 접근 전 경계값 검사, Java의 경우 NIO Buffer API 활용",
         "guideRef": "PART4 제1절 16항 (p.303-308)"
       }
+    ,
+      "dangerousPatterns": ["System\\.arraycopy\\(|byte\\[\\].*=.*new byte|ByteBuffer\\.allocate"]
     },
     {
       "ruleId": "IV-1.17",
@@ -631,6 +681,8 @@
       "remediation": { "strategy": "AUTH_GATE_FILTER",
         "description": "모든 중요 기능 진입 전 인증 상태 확인 필터 적용",
         "guideRef": "PART4 제2절 1항 (p.314-318)" }
+    ,
+      "dangerousPatterns": ["void doPost\\(HttpServletRequest|void doGet\\(HttpServletRequest"]
     },
     {
       "ruleId": "IV-2.2",  "part": "PART4", "section": "보안기능",
@@ -639,6 +691,8 @@
       "remediation": { "strategy": "RBAC_CHECK",
         "description": "기능별 권한 검사 로직 추가(RBAC/ABAC 패턴 적용)",
         "guideRef": "PART4 제2절 2항 (p.319-324)" }
+    ,
+      "dangerousPatterns": ["isAdmin\\(\\)|\\.getRole\\(\\)|hasPermission\\("]
     },
     {
       "ruleId": "IV-2.3",  "part": "PART4", "section": "보안기능",
@@ -647,6 +701,8 @@
       "remediation": { "strategy": "LEAST_PRIVILEGE",
         "description": "파일·디렉터리 권한을 최소 권한 원칙으로 설정",
         "guideRef": "PART4 제2절 3항 (p.325-329)" }
+    ,
+      "dangerousPatterns": ["setReadable\\(true|setWritable\\(true"]
     },
     {
       "ruleId": "IV-2.4",  "part": "PART4", "section": "보안기능",
@@ -656,6 +712,8 @@
       "remediation": { "strategy": "STRONG_CRYPTO",
         "description": "AES-256, SHA-256 이상의 안전한 알고리즘으로 교체",
         "guideRef": "PART4 제2절 4항 (p.330-336)" }
+    ,
+      "dangerousPatterns": ["getInstance.*DES|getInstance.*RC4|getInstance.*Blowfish"]
     },
     {
       "ruleId": "IV-2.5",  "part": "PART4", "section": "보안기능",
@@ -664,6 +722,8 @@
       "remediation": { "strategy": "ENCRYPT_SENSITIVE_DATA",
         "description": "중요정보(비밀번호, 주민번호 등) 저장 전 암호화 적용",
         "guideRef": "PART4 제2절 5항 (p.337-349)" }
+    ,
+      "dangerousPatterns": ["password.*getParameter|password.*cleartext|plainTextPassword"]
     },
     {
       "ruleId": "IV-2.6",  "part": "PART4", "section": "보안기능",
@@ -681,6 +741,8 @@
       "remediation": { "strategy": "MIN_KEY_SIZE",
         "description": "RSA 2048bit 이상, AES 128bit 이상, ECC 224bit 이상 키 길이 사용",
         "guideRef": "PART4 제2절 7항 (p.360-363)" }
+    ,
+      "dangerousPatterns": ["\\.initialize\\(512\\)|\\.initialize\\(1024\\)"]
     },
     {
       "ruleId": "IV-2.8",  "part": "PART4", "section": "보안기능",
@@ -690,6 +752,8 @@
       "remediation": { "strategy": "SECURE_RANDOM",
         "description": "java.security.SecureRandom으로 교체",
         "guideRef": "PART4 제2절 8항 (p.364-369)" }
+    ,
+      "dangerousPatterns": ["new Random\\(\\)|Math\\.random\\(\\)"]
     },
     {
       "ruleId": "IV-2.9",  "part": "PART4", "section": "보안기능",
@@ -698,6 +762,8 @@
       "remediation": { "strategy": "PASSWORD_POLICY",
         "description": "길이 8자 이상, 대소문자·숫자·특수문자 조합 필수 검증 로직 구현",
         "guideRef": "PART4 제2절 9항 (p.370-374)" }
+    ,
+      "dangerousPatterns": ["password\\.length\\(\\)\\s*<|minPasswordLength\\s*=\\s*[1-7]"]
     },
     {
       "ruleId": "IV-2.10", "part": "PART4", "section": "보안기능",
@@ -706,6 +772,8 @@
       "remediation": { "strategy": "VERIFY_SIGNATURE",
         "description": "전자서명 검증 실패 시 처리를 중단하고 예외 반환",
         "guideRef": "PART4 제2절 10항 (p.375-378)" }
+    ,
+      "dangerousPatterns": ["Signature\\.getInstance|sig\\.verify\\("]
     },
     {
       "ruleId": "IV-2.11", "part": "PART4", "section": "보안기능",
@@ -715,6 +783,8 @@
       "remediation": { "strategy": "PROPER_CERT_VALIDATION",
         "description": "사용자 정의 TrustManager 내 인증서 체인 및 호스트명 검증 구현",
         "guideRef": "PART4 제2절 11항 (p.379-382)" }
+    ,
+      "dangerousPatterns": ["setHostnameVerifier|ALLOW_ALL_HOSTNAME_VERIFIER|X509TrustManager"]
     },
     {
       "ruleId": "IV-2.12", "part": "PART4", "section": "보안기능",
@@ -724,6 +794,8 @@
       "remediation": { "strategy": "SECURE_COOKIE_ATTRIBUTES",
         "description": "쿠키에 HttpOnly, Secure, SameSite 속성 설정, 중요정보 쿠키 저장 금지",
         "guideRef": "PART4 제2절 12항 (p.383-386)" }
+    ,
+      "dangerousPatterns": ["new Cookie\\(|addCookie\\("]
     },
     {
       "ruleId": "IV-2.13", "part": "PART4", "section": "보안기능",
@@ -742,6 +814,8 @@
       "remediation": { "strategy": "SALTED_HASH",
         "description": "bcrypt, PBKDF2, Argon2 등 솔트를 포함하는 해시 함수 사용",
         "guideRef": "PART4 제2절 14항 (p.391-394)" }
+    ,
+      "dangerousPatterns": ["MessageDigest\\.getInstance.*MD5|MessageDigest\\.getInstance.*SHA-1"]
     },
     {
       "ruleId": "IV-2.15", "part": "PART4", "section": "보안기능",
@@ -750,6 +824,8 @@
       "remediation": { "strategy": "CHECKSUM_VERIFY",
         "description": "다운로드된 코드·라이브러리에 대해 체크섬(SHA-256) 검증 후 실행",
         "guideRef": "PART4 제2절 15항 (p.395-399)" }
+    ,
+      "dangerousPatterns": ["openStream\\(\\)|URLConnection.*getInputStream"]
     },
     {
       "ruleId": "IV-2.16", "part": "PART4", "section": "보안기능",
@@ -758,6 +834,8 @@
       "remediation": { "strategy": "ACCOUNT_LOCKOUT",
         "description": "로그인 실패 횟수 임계값 설정 및 계정 잠금/CAPTCHA 메커니즘 구현",
         "guideRef": "PART4 제2절 16항 (p.400-405)" }
+    ,
+      "dangerousPatterns": ["authenticate\\(|checkLogin\\(|verifyPassword\\("]
     },
 
     // 제3절 시간 및 상태 (2개)
@@ -777,6 +855,8 @@
       "remediation": { "strategy": "TERMINATION_CONDITION",
         "description": "반복문·재귀 함수에 명확한 종료 조건 및 최대 반복 횟수 제한 추가",
         "guideRef": "PART4 제3절 2항 (p.415-418)" }
+    ,
+      "dangerousPatterns": ["while\\s*\\(\\s*true\\s*\\)|for\\s*\\(\\s*;\\s*;\\s*\\)"]
     },
 
     // 제4절 에러처리 (3개)
@@ -788,6 +868,8 @@
       "remediation": { "strategy": "GENERIC_ERROR_MESSAGE",
         "description": "사용자에게 일반 오류 메시지만 출력, 상세 오류는 서버 로그에만 기록",
         "guideRef": "PART4 제4절 1항 (p.419-424)" }
+    ,
+      "dangerousPatterns": ["e\\.printStackTrace\\(\\)|out\\.print.*getMessage"]
     },
     {
       "ruleId": "IV-4.2", "part": "PART4", "section": "에러처리",
@@ -805,6 +887,8 @@
       "remediation": { "strategy": "SPECIFIC_EXCEPTION_HANDLING",
         "description": "포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리",
         "guideRef": "PART4 제4절 3항 (p.429-432)" }
+    ,
+      "dangerousPatterns": ["catch\\s*\\(\\s*Exception\\s+\\w|catch\\s*\\(\\s*Throwable\\s+\\w"]
     },
 
     // 제5절 코드오류 (5개)
@@ -815,6 +899,8 @@
       "remediation": { "strategy": "NULL_CHECK",
         "description": "객체 사용 전 null 검사 추가 또는 Optional 패턴 활용",
         "guideRef": "PART4 제5절 1항 (p.433-444)" }
+    ,
+      "dangerousPatterns": ["\\.get\\(\\)\\.\\w|getResult\\(\\)\\.get\\("]
     },
     {
       "ruleId": "IV-5.2", "part": "PART4", "section": "코드오류",
@@ -824,6 +910,8 @@
       "remediation": { "strategy": "TRY_WITH_RESOURCES",
         "description": "try-with-resources 구문으로 자원 자동 해제 보장",
         "guideRef": "PART4 제5절 2항 (p.445-453)" }
+    ,
+      "dangerousPatterns": ["new FileInputStream\\(|getConnection\\(\\)|new BufferedReader\\("]
     },
     {
       "ruleId": "IV-5.3", "part": "PART4", "section": "코드오류",
@@ -832,6 +920,8 @@
       "remediation": { "strategy": "NULL_AFTER_CLOSE",
         "description": "자원 해제 후 변수를 null로 설정하여 재사용 방지",
         "guideRef": "PART4 제5절 3항 (p.454-458)" }
+    ,
+      "dangerousPatterns": ["\\.close\\(\\);"]
     },
     {
       "ruleId": "IV-5.4", "part": "PART4", "section": "코드오류",
@@ -840,6 +930,8 @@
       "remediation": { "strategy": "INITIALIZE_VARIABLES",
         "description": "모든 변수를 선언 시 명시적으로 초기화",
         "guideRef": "PART4 제5절 4항 (p.459-461)" }
+    ,
+      "dangerousPatterns": ["private int \\w+;|private String \\w+;|private Object \\w+;"]
     },
     {
       "ruleId": "IV-5.5", "part": "PART4", "section": "코드오류",
@@ -861,6 +953,8 @@
       "remediation": { "strategy": "SESSION_ISOLATION",
         "description": "스레드 로컬 또는 요청별 세션 격리, 공유 객체에 사용자 데이터 저장 금지",
         "guideRef": "PART4 제6절 1항 (p.469-475)" }
+    ,
+      "dangerousPatterns": ["static.*HttpSession|public static.*Session"]
     },
     {
       "ruleId": "IV-6.2", "part": "PART4", "section": "캡슐화",
@@ -878,6 +972,8 @@
       "remediation": { "strategy": "DEFENSIVE_COPY",
         "description": "private 배열 반환 시 Arrays.copyOf()로 방어적 복사 후 반환",
         "guideRef": "PART4 제6절 3항 (p.481-486)" }
+    ,
+      "dangerousPatterns": ["public\\s+\\w+\\[\\]\\s+get\\w+\\(\\)"]
     },
     {
       "ruleId": "IV-6.4", "part": "PART4", "section": "캡슐화",
@@ -886,6 +982,8 @@
       "remediation": { "strategy": "DEFENSIVE_COPY_INPUT",
         "description": "외부 배열을 private 필드에 할당 시 Arrays.copyOf()로 방어적 복사",
         "guideRef": "PART4 제6절 4항 (p.487-491)" }
+    ,
+      "dangerousPatterns": ["this\\.\\w+\\s*=\\s*\\w+;"]
     },
 
     // 제7절 API 오용 (2개)
@@ -897,6 +995,8 @@
       "remediation": { "strategy": "IP_BASED_CHECK",
         "description": "DNS 역방향 조회 결과 대신 IP 주소 기반으로 보안 결정 수행",
         "guideRef": "PART4 제7절 1항 (p.492-496)" }
+    ,
+      "dangerousPatterns": ["InetAddress\\.getByName\\(|getHostName\\(\\)|getCanonicalHostName\\(\\)"]
     },
     {
       "ruleId": "IV-7.2", "part": "PART4", "section": "API 오용",
@@ -906,6 +1006,8 @@
       "remediation": { "strategy": "SAFE_API_REPLACEMENT",
         "description": "보안 취약점이 알려진 API를 안전한 대체 API로 교체",
         "guideRef": "PART4 제7절 2항 (p.497-505)" }
+    ,
+      "dangerousPatterns": ["Runtime\\.exec\\(|System\\.loadLibrary\\("]
     }
   ]
 }

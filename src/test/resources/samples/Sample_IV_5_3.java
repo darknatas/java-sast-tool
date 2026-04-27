@@ -1,9 +1,10 @@
 package com.example.sample;
-/**
- * [자동 생성 샘플] IV-5.3 — 해제된 자원 사용
- * 구분: PART4 / 코드오류
- * 현재 엔진에서 자동 탐지가 구현되지 않은 규칙입니다.
- */
+import java.io.*;
 public class Sample_IV_5_3 {
-    void placeholder() { }
+    void vuln(File file) throws Exception {
+        FileInputStream fis = new FileInputStream(file);
+        int first = fis.read();
+        fis.close();   // IV-5.3: 자원 해제 후 재사용 위험
+        int second = fis.read();
+    }
 }

@@ -1,9 +1,9 @@
 package com.example.sample;
-/**
- * [자동 생성 샘플] IV-1.6 — 위험한 형식 파일 업로드
- * 구분: PART4 / 입력데이터 검증 및 표현
- * 현재 엔진에서 자동 탐지가 구현되지 않은 규칙입니다.
- */
+import javax.servlet.http.*;
 public class Sample_IV_1_6 {
-    void placeholder() { }
+    void vuln(HttpServletRequest req) throws Exception {
+        Part filePart = req.getPart("file");  // IV-1.6: 파일 확장자 검증 없음
+        String filename = filePart.getSubmittedFileName();
+        filePart.write("/upload/" + filename);
+    }
 }

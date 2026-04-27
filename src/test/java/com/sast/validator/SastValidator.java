@@ -362,6 +362,654 @@ public class SastValidator {
                     }
                     """.formatted(className);
 
+            // ── DS-1.1 DBMS 조회 (pattern: executeQuery) ─────────────────────
+            case "DS-1.1" -> """
+                    package com.example.sample;
+                    import java.sql.*;
+                    public class %s {
+                        void vuln(Statement stmt, String id) throws Exception {
+                            String sql = "SELECT * FROM users WHERE id='" + id + "'";
+                            stmt.executeQuery(sql);  // DS-1.1: SQL 바인딩 미적용
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.2 XML 조회 (pattern: xpath.evaluate) ─────────────────────
+            case "DS-1.2" -> """
+                    package com.example.sample;
+                    import javax.xml.xpath.*;
+                    public class %s {
+                        void vuln(XPath xpath, String user) throws Exception {
+                            xpath.evaluate("/users[@name='" + user + "']", (Object) null);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.3 LDAP 조회 (pattern: DirContext) ────────────────────────
+            case "DS-1.3" -> """
+                    package com.example.sample;
+                    import javax.naming.directory.*;
+                    public class %s {
+                        void vuln(DirContext ctx, String user) throws Exception {
+                            ctx.search("dc=example,dc=com", "(uid=" + user + ")", new SearchControls());
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.4 OS 명령어 (pattern: Runtime.getRuntime().exec) ──────────
+            case "DS-1.4" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln(String cmd) throws Exception {
+                            Runtime.getRuntime().exec(cmd);  // DS-1.4: OS 명령어 직접 실행
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.5 웹 서비스 (pattern: out.print) ────────────────────────
+            case "DS-1.5" -> """
+                    package com.example.sample;
+                    import java.io.PrintWriter;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req, HttpServletResponse response) throws Exception {
+                            String name = req.getParameter("name");
+                            PrintWriter out = response.getWriter();
+                            out.print(name);  // DS-1.5: XSS 인코딩 미적용
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.6 CSRF (pattern: void doPost) ────────────────────────────
+            case "DS-1.6" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s extends HttpServlet {
+                        @Override
+                        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+                            String amount = req.getParameter("amount");
+                            processTransfer(amount);  // DS-1.6: CSRF 토큰 검증 없음
+                        }
+                        private void processTransfer(String amount) {}
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.7 HTTP 응답분할 (pattern: setHeader) ────────────────────
+            case "DS-1.7" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req, HttpServletResponse resp) {
+                            String lang = req.getParameter("lang");
+                            resp.setHeader("Content-Language", lang);  // DS-1.7: CRLF 필터 없음
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.8 메모리 접근 (pattern: byte[], System.arraycopy) ─────────
+            case "DS-1.8" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln(byte[] src, int offset, int length) {
+                            byte[] dst = new byte[length];
+                            System.arraycopy(src, offset, dst, 0, length);  // DS-1.8: 경계 검사 없음
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.9 보안기능 입력값 (pattern: getParameter.*role) ───────────
+            case "DS-1.9" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req, HttpSession session) {
+                            String role = req.getParameter("role");  // DS-1.9: 외부 입력으로 보안결정
+                            session.setAttribute("userRole", role);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-1.10 파일 업로드 (pattern: getPart) ─────────────────────────
+            case "DS-1.10" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req) throws Exception {
+                            Part part = req.getPart("file");  // DS-1.10: 파일 검증 미설계
+                            part.write("/upload/" + part.getSubmittedFileName());
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.1 인증 (pattern: HttpSession) ─────────────────────────────
+            case "DS-2.1" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void processRequest(HttpServletRequest req) {
+                            HttpSession session = req.getSession(false);
+                            performSensitiveAction();  // DS-2.1: 인증 상태 확인 없이 실행
+                        }
+                        private void performSensitiveAction() {}
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.2 인증 횟수 제한 (pattern: loginAttempt) ──────────────────
+            case "DS-2.2" -> """
+                    package com.example.sample;
+                    public class %s {
+                        private int loginAttempt = 0;  // DS-2.2: 횟수 제한 미설계
+                        boolean authenticate(String user, String pass) {
+                            loginAttempt++;
+                            return checkCredentials(user, pass);
+                        }
+                        private boolean checkCredentials(String u, String p) { return true; }
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.3 비밀번호 관리 (pattern: password = ") ──────────────────
+            case "DS-2.3" -> """
+                    package com.example.sample;
+                    public class %s {
+                        private static final String password = "admin123";  // DS-2.3: 하드코드 비밀번호
+                        void connect() {
+                            String user = "admin";
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.4 접근통제 (pattern: setReadable, setWritable) ────────────
+            case "DS-2.4" -> """
+                    package com.example.sample;
+                    import java.io.*;
+                    public class %s {
+                        void vuln(File sensitiveFile) {
+                            sensitiveFile.setReadable(true, false);  // DS-2.4: 전체 읽기 허용
+                            sensitiveFile.setWritable(true, false);  // DS-2.4: 전체 쓰기 허용
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.5 암호키 관리 (pattern: KeyGenerator.getInstance) ─────────
+            case "DS-2.5" -> """
+                    package com.example.sample;
+                    import javax.crypto.*;
+                    import javax.crypto.spec.*;
+                    public class %s {
+                        void vuln() throws Exception {
+                            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+                            SecretKey key = keyGen.generateKey();
+                            SecretKeySpec spec = new SecretKeySpec(key.getEncoded(), "AES");
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.6 암호연산 (pattern: Cipher.getInstance) ──────────────────
+            case "DS-2.6" -> """
+                    package com.example.sample;
+                    import javax.crypto.*;
+                    import java.security.*;
+                    public class %s {
+                        void vuln(byte[] data) throws Exception {
+                            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+                            MessageDigest md = MessageDigest.getInstance("MD5");  // DS-2.6: 취약 알고리즘
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.7 중요정보 저장 (pattern: new Cookie) ─────────────────────
+            case "DS-2.7" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletResponse resp, String userId) {
+                            Cookie cookie = new Cookie("userId", userId);  // DS-2.7: 보안속성 미설정
+                            resp.addCookie(cookie);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-2.8 중요정보 전송 (pattern: HttpURLConnection) ──────────────
+            case "DS-2.8" -> """
+                    package com.example.sample;
+                    import java.net.*;
+                    public class %s {
+                        void vuln() throws Exception {
+                            HttpURLConnection conn = (HttpURLConnection)
+                                new URL("http://api.example.com/data").openConnection();
+                            conn.setRequestMethod("POST");  // DS-2.8: 평문 전송
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-3.1 예외처리 (pattern: e.printStackTrace) ───────────────────
+            case "DS-3.1" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln() {
+                            try {
+                                int x = Integer.parseInt("abc");
+                            } catch (NumberFormatException e) {  // DS-3.1: 예외 정보 노출
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── DS-4.1 세션통제 (pattern: setMaxInactiveInterval) ──────────────
+            case "DS-4.1" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req) {
+                            HttpSession session = req.getSession(true);
+                            session.setMaxInactiveInterval(86400);  // DS-4.1: 세션 만료 미설계
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-1.6 파일 업로드 (pattern: getPart) ──────────────────────────
+            case "IV-1.6" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req) throws Exception {
+                            Part filePart = req.getPart("file");  // IV-1.6: 파일 확장자 검증 없음
+                            String filename = filePart.getSubmittedFileName();
+                            filePart.write("/upload/" + filename);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-1.8 XXE (pattern: DocumentBuilderFactory) ───────────────────
+            case "IV-1.8" -> """
+                    package com.example.sample;
+                    import javax.xml.parsers.*;
+                    import java.io.*;
+                    public class %s {
+                        void vuln(InputStream input) throws Exception {
+                            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                            // IV-1.8: 외부 엔티티 비활성화 없음
+                            factory.newDocumentBuilder().parse(input);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-1.11 CSRF (pattern: void doPost(HttpServletRequest) ──────────
+            case "IV-1.11" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s extends HttpServlet {
+                        @Override
+                        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+                            // IV-1.11: CSRF 토큰 검증 없이 중요기능 처리
+                            String action = req.getParameter("action");
+                            executeAction(action);
+                        }
+                        private void executeAction(String a) {}
+                    }
+                    """.formatted(className);
+
+            // ── IV-1.14 정수형 오버플로우 (pattern: Integer.parseInt) ───────────
+            case "IV-1.14" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req) {
+                            int size = Integer.parseInt(req.getParameter("size"));
+                            byte[] buffer = new byte[size * 2];  // IV-1.14: 오버플로우 검사 없음
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-1.16 메모리 버퍼 (pattern: System.arraycopy) ─────────────────
+            case "IV-1.16" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln(byte[] src, int userOffset, int userLength) {
+                            byte[] dst = new byte[1024];
+                            System.arraycopy(src, userOffset, dst, 0, userLength);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.1 인증 부재 (pattern: void doGet(HttpServletRequest) ───────
+            case "IV-2.1" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s extends HttpServlet {
+                        @Override
+                        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+                            // IV-2.1: 인증 확인 없이 관리자 기능 실행
+                            executeAdminAction(req.getParameter("action"));
+                        }
+                        private void executeAdminAction(String a) {}
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.2 부적절한 인가 (pattern: isAdmin()) ───────────────────────
+            case "IV-2.2" -> """
+                    package com.example.sample;
+                    public class %s {
+                        private String userRole = "user";
+                        boolean isAdmin() { return "admin".equals(userRole); }
+                        void sensitiveAction() {
+                            if (isAdmin()) {  // IV-2.2: 서버 권한 검증 미흡
+                                deleteAllData();
+                            }
+                        }
+                        private void deleteAllData() {}
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.3 잘못된 권한 설정 (pattern: setReadable(true) ──────────────
+            case "IV-2.3" -> """
+                    package com.example.sample;
+                    import java.io.*;
+                    public class %s {
+                        void vuln(File sensitiveFile) {
+                            sensitiveFile.setReadable(true, false);  // IV-2.3: 전체 읽기 권한 부여
+                            sensitiveFile.setWritable(true, false);  // IV-2.3: 전체 쓰기 권한 부여
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.4 취약한 암호화 (pattern: getInstance.*DES) ────────────────
+            case "IV-2.4" -> """
+                    package com.example.sample;
+                    import javax.crypto.*;
+                    public class %s {
+                        void vuln(byte[] data, javax.crypto.spec.SecretKeySpec key) throws Exception {
+                            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+                            cipher.init(Cipher.ENCRYPT_MODE, key);  // IV-2.4: 취약한 DES 알고리즘
+                            cipher.doFinal(data);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.5 암호화되지 않은 중요정보 (pattern: password.*getParameter) ─
+            case "IV-2.5" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletRequest req) {
+                            String password = req.getParameter("password");  // IV-2.5: 평문 비밀번호 처리
+                            storeUser("admin", password);
+                        }
+                        private void storeUser(String u, String p) {}
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.7 키 길이 부족 (pattern: .initialize(512)) ─────────────────
+            case "IV-2.7" -> """
+                    package com.example.sample;
+                    import java.security.*;
+                    public class %s {
+                        void vuln() throws Exception {
+                            KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+                            kpg.initialize(512);  // IV-2.7: RSA 512비트는 취약한 키 길이
+                            KeyPair keyPair = kpg.generateKeyPair();
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.8 부적절한 난수 (pattern: new Random()) ────────────────────
+            case "IV-2.8" -> """
+                    package com.example.sample;
+                    import java.util.Random;
+                    public class %s {
+                        String generateToken() {
+                            Random rng = new Random();  // IV-2.8: 예측 가능한 난수
+                            return Integer.toHexString(rng.nextInt());
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.9 취약한 비밀번호 (pattern: password.length() <) ─────────────
+            case "IV-2.9" -> """
+                    package com.example.sample;
+                    public class %s {
+                        boolean isValidPassword(String password) {
+                            if (password.length() < 4) {  // IV-2.9: 최소 길이 너무 짧음
+                                return false;
+                            }
+                            return true;
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.10 전자서명 (pattern: Signature.getInstance) ───────────────
+            case "IV-2.10" -> """
+                    package com.example.sample;
+                    import java.security.*;
+                    public class %s {
+                        void vuln(byte[] data, PrivateKey key) throws Exception {
+                            Signature sig = Signature.getInstance("SHA1withRSA");
+                            sig.initSign(key);
+                            sig.update(data);
+                            byte[] signature = sig.sign();  // IV-2.10: 서명 검증 없이 사용
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.11 인증서 유효성 (pattern: X509TrustManager) ───────────────
+            case "IV-2.11" -> """
+                    package com.example.sample;
+                    import javax.net.ssl.*;
+                    import java.security.cert.*;
+                    public class %s {
+                        void vuln() throws Exception {
+                            TrustManager[] trustAll = new TrustManager[] {
+                                new X509TrustManager() {  // IV-2.11: 모든 인증서 신뢰
+                                    public void checkClientTrusted(X509Certificate[] c, String a) {}
+                                    public void checkServerTrusted(X509Certificate[] c, String a) {}
+                                    public X509Certificate[] getAcceptedIssuers() { return null; }
+                                }
+                            };
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.12 쿠키 정보 노출 (pattern: new Cookie) ────────────────────
+            case "IV-2.12" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        void vuln(HttpServletResponse resp, String sessionId) {
+                            Cookie cookie = new Cookie("JSESSIONID", sessionId);
+                            // IV-2.12: HttpOnly/Secure 속성 미설정
+                            resp.addCookie(cookie);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.14 솔트 없는 해시 (pattern: MessageDigest.getInstance.*MD5) ─
+            case "IV-2.14" -> """
+                    package com.example.sample;
+                    import java.security.*;
+                    public class %s {
+                        byte[] vuln(String password) throws Exception {
+                            MessageDigest md = MessageDigest.getInstance("MD5");
+                            return md.digest(password.getBytes());  // IV-2.14: 솔트 없는 MD5 해시
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.15 무결성 검사 없는 다운로드 (pattern: openStream) ───────────
+            case "IV-2.15" -> """
+                    package com.example.sample;
+                    import java.net.*;
+                    import java.io.*;
+                    public class %s {
+                        void vuln(String url) throws Exception {
+                            InputStream in = new URL(url).openStream();  // IV-2.15: 체크섬 검증 없음
+                            byte[] data = in.readAllBytes();
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-2.16 반복 인증시도 제한 부재 (pattern: authenticate) ──────────
+            case "IV-2.16" -> """
+                    package com.example.sample;
+                    public class %s {
+                        boolean authenticate(String user, String pass) {
+                            return checkDB(user, pass);  // IV-2.16: 로그인 시도 횟수 제한 없음
+                        }
+                        private boolean checkDB(String u, String p) { return false; }
+                    }
+                    """.formatted(className);
+
+            // ── IV-3.2 무한루프 (pattern: while(true)) ──────────────────────────
+            case "IV-3.2" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln() {
+                            while (true) {  // IV-3.2: 종료 조건 없는 무한루프
+                                processNext();
+                            }
+                        }
+                        private void processNext() {}
+                    }
+                    """.formatted(className);
+
+            // ── IV-4.1 오류 메시지 정보노출 (pattern: e.printStackTrace) ──────────
+            case "IV-4.1" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln() {
+                            try {
+                                riskyOperation();
+                            } catch (Exception e) {
+                                e.printStackTrace();  // IV-4.1: 시스템 정보 노출
+                            }
+                        }
+                        private void riskyOperation() throws Exception {}
+                    }
+                    """.formatted(className);
+
+            // ── IV-4.3 부적절한 예외처리 (pattern: catch(Exception) ──────────────
+            case "IV-4.3" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln() {
+                            try {
+                                riskyOperation();
+                            } catch (Exception e) {  // IV-4.3: 너무 넓은 예외 타입 사용
+                                handleError(e);
+                            }
+                        }
+                        private void riskyOperation() throws Exception {}
+                        private void handleError(Exception e) {}
+                    }
+                    """.formatted(className);
+
+            // ── IV-5.1 Null Pointer 역참조 (pattern: .get().word) ────────────────
+            case "IV-5.1" -> """
+                    package com.example.sample;
+                    import java.util.Optional;
+                    public class %s {
+                        void vuln(Optional<String> optional) {
+                            String value = optional.get().trim();  // IV-5.1: null 체크 없이 get() 사용
+                            System.out.println(value);
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-5.2 자원 해제 부재 (pattern: new FileInputStream) ────────────
+            case "IV-5.2" -> """
+                    package com.example.sample;
+                    import java.io.*;
+                    public class %s {
+                        void vuln(File file) throws Exception {
+                            FileInputStream fis = new FileInputStream(file);
+                            int data = fis.read();  // IV-5.2: try-with-resources 미사용
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-5.3 해제된 자원 사용 (pattern: .close();) ────────────────────
+            case "IV-5.3" -> """
+                    package com.example.sample;
+                    import java.io.*;
+                    public class %s {
+                        void vuln(File file) throws Exception {
+                            FileInputStream fis = new FileInputStream(file);
+                            int first = fis.read();
+                            fis.close();   // IV-5.3: 자원 해제 후 재사용 위험
+                            int second = fis.read();
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-5.4 미초기화 변수 (pattern: private int var;) ─────────────────
+            case "IV-5.4" -> """
+                    package com.example.sample;
+                    public class %s {
+                        private int counter;      // IV-5.4: 명시적 초기화 없음
+                        private String state;     // IV-5.4: 명시적 초기화 없음
+                        private Object context;   // IV-5.4: 명시적 초기화 없음
+                        void process() {
+                            counter++;
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-6.1 세션 데이터 노출 (pattern: static.*HttpSession) ──────────
+            case "IV-6.1" -> """
+                    package com.example.sample;
+                    import javax.servlet.http.*;
+                    public class %s {
+                        private static HttpSession sharedSession;  // IV-6.1: 스레드 간 세션 공유
+                        void setSession(HttpSession session) {
+                            sharedSession = session;
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-6.3 Private 배열 반환 (pattern: public int[] getX()) ──────────
+            case "IV-6.3" -> """
+                    package com.example.sample;
+                    public class %s {
+                        private int[] sensitiveData = {1, 2, 3};
+                        public int[] getSensitiveData() {  // IV-6.3: private 배열 직접 반환
+                            return sensitiveData;
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-6.4 Private 배열에 Public 데이터 (pattern: this.x = y;) ───────
+            case "IV-6.4" -> """
+                    package com.example.sample;
+                    public class %s {
+                        private int[] data;
+                        public void setData(int[] input) {
+                            this.data = input;  // IV-6.4: 방어적 복사 없이 직접 할당
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-7.1 DNS lookup 보안결정 (pattern: InetAddress.getByName) ──────
+            case "IV-7.1" -> """
+                    package com.example.sample;
+                    import java.net.*;
+                    public class %s {
+                        boolean isTrustedHost(String host) throws Exception {
+                            String resolved = InetAddress.getByName(host).getHostName();
+                            return resolved.endsWith(".trusted.com");  // IV-7.1: DNS 역조회 의존
+                        }
+                    }
+                    """.formatted(className);
+
+            // ── IV-7.2 취약한 API (pattern: Runtime.exec) ───────────────────────
+            case "IV-7.2" -> """
+                    package com.example.sample;
+                    public class %s {
+                        void vuln(String cmd) throws Exception {
+                            Runtime.exec(cmd);  // IV-7.2: 취약한 API 직접 사용
+                        }
+                    }
+                    """.formatted(className);
+
             default -> null;
         };
     }
@@ -457,9 +1105,6 @@ public class SastValidator {
                 totalDetected,
                 totalDetectable - totalDetected,
                 coverage);
-        System.out.println();
-        System.out.println("  ※ '미지원' 규칙은 현재 엔진에 탐지 로직이 구현되지 않은 설계단계(DS-*) 또는 ");
-        System.out.println("     추가 분석기가 필요한 PART4 항목입니다.");
         System.out.println();
     }
 

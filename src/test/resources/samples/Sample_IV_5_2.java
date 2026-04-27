@@ -1,9 +1,8 @@
 package com.example.sample;
-/**
- * [자동 생성 샘플] IV-5.2 — 부적절한 자원 해제
- * 구분: PART4 / 코드오류
- * 현재 엔진에서 자동 탐지가 구현되지 않은 규칙입니다.
- */
+import java.io.*;
 public class Sample_IV_5_2 {
-    void placeholder() { }
+    void vuln(File file) throws Exception {
+        FileInputStream fis = new FileInputStream(file);
+        int data = fis.read();  // IV-5.2: try-with-resources 미사용
+    }
 }

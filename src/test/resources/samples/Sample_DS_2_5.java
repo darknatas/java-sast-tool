@@ -1,9 +1,10 @@
 package com.example.sample;
-/**
- * [자동 생성 샘플] DS-2.5 — 암호키 관리
- * 구분: PART3 / 보안기능
- * 현재 엔진에서 자동 탐지가 구현되지 않은 규칙입니다.
- */
+import javax.crypto.*;
+import javax.crypto.spec.*;
 public class Sample_DS_2_5 {
-    void placeholder() { }
+    void vuln() throws Exception {
+        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+        SecretKey key = keyGen.generateKey();
+        SecretKeySpec spec = new SecretKeySpec(key.getEncoded(), "AES");
+    }
 }

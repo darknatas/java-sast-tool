@@ -1,9 +1,9 @@
 package com.example.sample;
-/**
- * [자동 생성 샘플] IV-2.7 — 충분하지 않은 키 길이 사용
- * 구분: PART4 / 보안기능
- * 현재 엔진에서 자동 탐지가 구현되지 않은 규칙입니다.
- */
+import java.security.*;
 public class Sample_IV_2_7 {
-    void placeholder() { }
+    void vuln() throws Exception {
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+        kpg.initialize(512);  // IV-2.7: RSA 512비트는 취약한 키 길이
+        KeyPair keyPair = kpg.generateKeyPair();
+    }
 }

@@ -1,9 +1,8 @@
 package com.example.sample;
-/**
- * [자동 생성 샘플] IV-1.14 — 정수형 오버플로우
- * 구분: PART4 / 입력데이터 검증 및 표현
- * 현재 엔진에서 자동 탐지가 구현되지 않은 규칙입니다.
- */
+import javax.servlet.http.*;
 public class Sample_IV_1_14 {
-    void placeholder() { }
+    void vuln(HttpServletRequest req) {
+        int size = Integer.parseInt(req.getParameter("size"));
+        byte[] buffer = new byte[size * 2];  // IV-1.14: 오버플로우 검사 없음
+    }
 }
