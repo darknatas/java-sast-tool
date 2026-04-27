@@ -2,6 +2,7 @@ target/
 *.class
 *.jar
 *.war
+.claude/
 .claude_code/
 .DS_Store
 *.log
