@@ -11,17 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Taint Analysis Engine — Source → Propagator → Sink 흐름 탐지
  *
  * 알고리즘: 인트라-프로시저럴 Dataflow (메서드 단위)
- *   - IV-1.1 SQL 삽입 (CWE-89)
- *   - IV-1.3 경로 조작 (CWE-22)
- *   - IV-1.4 XSS (CWE-79)
- *   - IV-1.5 OS 명령어 삽입 (CWE-78)
- *   - 그 외 taintAnalysis: true 규칙 전체
+ * 지원 규칙: taintAnalysis: true 인 모든 IV-x.x 규칙
  */
 public class TaintAnalysisEngine {
 
@@ -33,8 +28,8 @@ public class TaintAnalysisEngine {
             "getParameter", "getAttribute", "getQueryString",
             "getHeader", "getCookies", "getInputStream", "getReader",
             "getenv", "getProperty",
-            "readLine", "readAllBytes",
-            "readObject", "readUnshared"
+            "readLine", "readAllBytes"
+            // readObject / readUnshared 는 IV-5.5 의 Sink — Source 에 두지 않음
     ));
 
     // ── Sanitizer Signatures ─────────────────────────────────────────────
@@ -48,35 +43,57 @@ public class TaintAnalysisEngine {
             "encode", "canonicalize"
     ));
 
-    // ── Sink Signatures (Rule별 매핑) ─────────────────────────────────────
+    // ── Method-Call Sink Signatures (Rule별 매핑) ─────────────────────────
 
     private static final Map<String, Set<String>> RULE_SINKS;
+
+    // ── Constructor-Call Sink Signatures (ObjectCreationExpr 기반) ────────
+    // 생성자 자체가 Sink인 경우 — new File(tainted), new FileInputStream(tainted)
+
+    private static final Map<String, Set<String>> RULE_CTOR_SINKS;
+
     static {
         Map<String, Set<String>> m = new HashMap<>();
         m.put("IV-1.1",  new HashSet<>(Arrays.asList(
                 "executeQuery", "executeUpdate", "execute", "executeBatch",
                 "createNativeQuery", "createQuery")));
-        m.put("IV-1.3",  new HashSet<>(Arrays.asList(
-                "new File", "new FileInputStream", "new FileOutputStream",
-                "new FileReader", "Paths.get", "new URL",
-                "openConnection", "new ServerSocket", "new Socket")));
+        // IV-1.2 코드삽입: ScriptEngine.eval(), Runtime.exec()
+        m.put("IV-1.2",  new HashSet<>(Arrays.asList(
+                "eval", "executeScript")));
+        // IV-1.4 XSS
         m.put("IV-1.4",  new HashSet<>(Arrays.asList(
-                "print", "println", "write", "getWriter", "sendRedirect")));
+                "print", "println", "write", "getWriter")));
+        // IV-1.5 OS 명령어 삽입
         m.put("IV-1.5",  new HashSet<>(Arrays.asList(
-                "exec", "ProcessBuilder", "command")));
+                "exec", "command")));
+        // IV-1.7 URL 자동접속: HttpServletResponse.sendRedirect()
+        m.put("IV-1.7",  new HashSet<>(Arrays.asList(
+                "sendRedirect")));
         m.put("IV-1.9",  new HashSet<>(Arrays.asList(
                 "evaluate", "executeXPath", "compile")));
         m.put("IV-1.10", new HashSet<>(Arrays.asList(
                 "search", "InitialDirContext")));
+        // IV-1.12 SSRF: url.openConnection() — scope(url)이 오염된 경우 탐지
         m.put("IV-1.12", new HashSet<>(Arrays.asList(
-                "new URL", "openConnection", "getForObject", "exchange")));
+                "openConnection", "getForObject", "exchange")));
         m.put("IV-1.13", new HashSet<>(Arrays.asList(
                 "setHeader", "addHeader")));
+        // IV-1.15 보안기능 결정: session.setAttribute(), Cookie.setSecure()
+        m.put("IV-1.15", new HashSet<>(Arrays.asList(
+                "setAttribute", "setSecure", "setMaxInactiveInterval")));
         m.put("IV-1.17", new HashSet<>(Arrays.asList(
-                "format", "printf", "MessageFormat.format")));
+                "format", "printf")));
+        // IV-5.5 역직렬화: ois.readObject() — scope(ois)이 오염된 경우 탐지
         m.put("IV-5.5",  new HashSet<>(Arrays.asList(
                 "readObject", "readUnshared")));
         RULE_SINKS = Collections.unmodifiableMap(m);
+
+        Map<String, Set<String>> c = new HashMap<>();
+        // IV-1.3 경로조작: new File(tainted), new FileInputStream(tainted) 등
+        c.put("IV-1.3",  new HashSet<>(Arrays.asList(
+                "File", "FileInputStream", "FileOutputStream",
+                "FileReader", "RandomAccessFile")));
+        RULE_CTOR_SINKS = Collections.unmodifiableMap(c);
     }
 
     // ── State per method analysis ─────────────────────────────────────────
@@ -125,6 +142,9 @@ public class TaintAnalysisEngine {
 
             if (isSourceCall(init)) {
                 taintSet.put(varName, new TaintInfo(init.toString(), line, new ArrayList<>()));
+            } else if (init instanceof ObjectCreationExpr) {
+                // new Foo(taintedArg) → 오염 전파 (생성된 객체 변수도 오염)
+                propagateTaintFromCtor((ObjectCreationExpr) init, varName, line);
             } else if (isTainted(init)) {
                 List<String> propagators = collectTaintedVars(init);
                 TaintInfo origin = propagators.isEmpty() ? null : taintSet.get(propagators.get(0));
@@ -149,6 +169,8 @@ public class TaintAnalysisEngine {
 
             if (isSourceCall(val)) {
                 taintSet.put(varName, new TaintInfo(val.toString(), line, new ArrayList<>()));
+            } else if (val instanceof ObjectCreationExpr) {
+                propagateTaintFromCtor((ObjectCreationExpr) val, varName, line);
             } else if (isTainted(val)) {
                 List<String> propagators = collectTaintedVars(val);
                 TaintInfo origin = propagators.isEmpty() ? null : taintSet.get(propagators.get(0));
@@ -158,6 +180,30 @@ public class TaintAnalysisEngine {
                         propagators));
             } else if (isSanitizerCall(val)) {
                 taintSet.remove(varName);
+            }
+        }
+
+        /**
+         * ObjectCreationExpr Sink 탐지 — IV-1.3 경로조작 등
+         * new File(taintedPath), new FileInputStream(taintedPath) 패턴
+         */
+        @Override
+        public void visit(ObjectCreationExpr n, Void arg) {
+            super.visit(n, arg);
+
+            String typeName = n.getTypeAsString();
+            Set<String> ctorSinks = RULE_CTOR_SINKS.getOrDefault(
+                    currentRule.getRuleId(), Collections.emptySet());
+            int line = n.getBegin().map(p -> p.line).orElse(-1);
+
+            if (ctorSinks.contains(typeName)) {
+                for (Expression argExpr : n.getArguments()) {
+                    if (isTainted(argExpr)) {
+                        String taintedVar = firstTaintedVar(argExpr);
+                        TaintInfo info = taintSet.get(taintedVar);
+                        reportFinding(info, taintedVar, n.toString(), line);
+                    }
+                }
             }
         }
 
@@ -171,12 +217,25 @@ public class TaintAnalysisEngine {
             // ① Sink 탐지
             Set<String> sinks = RULE_SINKS.getOrDefault(currentRule.getRuleId(), Collections.emptySet());
             if (sinks.contains(methodName)) {
+                boolean argFired = false;
                 for (Expression argExpr : n.getArguments()) {
                     if (isTainted(argExpr)) {
                         String taintedVar = firstTaintedVar(argExpr);
                         TaintInfo info = taintSet.get(taintedVar);
                         reportFinding(info, taintedVar, n.toString(), line);
+                        argFired = true;
                     }
+                }
+                // 인자에 오염 없으면 scope(수신 객체) 오염 여부 확인
+                // — ois.readObject(), url.openConnection() 패턴
+                if (!argFired) {
+                    n.getScope().ifPresent(scope -> {
+                        if (isTainted(scope)) {
+                            String taintedVar = firstTaintedVar(scope);
+                            TaintInfo info = taintSet.get(taintedVar);
+                            reportFinding(info, taintedVar, n.toString(), line);
+                        }
+                    });
                 }
             }
 
@@ -194,6 +253,24 @@ public class TaintAnalysisEngine {
     // ────────────────────────────────────────────────────────────────────
     // Helper Methods
     // ────────────────────────────────────────────────────────────────────
+
+    /**
+     * ObjectCreationExpr 의 인자에 오염값이 있으면 대상 변수(varName)를 오염 처리.
+     * Sink 탐지와 독립적으로 동작하는 전파 로직.
+     */
+    private void propagateTaintFromCtor(ObjectCreationExpr oce, String varName, int line) {
+        Optional<Expression> firstTainted = oce.getArguments().stream()
+                .filter(this::isTainted)
+                .findFirst();
+        if (firstTainted.isEmpty()) return;
+
+        List<String> propagators = collectTaintedVars(firstTainted.get());
+        TaintInfo origin = propagators.isEmpty() ? null : taintSet.get(propagators.get(0));
+        taintSet.put(varName, new TaintInfo(
+                origin != null ? origin.sourceExpr : oce.toString(),
+                origin != null ? origin.sourceLine : line,
+                propagators));
+    }
 
     private boolean isSourceCall(Expression expr) {
         if (expr instanceof MethodCallExpr) {
@@ -226,6 +303,9 @@ public class TaintAnalysisEngine {
             boolean argTainted = call.getArguments().stream().anyMatch(this::isTainted);
             return scopeTainted || argTainted;
         }
+        if (expr instanceof ObjectCreationExpr) {
+            return ((ObjectCreationExpr) expr).getArguments().stream().anyMatch(this::isTainted);
+        }
         if (expr instanceof EnclosedExpr) {
             return isTainted(((EnclosedExpr) expr).getInner());
         }
@@ -253,6 +333,9 @@ public class TaintAnalysisEngine {
             MethodCallExpr call = (MethodCallExpr) expr;
             call.getScope().ifPresent(s -> collectTaintedVarsRecursive(s, out));
             call.getArguments().forEach(a -> collectTaintedVarsRecursive(a, out));
+        } else if (expr instanceof ObjectCreationExpr) {
+            ((ObjectCreationExpr) expr).getArguments()
+                    .forEach(a -> collectTaintedVarsRecursive(a, out));
         }
     }
 
