@@ -5,3 +5,6 @@ target/
 .claude_code/
 .DS_Store
 *.log
+.settings/
+.project
+.classpath
