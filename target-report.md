@@ -5,9 +5,9 @@
 | 항목 | 내용 |
 |------|------|
 | **진단 대상** | /home/ec2-user/project/target-project/src/main/java |
-| **진단 일시** | 2026-04-28 09:38 |
-| **총 발견 건수** | 733건 |
-| **위험도별** | 치명: 0건  높음: 179건  중간: 217건  낮음: 337건  |
+| **진단 일시** | 2026-04-28 11:18 |
+| **총 발견 건수** | 715건 |
+| **위험도별** | 치명: 0건  높음: 174건  중간: 209건  낮음: 332건  |
 
 ---
 
@@ -21,733 +21,715 @@
 | 4 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 66 |
 | 5 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 88 |
 | 6 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 175 |
-| 7 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 205 |
-| 8 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 249 |
-| 9 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 266 |
-| 10 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 299 |
-| 11 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 300 |
-| 12 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 409 |
-| 13 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 422 |
-| 14 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 451 |
-| 15 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 505 |
-| 16 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 535 |
-| 17 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 600 |
-| 18 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 603 |
-| 19 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 616 |
-| 20 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 631 |
-| 21 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 665 |
-| 22 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 666 |
-| 23 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 173 |
-| 24 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 476 |
-| 25 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 663 |
-| 26 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 357 |
-| 27 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 376 |
-| 28 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 464 |
-| 29 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 491 |
-| 30 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 411 |
-| 31 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 526 |
-| 32 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 17 |
-| 33 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 408 |
-| 34 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 411 |
-| 35 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 523 |
-| 36 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 526 |
-| 37 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 357 |
-| 38 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 376 |
-| 39 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 464 |
-| 40 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 491 |
-| 41 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 411 |
-| 42 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 526 |
-| 43 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 17 |
-| 44 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 408 |
-| 45 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 411 |
-| 46 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 523 |
-| 47 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 526 |
-| 48 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HashtagController.java` | 208 |
-| 49 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HashtagController.java` | 252 |
-| 50 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HashtagController.java` | 279 |
-| 51 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 7 |
-| 52 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 107 |
-| 53 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 209 |
-| 54 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 280 |
-| 55 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 335 |
-| 56 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 338 |
-| 57 | `IV-1.4` | 크로스사이트 스크립트 | 🟠 높음(HIGH) | `.../HomeController.java` | 215 |
-| 58 | `DS-1.5` | 웹 서비스 요청 및 결과 검증 | 🟠 높음(HIGH) | `.../HomeController.java` | 130 |
-| 59 | `DS-1.5` | 웹 서비스 요청 및 결과 검증 | 🟠 높음(HIGH) | `.../HomeController.java` | 213 |
-| 60 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HomeController.java` | 226 |
-| 61 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 15 |
-| 62 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 112 |
-| 63 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 120 |
-| 64 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 227 |
-| 65 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 230 |
-| 66 | `IV-5.3` | 해제된 자원 사용 | 🟠 높음(HIGH) | `.../HomeController.java` | 190 |
-| 67 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 275 |
-| 68 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 384 |
-| 69 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 490 |
-| 70 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 528 |
-| 71 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 318 |
-| 72 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 427 |
-| 73 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 689 |
-| 74 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 11 |
-| 75 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 59 |
-| 76 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 134 |
-| 77 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 185 |
-| 78 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 229 |
-| 79 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 277 |
-| 80 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 386 |
-| 81 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 492 |
-| 82 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 530 |
-| 83 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 558 |
-| 84 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 561 |
-| 85 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 21 |
-| 86 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 315 |
-| 87 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 318 |
-| 88 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 424 |
-| 89 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 427 |
-| 90 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 682 |
-| 91 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 689 |
-| 92 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 357 |
-| 93 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 376 |
-| 94 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 464 |
-| 95 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 491 |
-| 96 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 411 |
-| 97 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 526 |
-| 98 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 17 |
-| 99 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 408 |
-| 100 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 411 |
-| 101 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 523 |
-| 102 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 526 |
-| 103 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 192 |
-| 104 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 269 |
-| 105 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 327 |
-| 106 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 354 |
-| 107 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 7 |
-| 108 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 270 |
-| 109 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 355 |
-| 110 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 422 |
-| 111 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 425 |
-| 112 | `DS-4.1` | 세션 통제 | 🟠 높음(HIGH) | `.../BoardService.java` | 88 |
-| 113 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardService.java` | 6 |
-| 114 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardService.java` | 88 |
-| 115 | `DS-4.1` | 세션 통제 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 363 |
-| 116 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 10 |
-| 117 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 128 |
-| 118 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 250 |
-| 119 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 324 |
-| 120 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 363 |
-| 121 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 365 |
-| 122 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../MemberVO.java` | 56 |
-| 123 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminInterceptor.java` | 14 |
-| 124 | `DS-1.5` | 웹 서비스 요청 및 결과 검증 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 44 |
-| 125 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 8 |
-| 126 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 80 |
-| 127 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 85 |
-| 128 | `IV-5.3` | 해제된 자원 사용 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 47 |
-| 129 | `IV-1.15` | 보안기능 결정에 사용되는 부적절한 입력값 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 96 |
-| 130 | `IV-1.15` | 보안기능 결정에 사용되는 부적절한 입력값 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 101 |
-| 131 | `IV-1.15` | 보안기능 결정에 사용되는 부적절한 입력값 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 99 |
-| 132 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 6 |
-| 133 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 95 |
-| 134 | `IV-5.3` | 해제된 자원 사용 | 🟠 높음(HIGH) | `.../FileServerController.java` | 59 |
-| 135 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../UnicodeNormalizeFilter.java` | 116 |
-| 136 | `IV-1.16` | 메모리 버퍼 오버플로우 | 🟠 높음(HIGH) | `.../UnicodeNormalizeFilter.java` | 116 |
-| 137 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 144 |
-| 138 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 10 |
-| 139 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 137 |
-| 140 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 144 |
-| 141 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../ControllerUtil.java` | 5 |
-| 142 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../ControllerUtil.java` | 73 |
-| 143 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../ControllerUtil.java` | 77 |
-| 144 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 77 |
-| 145 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 85 |
-| 146 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 142 |
-| 147 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 147 |
-| 148 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 193 |
-| 149 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 197 |
-| 150 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 202 |
-| 151 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 251 |
-| 152 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 256 |
-| 153 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 298 |
-| 154 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 303 |
-| 155 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../FileUtils.java` | 13 |
-| 156 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../FileUtils.java` | 49 |
-| 157 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../FileUtils.java` | 104 |
-| 158 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../FileUtils.java` | 273 |
-| 159 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 19 |
-| 160 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 50 |
-| 161 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 77 |
-| 162 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 105 |
-| 163 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 142 |
-| 164 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 192 |
-| 165 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 193 |
-| 166 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 197 |
-| 167 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 218 |
-| 168 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 251 |
-| 169 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 274 |
-| 170 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 298 |
-| 171 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 10 |
-| 172 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 13 |
-| 173 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 23 |
-| 174 | `DS-2.5` | 암호키 관리 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 21 |
-| 175 | `IV-1.16` | 메모리 버퍼 오버플로우 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 13 |
-| 176 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../Slugify.java` | 74 |
-| 177 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../WpPhpUnserializer.java` | 118 |
-| 178 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../WpPhpUnserializer.java` | 121 |
-| 179 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../WpSlugifier_WP611.java` | 103 |
-| 180 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 98 |
-| 181 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 177 |
-| 182 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 216 |
-| 183 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 271 |
-| 184 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 404 |
-| 185 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 436 |
-| 186 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 495 |
-| 187 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 521 |
-| 188 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 591 |
-| 189 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 675 |
-| 190 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 797 |
-| 191 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 123 |
-| 192 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 125 |
-| 193 | `IV-2.9` | 취약한 비밀번호 허용 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 697 |
-| 194 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 53 |
-| 195 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 56 |
-| 196 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 145 |
-| 197 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 206 |
-| 198 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 271 |
-| 199 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 343 |
-| 200 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 452 |
-| 201 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 478 |
-| 202 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 567 |
-| 203 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 328 |
-| 204 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 145 |
-| 205 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 206 |
-| 206 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 271 |
-| 207 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 343 |
-| 208 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 452 |
-| 209 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 478 |
-| 210 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 567 |
-| 211 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 328 |
-| 212 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 63 |
-| 213 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 64 |
-| 214 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 111 |
-| 215 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 112 |
-| 216 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 105 |
-| 217 | `IV-2.8` | 적절하지 않은 난수 값 사용 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 60 |
-| 218 | `IV-4.1` | 오류 메시지 정보노출 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 64 |
-| 219 | `IV-4.1` | 오류 메시지 정보노출 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 112 |
-| 220 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 92 |
-| 221 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 116 |
-| 222 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 140 |
-| 223 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 164 |
-| 224 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 189 |
-| 225 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 240 |
-| 226 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 266 |
-| 227 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 327 |
-| 228 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 397 |
-| 229 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../HomeController.java` | 181 |
-| 230 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 185 |
-| 231 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 187 |
-| 232 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 199 |
-| 233 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 61 |
-| 234 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 64 |
-| 235 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 67 |
-| 236 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MainController.java` | 759 |
-| 237 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 643 |
-| 238 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 644 |
-| 239 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 645 |
-| 240 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 646 |
-| 241 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 647 |
-| 242 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 651 |
-| 243 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 652 |
-| 244 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 653 |
-| 245 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 654 |
-| 246 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 655 |
-| 247 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 145 |
-| 248 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 206 |
-| 249 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 271 |
-| 250 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 343 |
-| 251 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 452 |
-| 252 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 478 |
-| 253 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 567 |
-| 254 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 328 |
-| 255 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 101 |
-| 256 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 126 |
-| 257 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 150 |
-| 258 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 178 |
-| 259 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 219 |
-| 260 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 250 |
-| 261 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 315 |
-| 262 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 341 |
-| 263 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 414 |
-| 264 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 525 |
-| 265 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 543 |
-| 266 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 235 |
-| 267 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 244 |
-| 268 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 310 |
-| 269 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 319 |
-| 270 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 164 |
-| 271 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 283 |
-| 272 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 341 |
-| 273 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 155 |
-| 274 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 263 |
-| 275 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 273 |
-| 276 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 337 |
-| 277 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 43 |
-| 278 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 46 |
-| 279 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 49 |
-| 280 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 70 |
-| 281 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 110 |
-| 282 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 134 |
-| 283 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 99 |
-| 284 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 94 |
-| 285 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 103 |
-| 286 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 174 |
-| 287 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 183 |
-| 288 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 114 |
-| 289 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 162 |
-| 290 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 32 |
-| 291 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 35 |
-| 292 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 38 |
-| 293 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MemberServiceImpl.java` | 133 |
-| 294 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MemberServiceImpl.java` | 274 |
-| 295 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 86 |
-| 296 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 121 |
-| 297 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 149 |
-| 298 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 115 |
-| 299 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardDefaultVO.java` | 53 |
-| 300 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardDefaultVO.java` | 55 |
-| 301 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 89 |
-| 302 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 91 |
-| 303 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 97 |
-| 304 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 100 |
-| 305 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 103 |
-| 306 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 113 |
-| 307 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../CategoryVO.java` | 8 |
-| 308 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../CategoryVO.java` | 9 |
-| 309 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 8 |
-| 310 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 9 |
-| 311 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 10 |
-| 312 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 11 |
-| 313 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 12 |
-| 314 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 13 |
-| 315 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 14 |
-| 316 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 15 |
-| 317 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 16 |
-| 318 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 13 |
-| 319 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 14 |
-| 320 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 15 |
-| 321 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 16 |
-| 322 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 17 |
-| 323 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 18 |
-| 324 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 19 |
-| 325 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 20 |
-| 326 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 21 |
-| 327 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 22 |
-| 328 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 23 |
-| 329 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 26 |
-| 330 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 27 |
-| 331 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 28 |
-| 332 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 29 |
-| 333 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 30 |
-| 334 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 31 |
-| 335 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 33 |
-| 336 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 34 |
-| 337 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 36 |
-| 338 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 37 |
-| 339 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 38 |
-| 340 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 9 |
-| 341 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 10 |
-| 342 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 11 |
-| 343 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 12 |
-| 344 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 13 |
-| 345 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 14 |
-| 346 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 15 |
-| 347 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 16 |
-| 348 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 17 |
-| 349 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 31 |
-| 350 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 32 |
-| 351 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 33 |
-| 352 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 5 |
-| 353 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 6 |
-| 354 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 7 |
-| 355 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 8 |
-| 356 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 9 |
-| 357 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 10 |
-| 358 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminInterceptor.java` | 24 |
-| 359 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminInterceptor.java` | 25 |
-| 360 | `IV-4.1` | 오류 메시지 정보노출 | 🟡 중간(MEDIUM) | `.../AdminInterceptor.java` | 25 |
-| 361 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FileServerController.java` | 54 |
-| 362 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FileServerController.java` | 60 |
-| 363 | `IV-3.2` | 종료되지 않는 반복문 또는 재귀 함수 | 🟡 중간(MEDIUM) | `.../FileServerController.java` | 40 |
-| 364 | `IV-5.2` | 부적절한 자원 해제 | 🟡 중간(MEDIUM) | `.../FileServerController.java` | 29 |
-| 365 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../FileServerController.java` | 8 |
-| 366 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../IeEmulateFilter.java` | 32 |
-| 367 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MvcConfig.java` | 14 |
-| 368 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 4 |
-| 369 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 5 |
-| 370 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 6 |
-| 371 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 7 |
-| 372 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 8 |
-| 373 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 58 |
-| 374 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 59 |
-| 375 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 60 |
-| 376 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 61 |
-| 377 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 62 |
-| 378 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 63 |
-| 379 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 64 |
-| 380 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 113 |
-| 381 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 111 |
-| 382 | `IV-5.2` | 부적절한 자원 해제 | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 113 |
-| 383 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 25 |
-| 384 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardUtil.java` | 77 |
-| 385 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../FetchWpArticleUtil.java` | 99 |
-| 386 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 70 |
-| 387 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 135 |
-| 388 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 188 |
-| 389 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 245 |
-| 390 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 292 |
-| 391 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 36 |
-| 392 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 39 |
-| 393 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 42 |
-| 394 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../OTPUtil.java` | 17 |
-| 395 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../WpPhpUnserializer.java` | 91 |
-| 396 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../WpPhpUnserializer.java` | 90 |
-| 397 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 98 |
-| 398 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 177 |
-| 399 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 216 |
-| 400 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 271 |
-| 401 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 404 |
-| 402 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 436 |
-| 403 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 495 |
-| 404 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 521 |
-| 405 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 591 |
-| 406 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 675 |
-| 407 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 797 |
-| 408 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 145 |
-| 409 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 206 |
-| 410 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 271 |
-| 411 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 343 |
-| 412 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 452 |
-| 413 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 478 |
-| 414 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 567 |
-| 415 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 145 |
-| 416 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 206 |
-| 417 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 271 |
-| 418 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 343 |
-| 419 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 452 |
-| 420 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 478 |
-| 421 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 567 |
-| 422 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 63 |
-| 423 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 111 |
-| 424 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 54 |
-| 425 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 64 |
-| 426 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 97 |
-| 427 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 98 |
-| 428 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 112 |
-| 429 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 92 |
-| 430 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 116 |
-| 431 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 140 |
-| 432 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 164 |
-| 433 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 189 |
-| 434 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 240 |
-| 435 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 266 |
-| 436 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 327 |
-| 437 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 397 |
-| 438 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 121 |
-| 439 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 173 |
-| 440 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 216 |
-| 441 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 264 |
-| 442 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 374 |
-| 443 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 483 |
-| 444 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 521 |
-| 445 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 550 |
-| 446 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 759 |
-| 447 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 145 |
-| 448 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 206 |
-| 449 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 271 |
-| 450 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 343 |
-| 451 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 452 |
-| 452 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 478 |
-| 453 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 567 |
-| 454 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 101 |
-| 455 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 126 |
-| 456 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 150 |
-| 457 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 178 |
-| 458 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 219 |
-| 459 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 250 |
-| 460 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 315 |
-| 461 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 341 |
-| 462 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 414 |
-| 463 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 525 |
-| 464 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 543 |
-| 465 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardServiceImpl.java` | 164 |
-| 466 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardServiceImpl.java` | 283 |
-| 467 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardServiceImpl.java` | 341 |
-| 468 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagServiceImpl.java` | 70 |
-| 469 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagServiceImpl.java` | 110 |
-| 470 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagServiceImpl.java` | 134 |
-| 471 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainServiceImpl.java` | 114 |
-| 472 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainServiceImpl.java` | 162 |
-| 473 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MemberServiceImpl.java` | 133 |
-| 474 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MemberServiceImpl.java` | 274 |
-| 475 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeServiceImpl.java` | 86 |
-| 476 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeServiceImpl.java` | 121 |
-| 477 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeServiceImpl.java` | 149 |
-| 478 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 88 |
-| 479 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 96 |
-| 480 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 104 |
-| 481 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 112 |
-| 482 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 120 |
-| 483 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 128 |
-| 484 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 136 |
-| 485 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 144 |
-| 486 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 152 |
-| 487 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 160 |
-| 488 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 168 |
-| 489 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 176 |
-| 490 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 184 |
-| 491 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 192 |
-| 492 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 200 |
-| 493 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 208 |
-| 494 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 216 |
-| 495 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 224 |
-| 496 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 232 |
-| 497 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 240 |
-| 498 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 248 |
-| 499 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 256 |
-| 500 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 264 |
-| 501 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 272 |
-| 502 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 280 |
-| 503 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 288 |
-| 504 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 296 |
-| 505 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 304 |
-| 506 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 312 |
-| 507 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 320 |
-| 508 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 328 |
-| 509 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 336 |
-| 510 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 344 |
-| 511 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 352 |
-| 512 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 120 |
-| 513 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 128 |
-| 514 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 136 |
-| 515 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 144 |
-| 516 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 152 |
-| 517 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 160 |
-| 518 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 168 |
-| 519 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 176 |
-| 520 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 184 |
-| 521 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 192 |
-| 522 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 200 |
-| 523 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 208 |
-| 524 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 216 |
-| 525 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 224 |
-| 526 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 232 |
-| 527 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 240 |
-| 528 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 248 |
-| 529 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 256 |
-| 530 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 264 |
-| 531 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 272 |
-| 532 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 280 |
-| 533 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 288 |
-| 534 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 296 |
-| 535 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 304 |
-| 536 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 312 |
-| 537 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 320 |
-| 538 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 328 |
-| 539 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 336 |
-| 540 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 344 |
-| 541 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 352 |
-| 542 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 360 |
-| 543 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 368 |
-| 544 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 376 |
-| 545 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 384 |
-| 546 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 392 |
-| 547 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 400 |
-| 548 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 408 |
-| 549 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 416 |
-| 550 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 424 |
-| 551 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 432 |
-| 552 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 440 |
-| 553 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 448 |
-| 554 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 456 |
-| 555 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 464 |
-| 556 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 472 |
-| 557 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 480 |
-| 558 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 488 |
-| 559 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 496 |
-| 560 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 504 |
-| 561 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 512 |
-| 562 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 520 |
-| 563 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 528 |
-| 564 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 536 |
-| 565 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 544 |
-| 566 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 552 |
-| 567 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 560 |
-| 568 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 568 |
-| 569 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 576 |
-| 570 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 584 |
-| 571 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 592 |
-| 572 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 600 |
-| 573 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 607 |
-| 574 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 613 |
-| 575 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 619 |
-| 576 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 625 |
-| 577 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 631 |
-| 578 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 637 |
-| 579 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 643 |
-| 580 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 649 |
-| 581 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 655 |
-| 582 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 661 |
-| 583 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 667 |
-| 584 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 673 |
-| 585 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 679 |
-| 586 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 19 |
-| 587 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 25 |
-| 588 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 31 |
-| 589 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 37 |
-| 590 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 43 |
-| 591 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 49 |
-| 592 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 55 |
-| 593 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 29 |
-| 594 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 37 |
-| 595 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 45 |
-| 596 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 53 |
-| 597 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 61 |
-| 598 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 69 |
-| 599 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 77 |
-| 600 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 85 |
-| 601 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 93 |
-| 602 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 101 |
-| 603 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 109 |
-| 604 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 117 |
-| 605 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 24 |
-| 606 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 30 |
-| 607 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 36 |
-| 608 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 42 |
-| 609 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 48 |
-| 610 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 54 |
-| 611 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 60 |
-| 612 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 66 |
-| 613 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 72 |
-| 614 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 78 |
-| 615 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 84 |
-| 616 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 90 |
-| 617 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 65 |
-| 618 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 71 |
-| 619 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 77 |
-| 620 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 83 |
-| 621 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 89 |
-| 622 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 95 |
-| 623 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 101 |
-| 624 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 107 |
-| 625 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 113 |
-| 626 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 119 |
-| 627 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 125 |
-| 628 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 131 |
-| 629 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 137 |
-| 630 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 143 |
-| 631 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 149 |
-| 632 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 155 |
-| 633 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 161 |
-| 634 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 167 |
-| 635 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 173 |
-| 636 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 179 |
-| 637 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 185 |
-| 638 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 191 |
-| 639 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 197 |
-| 640 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 203 |
-| 641 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 209 |
-| 642 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 215 |
-| 643 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 221 |
-| 644 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 227 |
-| 645 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 233 |
-| 646 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 239 |
-| 647 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 245 |
-| 648 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 251 |
-| 649 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 257 |
-| 650 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 263 |
-| 651 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 269 |
-| 652 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 275 |
-| 653 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 281 |
-| 654 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 287 |
-| 655 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 293 |
-| 656 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 299 |
-| 657 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 305 |
-| 658 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 311 |
-| 659 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 317 |
-| 660 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 323 |
-| 661 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 329 |
-| 662 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 335 |
-| 663 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 45 |
-| 664 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 51 |
-| 665 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 57 |
-| 666 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 64 |
-| 667 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 70 |
-| 668 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 76 |
-| 669 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 82 |
-| 670 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 88 |
-| 671 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 94 |
-| 672 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 100 |
-| 673 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 106 |
-| 674 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 112 |
-| 675 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 118 |
-| 676 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 124 |
-| 677 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 130 |
-| 678 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 136 |
-| 679 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 142 |
-| 680 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 148 |
-| 681 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 154 |
-| 682 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 160 |
-| 683 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 166 |
-| 684 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 172 |
-| 685 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 44 |
-| 686 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 50 |
-| 687 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 56 |
-| 688 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 62 |
-| 689 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 68 |
-| 690 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 74 |
-| 691 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 80 |
-| 692 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 86 |
-| 693 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 92 |
-| 694 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 98 |
-| 695 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 104 |
-| 696 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 110 |
-| 697 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 116 |
-| 698 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 122 |
-| 699 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 128 |
-| 700 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 134 |
-| 701 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 140 |
-| 702 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 146 |
-| 703 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 152 |
-| 704 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 158 |
-| 705 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 164 |
-| 706 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../TermRelationshipsVO.java` | 12 |
-| 707 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../TermRelationshipsVO.java` | 18 |
-| 708 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../TermRelationshipsVO.java` | 24 |
-| 709 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 16 |
-| 710 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 22 |
-| 711 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 28 |
-| 712 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 34 |
-| 713 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 40 |
-| 714 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 46 |
-| 715 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 52 |
-| 716 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminInterceptor.java` | 24 |
-| 717 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../AdminInterceptor.java` | 25 |
-| 718 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../MvcConfig.java` | 18 |
-| 719 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 15 |
-| 720 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 23 |
-| 721 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 31 |
-| 722 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 35 |
-| 723 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PasswordEncoding.java` | 15 |
-| 724 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardUtil.java` | 77 |
-| 725 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../OTPUtil.java` | 48 |
-| 726 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 91 |
-| 727 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 334 |
-| 728 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 335 |
-| 729 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 338 |
-| 730 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 341 |
-| 731 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 344 |
-| 732 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 122 |
-| 733 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpSlugifier_WP611.java` | 136 |
+| 7 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 299 |
+| 8 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 300 |
+| 9 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 409 |
+| 10 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 422 |
+| 11 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 451 |
+| 12 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 505 |
+| 13 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 535 |
+| 14 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 600 |
+| 15 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 603 |
+| 16 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 616 |
+| 17 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 631 |
+| 18 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 665 |
+| 19 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 666 |
+| 20 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 173 |
+| 21 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 476 |
+| 22 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../AdminMemberController.java` | 663 |
+| 23 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 357 |
+| 24 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 376 |
+| 25 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 464 |
+| 26 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 491 |
+| 27 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 411 |
+| 28 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 526 |
+| 29 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 17 |
+| 30 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 408 |
+| 31 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 411 |
+| 32 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 523 |
+| 33 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BizStoryController.java` | 526 |
+| 34 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 357 |
+| 35 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 376 |
+| 36 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 464 |
+| 37 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 491 |
+| 38 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 411 |
+| 39 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 526 |
+| 40 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 17 |
+| 41 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 408 |
+| 42 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 411 |
+| 43 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 523 |
+| 44 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../EsgStoryController.java` | 526 |
+| 45 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HashtagController.java` | 208 |
+| 46 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HashtagController.java` | 252 |
+| 47 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HashtagController.java` | 279 |
+| 48 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 7 |
+| 49 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 107 |
+| 50 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 209 |
+| 51 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 280 |
+| 52 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 335 |
+| 53 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HashtagController.java` | 338 |
+| 54 | `IV-1.4` | 크로스사이트 스크립트 | 🟠 높음(HIGH) | `.../HomeController.java` | 215 |
+| 55 | `DS-1.5` | 웹 서비스 요청 및 결과 검증 | 🟠 높음(HIGH) | `.../HomeController.java` | 130 |
+| 56 | `DS-1.5` | 웹 서비스 요청 및 결과 검증 | 🟠 높음(HIGH) | `.../HomeController.java` | 213 |
+| 57 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../HomeController.java` | 226 |
+| 58 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 15 |
+| 59 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 112 |
+| 60 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 120 |
+| 61 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 227 |
+| 62 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../HomeController.java` | 230 |
+| 63 | `IV-5.3` | 해제된 자원 사용 | 🟠 높음(HIGH) | `.../HomeController.java` | 190 |
+| 64 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 275 |
+| 65 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 384 |
+| 66 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 490 |
+| 67 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 528 |
+| 68 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 318 |
+| 69 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 427 |
+| 70 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MainController.java` | 689 |
+| 71 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 11 |
+| 72 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 59 |
+| 73 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 134 |
+| 74 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 185 |
+| 75 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 229 |
+| 76 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 277 |
+| 77 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 386 |
+| 78 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 492 |
+| 79 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 530 |
+| 80 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 558 |
+| 81 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../MainController.java` | 561 |
+| 82 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 21 |
+| 83 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 315 |
+| 84 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 318 |
+| 85 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 424 |
+| 86 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 427 |
+| 87 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 682 |
+| 88 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MainController.java` | 689 |
+| 89 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 357 |
+| 90 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 376 |
+| 91 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 464 |
+| 92 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 491 |
+| 93 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 411 |
+| 94 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 526 |
+| 95 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 17 |
+| 96 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 408 |
+| 97 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 411 |
+| 98 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 523 |
+| 99 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../MediaCenterController.java` | 526 |
+| 100 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 192 |
+| 101 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 269 |
+| 102 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 327 |
+| 103 | `DS-1.6` | 웹 기반 중요 기능 수행 요청 유효성 검증 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 354 |
+| 104 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 7 |
+| 105 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 270 |
+| 106 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 355 |
+| 107 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 422 |
+| 108 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../NewsTypeController.java` | 425 |
+| 109 | `DS-4.1` | 세션 통제 | 🟠 높음(HIGH) | `.../BoardService.java` | 88 |
+| 110 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardService.java` | 6 |
+| 111 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardService.java` | 88 |
+| 112 | `DS-4.1` | 세션 통제 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 363 |
+| 113 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 10 |
+| 114 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 128 |
+| 115 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 250 |
+| 116 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 324 |
+| 117 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 363 |
+| 118 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../BoardServiceImpl.java` | 365 |
+| 119 | `DS-2.3` | 비밀번호 관리 | 🟠 높음(HIGH) | `.../MemberVO.java` | 56 |
+| 120 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AdminInterceptor.java` | 14 |
+| 121 | `DS-1.5` | 웹 서비스 요청 및 결과 검증 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 44 |
+| 122 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 8 |
+| 123 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 80 |
+| 124 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 85 |
+| 125 | `IV-5.3` | 해제된 자원 사용 | 🟠 높음(HIGH) | `.../AuthLogInterceptor.java` | 47 |
+| 126 | `IV-1.15` | 보안기능 결정에 사용되는 부적절한 입력값 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 96 |
+| 127 | `IV-1.15` | 보안기능 결정에 사용되는 부적절한 입력값 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 101 |
+| 128 | `IV-1.15` | 보안기능 결정에 사용되는 부적절한 입력값 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 99 |
+| 129 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 6 |
+| 130 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../CommonUtil.java` | 95 |
+| 131 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../UnicodeNormalizeFilter.java` | 116 |
+| 132 | `IV-1.16` | 메모리 버퍼 오버플로우 | 🟠 높음(HIGH) | `.../UnicodeNormalizeFilter.java` | 116 |
+| 133 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 144 |
+| 134 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 10 |
+| 135 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 137 |
+| 136 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../BoardUtil.java` | 144 |
+| 137 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../ControllerUtil.java` | 5 |
+| 138 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../ControllerUtil.java` | 73 |
+| 139 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../ControllerUtil.java` | 77 |
+| 140 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 77 |
+| 141 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 85 |
+| 142 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 142 |
+| 143 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 147 |
+| 144 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 193 |
+| 145 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 197 |
+| 146 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 202 |
+| 147 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 251 |
+| 148 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 256 |
+| 149 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 298 |
+| 150 | `DS-1.10` | 업로드·다운로드 파일 검증 | 🟠 높음(HIGH) | `.../FileUtils.java` | 303 |
+| 151 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../FileUtils.java` | 13 |
+| 152 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../FileUtils.java` | 49 |
+| 153 | `DS-2.1` | 인증 대상 및 방식 | 🟠 높음(HIGH) | `.../FileUtils.java` | 273 |
+| 154 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 19 |
+| 155 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 50 |
+| 156 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 77 |
+| 157 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 105 |
+| 158 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 142 |
+| 159 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 192 |
+| 160 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 193 |
+| 161 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 197 |
+| 162 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 218 |
+| 163 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 251 |
+| 164 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 274 |
+| 165 | `IV-1.6` | 위험한 형식 파일 업로드 | 🟠 높음(HIGH) | `.../FileUtils.java` | 298 |
+| 166 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 10 |
+| 167 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 13 |
+| 168 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 23 |
+| 169 | `DS-2.5` | 암호키 관리 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 21 |
+| 170 | `IV-1.16` | 메모리 버퍼 오버플로우 | 🟠 높음(HIGH) | `.../OTPUtil.java` | 13 |
+| 171 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../Slugify.java` | 74 |
+| 172 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../WpPhpUnserializer.java` | 118 |
+| 173 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../WpPhpUnserializer.java` | 121 |
+| 174 | `DS-1.8` | 허용된 범위내 메모리 접근 | 🟠 높음(HIGH) | `.../WpSlugifier_WP611.java` | 103 |
+| 175 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 98 |
+| 176 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 177 |
+| 177 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 404 |
+| 178 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 436 |
+| 179 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 495 |
+| 180 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 521 |
+| 181 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 591 |
+| 182 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 675 |
+| 183 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 797 |
+| 184 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 123 |
+| 185 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 125 |
+| 186 | `IV-2.9` | 취약한 비밀번호 허용 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 697 |
+| 187 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 53 |
+| 188 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../AdminMemberController.java` | 56 |
+| 189 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 145 |
+| 190 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 206 |
+| 191 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 271 |
+| 192 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 343 |
+| 193 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 452 |
+| 194 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 478 |
+| 195 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 567 |
+| 196 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BizStoryController.java` | 328 |
+| 197 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 145 |
+| 198 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 206 |
+| 199 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 271 |
+| 200 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 343 |
+| 201 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 452 |
+| 202 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 478 |
+| 203 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 567 |
+| 204 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../EsgStoryController.java` | 328 |
+| 205 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 63 |
+| 206 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 64 |
+| 207 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 111 |
+| 208 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 112 |
+| 209 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 105 |
+| 210 | `IV-4.1` | 오류 메시지 정보노출 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 64 |
+| 211 | `IV-4.1` | 오류 메시지 정보노출 | 🟡 중간(MEDIUM) | `.../FetchWpArticleController.java` | 112 |
+| 212 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 92 |
+| 213 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 116 |
+| 214 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 140 |
+| 215 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 164 |
+| 216 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 189 |
+| 217 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 240 |
+| 218 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 266 |
+| 219 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 327 |
+| 220 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagController.java` | 397 |
+| 221 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../HomeController.java` | 181 |
+| 222 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 185 |
+| 223 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 187 |
+| 224 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 199 |
+| 225 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 61 |
+| 226 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 64 |
+| 227 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HomeController.java` | 67 |
+| 228 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MainController.java` | 759 |
+| 229 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 643 |
+| 230 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 644 |
+| 231 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 645 |
+| 232 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 646 |
+| 233 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 647 |
+| 234 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 651 |
+| 235 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 652 |
+| 236 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 653 |
+| 237 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 654 |
+| 238 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MainController.java` | 655 |
+| 239 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 145 |
+| 240 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 206 |
+| 241 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 271 |
+| 242 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 343 |
+| 243 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 452 |
+| 244 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 478 |
+| 245 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 567 |
+| 246 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../MediaCenterController.java` | 328 |
+| 247 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 101 |
+| 248 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 126 |
+| 249 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 150 |
+| 250 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 178 |
+| 251 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 219 |
+| 252 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 250 |
+| 253 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 315 |
+| 254 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 341 |
+| 255 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 414 |
+| 256 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 525 |
+| 257 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeController.java` | 543 |
+| 258 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 235 |
+| 259 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 244 |
+| 260 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 310 |
+| 261 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 319 |
+| 262 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 164 |
+| 263 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 283 |
+| 264 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 341 |
+| 265 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 155 |
+| 266 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 263 |
+| 267 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 273 |
+| 268 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 337 |
+| 269 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 43 |
+| 270 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 46 |
+| 271 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardServiceImpl.java` | 49 |
+| 272 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 70 |
+| 273 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 110 |
+| 274 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 134 |
+| 275 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../HashtagServiceImpl.java` | 99 |
+| 276 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 94 |
+| 277 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 103 |
+| 278 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 174 |
+| 279 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 183 |
+| 280 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 114 |
+| 281 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 162 |
+| 282 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 32 |
+| 283 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 35 |
+| 284 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MainServiceImpl.java` | 38 |
+| 285 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MemberServiceImpl.java` | 133 |
+| 286 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../MemberServiceImpl.java` | 274 |
+| 287 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 86 |
+| 288 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 121 |
+| 289 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 149 |
+| 290 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../NewsTypeServiceImpl.java` | 115 |
+| 291 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardDefaultVO.java` | 53 |
+| 292 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardDefaultVO.java` | 55 |
+| 293 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 89 |
+| 294 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 91 |
+| 295 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 97 |
+| 296 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 100 |
+| 297 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 103 |
+| 298 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../BoardVO.java` | 113 |
+| 299 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../CategoryVO.java` | 8 |
+| 300 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../CategoryVO.java` | 9 |
+| 301 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 8 |
+| 302 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 9 |
+| 303 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 10 |
+| 304 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 11 |
+| 305 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 12 |
+| 306 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 13 |
+| 307 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 14 |
+| 308 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 15 |
+| 309 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../HashtagVO.java` | 16 |
+| 310 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 13 |
+| 311 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 14 |
+| 312 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 15 |
+| 313 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 16 |
+| 314 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 17 |
+| 315 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 18 |
+| 316 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 19 |
+| 317 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 20 |
+| 318 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 21 |
+| 319 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 22 |
+| 320 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 23 |
+| 321 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 26 |
+| 322 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 27 |
+| 323 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 28 |
+| 324 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 29 |
+| 325 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 30 |
+| 326 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 31 |
+| 327 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 33 |
+| 328 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 34 |
+| 329 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 36 |
+| 330 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 37 |
+| 331 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MemberVO.java` | 38 |
+| 332 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 9 |
+| 333 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 10 |
+| 334 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 11 |
+| 335 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 12 |
+| 336 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 13 |
+| 337 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 14 |
+| 338 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 15 |
+| 339 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 16 |
+| 340 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 17 |
+| 341 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 31 |
+| 342 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 32 |
+| 343 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../NewsTypeVO.java` | 33 |
+| 344 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 5 |
+| 345 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 6 |
+| 346 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 7 |
+| 347 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 8 |
+| 348 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 9 |
+| 349 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../WpFetchVO.java` | 10 |
+| 350 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminInterceptor.java` | 24 |
+| 351 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../AdminInterceptor.java` | 25 |
+| 352 | `IV-4.1` | 오류 메시지 정보노출 | 🟡 중간(MEDIUM) | `.../AdminInterceptor.java` | 25 |
+| 353 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../IeEmulateFilter.java` | 32 |
+| 354 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../MvcConfig.java` | 14 |
+| 355 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 4 |
+| 356 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 5 |
+| 357 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 6 |
+| 358 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 7 |
+| 359 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 8 |
+| 360 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 58 |
+| 361 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 59 |
+| 362 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 60 |
+| 363 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 61 |
+| 364 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 62 |
+| 365 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 63 |
+| 366 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../PaginationInfo.java` | 64 |
+| 367 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 113 |
+| 368 | `DS-1.7` | HTTP 프로토콜 유효성 검증 | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 111 |
+| 369 | `IV-5.2` | 부적절한 자원 해제 | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 113 |
+| 370 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../UnicodeNormalizeFilter.java` | 25 |
+| 371 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../BoardUtil.java` | 77 |
+| 372 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../FetchWpArticleUtil.java` | 99 |
+| 373 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 70 |
+| 374 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 135 |
+| 375 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 188 |
+| 376 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 245 |
+| 377 | `IV-3.1` | 경쟁조건: 검사 시점과 사용 시점(TOCTOU) | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 292 |
+| 378 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 36 |
+| 379 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 39 |
+| 380 | `IV-5.4` | 초기화되지 않은 변수 사용 | 🟡 중간(MEDIUM) | `.../FileUtils.java` | 42 |
+| 381 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../OTPUtil.java` | 17 |
+| 382 | `DS-3.1` | 예외처리 | 🟡 중간(MEDIUM) | `.../WpPhpUnserializer.java` | 91 |
+| 383 | `IV-1.14` | 정수형 오버플로우 | 🟡 중간(MEDIUM) | `.../WpPhpUnserializer.java` | 90 |
+| 384 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 98 |
+| 385 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 177 |
+| 386 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 404 |
+| 387 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 436 |
+| 388 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 495 |
+| 389 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 521 |
+| 390 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 591 |
+| 391 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 675 |
+| 392 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminMemberController.java` | 797 |
+| 393 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 145 |
+| 394 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 206 |
+| 395 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 271 |
+| 396 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 343 |
+| 397 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 452 |
+| 398 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 478 |
+| 399 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BizStoryController.java` | 567 |
+| 400 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 145 |
+| 401 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 206 |
+| 402 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 271 |
+| 403 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 343 |
+| 404 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 452 |
+| 405 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 478 |
+| 406 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../EsgStoryController.java` | 567 |
+| 407 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 63 |
+| 408 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 111 |
+| 409 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 54 |
+| 410 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 64 |
+| 411 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../FetchWpArticleController.java` | 112 |
+| 412 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 92 |
+| 413 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 116 |
+| 414 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 140 |
+| 415 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 164 |
+| 416 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 189 |
+| 417 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 240 |
+| 418 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 266 |
+| 419 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 327 |
+| 420 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagController.java` | 397 |
+| 421 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 121 |
+| 422 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 173 |
+| 423 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 216 |
+| 424 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 264 |
+| 425 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 374 |
+| 426 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 483 |
+| 427 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 521 |
+| 428 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 550 |
+| 429 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainController.java` | 759 |
+| 430 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 145 |
+| 431 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 206 |
+| 432 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 271 |
+| 433 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 343 |
+| 434 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 452 |
+| 435 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 478 |
+| 436 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MediaCenterController.java` | 567 |
+| 437 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 101 |
+| 438 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 126 |
+| 439 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 150 |
+| 440 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 178 |
+| 441 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 219 |
+| 442 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 250 |
+| 443 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 315 |
+| 444 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 341 |
+| 445 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 414 |
+| 446 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 525 |
+| 447 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeController.java` | 543 |
+| 448 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardServiceImpl.java` | 164 |
+| 449 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardServiceImpl.java` | 283 |
+| 450 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardServiceImpl.java` | 341 |
+| 451 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagServiceImpl.java` | 70 |
+| 452 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagServiceImpl.java` | 110 |
+| 453 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../HashtagServiceImpl.java` | 134 |
+| 454 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainServiceImpl.java` | 114 |
+| 455 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MainServiceImpl.java` | 162 |
+| 456 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MemberServiceImpl.java` | 133 |
+| 457 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../MemberServiceImpl.java` | 274 |
+| 458 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeServiceImpl.java` | 86 |
+| 459 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeServiceImpl.java` | 121 |
+| 460 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../NewsTypeServiceImpl.java` | 149 |
+| 461 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 88 |
+| 462 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 96 |
+| 463 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 104 |
+| 464 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 112 |
+| 465 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 120 |
+| 466 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 128 |
+| 467 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 136 |
+| 468 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 144 |
+| 469 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 152 |
+| 470 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 160 |
+| 471 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 168 |
+| 472 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 176 |
+| 473 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 184 |
+| 474 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 192 |
+| 475 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 200 |
+| 476 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 208 |
+| 477 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 216 |
+| 478 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 224 |
+| 479 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 232 |
+| 480 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 240 |
+| 481 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 248 |
+| 482 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 256 |
+| 483 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 264 |
+| 484 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 272 |
+| 485 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 280 |
+| 486 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 288 |
+| 487 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 296 |
+| 488 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 304 |
+| 489 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 312 |
+| 490 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 320 |
+| 491 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 328 |
+| 492 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 336 |
+| 493 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 344 |
+| 494 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardDefaultVO.java` | 352 |
+| 495 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 120 |
+| 496 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 128 |
+| 497 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 136 |
+| 498 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 144 |
+| 499 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 152 |
+| 500 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 160 |
+| 501 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 168 |
+| 502 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 176 |
+| 503 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 184 |
+| 504 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 192 |
+| 505 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 200 |
+| 506 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 208 |
+| 507 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 216 |
+| 508 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 224 |
+| 509 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 232 |
+| 510 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 240 |
+| 511 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 248 |
+| 512 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 256 |
+| 513 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 264 |
+| 514 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 272 |
+| 515 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 280 |
+| 516 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 288 |
+| 517 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 296 |
+| 518 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 304 |
+| 519 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 312 |
+| 520 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 320 |
+| 521 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 328 |
+| 522 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 336 |
+| 523 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 344 |
+| 524 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 352 |
+| 525 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 360 |
+| 526 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 368 |
+| 527 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 376 |
+| 528 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 384 |
+| 529 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 392 |
+| 530 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 400 |
+| 531 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 408 |
+| 532 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 416 |
+| 533 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 424 |
+| 534 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 432 |
+| 535 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 440 |
+| 536 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 448 |
+| 537 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 456 |
+| 538 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 464 |
+| 539 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 472 |
+| 540 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 480 |
+| 541 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 488 |
+| 542 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 496 |
+| 543 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 504 |
+| 544 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 512 |
+| 545 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 520 |
+| 546 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 528 |
+| 547 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 536 |
+| 548 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 544 |
+| 549 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 552 |
+| 550 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 560 |
+| 551 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 568 |
+| 552 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 576 |
+| 553 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 584 |
+| 554 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 592 |
+| 555 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 600 |
+| 556 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 607 |
+| 557 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 613 |
+| 558 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 619 |
+| 559 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 625 |
+| 560 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 631 |
+| 561 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 637 |
+| 562 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 643 |
+| 563 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 649 |
+| 564 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 655 |
+| 565 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 661 |
+| 566 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 667 |
+| 567 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 673 |
+| 568 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../BoardVO.java` | 679 |
+| 569 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 19 |
+| 570 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 25 |
+| 571 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 31 |
+| 572 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 37 |
+| 573 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 43 |
+| 574 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 49 |
+| 575 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CategoryVO.java` | 55 |
+| 576 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 29 |
+| 577 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 37 |
+| 578 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 45 |
+| 579 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 53 |
+| 580 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 61 |
+| 581 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 69 |
+| 582 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 77 |
+| 583 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 85 |
+| 584 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 93 |
+| 585 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 101 |
+| 586 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 109 |
+| 587 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../CodeVO.java` | 117 |
+| 588 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 24 |
+| 589 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 30 |
+| 590 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 36 |
+| 591 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 42 |
+| 592 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 48 |
+| 593 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 54 |
+| 594 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 60 |
+| 595 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 66 |
+| 596 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 72 |
+| 597 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 78 |
+| 598 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 84 |
+| 599 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../HashtagVO.java` | 90 |
+| 600 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 65 |
+| 601 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 71 |
+| 602 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 77 |
+| 603 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 83 |
+| 604 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 89 |
+| 605 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 95 |
+| 606 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 101 |
+| 607 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 107 |
+| 608 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 113 |
+| 609 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 119 |
+| 610 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 125 |
+| 611 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 131 |
+| 612 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 137 |
+| 613 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 143 |
+| 614 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 149 |
+| 615 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 155 |
+| 616 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 161 |
+| 617 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 167 |
+| 618 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 173 |
+| 619 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 179 |
+| 620 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 185 |
+| 621 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 191 |
+| 622 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 197 |
+| 623 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 203 |
+| 624 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 209 |
+| 625 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 215 |
+| 626 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 221 |
+| 627 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 227 |
+| 628 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 233 |
+| 629 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 239 |
+| 630 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 245 |
+| 631 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 251 |
+| 632 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 257 |
+| 633 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 263 |
+| 634 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 269 |
+| 635 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 275 |
+| 636 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 281 |
+| 637 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 287 |
+| 638 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 293 |
+| 639 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 299 |
+| 640 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 305 |
+| 641 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 311 |
+| 642 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 317 |
+| 643 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 323 |
+| 644 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 329 |
+| 645 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MainVO.java` | 335 |
+| 646 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 45 |
+| 647 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 51 |
+| 648 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 57 |
+| 649 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 64 |
+| 650 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 70 |
+| 651 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 76 |
+| 652 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 82 |
+| 653 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 88 |
+| 654 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 94 |
+| 655 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 100 |
+| 656 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 106 |
+| 657 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 112 |
+| 658 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 118 |
+| 659 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 124 |
+| 660 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 130 |
+| 661 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 136 |
+| 662 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 142 |
+| 663 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 148 |
+| 664 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 154 |
+| 665 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 160 |
+| 666 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 166 |
+| 667 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../MemberVO.java` | 172 |
+| 668 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 44 |
+| 669 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 50 |
+| 670 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 56 |
+| 671 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 62 |
+| 672 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 68 |
+| 673 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 74 |
+| 674 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 80 |
+| 675 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 86 |
+| 676 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 92 |
+| 677 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 98 |
+| 678 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 104 |
+| 679 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 110 |
+| 680 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 116 |
+| 681 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 122 |
+| 682 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 128 |
+| 683 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 134 |
+| 684 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 140 |
+| 685 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 146 |
+| 686 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 152 |
+| 687 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 158 |
+| 688 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../NewsTypeVO.java` | 164 |
+| 689 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../TermRelationshipsVO.java` | 12 |
+| 690 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../TermRelationshipsVO.java` | 18 |
+| 691 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../TermRelationshipsVO.java` | 24 |
+| 692 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 16 |
+| 693 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 22 |
+| 694 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 28 |
+| 695 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 34 |
+| 696 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 40 |
+| 697 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 46 |
+| 698 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpFetchVO.java` | 52 |
+| 699 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../AdminInterceptor.java` | 24 |
+| 700 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../AdminInterceptor.java` | 25 |
+| 701 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 15 |
+| 702 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 23 |
+| 703 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 31 |
+| 704 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PaginationInfo.java` | 35 |
+| 705 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../PasswordEncoding.java` | 15 |
+| 706 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../BoardUtil.java` | 77 |
+| 707 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../OTPUtil.java` | 48 |
+| 708 | `IV-4.3` | 부적절한 예외 처리 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 91 |
+| 709 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 334 |
+| 710 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 335 |
+| 711 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 338 |
+| 712 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 341 |
+| 713 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 344 |
+| 714 | `IV-6.4` | Private 배열에 Public 데이터 할당 | 🟢 낮음(LOW) | `.../WpPhpUnserializer.java` | 122 |
+| 715 | `IV-6.2` | 제거되지 않고 남은 디버그 코드 | 🟢 낮음(LOW) | `.../WpSlugifier_WP611.java` | 136 |
 
 ---
 
@@ -1033,135 +1015,6 @@ session = request.getSession(true);
 | **약점명** | 인증 대상 및 방식 |
 | **위험도** | 🟠 높음(HIGH) |
 | **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
-| **라인** | 205 |
-| **CWE** | CWE-306 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-2.1] L205에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 205
-//	public String verify(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [8] DS-2.1 — 인증 대상 및 방식
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-2.1` |
-| **약점명** | 인증 대상 및 방식 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
-| **라인** | 249 |
-| **CWE** | CWE-306 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-2.1] L249에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 249
-//                        session = request.getSession(true);
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [9] DS-2.1 — 인증 대상 및 방식
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-2.1` |
-| **약점명** | 인증 대상 및 방식 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
-| **라인** | 266 |
-| **CWE** | CWE-306 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-2.1] L266에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 266
-//                    session = request.getSession(true);
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [10] DS-2.1 — 인증 대상 및 방식
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-2.1` |
-| **약점명** | 인증 대상 및 방식 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
 | **라인** | 299 |
 | **CWE** | CWE-306 |
 | **가이드 참조** |  |
@@ -1197,7 +1050,7 @@ request.getSession().removeAttribute("admin");
 
 ---
 
-### [11] DS-2.1 — 인증 대상 및 방식
+### [8] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1240,7 +1093,7 @@ request.getSession().invalidate();
 
 ---
 
-### [12] DS-2.1 — 인증 대상 및 방식
+### [9] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1283,7 +1136,7 @@ MemberVO sessionMemberVO = setMemberInfo(new MemberVO(), request.getSession());
 
 ---
 
-### [13] DS-2.1 — 인증 대상 및 방식
+### [10] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1326,7 +1179,7 @@ public String idChk(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRe
 
 ---
 
-### [14] DS-2.1 — 인증 대상 및 방식
+### [11] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1369,7 +1222,7 @@ HttpSession session, ModelMap model) throws Exception {
 
 ---
 
-### [15] DS-2.1 — 인증 대상 및 방식
+### [12] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1412,7 +1265,7 @@ public String delProc(@ModelAttribute("memberVO") MemberVO memberVO, HttpSession
 
 ---
 
-### [16] DS-2.1 — 인증 대상 및 방식
+### [13] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1455,7 +1308,7 @@ HttpSession session, ModelMap model) throws Exception {
 
 ---
 
-### [17] DS-2.1 — 인증 대상 및 방식
+### [14] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1498,7 +1351,7 @@ public MemberVO setMemberInfo(MemberVO vo, HttpSession session) {
 
 ---
 
-### [18] DS-2.1 — 인증 대상 및 방식
+### [15] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1541,7 +1394,7 @@ memberVo = (MemberVO) session.getAttribute("admin");
 
 ---
 
-### [19] DS-2.1 — 인증 대상 및 방식
+### [16] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1584,7 +1437,7 @@ HttpSession session, ModelMap model) throws Exception {
 
 ---
 
-### [20] DS-2.1 — 인증 대상 및 방식
+### [17] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1627,7 +1480,7 @@ HttpSession session, ModelMap model) throws Exception {
 
 ---
 
-### [21] DS-2.1 — 인증 대상 및 방식
+### [18] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1670,7 +1523,7 @@ if (null != session.getAttribute("memberNoLoginId")) {
 
 ---
 
-### [22] DS-2.1 — 인증 대상 및 방식
+### [19] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -1713,7 +1566,7 @@ memberVO.setId(session.getAttribute("memberNoLoginId").toString());
 
 ---
 
-### [23] DS-2.3 — 비밀번호 관리
+### [20] DS-2.3 — 비밀번호 관리
 
 | 항목 | 내용 |
 |------|------|
@@ -1756,7 +1609,7 @@ memberInfoVo.setPassword("");
 
 ---
 
-### [24] DS-2.3 — 비밀번호 관리
+### [21] DS-2.3 — 비밀번호 관리
 
 | 항목 | 내용 |
 |------|------|
@@ -1799,7 +1652,7 @@ memberVO.setPassword( newHash );
 
 ---
 
-### [25] DS-2.3 — 비밀번호 관리
+### [22] DS-2.3 — 비밀번호 관리
 
 | 항목 | 내용 |
 |------|------|
@@ -1842,7 +1695,7 @@ memberVO.setPassword( newHash );
 
 ---
 
-### [26] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [23] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -1885,7 +1738,7 @@ memberVO.setPassword( newHash );
 
 ---
 
-### [27] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [24] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -1928,7 +1781,7 @@ memberVO.setPassword( newHash );
 
 ---
 
-### [28] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [25] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -1971,7 +1824,7 @@ memberVO.setPassword( newHash );
 
 ---
 
-### [29] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [26] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2014,7 +1867,7 @@ memberVO.setPassword( newHash );
 
 ---
 
-### [30] DS-1.10 — 업로드·다운로드 파일 검증
+### [27] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2057,7 +1910,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [31] DS-1.10 — 업로드·다운로드 파일 검증
+### [28] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2100,7 +1953,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [32] IV-1.6 — 위험한 형식 파일 업로드
+### [29] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -2121,6 +1974,312 @@ String fileName = file.getOriginalFilename().toLowerCase();
 ```java
 // Line 17
 import org.springframework.web.multipart.MultipartFile;
+```
+
+#### 보안 원칙
+
+> **확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장의 4중 방어를 적용합니다.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// [수정] IV-1.6 위험한 형식 파일 업로드 방지
+//
+// ▶ 취약 원인: 업로드 파일의 확장자/MIME 미검증 → 웹셸(JSP, PHP) 업로드 후 실행 가능
+// ▶ 보안 원칙: 확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장
+//
+// 필요 import:
+//   import java.nio.file.*;
+//   import java.util.*;
+//   import org.apache.commons.io.FilenameUtils;
+
+// ── Step 1. 파일명 null / 빈 값 검증 ──────────────────────────
+String originalFilename = multipartFile.getOriginalFilename();
+if (originalFilename == null || originalFilename.isBlank()) {
+    throw new IllegalArgumentException("업로드 파일명이 없습니다.");
+}
+
+// ── Step 2. 확장자 화이트리스트 검증 ──────────────────────────
+// 블랙리스트 방식은 우회 가능 (.jsp, .Jsp, .jsp%00 등)
+// 화이트리스트만 허용
+String ext = FilenameUtils.getExtension(originalFilename).toLowerCase();
+Set<String> allowedExt = Set.of("jpg", "jpeg", "png", "gif", "pdf", "docx", "xlsx");
+if (!allowedExt.contains(ext)) {
+    log.warn("[SECURITY] 허용되지 않은 업로드 파일 형식: {}", ext);
+    throw new SecurityException("허용되지 않는 파일 형식: " + ext);
+}
+
+// ── Step 3. MIME 타입 검증 (확장자 위변조 방어) ───────────────
+// 파일 매직 바이트(헤더)를 읽어 실제 파일 형식 확인
+String detectedMime = Files.probeContentType(multipartFile.getInputStream());
+// 또는 Apache Tika 사용: new Tika().detect(multipartFile.getInputStream())
+Set<String> allowedMime = Set.of(
+    "image/jpeg", "image/png", "image/gif",
+    "application/pdf",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+);
+if (detectedMime == null || !allowedMime.contains(detectedMime)) {
+    throw new SecurityException("파일 내용과 형식이 불일치하거나 허용되지 않습니다.");
+}
+
+// ── Step 4. 파일 크기 검증 ─────────────────────────────────────
+long MAX_SIZE = 10 * 1024 * 1024L;  // 10 MB
+if (multipartFile.getSize() > MAX_SIZE) {
+    throw new IllegalArgumentException("파일 크기가 허용 한도(10MB)를 초과합니다.");
+}
+
+// ── Step 5. 파일명 랜덤화 — 원본 파일명 제거 ──────────────────
+// 원본 파일명은 DB에만 보관; 디스크에는 예측 불가한 UUID 사용
+String safeFilename = UUID.randomUUID().toString() + "." + ext;
+
+// ── Step 6. 웹 루트 외부 디렉터리에 저장 ─────────────────────
+// 웹 루트 내 저장 시 브라우저에서 직접 실행 가능
+Path uploadDir = Paths.get("/var/app/uploads");  // 웹 루트 외부
+if (!Files.exists(uploadDir)) Files.createDirectories(uploadDir);
+Path savePath = uploadDir.resolve(safeFilename);
+Files.write(savePath, multipartFile.getBytes());
+
+log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilename);
+```
+
+#### 조치 설명
+
+> 확장자 화이트리스트로 실행 가능 파일(.jsp, .php 등)을 차단하고, MIME 타입 검증으로 확장자 위변조를 방어합니다. UUID 파일명으로 경로 예측을 방지하고, 웹 루트 외부에 저장해 직접 실행을 차단합니다. 가이드 참조: PART4 제1절 6항 위험한 형식 파일 업로드 (p.232-238)
+
+#### 참고자료
+
+- PART4 제1절 6항 (p.232-238)
+- CWE-434: Unrestricted Upload of File with Dangerous Type
+- OWASP File Upload Cheat Sheet
+
+---
+
+### [30] IV-1.6 — 위험한 형식 파일 업로드
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `IV-1.6` |
+| **약점명** | 위험한 형식 파일 업로드 |
+| **위험도** | 🟠 높음(HIGH) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 408 |
+| **CWE** | CWE-434 |
+| **가이드 참조** | PART4 제1절 6항 (p.232-238) |
+
+#### 탐지 근거
+
+> [IV-1.6] L408에서 위험 패턴이 탐지되었습니다. 조치: 허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화
+
+#### ❌ 취약한 코드
+
+```java
+// Line 408
+MultipartFile file = multipartHttpServletRequest.getFile(next);
+```
+
+#### 보안 원칙
+
+> **확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장의 4중 방어를 적용합니다.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// [수정] IV-1.6 위험한 형식 파일 업로드 방지
+//
+// ▶ 취약 원인: 업로드 파일의 확장자/MIME 미검증 → 웹셸(JSP, PHP) 업로드 후 실행 가능
+// ▶ 보안 원칙: 확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장
+//
+// 필요 import:
+//   import java.nio.file.*;
+//   import java.util.*;
+//   import org.apache.commons.io.FilenameUtils;
+
+// ── Step 1. 파일명 null / 빈 값 검증 ──────────────────────────
+String originalFilename = multipartFile.getOriginalFilename();
+if (originalFilename == null || originalFilename.isBlank()) {
+    throw new IllegalArgumentException("업로드 파일명이 없습니다.");
+}
+
+// ── Step 2. 확장자 화이트리스트 검증 ──────────────────────────
+// 블랙리스트 방식은 우회 가능 (.jsp, .Jsp, .jsp%00 등)
+// 화이트리스트만 허용
+String ext = FilenameUtils.getExtension(originalFilename).toLowerCase();
+Set<String> allowedExt = Set.of("jpg", "jpeg", "png", "gif", "pdf", "docx", "xlsx");
+if (!allowedExt.contains(ext)) {
+    log.warn("[SECURITY] 허용되지 않은 업로드 파일 형식: {}", ext);
+    throw new SecurityException("허용되지 않는 파일 형식: " + ext);
+}
+
+// ── Step 3. MIME 타입 검증 (확장자 위변조 방어) ───────────────
+// 파일 매직 바이트(헤더)를 읽어 실제 파일 형식 확인
+String detectedMime = Files.probeContentType(multipartFile.getInputStream());
+// 또는 Apache Tika 사용: new Tika().detect(multipartFile.getInputStream())
+Set<String> allowedMime = Set.of(
+    "image/jpeg", "image/png", "image/gif",
+    "application/pdf",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+);
+if (detectedMime == null || !allowedMime.contains(detectedMime)) {
+    throw new SecurityException("파일 내용과 형식이 불일치하거나 허용되지 않습니다.");
+}
+
+// ── Step 4. 파일 크기 검증 ─────────────────────────────────────
+long MAX_SIZE = 10 * 1024 * 1024L;  // 10 MB
+if (multipartFile.getSize() > MAX_SIZE) {
+    throw new IllegalArgumentException("파일 크기가 허용 한도(10MB)를 초과합니다.");
+}
+
+// ── Step 5. 파일명 랜덤화 — 원본 파일명 제거 ──────────────────
+// 원본 파일명은 DB에만 보관; 디스크에는 예측 불가한 UUID 사용
+String safeFilename = UUID.randomUUID().toString() + "." + ext;
+
+// ── Step 6. 웹 루트 외부 디렉터리에 저장 ─────────────────────
+// 웹 루트 내 저장 시 브라우저에서 직접 실행 가능
+Path uploadDir = Paths.get("/var/app/uploads");  // 웹 루트 외부
+if (!Files.exists(uploadDir)) Files.createDirectories(uploadDir);
+Path savePath = uploadDir.resolve(safeFilename);
+Files.write(savePath, multipartFile.getBytes());
+
+log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilename);
+```
+
+#### 조치 설명
+
+> 확장자 화이트리스트로 실행 가능 파일(.jsp, .php 등)을 차단하고, MIME 타입 검증으로 확장자 위변조를 방어합니다. UUID 파일명으로 경로 예측을 방지하고, 웹 루트 외부에 저장해 직접 실행을 차단합니다. 가이드 참조: PART4 제1절 6항 위험한 형식 파일 업로드 (p.232-238)
+
+#### 참고자료
+
+- PART4 제1절 6항 (p.232-238)
+- CWE-434: Unrestricted Upload of File with Dangerous Type
+- OWASP File Upload Cheat Sheet
+
+---
+
+### [31] IV-1.6 — 위험한 형식 파일 업로드
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `IV-1.6` |
+| **약점명** | 위험한 형식 파일 업로드 |
+| **위험도** | 🟠 높음(HIGH) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 411 |
+| **CWE** | CWE-434 |
+| **가이드 참조** | PART4 제1절 6항 (p.232-238) |
+
+#### 탐지 근거
+
+> [IV-1.6] L411에서 위험 패턴이 탐지되었습니다. 조치: 허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화
+
+#### ❌ 취약한 코드
+
+```java
+// Line 411
+String fileName = file.getOriginalFilename().toLowerCase();
+```
+
+#### 보안 원칙
+
+> **확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장의 4중 방어를 적용합니다.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// [수정] IV-1.6 위험한 형식 파일 업로드 방지
+//
+// ▶ 취약 원인: 업로드 파일의 확장자/MIME 미검증 → 웹셸(JSP, PHP) 업로드 후 실행 가능
+// ▶ 보안 원칙: 확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장
+//
+// 필요 import:
+//   import java.nio.file.*;
+//   import java.util.*;
+//   import org.apache.commons.io.FilenameUtils;
+
+// ── Step 1. 파일명 null / 빈 값 검증 ──────────────────────────
+String originalFilename = multipartFile.getOriginalFilename();
+if (originalFilename == null || originalFilename.isBlank()) {
+    throw new IllegalArgumentException("업로드 파일명이 없습니다.");
+}
+
+// ── Step 2. 확장자 화이트리스트 검증 ──────────────────────────
+// 블랙리스트 방식은 우회 가능 (.jsp, .Jsp, .jsp%00 등)
+// 화이트리스트만 허용
+String ext = FilenameUtils.getExtension(originalFilename).toLowerCase();
+Set<String> allowedExt = Set.of("jpg", "jpeg", "png", "gif", "pdf", "docx", "xlsx");
+if (!allowedExt.contains(ext)) {
+    log.warn("[SECURITY] 허용되지 않은 업로드 파일 형식: {}", ext);
+    throw new SecurityException("허용되지 않는 파일 형식: " + ext);
+}
+
+// ── Step 3. MIME 타입 검증 (확장자 위변조 방어) ───────────────
+// 파일 매직 바이트(헤더)를 읽어 실제 파일 형식 확인
+String detectedMime = Files.probeContentType(multipartFile.getInputStream());
+// 또는 Apache Tika 사용: new Tika().detect(multipartFile.getInputStream())
+Set<String> allowedMime = Set.of(
+    "image/jpeg", "image/png", "image/gif",
+    "application/pdf",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+);
+if (detectedMime == null || !allowedMime.contains(detectedMime)) {
+    throw new SecurityException("파일 내용과 형식이 불일치하거나 허용되지 않습니다.");
+}
+
+// ── Step 4. 파일 크기 검증 ─────────────────────────────────────
+long MAX_SIZE = 10 * 1024 * 1024L;  // 10 MB
+if (multipartFile.getSize() > MAX_SIZE) {
+    throw new IllegalArgumentException("파일 크기가 허용 한도(10MB)를 초과합니다.");
+}
+
+// ── Step 5. 파일명 랜덤화 — 원본 파일명 제거 ──────────────────
+// 원본 파일명은 DB에만 보관; 디스크에는 예측 불가한 UUID 사용
+String safeFilename = UUID.randomUUID().toString() + "." + ext;
+
+// ── Step 6. 웹 루트 외부 디렉터리에 저장 ─────────────────────
+// 웹 루트 내 저장 시 브라우저에서 직접 실행 가능
+Path uploadDir = Paths.get("/var/app/uploads");  // 웹 루트 외부
+if (!Files.exists(uploadDir)) Files.createDirectories(uploadDir);
+Path savePath = uploadDir.resolve(safeFilename);
+Files.write(savePath, multipartFile.getBytes());
+
+log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilename);
+```
+
+#### 조치 설명
+
+> 확장자 화이트리스트로 실행 가능 파일(.jsp, .php 등)을 차단하고, MIME 타입 검증으로 확장자 위변조를 방어합니다. UUID 파일명으로 경로 예측을 방지하고, 웹 루트 외부에 저장해 직접 실행을 차단합니다. 가이드 참조: PART4 제1절 6항 위험한 형식 파일 업로드 (p.232-238)
+
+#### 참고자료
+
+- PART4 제1절 6항 (p.232-238)
+- CWE-434: Unrestricted Upload of File with Dangerous Type
+- OWASP File Upload Cheat Sheet
+
+---
+
+### [32] IV-1.6 — 위험한 형식 파일 업로드
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `IV-1.6` |
+| **약점명** | 위험한 형식 파일 업로드 |
+| **위험도** | 🟠 높음(HIGH) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 523 |
+| **CWE** | CWE-434 |
+| **가이드 참조** | PART4 제1절 6항 (p.232-238) |
+
+#### 탐지 근거
+
+> [IV-1.6] L523에서 위험 패턴이 탐지되었습니다. 조치: 허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화
+
+#### ❌ 취약한 코드
+
+```java
+// Line 523
+MultipartFile file = multipartHttpServletRequest.getFile(next);
 ```
 
 #### 보안 원칙
@@ -2210,312 +2369,6 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 | **약점명** | 위험한 형식 파일 업로드 |
 | **위험도** | 🟠 높음(HIGH) |
 | **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 408 |
-| **CWE** | CWE-434 |
-| **가이드 참조** | PART4 제1절 6항 (p.232-238) |
-
-#### 탐지 근거
-
-> [IV-1.6] L408에서 위험 패턴이 탐지되었습니다. 조치: 허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화
-
-#### ❌ 취약한 코드
-
-```java
-// Line 408
-MultipartFile file = multipartHttpServletRequest.getFile(next);
-```
-
-#### 보안 원칙
-
-> **확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장의 4중 방어를 적용합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-1.6 위험한 형식 파일 업로드 방지
-//
-// ▶ 취약 원인: 업로드 파일의 확장자/MIME 미검증 → 웹셸(JSP, PHP) 업로드 후 실행 가능
-// ▶ 보안 원칙: 확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장
-//
-// 필요 import:
-//   import java.nio.file.*;
-//   import java.util.*;
-//   import org.apache.commons.io.FilenameUtils;
-
-// ── Step 1. 파일명 null / 빈 값 검증 ──────────────────────────
-String originalFilename = multipartFile.getOriginalFilename();
-if (originalFilename == null || originalFilename.isBlank()) {
-    throw new IllegalArgumentException("업로드 파일명이 없습니다.");
-}
-
-// ── Step 2. 확장자 화이트리스트 검증 ──────────────────────────
-// 블랙리스트 방식은 우회 가능 (.jsp, .Jsp, .jsp%00 등)
-// 화이트리스트만 허용
-String ext = FilenameUtils.getExtension(originalFilename).toLowerCase();
-Set<String> allowedExt = Set.of("jpg", "jpeg", "png", "gif", "pdf", "docx", "xlsx");
-if (!allowedExt.contains(ext)) {
-    log.warn("[SECURITY] 허용되지 않은 업로드 파일 형식: {}", ext);
-    throw new SecurityException("허용되지 않는 파일 형식: " + ext);
-}
-
-// ── Step 3. MIME 타입 검증 (확장자 위변조 방어) ───────────────
-// 파일 매직 바이트(헤더)를 읽어 실제 파일 형식 확인
-String detectedMime = Files.probeContentType(multipartFile.getInputStream());
-// 또는 Apache Tika 사용: new Tika().detect(multipartFile.getInputStream())
-Set<String> allowedMime = Set.of(
-    "image/jpeg", "image/png", "image/gif",
-    "application/pdf",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-);
-if (detectedMime == null || !allowedMime.contains(detectedMime)) {
-    throw new SecurityException("파일 내용과 형식이 불일치하거나 허용되지 않습니다.");
-}
-
-// ── Step 4. 파일 크기 검증 ─────────────────────────────────────
-long MAX_SIZE = 10 * 1024 * 1024L;  // 10 MB
-if (multipartFile.getSize() > MAX_SIZE) {
-    throw new IllegalArgumentException("파일 크기가 허용 한도(10MB)를 초과합니다.");
-}
-
-// ── Step 5. 파일명 랜덤화 — 원본 파일명 제거 ──────────────────
-// 원본 파일명은 DB에만 보관; 디스크에는 예측 불가한 UUID 사용
-String safeFilename = UUID.randomUUID().toString() + "." + ext;
-
-// ── Step 6. 웹 루트 외부 디렉터리에 저장 ─────────────────────
-// 웹 루트 내 저장 시 브라우저에서 직접 실행 가능
-Path uploadDir = Paths.get("/var/app/uploads");  // 웹 루트 외부
-if (!Files.exists(uploadDir)) Files.createDirectories(uploadDir);
-Path savePath = uploadDir.resolve(safeFilename);
-Files.write(savePath, multipartFile.getBytes());
-
-log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilename);
-```
-
-#### 조치 설명
-
-> 확장자 화이트리스트로 실행 가능 파일(.jsp, .php 등)을 차단하고, MIME 타입 검증으로 확장자 위변조를 방어합니다. UUID 파일명으로 경로 예측을 방지하고, 웹 루트 외부에 저장해 직접 실행을 차단합니다. 가이드 참조: PART4 제1절 6항 위험한 형식 파일 업로드 (p.232-238)
-
-#### 참고자료
-
-- PART4 제1절 6항 (p.232-238)
-- CWE-434: Unrestricted Upload of File with Dangerous Type
-- OWASP File Upload Cheat Sheet
-
----
-
-### [34] IV-1.6 — 위험한 형식 파일 업로드
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-1.6` |
-| **약점명** | 위험한 형식 파일 업로드 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 411 |
-| **CWE** | CWE-434 |
-| **가이드 참조** | PART4 제1절 6항 (p.232-238) |
-
-#### 탐지 근거
-
-> [IV-1.6] L411에서 위험 패턴이 탐지되었습니다. 조치: 허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화
-
-#### ❌ 취약한 코드
-
-```java
-// Line 411
-String fileName = file.getOriginalFilename().toLowerCase();
-```
-
-#### 보안 원칙
-
-> **확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장의 4중 방어를 적용합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-1.6 위험한 형식 파일 업로드 방지
-//
-// ▶ 취약 원인: 업로드 파일의 확장자/MIME 미검증 → 웹셸(JSP, PHP) 업로드 후 실행 가능
-// ▶ 보안 원칙: 확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장
-//
-// 필요 import:
-//   import java.nio.file.*;
-//   import java.util.*;
-//   import org.apache.commons.io.FilenameUtils;
-
-// ── Step 1. 파일명 null / 빈 값 검증 ──────────────────────────
-String originalFilename = multipartFile.getOriginalFilename();
-if (originalFilename == null || originalFilename.isBlank()) {
-    throw new IllegalArgumentException("업로드 파일명이 없습니다.");
-}
-
-// ── Step 2. 확장자 화이트리스트 검증 ──────────────────────────
-// 블랙리스트 방식은 우회 가능 (.jsp, .Jsp, .jsp%00 등)
-// 화이트리스트만 허용
-String ext = FilenameUtils.getExtension(originalFilename).toLowerCase();
-Set<String> allowedExt = Set.of("jpg", "jpeg", "png", "gif", "pdf", "docx", "xlsx");
-if (!allowedExt.contains(ext)) {
-    log.warn("[SECURITY] 허용되지 않은 업로드 파일 형식: {}", ext);
-    throw new SecurityException("허용되지 않는 파일 형식: " + ext);
-}
-
-// ── Step 3. MIME 타입 검증 (확장자 위변조 방어) ───────────────
-// 파일 매직 바이트(헤더)를 읽어 실제 파일 형식 확인
-String detectedMime = Files.probeContentType(multipartFile.getInputStream());
-// 또는 Apache Tika 사용: new Tika().detect(multipartFile.getInputStream())
-Set<String> allowedMime = Set.of(
-    "image/jpeg", "image/png", "image/gif",
-    "application/pdf",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-);
-if (detectedMime == null || !allowedMime.contains(detectedMime)) {
-    throw new SecurityException("파일 내용과 형식이 불일치하거나 허용되지 않습니다.");
-}
-
-// ── Step 4. 파일 크기 검증 ─────────────────────────────────────
-long MAX_SIZE = 10 * 1024 * 1024L;  // 10 MB
-if (multipartFile.getSize() > MAX_SIZE) {
-    throw new IllegalArgumentException("파일 크기가 허용 한도(10MB)를 초과합니다.");
-}
-
-// ── Step 5. 파일명 랜덤화 — 원본 파일명 제거 ──────────────────
-// 원본 파일명은 DB에만 보관; 디스크에는 예측 불가한 UUID 사용
-String safeFilename = UUID.randomUUID().toString() + "." + ext;
-
-// ── Step 6. 웹 루트 외부 디렉터리에 저장 ─────────────────────
-// 웹 루트 내 저장 시 브라우저에서 직접 실행 가능
-Path uploadDir = Paths.get("/var/app/uploads");  // 웹 루트 외부
-if (!Files.exists(uploadDir)) Files.createDirectories(uploadDir);
-Path savePath = uploadDir.resolve(safeFilename);
-Files.write(savePath, multipartFile.getBytes());
-
-log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilename);
-```
-
-#### 조치 설명
-
-> 확장자 화이트리스트로 실행 가능 파일(.jsp, .php 등)을 차단하고, MIME 타입 검증으로 확장자 위변조를 방어합니다. UUID 파일명으로 경로 예측을 방지하고, 웹 루트 외부에 저장해 직접 실행을 차단합니다. 가이드 참조: PART4 제1절 6항 위험한 형식 파일 업로드 (p.232-238)
-
-#### 참고자료
-
-- PART4 제1절 6항 (p.232-238)
-- CWE-434: Unrestricted Upload of File with Dangerous Type
-- OWASP File Upload Cheat Sheet
-
----
-
-### [35] IV-1.6 — 위험한 형식 파일 업로드
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-1.6` |
-| **약점명** | 위험한 형식 파일 업로드 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 523 |
-| **CWE** | CWE-434 |
-| **가이드 참조** | PART4 제1절 6항 (p.232-238) |
-
-#### 탐지 근거
-
-> [IV-1.6] L523에서 위험 패턴이 탐지되었습니다. 조치: 허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화
-
-#### ❌ 취약한 코드
-
-```java
-// Line 523
-MultipartFile file = multipartHttpServletRequest.getFile(next);
-```
-
-#### 보안 원칙
-
-> **확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장의 4중 방어를 적용합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-1.6 위험한 형식 파일 업로드 방지
-//
-// ▶ 취약 원인: 업로드 파일의 확장자/MIME 미검증 → 웹셸(JSP, PHP) 업로드 후 실행 가능
-// ▶ 보안 원칙: 확장자 화이트리스트 + MIME 검증 + 파일명 랜덤화 + 웹 루트 외부 저장
-//
-// 필요 import:
-//   import java.nio.file.*;
-//   import java.util.*;
-//   import org.apache.commons.io.FilenameUtils;
-
-// ── Step 1. 파일명 null / 빈 값 검증 ──────────────────────────
-String originalFilename = multipartFile.getOriginalFilename();
-if (originalFilename == null || originalFilename.isBlank()) {
-    throw new IllegalArgumentException("업로드 파일명이 없습니다.");
-}
-
-// ── Step 2. 확장자 화이트리스트 검증 ──────────────────────────
-// 블랙리스트 방식은 우회 가능 (.jsp, .Jsp, .jsp%00 등)
-// 화이트리스트만 허용
-String ext = FilenameUtils.getExtension(originalFilename).toLowerCase();
-Set<String> allowedExt = Set.of("jpg", "jpeg", "png", "gif", "pdf", "docx", "xlsx");
-if (!allowedExt.contains(ext)) {
-    log.warn("[SECURITY] 허용되지 않은 업로드 파일 형식: {}", ext);
-    throw new SecurityException("허용되지 않는 파일 형식: " + ext);
-}
-
-// ── Step 3. MIME 타입 검증 (확장자 위변조 방어) ───────────────
-// 파일 매직 바이트(헤더)를 읽어 실제 파일 형식 확인
-String detectedMime = Files.probeContentType(multipartFile.getInputStream());
-// 또는 Apache Tika 사용: new Tika().detect(multipartFile.getInputStream())
-Set<String> allowedMime = Set.of(
-    "image/jpeg", "image/png", "image/gif",
-    "application/pdf",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-);
-if (detectedMime == null || !allowedMime.contains(detectedMime)) {
-    throw new SecurityException("파일 내용과 형식이 불일치하거나 허용되지 않습니다.");
-}
-
-// ── Step 4. 파일 크기 검증 ─────────────────────────────────────
-long MAX_SIZE = 10 * 1024 * 1024L;  // 10 MB
-if (multipartFile.getSize() > MAX_SIZE) {
-    throw new IllegalArgumentException("파일 크기가 허용 한도(10MB)를 초과합니다.");
-}
-
-// ── Step 5. 파일명 랜덤화 — 원본 파일명 제거 ──────────────────
-// 원본 파일명은 DB에만 보관; 디스크에는 예측 불가한 UUID 사용
-String safeFilename = UUID.randomUUID().toString() + "." + ext;
-
-// ── Step 6. 웹 루트 외부 디렉터리에 저장 ─────────────────────
-// 웹 루트 내 저장 시 브라우저에서 직접 실행 가능
-Path uploadDir = Paths.get("/var/app/uploads");  // 웹 루트 외부
-if (!Files.exists(uploadDir)) Files.createDirectories(uploadDir);
-Path savePath = uploadDir.resolve(safeFilename);
-Files.write(savePath, multipartFile.getBytes());
-
-log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilename);
-```
-
-#### 조치 설명
-
-> 확장자 화이트리스트로 실행 가능 파일(.jsp, .php 등)을 차단하고, MIME 타입 검증으로 확장자 위변조를 방어합니다. UUID 파일명으로 경로 예측을 방지하고, 웹 루트 외부에 저장해 직접 실행을 차단합니다. 가이드 참조: PART4 제1절 6항 위험한 형식 파일 업로드 (p.232-238)
-
-#### 참고자료
-
-- PART4 제1절 6항 (p.232-238)
-- CWE-434: Unrestricted Upload of File with Dangerous Type
-- OWASP File Upload Cheat Sheet
-
----
-
-### [36] IV-1.6 — 위험한 형식 파일 업로드
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-1.6` |
-| **약점명** | 위험한 형식 파일 업로드 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
 | **라인** | 526 |
 | **CWE** | CWE-434 |
 | **가이드 참조** | PART4 제1절 6항 (p.232-238) |
@@ -2610,7 +2463,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [37] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [34] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2653,7 +2506,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [38] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [35] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2696,7 +2549,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [39] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [36] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2739,7 +2592,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [40] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [37] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2782,7 +2635,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [41] DS-1.10 — 업로드·다운로드 파일 검증
+### [38] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2825,7 +2678,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [42] DS-1.10 — 업로드·다운로드 파일 검증
+### [39] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -2868,7 +2721,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [43] IV-1.6 — 위험한 형식 파일 업로드
+### [40] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -2970,7 +2823,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [44] IV-1.6 — 위험한 형식 파일 업로드
+### [41] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -3072,7 +2925,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [45] IV-1.6 — 위험한 형식 파일 업로드
+### [42] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -3174,7 +3027,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [46] IV-1.6 — 위험한 형식 파일 업로드
+### [43] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -3276,7 +3129,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [47] IV-1.6 — 위험한 형식 파일 업로드
+### [44] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -3378,7 +3231,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [48] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [45] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -3421,7 +3274,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [49] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [46] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -3464,7 +3317,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [50] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [47] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -3507,7 +3360,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [51] DS-2.1 — 인증 대상 및 방식
+### [48] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -3550,7 +3403,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [52] DS-2.1 — 인증 대상 및 방식
+### [49] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -3593,7 +3446,7 @@ public ModelAndView hashtagWrite(@ModelAttribute("hashtagVO") HashtagVO hashtagV
 
 ---
 
-### [53] DS-2.1 — 인증 대상 및 방식
+### [50] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -3636,7 +3489,7 @@ public ModelAndView hashtagWriteProc(@ModelAttribute("hashtagVO") HashtagVO hash
 
 ---
 
-### [54] DS-2.1 — 인증 대상 및 방식
+### [51] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -3679,7 +3532,7 @@ public ModelAndView hashtagModifyProc(@ModelAttribute("hashtagVO") HashtagVO has
 
 ---
 
-### [55] DS-2.1 — 인증 대상 및 방식
+### [52] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -3722,7 +3575,7 @@ private HashtagVO setMemberInfo(HashtagVO vo, HttpSession session) {
 
 ---
 
-### [56] DS-2.1 — 인증 대상 및 방식
+### [53] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -3765,7 +3618,7 @@ memberVo = (MemberVO) session.getAttribute("admin");
 
 ---
 
-### [57] IV-1.4 — 크로스사이트 스크립트
+### [54] IV-1.4 — 크로스사이트 스크립트
 
 | 항목 | 내용 |
 |------|------|
@@ -3858,7 +3711,7 @@ response.setHeader("Content-Security-Policy",
 
 ---
 
-### [58] DS-1.5 — 웹 서비스 요청 및 결과 검증
+### [55] DS-1.5 — 웹 서비스 요청 및 결과 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -3901,7 +3754,7 @@ PrintWriter out = response.getWriter();
 
 ---
 
-### [59] DS-1.5 — 웹 서비스 요청 및 결과 검증
+### [56] DS-1.5 — 웹 서비스 요청 및 결과 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -3944,7 +3797,7 @@ PrintWriter out = response.getWriter ();
 
 ---
 
-### [60] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [57] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -3987,7 +3840,7 @@ PrintWriter out = response.getWriter ();
 
 ---
 
-### [61] DS-2.1 — 인증 대상 및 방식
+### [58] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4030,7 +3883,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [62] DS-2.1 — 인증 대상 및 방식
+### [59] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4073,7 +3926,7 @@ HttpSession session = request.getSession();
 
 ---
 
-### [63] DS-2.1 — 인증 대상 및 방식
+### [60] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4116,7 +3969,7 @@ MemberVO memberVO = (MemberVO)session.getAttribute("admin");
 
 ---
 
-### [64] DS-2.1 — 인증 대상 및 방식
+### [61] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4159,7 +4012,7 @@ public String checkAuth(@RequestParam("menuCode") String menuCode, HttpSession s
 
 ---
 
-### [65] DS-2.1 — 인증 대상 및 방식
+### [62] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4202,7 +4055,7 @@ MemberVO memberVO = (MemberVO)session.getAttribute("admin");
 
 ---
 
-### [66] IV-5.3 — 해제된 자원 사용
+### [63] IV-5.3 — 해제된 자원 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -4264,7 +4117,7 @@ try {
 
 ---
 
-### [67] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [64] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -4307,7 +4160,7 @@ try {
 
 ---
 
-### [68] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [65] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -4350,7 +4203,7 @@ try {
 
 ---
 
-### [69] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [66] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -4393,7 +4246,7 @@ try {
 
 ---
 
-### [70] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [67] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -4436,7 +4289,7 @@ try {
 
 ---
 
-### [71] DS-1.10 — 업로드·다운로드 파일 검증
+### [68] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -4479,7 +4332,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [72] DS-1.10 — 업로드·다운로드 파일 검증
+### [69] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -4522,7 +4375,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [73] DS-1.10 — 업로드·다운로드 파일 검증
+### [70] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -4565,7 +4418,7 @@ String originalName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [74] DS-2.1 — 인증 대상 및 방식
+### [71] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4608,7 +4461,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [75] DS-2.1 — 인증 대상 및 방식
+### [72] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4651,7 +4504,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [76] DS-2.1 — 인증 대상 및 방식
+### [73] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4694,7 +4547,7 @@ HttpSession session, HttpServletRequest request, ModelAndView model)
 
 ---
 
-### [77] DS-2.1 — 인증 대상 및 방식
+### [74] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4737,7 +4590,7 @@ HttpSession session, HttpServletRequest request, ModelAndView model)
 
 ---
 
-### [78] DS-2.1 — 인증 대상 및 방식
+### [75] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4780,7 +4633,7 @@ HttpSession session, HttpServletRequest request, ModelAndView model)
 
 ---
 
-### [79] DS-2.1 — 인증 대상 및 방식
+### [76] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4823,7 +4676,7 @@ HttpSession session, HttpServletRequest request, ModelAndView model)
 
 ---
 
-### [80] DS-2.1 — 인증 대상 및 방식
+### [77] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4866,7 +4719,7 @@ HttpSession session, HttpServletRequest request, ModelAndView model)
 
 ---
 
-### [81] DS-2.1 — 인증 대상 및 방식
+### [78] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4909,7 +4762,7 @@ HttpSession session, HttpServletRequest request, ModelAndView model)
 
 ---
 
-### [82] DS-2.1 — 인증 대상 및 방식
+### [79] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4952,7 +4805,7 @@ HttpSession session, HttpServletRequest request, ModelAndView model)
 
 ---
 
-### [83] DS-2.1 — 인증 대상 및 방식
+### [80] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -4995,7 +4848,7 @@ public MainVO setMemberInfo(MainVO vo, HttpSession session) {
 
 ---
 
-### [84] DS-2.1 — 인증 대상 및 방식
+### [81] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -5038,7 +4891,7 @@ memberVo = (MemberVO) session.getAttribute("admin");
 
 ---
 
-### [85] IV-1.6 — 위험한 형식 파일 업로드
+### [82] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -5140,7 +4993,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [86] IV-1.6 — 위험한 형식 파일 업로드
+### [83] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -5242,7 +5095,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [87] IV-1.6 — 위험한 형식 파일 업로드
+### [84] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -5344,7 +5197,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [88] IV-1.6 — 위험한 형식 파일 업로드
+### [85] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -5446,7 +5299,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [89] IV-1.6 — 위험한 형식 파일 업로드
+### [86] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -5548,7 +5401,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [90] IV-1.6 — 위험한 형식 파일 업로드
+### [87] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -5650,7 +5503,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [91] IV-1.6 — 위험한 형식 파일 업로드
+### [88] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -5752,7 +5605,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [92] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [89] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -5795,7 +5648,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [93] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [90] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -5838,7 +5691,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [94] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [91] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -5881,7 +5734,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [95] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [92] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -5924,7 +5777,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [96] DS-1.10 — 업로드·다운로드 파일 검증
+### [93] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -5967,7 +5820,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [97] DS-1.10 — 업로드·다운로드 파일 검증
+### [94] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -6010,7 +5863,7 @@ String fileName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [98] IV-1.6 — 위험한 형식 파일 업로드
+### [95] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -6112,7 +5965,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [99] IV-1.6 — 위험한 형식 파일 업로드
+### [96] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -6214,7 +6067,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [100] IV-1.6 — 위험한 형식 파일 업로드
+### [97] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -6316,7 +6169,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [101] IV-1.6 — 위험한 형식 파일 업로드
+### [98] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -6418,7 +6271,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [102] IV-1.6 — 위험한 형식 파일 업로드
+### [99] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -6520,7 +6373,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [103] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [100] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -6563,7 +6416,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [104] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [101] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -6606,7 +6459,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [105] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [102] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -6649,7 +6502,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [106] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
+### [103] DS-1.6 — 웹 기반 중요 기능 수행 요청 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -6692,7 +6545,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [107] DS-2.1 — 인증 대상 및 방식
+### [104] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -6735,7 +6588,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [108] DS-2.1 — 인증 대상 및 방식
+### [105] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -6778,7 +6631,7 @@ public ModelAndView newsTypeWriteProc(@ModelAttribute("newsTypeVO") NewsTypeVO n
 
 ---
 
-### [109] DS-2.1 — 인증 대상 및 방식
+### [106] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -6821,7 +6674,7 @@ public ModelAndView newsTypeModifyProc(@ModelAttribute("newsTypeVO") NewsTypeVO 
 
 ---
 
-### [110] DS-2.1 — 인증 대상 및 방식
+### [107] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -6864,7 +6717,7 @@ private NewsTypeVO setMemberInfo(NewsTypeVO vo, HttpSession session) {
 
 ---
 
-### [111] DS-2.1 — 인증 대상 및 방식
+### [108] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -6907,7 +6760,7 @@ memberVo = (MemberVO) session.getAttribute("admin");
 
 ---
 
-### [112] DS-4.1 — 세션 통제
+### [109] DS-4.1 — 세션 통제
 
 | 항목 | 내용 |
 |------|------|
@@ -6971,7 +6824,7 @@ public BoardVO setMemberInfo(BoardVO vo, String userId, String userName) {
 
 ---
 
-### [113] DS-2.1 — 인증 대상 및 방식
+### [110] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7014,7 +6867,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [114] DS-2.1 — 인증 대상 및 방식
+### [111] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7057,7 +6910,7 @@ BoardVO setMemberInfo(BoardVO vo, HttpSession session);
 
 ---
 
-### [115] DS-4.1 — 세션 통제
+### [112] DS-4.1 — 세션 통제
 
 | 항목 | 내용 |
 |------|------|
@@ -7121,7 +6974,7 @@ public BoardVO setMemberInfo(BoardVO vo, String userId, String userName) {
 
 ---
 
-### [116] DS-2.1 — 인증 대상 및 방식
+### [113] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7164,7 +7017,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [117] DS-2.1 — 인증 대상 및 방식
+### [114] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7207,7 +7060,7 @@ vo = setMemberInfo(vo, request.getSession());
 
 ---
 
-### [118] DS-2.1 — 인증 대상 및 방식
+### [115] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7250,7 +7103,7 @@ vo = setMemberInfo(vo, request.getSession());
 
 ---
 
-### [119] DS-2.1 — 인증 대상 및 방식
+### [116] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7293,7 +7146,7 @@ vo = setMemberInfo(vo, request.getSession());
 
 ---
 
-### [120] DS-2.1 — 인증 대상 및 방식
+### [117] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7336,7 +7189,7 @@ public BoardVO setMemberInfo(BoardVO vo, HttpSession session) {
 
 ---
 
-### [121] DS-2.1 — 인증 대상 및 방식
+### [118] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7379,7 +7232,7 @@ memberVo = (MemberVO) session.getAttribute("admin");
 
 ---
 
-### [122] DS-2.3 — 비밀번호 관리
+### [119] DS-2.3 — 비밀번호 관리
 
 | 항목 | 내용 |
 |------|------|
@@ -7422,7 +7275,7 @@ public void setPassword(String password) {
 
 ---
 
-### [123] DS-2.1 — 인증 대상 및 방식
+### [120] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7465,7 +7318,7 @@ if(request.getSession().getAttribute("admin") == null ){
 
 ---
 
-### [124] DS-1.5 — 웹 서비스 요청 및 결과 검증
+### [121] DS-1.5 — 웹 서비스 요청 및 결과 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -7508,7 +7361,7 @@ PrintWriter printwriter = response.getWriter();
 
 ---
 
-### [125] DS-2.1 — 인증 대상 및 방식
+### [122] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7551,7 +7404,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [126] DS-2.1 — 인증 대상 및 방식
+### [123] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7594,7 +7447,7 @@ HttpSession session = request.getSession();
 
 ---
 
-### [127] DS-2.1 — 인증 대상 및 방식
+### [124] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7637,7 +7490,7 @@ MemberVO memberVO = (MemberVO)session.getAttribute("admin");
 
 ---
 
-### [128] IV-5.3 — 해제된 자원 사용
+### [125] IV-5.3 — 해제된 자원 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -7699,7 +7552,7 @@ try {
 
 ---
 
-### [129] IV-1.15 — 보안기능 결정에 사용되는 부적절한 입력값
+### [126] IV-1.15 — 보안기능 결정에 사용되는 부적절한 입력값
 
 | 항목 | 내용 |
 |------|------|
@@ -7756,7 +7609,7 @@ if (!hasAdminRole) throw new ForbiddenException("관리자 권한 필요");
 
 ---
 
-### [130] IV-1.15 — 보안기능 결정에 사용되는 부적절한 입력값
+### [127] IV-1.15 — 보안기능 결정에 사용되는 부적절한 입력값
 
 | 항목 | 내용 |
 |------|------|
@@ -7813,7 +7666,7 @@ if (!hasAdminRole) throw new ForbiddenException("관리자 권한 필요");
 
 ---
 
-### [131] IV-1.15 — 보안기능 결정에 사용되는 부적절한 입력값
+### [128] IV-1.15 — 보안기능 결정에 사용되는 부적절한 입력값
 
 | 항목 | 내용 |
 |------|------|
@@ -7870,7 +7723,7 @@ if (!hasAdminRole) throw new ForbiddenException("관리자 권한 필요");
 
 ---
 
-### [132] DS-2.1 — 인증 대상 및 방식
+### [129] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7913,7 +7766,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [133] DS-2.1 — 인증 대상 및 방식
+### [130] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -7956,69 +7809,7 @@ HttpSession session = request.getSession();
 
 ---
 
-### [134] IV-5.3 — 해제된 자원 사용
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-5.3` |
-| **약점명** | 해제된 자원 사용 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java` |
-| **라인** | 59 |
-| **CWE** | CWE-416 |
-| **가이드 참조** | PART4 제5절 3항 (p.454-458) |
-
-#### 탐지 근거
-
-> [IV-5.3] L59에서 위험 패턴이 탐지되었습니다. 조치: 자원 해제 후 변수를 null로 설정하여 재사용 방지
-
-#### ❌ 취약한 코드
-
-```java
-// Line 59
-//					in.close();
-```
-
-#### 보안 원칙
-
-> **자원 반환 후 참조 변수를 null로 설정하여 재사용을 방지합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-5.3 해제된 자원 재사용 방지
-// ❌ 취약:
-// connection.close();
-// connection.createStatement();  // 이미 닫힌 연결 사용
-
-// ✅ 안전 1: try-with-resources (범위 밖에서 사용 불가)
-try (Connection con = dataSource.getConnection()) {
-    // con은 이 블록 안에서만 유효
-}
-// con은 여기서 더 이상 참조할 수 없음
-
-// ✅ 안전 2: 수동 닫기 시 null 할당
-InputStream in = null;
-try {
-    in = new FileInputStream(file);
-    // 사용
-} finally {
-    if (in != null) { in.close(); in = null; }
-}
-```
-
-#### 조치 설명
-
-> 이미 닫힌 스트림·연결을 재사용하면 예외가 발생하고 오류 처리 과정에서 내부 정보가 노출될 수 있습니다. try-with-resources를 사용하거나 close() 후 변수를 null로 설정하세요. 가이드 참조: PART4 제5절 3항 해제된 자원 사용 (p.443-446)
-
-#### 참고자료
-
-- PART4 제5절 3항 (p.443-446)
-- CWE-416: Use After Free
-
----
-
-### [135] DS-1.8 — 허용된 범위내 메모리 접근
+### [131] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -8061,7 +7852,7 @@ byte[] buffer = new byte[8192];
 
 ---
 
-### [136] IV-1.16 — 메모리 버퍼 오버플로우
+### [132] IV-1.16 — 메모리 버퍼 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -8113,7 +7904,7 @@ buffer.put(data, 0, buffer.limit());
 
 ---
 
-### [137] DS-1.10 — 업로드·다운로드 파일 검증
+### [133] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8156,7 +7947,7 @@ String originalName = file.getOriginalFilename().toLowerCase();
 
 ---
 
-### [138] IV-1.6 — 위험한 형식 파일 업로드
+### [134] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -8258,7 +8049,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [139] IV-1.6 — 위험한 형식 파일 업로드
+### [135] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -8360,7 +8151,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [140] IV-1.6 — 위험한 형식 파일 업로드
+### [136] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -8462,7 +8253,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [141] DS-2.1 — 인증 대상 및 방식
+### [137] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -8505,7 +8296,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [142] DS-2.1 — 인증 대상 및 방식
+### [138] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -8548,7 +8339,7 @@ request.getSession().setAttribute("RESULT_MESSAGE", message);
 
 ---
 
-### [143] DS-2.1 — 인증 대상 및 방식
+### [139] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -8591,7 +8382,7 @@ HttpSession hs = request.getSession();
 
 ---
 
-### [144] DS-1.10 — 업로드·다운로드 파일 검증
+### [140] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8634,7 +8425,7 @@ originalFileName = multipartFile.getOriginalFilename();
 
 ---
 
-### [145] DS-1.10 — 업로드·다운로드 파일 검증
+### [141] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8677,7 +8468,7 @@ multipartFile.transferTo(file);
 
 ---
 
-### [146] DS-1.10 — 업로드·다운로드 파일 검증
+### [142] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8720,7 +8511,7 @@ originalFileName = multipartFile.getOriginalFilename();
 
 ---
 
-### [147] DS-1.10 — 업로드·다운로드 파일 검증
+### [143] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8763,7 +8554,7 @@ multipartFile.transferTo(file);
 
 ---
 
-### [148] DS-1.10 — 업로드·다운로드 파일 검증
+### [144] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8806,7 +8597,7 @@ if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
 
 ---
 
-### [149] DS-1.10 — 업로드·다운로드 파일 검증
+### [145] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8849,7 +8640,7 @@ originalFileName = mf.get(i).getOriginalFilename();
 
 ---
 
-### [150] DS-1.10 — 업로드·다운로드 파일 검증
+### [146] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8892,7 +8683,7 @@ mf.get(i).transferTo(file);
 
 ---
 
-### [151] DS-1.10 — 업로드·다운로드 파일 검증
+### [147] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8935,7 +8726,7 @@ originalFileName = multipartFile.getOriginalFilename();
 
 ---
 
-### [152] DS-1.10 — 업로드·다운로드 파일 검증
+### [148] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -8978,7 +8769,7 @@ multipartFile.transferTo(file);
 
 ---
 
-### [153] DS-1.10 — 업로드·다운로드 파일 검증
+### [149] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -9021,7 +8812,7 @@ originalFileName = multipartFile.getOriginalFilename();
 
 ---
 
-### [154] DS-1.10 — 업로드·다운로드 파일 검증
+### [150] DS-1.10 — 업로드·다운로드 파일 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -9064,7 +8855,7 @@ multipartFile.transferTo(file);
 
 ---
 
-### [155] DS-2.1 — 인증 대상 및 방식
+### [151] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -9107,7 +8898,7 @@ import javax.servlet.http.HttpSession;
 
 ---
 
-### [156] DS-2.1 — 인증 대상 및 방식
+### [152] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -9150,50 +8941,7 @@ HttpSession httpSession = request.getSession();
 
 ---
 
-### [157] DS-2.1 — 인증 대상 및 방식
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-2.1` |
-| **약점명** | 인증 대상 및 방식 |
-| **위험도** | 🟠 높음(HIGH) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/util/FileUtils.java` |
-| **라인** | 104 |
-| **CWE** | CWE-306 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-2.1] L104에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 104
-//		HttpSession httpSession = request.getSession();
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [158] DS-2.1 — 인증 대상 및 방식
+### [153] DS-2.1 — 인증 대상 및 방식
 
 | 항목 | 내용 |
 |------|------|
@@ -9236,7 +8984,7 @@ HttpSession httpSession = request.getSession();
 
 ---
 
-### [159] IV-1.6 — 위험한 형식 파일 업로드
+### [154] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -9338,7 +9086,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [160] IV-1.6 — 위험한 형식 파일 업로드
+### [155] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -9440,7 +9188,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [161] IV-1.6 — 위험한 형식 파일 업로드
+### [156] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -9542,7 +9290,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [162] IV-1.6 — 위험한 형식 파일 업로드
+### [157] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -9644,7 +9392,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [163] IV-1.6 — 위험한 형식 파일 업로드
+### [158] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -9746,7 +9494,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [164] IV-1.6 — 위험한 형식 파일 업로드
+### [159] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -9848,7 +9596,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [165] IV-1.6 — 위험한 형식 파일 업로드
+### [160] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -9950,7 +9698,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [166] IV-1.6 — 위험한 형식 파일 업로드
+### [161] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -10052,7 +9800,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [167] IV-1.6 — 위험한 형식 파일 업로드
+### [162] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -10154,7 +9902,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [168] IV-1.6 — 위험한 형식 파일 업로드
+### [163] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -10256,7 +10004,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [169] IV-1.6 — 위험한 형식 파일 업로드
+### [164] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -10358,7 +10106,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [170] IV-1.6 — 위험한 형식 파일 업로드
+### [165] IV-1.6 — 위험한 형식 파일 업로드
 
 | 항목 | 내용 |
 |------|------|
@@ -10460,7 +10208,7 @@ log.info("[Upload] 파일 저장 완료: {} → {}", originalFilename, safeFilen
 
 ---
 
-### [171] DS-1.8 — 허용된 범위내 메모리 접근
+### [166] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -10503,7 +10251,7 @@ private static final byte[] SECRET_KEY = "skdndSecretKey!@#".getBytes();
 
 ---
 
-### [172] DS-1.8 — 허용된 범위내 메모리 접근
+### [167] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -10546,7 +10294,7 @@ byte[] data = new byte[8];
 
 ---
 
-### [173] DS-1.8 — 허용된 범위내 메모리 접근
+### [168] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -10589,7 +10337,7 @@ byte[] hash = mac.doFinal(data);
 
 ---
 
-### [174] DS-2.5 — 암호키 관리
+### [169] DS-2.5 — 암호키 관리
 
 | 항목 | 내용 |
 |------|------|
@@ -10632,7 +10380,7 @@ mac.init(new SecretKeySpec(SECRET_KEY, ALGORITHM));
 
 ---
 
-### [175] IV-1.16 — 메모리 버퍼 오버플로우
+### [170] IV-1.16 — 메모리 버퍼 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -10684,7 +10432,7 @@ buffer.put(data, 0, buffer.limit());
 
 ---
 
-### [176] DS-1.8 — 허용된 범위내 메모리 접근
+### [171] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -10727,7 +10475,7 @@ byte[] bytes = new String(Character.toChars(cp)).getBytes(StandardCharsets.UTF_8
 
 ---
 
-### [177] DS-1.8 — 허용된 범위내 메모리 접근
+### [172] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -10770,7 +10518,7 @@ private final byte[] b;
 
 ---
 
-### [178] DS-1.8 — 허용된 범위내 메모리 접근
+### [173] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -10813,7 +10561,7 @@ Parser(byte[] bytes) {
 
 ---
 
-### [179] DS-1.8 — 허용된 범위내 메모리 접근
+### [174] DS-1.8 — 허용된 범위내 메모리 접근
 
 | 항목 | 내용 |
 |------|------|
@@ -10856,7 +10604,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [180] DS-3.1 — 예외처리
+### [175] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -10899,7 +10647,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [181] DS-3.1 — 예외처리
+### [176] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -10942,93 +10690,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [182] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
-| **라인** | 216 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L216에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 216
-//		} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [183] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
-| **라인** | 271 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L271에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 271
-//			}catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [184] DS-3.1 — 예외처리
+### [177] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11071,7 +10733,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [185] DS-3.1 — 예외처리
+### [178] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11114,7 +10776,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [186] DS-3.1 — 예외처리
+### [179] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11157,7 +10819,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [187] DS-3.1 — 예외처리
+### [180] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11200,7 +10862,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [188] DS-3.1 — 예외처리
+### [181] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11243,7 +10905,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [189] DS-3.1 — 예외처리
+### [182] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11286,7 +10948,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [190] DS-3.1 — 예외처리
+### [183] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11329,7 +10991,7 @@ byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
 ---
 
-### [191] IV-1.14 — 정수형 오버플로우
+### [184] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -11385,7 +11047,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [192] IV-1.14 — 정수형 오버플로우
+### [185] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -11441,7 +11103,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [193] IV-2.9 — 취약한 비밀번호 허용
+### [186] IV-2.9 — 취약한 비밀번호 허용
 
 | 항목 | 내용 |
 |------|------|
@@ -11493,7 +11155,7 @@ String hashedPw = encoder.encode(password);
 
 ---
 
-### [194] IV-5.4 — 초기화되지 않은 변수 사용
+### [187] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -11554,7 +11216,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [195] IV-5.4 — 초기화되지 않은 변수 사용
+### [188] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -11615,7 +11277,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [196] DS-3.1 — 예외처리
+### [189] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11658,7 +11320,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [197] DS-3.1 — 예외처리
+### [190] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -11678,6 +11340,320 @@ user.ifPresent(u -> process(u));
 
 ```java
 // Line 206
+} catch (Exception e) {
+```
+
+#### 보안 원칙
+
+> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
+```
+
+#### 조치 설명
+
+> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
+
+#### 참고자료
+
+- 
+
+---
+
+### [191] DS-3.1 — 예외처리
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `DS-3.1` |
+| **약점명** | 예외처리 |
+| **위험도** | 🟡 중간(MEDIUM) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 271 |
+| **CWE** | CWE-209, CWE-390 |
+| **가이드 참조** |  |
+
+#### 탐지 근거
+
+> [DS-3.1] L271에서 위험 패턴이 탐지되었습니다. 
+
+#### ❌ 취약한 코드
+
+```java
+// Line 271
+} catch (Exception e) {
+```
+
+#### 보안 원칙
+
+> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
+```
+
+#### 조치 설명
+
+> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
+
+#### 참고자료
+
+- 
+
+---
+
+### [192] DS-3.1 — 예외처리
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `DS-3.1` |
+| **약점명** | 예외처리 |
+| **위험도** | 🟡 중간(MEDIUM) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 343 |
+| **CWE** | CWE-209, CWE-390 |
+| **가이드 참조** |  |
+
+#### 탐지 근거
+
+> [DS-3.1] L343에서 위험 패턴이 탐지되었습니다. 
+
+#### ❌ 취약한 코드
+
+```java
+// Line 343
+} catch (Exception e) {
+```
+
+#### 보안 원칙
+
+> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
+```
+
+#### 조치 설명
+
+> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
+
+#### 참고자료
+
+- 
+
+---
+
+### [193] DS-3.1 — 예외처리
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `DS-3.1` |
+| **약점명** | 예외처리 |
+| **위험도** | 🟡 중간(MEDIUM) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 452 |
+| **CWE** | CWE-209, CWE-390 |
+| **가이드 참조** |  |
+
+#### 탐지 근거
+
+> [DS-3.1] L452에서 위험 패턴이 탐지되었습니다. 
+
+#### ❌ 취약한 코드
+
+```java
+// Line 452
+} catch (Exception e) {
+```
+
+#### 보안 원칙
+
+> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
+```
+
+#### 조치 설명
+
+> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
+
+#### 참고자료
+
+- 
+
+---
+
+### [194] DS-3.1 — 예외처리
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `DS-3.1` |
+| **약점명** | 예외처리 |
+| **위험도** | 🟡 중간(MEDIUM) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 478 |
+| **CWE** | CWE-209, CWE-390 |
+| **가이드 참조** |  |
+
+#### 탐지 근거
+
+> [DS-3.1] L478에서 위험 패턴이 탐지되었습니다. 
+
+#### ❌ 취약한 코드
+
+```java
+// Line 478
+} catch (Exception e) {
+```
+
+#### 보안 원칙
+
+> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
+```
+
+#### 조치 설명
+
+> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
+
+#### 참고자료
+
+- 
+
+---
+
+### [195] DS-3.1 — 예외처리
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `DS-3.1` |
+| **약점명** | 예외처리 |
+| **위험도** | 🟡 중간(MEDIUM) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 567 |
+| **CWE** | CWE-209, CWE-390 |
+| **가이드 참조** |  |
+
+#### 탐지 근거
+
+> [DS-3.1] L567에서 위험 패턴이 탐지되었습니다. 
+
+#### ❌ 취약한 코드
+
+```java
+// Line 567
+} catch (Exception e) {
+```
+
+#### 보안 원칙
+
+> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
+```
+
+#### 조치 설명
+
+> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
+
+#### 참고자료
+
+- 
+
+---
+
+### [196] IV-1.14 — 정수형 오버플로우
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `IV-1.14` |
+| **약점명** | 정수형 오버플로우 |
+| **위험도** | 🟡 중간(MEDIUM) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
+| **라인** | 328 |
+| **CWE** | CWE-190 |
+| **가이드 참조** | PART4 제1절 14항 (p.290-296) |
+
+#### 탐지 근거
+
+> [IV-1.14] L328에서 위험 패턴이 탐지되었습니다. 조치: 정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용
+
+#### ❌ 취약한 코드
+
+```java
+// Line 328
+hashtagVO.setObjectId( Long.parseLong(boardVO.getBbsNo()) );
+```
+
+#### 보안 원칙
+
+> **정수 연산 전 범위 검사를 수행하거나 BigInteger/Math.addExact를 사용합니다.**
+
+#### ✅ 권고 수정 코드
+
+```java
+// [수정] IV-1.14 정수형 오버플로우 방지
+// ❌ 취약: int result = Integer.parseInt(request.getParameter("count")) * multiplier;
+// ✅ 안전:
+String countStr = request.getParameter("count");
+long count;
+try {
+    count = Long.parseLong(countStr);
+} catch (NumberFormatException e) {
+    throw new IllegalArgumentException("유효하지 않은 숫자: " + countStr);
+}
+if (count < 0 || count > Integer.MAX_VALUE)
+    throw new IllegalArgumentException("허용 범위 초과: " + count);
+// 또는: Math.addExact(a, b) — 오버플로우 시 ArithmeticException 발생
+```
+
+#### 조치 설명
+
+> 외부 입력 정수를 검증 없이 연산에 사용하면 오버플로우로 예상치 못한 결과가 발생합니다. Long으로 파싱 후 Integer 범위 검증, 또는 Math.addExact()로 오버플로우를 예외로 처리하세요. 가이드 참조: PART4 제1절 14항 정수형 오버플로우 (p.290-296)
+
+#### 참고자료
+
+- PART4 제1절 14항 (p.290-296)
+- CWE-190: Integer Overflow
+
+---
+
+### [197] DS-3.1 — 예외처리
+
+| 항목 | 내용 |
+|------|------|
+| **진단항목 번호** | `DS-3.1` |
+| **약점명** | 예외처리 |
+| **위험도** | 🟡 중간(MEDIUM) |
+| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java` |
+| **라인** | 145 |
+| **CWE** | CWE-209, CWE-390 |
+| **가이드 참조** |  |
+
+#### 탐지 근거
+
+> [DS-3.1] L145에서 위험 패턴이 탐지되었습니다. 
+
+#### ❌ 취약한 코드
+
+```java
+// Line 145
 } catch (Exception e) {
 ```
 
@@ -11708,320 +11684,6 @@ user.ifPresent(u -> process(u));
 | **진단항목 번호** | `DS-3.1` |
 | **약점명** | 예외처리 |
 | **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 271 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L271에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 271
-} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [199] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 343 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L343에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 343
-} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [200] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 452 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L452에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 452
-} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [201] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 478 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L478에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 478
-} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [202] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 567 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L567에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 567
-} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [203] IV-1.14 — 정수형 오버플로우
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-1.14` |
-| **약점명** | 정수형 오버플로우 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java` |
-| **라인** | 328 |
-| **CWE** | CWE-190 |
-| **가이드 참조** | PART4 제1절 14항 (p.290-296) |
-
-#### 탐지 근거
-
-> [IV-1.14] L328에서 위험 패턴이 탐지되었습니다. 조치: 정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용
-
-#### ❌ 취약한 코드
-
-```java
-// Line 328
-hashtagVO.setObjectId( Long.parseLong(boardVO.getBbsNo()) );
-```
-
-#### 보안 원칙
-
-> **정수 연산 전 범위 검사를 수행하거나 BigInteger/Math.addExact를 사용합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-1.14 정수형 오버플로우 방지
-// ❌ 취약: int result = Integer.parseInt(request.getParameter("count")) * multiplier;
-// ✅ 안전:
-String countStr = request.getParameter("count");
-long count;
-try {
-    count = Long.parseLong(countStr);
-} catch (NumberFormatException e) {
-    throw new IllegalArgumentException("유효하지 않은 숫자: " + countStr);
-}
-if (count < 0 || count > Integer.MAX_VALUE)
-    throw new IllegalArgumentException("허용 범위 초과: " + count);
-// 또는: Math.addExact(a, b) — 오버플로우 시 ArithmeticException 발생
-```
-
-#### 조치 설명
-
-> 외부 입력 정수를 검증 없이 연산에 사용하면 오버플로우로 예상치 못한 결과가 발생합니다. Long으로 파싱 후 Integer 범위 검증, 또는 Math.addExact()로 오버플로우를 예외로 처리하세요. 가이드 참조: PART4 제1절 14항 정수형 오버플로우 (p.290-296)
-
-#### 참고자료
-
-- PART4 제1절 14항 (p.290-296)
-- CWE-190: Integer Overflow
-
----
-
-### [204] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java` |
-| **라인** | 145 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L145에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 145
-} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [205] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
 | **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java` |
 | **라인** | 206 |
 | **CWE** | CWE-209, CWE-390 |
@@ -12058,7 +11720,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [206] DS-3.1 — 예외처리
+### [199] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12101,7 +11763,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [207] DS-3.1 — 예외처리
+### [200] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12144,7 +11806,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [208] DS-3.1 — 예외처리
+### [201] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12187,7 +11849,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [209] DS-3.1 — 예외처리
+### [202] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12230,7 +11892,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [210] DS-3.1 — 예외처리
+### [203] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12273,7 +11935,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [211] IV-1.14 — 정수형 오버플로우
+### [204] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -12329,7 +11991,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [212] DS-3.1 — 예외처리
+### [205] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12372,7 +12034,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [213] DS-3.1 — 예외처리
+### [206] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12415,7 +12077,7 @@ e.printStackTrace();
 
 ---
 
-### [214] DS-3.1 — 예외처리
+### [207] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12458,7 +12120,7 @@ e.printStackTrace();
 
 ---
 
-### [215] DS-3.1 — 예외처리
+### [208] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12501,7 +12163,7 @@ e.printStackTrace();
 
 ---
 
-### [216] IV-1.14 — 정수형 오버플로우
+### [209] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -12557,92 +12219,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [217] IV-2.8 — 적절하지 않은 난수 값 사용
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-2.8` |
-| **약점명** | 적절하지 않은 난수 값 사용 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/FetchWpArticleController.java` |
-| **라인** | 60 |
-| **CWE** | CWE-330 |
-| **가이드 참조** | PART4 제2절 8항 (p.364-369) |
-
-#### 탐지 근거
-
-> [IV-2.8] L60에서 위험 패턴이 탐지되었습니다. 조치: java.security.SecureRandom으로 교체
-
-#### ❌ 취약한 코드
-
-```java
-// Line 60
-//				long delay = 1000 + (long)(Math.random() * 800); // 1~1.8초
-```
-
-#### 보안 원칙
-
-> **보안 목적 난수는 OS 엔트로피 소스를 사용하는 java.security.SecureRandom을 사용합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-2.8 적절하지 않은 난수 값 사용 방지
-//
-// ▶ 취약 원인: java.util.Random은 선형합동 알고리즘(LCG) 기반 — 시드 예측 후 값 추측 가능
-// ▶ 보안 원칙: 보안 목적 난수는 반드시 java.security.SecureRandom 사용
-//
-// 필요 import:
-//   import java.security.SecureRandom;
-//   import java.util.Base64;
-
-// ── Step 1. SecureRandom 인스턴스 생성 ─────────────────────────
-// SecureRandom은 OS 엔트로피 소스(/dev/urandom 등)를 사용
-// 클래스 레벨 필드로 선언해 재사용 (인스턴스 생성 비용이 높음)
-private static final SecureRandom SECURE_RANDOM = new SecureRandom();
-
-// ── Step 2. 정수 범위 난수 생성 ─────────────────────────────────
-// ❌ 취약: new Random().nextInt(bound)  — 예측 가능
-// ✅ 안전:
-int randomInt = SECURE_RANDOM.nextInt(bound);   // [0, bound) 범위
-
-// ── Step 3. 세션 토큰 / 인증 코드 생성 (바이트 배열 방식) ───────
-// 256비트(32바이트) = 충분한 엔트로피
-byte[] tokenBytes = new byte[32];
-SECURE_RANDOM.nextBytes(tokenBytes);
-
-// URL-safe Base64 인코딩 (패딩 제거)
-String sessionToken = Base64.getUrlEncoder().withoutPadding()
-                           .encodeToString(tokenBytes);
-// 예: "dGhpcyBpcyBhIHRlc3Q" (43자, URL-safe)
-
-// ── Step 4. 인증 코드(숫자 6자리) 생성 예시 ──────────────────────
-int authCode = 100000 + SECURE_RANDOM.nextInt(900000);  // [100000, 999999]
-String authCodeStr = String.valueOf(authCode);
-
-// ── Step 5. UUID 기반 식별자 생성 (간편 대안) ──────────────────
-// UUID.randomUUID()는 내부적으로 SecureRandom을 사용 (Java 표준)
-String uniqueId = java.util.UUID.randomUUID().toString();
-
-// ── [주의] 보안 목적이 아닌 경우 ──────────────────────────────
-// 성능이 중요하고 보안이 불필요한 경우(게임 아이템 드랍률 등)에만
-// java.util.Random 또는 ThreadLocalRandom 사용 가능
-// int nonSecureRandom = ThreadLocalRandom.current().nextInt(100);
-```
-
-#### 조치 설명
-
-> java.util.Random은 시드를 알면 이후 모든 값 예측이 가능합니다. 세션 토큰, 인증 코드, 암호화 키 등 보안 목적에는 반드시 SecureRandom을 사용하세요. 인스턴스는 재사용 가능하므로 클래스 레벨 static 필드로 선언하는 것이 효율적입니다. 가이드 참조: PART4 제2절 8항 적절하지 않은 난수 값 사용 (p.364-369)
-
-#### 참고자료
-
-- PART4 제2절 8항 (p.364-369)
-- CWE-330: Use of Insufficiently Random Values
-- CWE-338: Use of Cryptographically Weak PRNG
-
----
-
-### [218] IV-4.1 — 오류 메시지 정보노출
+### [210] IV-4.1 — 오류 메시지 정보노출
 
 | 항목 | 내용 |
 |------|------|
@@ -12738,7 +12315,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [219] IV-4.1 — 오류 메시지 정보노출
+### [211] IV-4.1 — 오류 메시지 정보노출
 
 | 항목 | 내용 |
 |------|------|
@@ -12834,7 +12411,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [220] DS-3.1 — 예외처리
+### [212] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12877,7 +12454,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [221] DS-3.1 — 예외처리
+### [213] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12920,7 +12497,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [222] DS-3.1 — 예외처리
+### [214] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -12963,7 +12540,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [223] DS-3.1 — 예외처리
+### [215] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13006,7 +12583,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [224] DS-3.1 — 예외처리
+### [216] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13049,7 +12626,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [225] DS-3.1 — 예외처리
+### [217] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13092,7 +12669,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [226] DS-3.1 — 예외처리
+### [218] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13135,7 +12712,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [227] DS-3.1 — 예외처리
+### [219] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13178,7 +12755,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [228] DS-3.1 — 예외처리
+### [220] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13221,7 +12798,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [229] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [221] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -13343,7 +12920,7 @@ try {
 
 ---
 
-### [230] DS-1.7 — HTTP 프로토콜 유효성 검증
+### [222] DS-1.7 — HTTP 프로토콜 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -13386,7 +12963,7 @@ response.setHeader("Content-Disposition", "attachment; fileName=\""
 
 ---
 
-### [231] DS-1.7 — HTTP 프로토콜 유효성 검증
+### [223] DS-1.7 — HTTP 프로토콜 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -13429,7 +13006,7 @@ response.setHeader("Content-Transfer-Encoding", "binary");
 
 ---
 
-### [232] DS-3.1 — 예외처리
+### [224] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13472,7 +13049,7 @@ response.setHeader("Content-Transfer-Encoding", "binary");
 
 ---
 
-### [233] IV-5.4 — 초기화되지 않은 변수 사용
+### [225] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -13533,7 +13110,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [234] IV-5.4 — 초기화되지 않은 변수 사용
+### [226] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -13594,7 +13171,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [235] IV-5.4 — 초기화되지 않은 변수 사용
+### [227] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -13655,7 +13232,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [236] DS-3.1 — 예외처리
+### [228] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -13698,7 +13275,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [237] IV-1.14 — 정수형 오버플로우
+### [229] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -13754,7 +13331,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [238] IV-1.14 — 정수형 오버플로우
+### [230] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -13810,7 +13387,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [239] IV-1.14 — 정수형 오버플로우
+### [231] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -13866,7 +13443,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [240] IV-1.14 — 정수형 오버플로우
+### [232] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -13922,7 +13499,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [241] IV-1.14 — 정수형 오버플로우
+### [233] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -13978,7 +13555,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [242] IV-1.14 — 정수형 오버플로우
+### [234] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -14034,7 +13611,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [243] IV-1.14 — 정수형 오버플로우
+### [235] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -14090,7 +13667,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [244] IV-1.14 — 정수형 오버플로우
+### [236] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -14146,7 +13723,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [245] IV-1.14 — 정수형 오버플로우
+### [237] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -14202,7 +13779,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [246] IV-1.14 — 정수형 오버플로우
+### [238] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -14258,7 +13835,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [247] DS-3.1 — 예외처리
+### [239] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14301,7 +13878,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [248] DS-3.1 — 예외처리
+### [240] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14344,7 +13921,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [249] DS-3.1 — 예외처리
+### [241] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14387,7 +13964,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [250] DS-3.1 — 예외처리
+### [242] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14430,7 +14007,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [251] DS-3.1 — 예외처리
+### [243] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14473,7 +14050,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [252] DS-3.1 — 예외처리
+### [244] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14516,7 +14093,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [253] DS-3.1 — 예외처리
+### [245] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14559,7 +14136,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [254] IV-1.14 — 정수형 오버플로우
+### [246] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -14615,7 +14192,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [255] DS-3.1 — 예외처리
+### [247] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14658,7 +14235,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [256] DS-3.1 — 예외처리
+### [248] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14701,7 +14278,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [257] DS-3.1 — 예외처리
+### [249] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14744,7 +14321,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [258] DS-3.1 — 예외처리
+### [250] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14787,7 +14364,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [259] DS-3.1 — 예외처리
+### [251] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14830,7 +14407,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [260] DS-3.1 — 예외처리
+### [252] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14873,7 +14450,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [261] DS-3.1 — 예외처리
+### [253] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14916,7 +14493,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [262] DS-3.1 — 예외처리
+### [254] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -14959,7 +14536,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [263] DS-3.1 — 예외처리
+### [255] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -15002,7 +14579,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [264] DS-3.1 — 예외처리
+### [256] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -15045,7 +14622,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [265] DS-3.1 — 예외처리
+### [257] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -15088,7 +14665,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [266] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [258] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -15210,7 +14787,7 @@ try {
 
 ---
 
-### [267] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [259] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -15332,7 +14909,7 @@ try {
 
 ---
 
-### [268] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [260] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -15454,7 +15031,7 @@ try {
 
 ---
 
-### [269] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [261] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -15576,7 +15153,7 @@ try {
 
 ---
 
-### [270] DS-3.1 — 예외처리
+### [262] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -15619,7 +15196,7 @@ try {
 
 ---
 
-### [271] DS-3.1 — 예외처리
+### [263] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -15662,7 +15239,7 @@ try {
 
 ---
 
-### [272] DS-3.1 — 예외처리
+### [264] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -15705,7 +15282,7 @@ try {
 
 ---
 
-### [273] IV-1.14 — 정수형 오버플로우
+### [265] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -15761,7 +15338,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [274] IV-1.14 — 정수형 오버플로우
+### [266] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -15817,7 +15394,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [275] IV-1.14 — 정수형 오버플로우
+### [267] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -15873,7 +15450,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [276] IV-1.14 — 정수형 오버플로우
+### [268] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -15929,7 +15506,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [277] IV-5.4 — 초기화되지 않은 변수 사용
+### [269] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -15990,7 +15567,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [278] IV-5.4 — 초기화되지 않은 변수 사용
+### [270] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -16051,7 +15628,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [279] IV-5.4 — 초기화되지 않은 변수 사용
+### [271] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -16112,7 +15689,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [280] DS-3.1 — 예외처리
+### [272] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -16155,7 +15732,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [281] DS-3.1 — 예외처리
+### [273] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -16198,7 +15775,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [282] DS-3.1 — 예외처리
+### [274] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -16241,7 +15818,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [283] IV-1.14 — 정수형 오버플로우
+### [275] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -16297,7 +15874,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [284] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [276] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -16419,7 +15996,7 @@ try {
 
 ---
 
-### [285] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [277] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -16541,7 +16118,7 @@ try {
 
 ---
 
-### [286] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [278] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -16663,7 +16240,7 @@ try {
 
 ---
 
-### [287] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [279] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -16785,7 +16362,7 @@ try {
 
 ---
 
-### [288] DS-3.1 — 예외처리
+### [280] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -16828,7 +16405,7 @@ try {
 
 ---
 
-### [289] DS-3.1 — 예외처리
+### [281] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -16871,7 +16448,7 @@ try {
 
 ---
 
-### [290] IV-5.4 — 초기화되지 않은 변수 사용
+### [282] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -16932,7 +16509,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [291] IV-5.4 — 초기화되지 않은 변수 사용
+### [283] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -16993,7 +16570,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [292] IV-5.4 — 초기화되지 않은 변수 사용
+### [284] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17054,7 +16631,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [293] DS-3.1 — 예외처리
+### [285] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -17097,7 +16674,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [294] DS-3.1 — 예외처리
+### [286] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -17140,7 +16717,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [295] DS-3.1 — 예외처리
+### [287] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -17183,7 +16760,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [296] DS-3.1 — 예외처리
+### [288] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -17226,7 +16803,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [297] DS-3.1 — 예외처리
+### [289] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -17269,7 +16846,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [298] IV-1.14 — 정수형 오버플로우
+### [290] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -17325,7 +16902,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [299] IV-5.4 — 초기화되지 않은 변수 사용
+### [291] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17386,7 +16963,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [300] IV-5.4 — 초기화되지 않은 변수 사용
+### [292] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17447,7 +17024,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [301] IV-5.4 — 초기화되지 않은 변수 사용
+### [293] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17508,7 +17085,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [302] IV-5.4 — 초기화되지 않은 변수 사용
+### [294] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17569,7 +17146,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [303] IV-5.4 — 초기화되지 않은 변수 사용
+### [295] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17630,7 +17207,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [304] IV-5.4 — 초기화되지 않은 변수 사용
+### [296] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17691,7 +17268,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [305] IV-5.4 — 초기화되지 않은 변수 사용
+### [297] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17752,7 +17329,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [306] IV-5.4 — 초기화되지 않은 변수 사용
+### [298] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17813,7 +17390,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [307] IV-5.4 — 초기화되지 않은 변수 사용
+### [299] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17874,7 +17451,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [308] IV-5.4 — 초기화되지 않은 변수 사용
+### [300] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17935,7 +17512,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [309] IV-5.4 — 초기화되지 않은 변수 사용
+### [301] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -17996,7 +17573,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [310] IV-5.4 — 초기화되지 않은 변수 사용
+### [302] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18057,7 +17634,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [311] IV-5.4 — 초기화되지 않은 변수 사용
+### [303] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18118,7 +17695,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [312] IV-5.4 — 초기화되지 않은 변수 사용
+### [304] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18179,7 +17756,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [313] IV-5.4 — 초기화되지 않은 변수 사용
+### [305] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18240,7 +17817,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [314] IV-5.4 — 초기화되지 않은 변수 사용
+### [306] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18301,7 +17878,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [315] IV-5.4 — 초기화되지 않은 변수 사용
+### [307] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18362,7 +17939,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [316] IV-5.4 — 초기화되지 않은 변수 사용
+### [308] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18423,7 +18000,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [317] IV-5.4 — 초기화되지 않은 변수 사용
+### [309] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18484,7 +18061,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [318] IV-5.4 — 초기화되지 않은 변수 사용
+### [310] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18545,7 +18122,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [319] IV-5.4 — 초기화되지 않은 변수 사용
+### [311] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18606,7 +18183,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [320] IV-5.4 — 초기화되지 않은 변수 사용
+### [312] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18667,7 +18244,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [321] IV-5.4 — 초기화되지 않은 변수 사용
+### [313] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18728,7 +18305,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [322] IV-5.4 — 초기화되지 않은 변수 사용
+### [314] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18789,7 +18366,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [323] IV-5.4 — 초기화되지 않은 변수 사용
+### [315] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18850,7 +18427,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [324] IV-5.4 — 초기화되지 않은 변수 사용
+### [316] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18911,7 +18488,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [325] IV-5.4 — 초기화되지 않은 변수 사용
+### [317] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -18972,7 +18549,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [326] IV-5.4 — 초기화되지 않은 변수 사용
+### [318] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19033,7 +18610,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [327] IV-5.4 — 초기화되지 않은 변수 사용
+### [319] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19094,7 +18671,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [328] IV-5.4 — 초기화되지 않은 변수 사용
+### [320] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19155,7 +18732,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [329] IV-5.4 — 초기화되지 않은 변수 사용
+### [321] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19216,7 +18793,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [330] IV-5.4 — 초기화되지 않은 변수 사용
+### [322] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19277,7 +18854,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [331] IV-5.4 — 초기화되지 않은 변수 사용
+### [323] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19338,7 +18915,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [332] IV-5.4 — 초기화되지 않은 변수 사용
+### [324] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19399,7 +18976,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [333] IV-5.4 — 초기화되지 않은 변수 사용
+### [325] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19460,7 +19037,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [334] IV-5.4 — 초기화되지 않은 변수 사용
+### [326] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19521,7 +19098,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [335] IV-5.4 — 초기화되지 않은 변수 사용
+### [327] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19582,7 +19159,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [336] IV-5.4 — 초기화되지 않은 변수 사용
+### [328] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19643,7 +19220,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [337] IV-5.4 — 초기화되지 않은 변수 사용
+### [329] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19704,7 +19281,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [338] IV-5.4 — 초기화되지 않은 변수 사용
+### [330] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19765,7 +19342,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [339] IV-5.4 — 초기화되지 않은 변수 사용
+### [331] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19826,7 +19403,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [340] IV-5.4 — 초기화되지 않은 변수 사용
+### [332] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19887,7 +19464,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [341] IV-5.4 — 초기화되지 않은 변수 사용
+### [333] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -19948,7 +19525,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [342] IV-5.4 — 초기화되지 않은 변수 사용
+### [334] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20009,7 +19586,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [343] IV-5.4 — 초기화되지 않은 변수 사용
+### [335] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20070,7 +19647,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [344] IV-5.4 — 초기화되지 않은 변수 사용
+### [336] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20131,7 +19708,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [345] IV-5.4 — 초기화되지 않은 변수 사용
+### [337] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20192,7 +19769,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [346] IV-5.4 — 초기화되지 않은 변수 사용
+### [338] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20253,7 +19830,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [347] IV-5.4 — 초기화되지 않은 변수 사용
+### [339] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20314,7 +19891,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [348] IV-5.4 — 초기화되지 않은 변수 사용
+### [340] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20375,7 +19952,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [349] IV-5.4 — 초기화되지 않은 변수 사용
+### [341] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20436,7 +20013,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [350] IV-5.4 — 초기화되지 않은 변수 사용
+### [342] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20497,7 +20074,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [351] IV-5.4 — 초기화되지 않은 변수 사용
+### [343] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20558,7 +20135,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [352] IV-5.4 — 초기화되지 않은 변수 사용
+### [344] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20619,7 +20196,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [353] IV-5.4 — 초기화되지 않은 변수 사용
+### [345] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20680,7 +20257,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [354] IV-5.4 — 초기화되지 않은 변수 사용
+### [346] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20741,7 +20318,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [355] IV-5.4 — 초기화되지 않은 변수 사용
+### [347] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20802,7 +20379,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [356] IV-5.4 — 초기화되지 않은 변수 사용
+### [348] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20863,7 +20440,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [357] IV-5.4 — 초기화되지 않은 변수 사용
+### [349] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -20924,7 +20501,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [358] DS-3.1 — 예외처리
+### [350] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -20967,7 +20544,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [359] DS-3.1 — 예외처리
+### [351] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -21010,7 +20587,7 @@ e.printStackTrace();
 
 ---
 
-### [360] IV-4.1 — 오류 메시지 정보노출
+### [352] IV-4.1 — 오류 메시지 정보노출
 
 | 항목 | 내용 |
 |------|------|
@@ -21106,275 +20683,7 @@ private void sendGenericError(HttpServletResponse response, String message)
 
 ---
 
-### [361] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java` |
-| **라인** | 54 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L54에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 54
-//		} catch (IOException e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [362] DS-3.1 — 예외처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `DS-3.1` |
-| **약점명** | 예외처리 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java` |
-| **라인** | 60 |
-| **CWE** | CWE-209, CWE-390 |
-| **가이드 참조** |  |
-
-#### 탐지 근거
-
-> [DS-3.1] L60에서 위험 패턴이 탐지되었습니다. 
-
-#### ❌ 취약한 코드
-
-```java
-// Line 60
-//				} catch (IOException e) {
-```
-
-#### 보안 원칙
-
-> **가이드에서 해당 약점의 조치 방안을 확인하세요.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// 해당 약점의 수정 방법을 가이드에서 확인하세요: 
-```
-
-#### 조치 설명
-
-> 보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.
-
-#### 참고자료
-
-- 
-
----
-
-### [363] IV-3.2 — 종료되지 않는 반복문 또는 재귀 함수
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-3.2` |
-| **약점명** | 종료되지 않는 반복문 또는 재귀 함수 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java` |
-| **라인** | 40 |
-| **CWE** | CWE-835 |
-| **가이드 참조** | PART4 제3절 2항 (p.415-418) |
-
-#### 탐지 근거
-
-> [IV-3.2] L40에서 위험 패턴이 탐지되었습니다. 조치: 반복문·재귀 함수에 명확한 종료 조건 및 최대 반복 횟수 제한 추가
-
-#### ❌ 취약한 코드
-
-```java
-// Line 40
-//				while (true) {
-```
-
-#### 보안 원칙
-
-> **반복문·재귀 함수에 명확한 종료 조건과 최대 반복 횟수를 제한합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-3.2 무한 반복문 방지: 명확한 종료 조건 추가
-// ❌ 취약: while(true) { ... } / for(;;) { ... }
-// ✅ 안전:
-int maxRetries = 3;
-int attempt = 0;
-while (attempt < maxRetries && !isComplete()) {
-    process();
-    attempt++;
-}
-if (attempt >= maxRetries) log.warn("최대 재시도 횟수 초과");
-
-// 재귀 함수: 최대 깊이 제한
-private void recurse(int depth) {
-    if (depth > 100) throw new RuntimeException("최대 재귀 깊이 초과");
-    // ...
-    recurse(depth + 1);
-}
-```
-
-#### 조치 설명
-
-> 종료 조건 없는 반복문은 서비스 거부(DoS) 공격에 악용되거나 CPU를 고갈시킬 수 있습니다. 외부 입력에 의존하는 반복에는 반드시 최대 반복 횟수나 타임아웃을 설정하세요. 가이드 참조: PART4 제3절 2항 종료되지 않는 반복문 (p.415-418)
-
-#### 참고자료
-
-- PART4 제3절 2항 (p.415-418)
-- CWE-835: Loop with Unreachable Exit Condition
-
----
-
-### [364] IV-5.2 — 부적절한 자원 해제
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-5.2` |
-| **약점명** | 부적절한 자원 해제 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java` |
-| **라인** | 29 |
-| **CWE** | CWE-772 |
-| **가이드 참조** | PART4 제5절 2항 (p.445-453) |
-
-#### 탐지 근거
-
-> [IV-5.2] L29에서 위험 패턴이 탐지되었습니다. 조치: try-with-resources 구문으로 자원 자동 해제 보장
-
-#### ❌ 취약한 코드
-
-```java
-// Line 29
-//				in = new FileInputStream(storePath);
-```
-
-#### 보안 원칙
-
-> **AutoCloseable 자원은 try-with-resources로 자동 반환을 보장합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-5.2 자원 반환 누락 방지: try-with-resources 사용
-// ❌ 취약:
-// InputStream in = new FileInputStream(file);
-// // 예외 발생 시 in.close() 호출 안 됨
-
-// ✅ 안전:
-try (InputStream in = new FileInputStream(file);
-     BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-    String line;
-    while ((line = reader.readLine()) != null) {
-        // 처리
-    }
-} catch (IOException e) {
-    log.error("파일 읽기 오류: {}", e.getMessage(), e);
-}
-// DB 연결:
-try (Connection con = dataSource.getConnection();
-     PreparedStatement pstmt = con.prepareStatement(sql)) { ... }
-```
-
-#### 조치 설명
-
-> 파일·DB 연결 등의 자원을 finally 블록 없이 사용하면 예외 발생 시 자원이 누수됩니다. Java 7+ try-with-resources를 사용하면 예외 발생 여부와 관계없이 자원이 자동으로 닫힙니다. 가이드 참조: PART4 제5절 2항 자원 반환 누락 (p.438-442)
-
-#### 참고자료
-
-- PART4 제5절 2항 (p.438-442)
-- CWE-772: Resource Leak
-
----
-
-### [365] IV-5.4 — 초기화되지 않은 변수 사용
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-5.4` |
-| **약점명** | 초기화되지 않은 변수 사용 |
-| **위험도** | 🟡 중간(MEDIUM) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java` |
-| **라인** | 8 |
-| **CWE** | CWE-457 |
-| **가이드 참조** | PART4 제5절 4항 (p.459-461) |
-
-#### 탐지 근거
-
-> [IV-5.4] L8에서 위험 패턴이 탐지되었습니다. 조치: 모든 변수를 선언 시 명시적으로 초기화
-
-#### ❌ 취약한 코드
-
-```java
-// Line 8
-//	private String uploadPath;
-```
-
-#### 보안 원칙
-
-> **변수를 선언과 동시에 안전한 기본값으로 초기화합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-5.4 초기화되지 않은 변수 사용 방지
-// ❌ 취약:
-// int count;
-// if (condition) count = 5;
-// process(count);  // count가 초기화되지 않을 수 있음
-
-// ✅ 안전: 선언 시 기본값 설정
-int count = 0;  // 안전한 기본값
-String message = "";  // null 대신 빈 문자열
-List<String> items = new ArrayList<>();  // null 대신 빈 컬렉션
-
-if (condition) count = fetchCount();
-process(count);
-
-// 객체형: Optional 활용
-Optional<User> user = Optional.empty();
-if (authenticated) user = Optional.of(loadUser());
-user.ifPresent(u -> process(u));
-```
-
-#### 조치 설명
-
-> 초기화되지 않은 변수를 사용하면 예측 불가한 값으로 처리되어 보안 검사가 우회될 수 있습니다. 항상 선언과 동시에 안전한 기본값(0, "", false, null 검사 후 Optional)을 할당하세요. 가이드 참조: PART4 제5절 4항 초기화되지 않은 변수 사용 (p.447-450)
-
-#### 참고자료
-
-- PART4 제5절 4항 (p.447-450)
-- CWE-457: Use of Uninitialized Variable
-
----
-
-### [366] DS-1.7 — HTTP 프로토콜 유효성 검증
+### [353] DS-1.7 — HTTP 프로토콜 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -21417,7 +20726,7 @@ res.setHeader("X-UA-Compatible", "IE=edge");
 
 ---
 
-### [367] IV-5.4 — 초기화되지 않은 변수 사용
+### [354] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21478,7 +20787,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [368] IV-5.4 — 초기화되지 않은 변수 사용
+### [355] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21539,7 +20848,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [369] IV-5.4 — 초기화되지 않은 변수 사용
+### [356] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21600,7 +20909,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [370] IV-5.4 — 초기화되지 않은 변수 사용
+### [357] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21661,7 +20970,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [371] IV-5.4 — 초기화되지 않은 변수 사용
+### [358] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21722,7 +21031,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [372] IV-5.4 — 초기화되지 않은 변수 사용
+### [359] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21783,7 +21092,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [373] IV-5.4 — 초기화되지 않은 변수 사용
+### [360] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21844,7 +21153,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [374] IV-5.4 — 초기화되지 않은 변수 사용
+### [361] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21905,7 +21214,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [375] IV-5.4 — 초기화되지 않은 변수 사용
+### [362] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -21966,7 +21275,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [376] IV-5.4 — 초기화되지 않은 변수 사용
+### [363] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -22027,7 +21336,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [377] IV-5.4 — 초기화되지 않은 변수 사용
+### [364] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -22088,7 +21397,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [378] IV-5.4 — 초기화되지 않은 변수 사용
+### [365] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -22149,7 +21458,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [379] IV-5.4 — 초기화되지 않은 변수 사용
+### [366] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -22210,7 +21519,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [380] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [367] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -22332,7 +21641,7 @@ try {
 
 ---
 
-### [381] DS-1.7 — HTTP 프로토콜 유효성 검증
+### [368] DS-1.7 — HTTP 프로토콜 유효성 검증
 
 | 항목 | 내용 |
 |------|------|
@@ -22375,7 +21684,7 @@ response.setHeader("Content-Length", String.valueOf(file.length()));
 
 ---
 
-### [382] IV-5.2 — 부적절한 자원 해제
+### [369] IV-5.2 — 부적절한 자원 해제
 
 | 항목 | 내용 |
 |------|------|
@@ -22436,7 +21745,7 @@ try (Connection con = dataSource.getConnection();
 
 ---
 
-### [383] IV-5.4 — 초기화되지 않은 변수 사용
+### [370] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -22497,7 +21806,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [384] DS-3.1 — 예외처리
+### [371] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -22540,7 +21849,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [385] IV-1.14 — 정수형 오버플로우
+### [372] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -22596,7 +21905,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [386] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [373] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -22718,7 +22027,7 @@ try {
 
 ---
 
-### [387] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [374] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -22840,7 +22149,7 @@ try {
 
 ---
 
-### [388] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [375] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -22962,7 +22271,7 @@ try {
 
 ---
 
-### [389] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [376] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -23084,7 +22393,7 @@ try {
 
 ---
 
-### [390] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
+### [377] IV-3.1 — 경쟁조건: 검사 시점과 사용 시점(TOCTOU)
 
 | 항목 | 내용 |
 |------|------|
@@ -23206,7 +22515,7 @@ try {
 
 ---
 
-### [391] IV-5.4 — 초기화되지 않은 변수 사용
+### [378] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -23267,7 +22576,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [392] IV-5.4 — 초기화되지 않은 변수 사용
+### [379] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -23328,7 +22637,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [393] IV-5.4 — 초기화되지 않은 변수 사용
+### [380] IV-5.4 — 초기화되지 않은 변수 사용
 
 | 항목 | 내용 |
 |------|------|
@@ -23389,7 +22698,7 @@ user.ifPresent(u -> process(u));
 
 ---
 
-### [394] IV-1.14 — 정수형 오버플로우
+### [381] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -23445,7 +22754,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [395] DS-3.1 — 예외처리
+### [382] DS-3.1 — 예외처리
 
 | 항목 | 내용 |
 |------|------|
@@ -23488,7 +22797,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [396] IV-1.14 — 정수형 오버플로우
+### [383] IV-1.14 — 정수형 오버플로우
 
 | 항목 | 내용 |
 |------|------|
@@ -23544,7 +22853,7 @@ if (count < 0 || count > Integer.MAX_VALUE)
 
 ---
 
-### [397] IV-4.3 — 부적절한 예외 처리
+### [384] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -23602,7 +22911,7 @@ try {
 
 ---
 
-### [398] IV-4.3 — 부적절한 예외 처리
+### [385] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -23660,123 +22969,7 @@ try {
 
 ---
 
-### [399] IV-4.3 — 부적절한 예외 처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-4.3` |
-| **약점명** | 부적절한 예외 처리 |
-| **위험도** | 🟢 낮음(LOW) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
-| **라인** | 216 |
-| **CWE** | CWE-754 |
-| **가이드 참조** | PART4 제4절 3항 (p.429-432) |
-
-#### 탐지 근거
-
-> [IV-4.3] L216에서 위험 패턴이 탐지되었습니다. 조치: 포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리
-
-#### ❌ 취약한 코드
-
-```java
-// Line 216
-//		} catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **Exception과 같이 과도하게 넓은 예외 대신 구체적인 예외 타입을 처리합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-4.3 과도한 예외 처리 개선
-// ❌ 취약: catch (Exception e) { /* 모든 예외를 하나로 */ }
-// ✅ 안전: 예외 종류별 분리 처리
-try {
-    // 구체적인 예외 먼저 처리
-} catch (java.sql.SQLException e) {
-    // DB 관련 처리
-    log.error("[DB] SQL 오류: errorCode={}", e.getErrorCode(), e);
-} catch (java.io.IOException e) {
-    // 파일/네트워크 처리
-    log.error("[IO] 입출력 오류", e);
-} catch (RuntimeException e) {
-    log.error("[Runtime] 런타임 오류", e);
-    throw e;  // 재발생
-}
-```
-
-#### 조치 설명
-
-> catch(Exception e)는 복구 불가능한 오류(OutOfMemoryError 제외)를 포함하여 의도치 않은 처리가 됩니다. 구체적인 예외 타입별로 분리하여 오류 원인을 명확히 파악하고 적절한 복구 로직을 적용하세요. 가이드 참조: PART4 제4절 3항 과도하게 광범위한 예외 처리 (p.429-432)
-
-#### 참고자료
-
-- PART4 제4절 3항 (p.429-432)
-- CWE-396: Overly Broad Catch
-
----
-
-### [400] IV-4.3 — 부적절한 예외 처리
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-4.3` |
-| **약점명** | 부적절한 예외 처리 |
-| **위험도** | 🟢 낮음(LOW) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java` |
-| **라인** | 271 |
-| **CWE** | CWE-754 |
-| **가이드 참조** | PART4 제4절 3항 (p.429-432) |
-
-#### 탐지 근거
-
-> [IV-4.3] L271에서 위험 패턴이 탐지되었습니다. 조치: 포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리
-
-#### ❌ 취약한 코드
-
-```java
-// Line 271
-//			}catch (Exception e) {
-```
-
-#### 보안 원칙
-
-> **Exception과 같이 과도하게 넓은 예외 대신 구체적인 예외 타입을 처리합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-4.3 과도한 예외 처리 개선
-// ❌ 취약: catch (Exception e) { /* 모든 예외를 하나로 */ }
-// ✅ 안전: 예외 종류별 분리 처리
-try {
-    // 구체적인 예외 먼저 처리
-} catch (java.sql.SQLException e) {
-    // DB 관련 처리
-    log.error("[DB] SQL 오류: errorCode={}", e.getErrorCode(), e);
-} catch (java.io.IOException e) {
-    // 파일/네트워크 처리
-    log.error("[IO] 입출력 오류", e);
-} catch (RuntimeException e) {
-    log.error("[Runtime] 런타임 오류", e);
-    throw e;  // 재발생
-}
-```
-
-#### 조치 설명
-
-> catch(Exception e)는 복구 불가능한 오류(OutOfMemoryError 제외)를 포함하여 의도치 않은 처리가 됩니다. 구체적인 예외 타입별로 분리하여 오류 원인을 명확히 파악하고 적절한 복구 로직을 적용하세요. 가이드 참조: PART4 제4절 3항 과도하게 광범위한 예외 처리 (p.429-432)
-
-#### 참고자료
-
-- PART4 제4절 3항 (p.429-432)
-- CWE-396: Overly Broad Catch
-
----
-
-### [401] IV-4.3 — 부적절한 예외 처리
+### [386] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -23834,7 +23027,7 @@ try {
 
 ---
 
-### [402] IV-4.3 — 부적절한 예외 처리
+### [387] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -23892,7 +23085,7 @@ try {
 
 ---
 
-### [403] IV-4.3 — 부적절한 예외 처리
+### [388] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -23950,7 +23143,7 @@ try {
 
 ---
 
-### [404] IV-4.3 — 부적절한 예외 처리
+### [389] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24008,7 +23201,7 @@ try {
 
 ---
 
-### [405] IV-4.3 — 부적절한 예외 처리
+### [390] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24066,7 +23259,7 @@ try {
 
 ---
 
-### [406] IV-4.3 — 부적절한 예외 처리
+### [391] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24124,7 +23317,7 @@ try {
 
 ---
 
-### [407] IV-4.3 — 부적절한 예외 처리
+### [392] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24182,7 +23375,7 @@ try {
 
 ---
 
-### [408] IV-4.3 — 부적절한 예외 처리
+### [393] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24240,7 +23433,7 @@ try {
 
 ---
 
-### [409] IV-4.3 — 부적절한 예외 처리
+### [394] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24298,7 +23491,7 @@ try {
 
 ---
 
-### [410] IV-4.3 — 부적절한 예외 처리
+### [395] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24356,7 +23549,7 @@ try {
 
 ---
 
-### [411] IV-4.3 — 부적절한 예외 처리
+### [396] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24414,7 +23607,7 @@ try {
 
 ---
 
-### [412] IV-4.3 — 부적절한 예외 처리
+### [397] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24472,7 +23665,7 @@ try {
 
 ---
 
-### [413] IV-4.3 — 부적절한 예외 처리
+### [398] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24530,7 +23723,7 @@ try {
 
 ---
 
-### [414] IV-4.3 — 부적절한 예외 처리
+### [399] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24588,7 +23781,7 @@ try {
 
 ---
 
-### [415] IV-4.3 — 부적절한 예외 처리
+### [400] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24646,7 +23839,7 @@ try {
 
 ---
 
-### [416] IV-4.3 — 부적절한 예외 처리
+### [401] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24704,7 +23897,7 @@ try {
 
 ---
 
-### [417] IV-4.3 — 부적절한 예외 처리
+### [402] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24762,7 +23955,7 @@ try {
 
 ---
 
-### [418] IV-4.3 — 부적절한 예외 처리
+### [403] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24820,7 +24013,7 @@ try {
 
 ---
 
-### [419] IV-4.3 — 부적절한 예외 처리
+### [404] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24878,7 +24071,7 @@ try {
 
 ---
 
-### [420] IV-4.3 — 부적절한 예외 처리
+### [405] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24936,7 +24129,7 @@ try {
 
 ---
 
-### [421] IV-4.3 — 부적절한 예외 처리
+### [406] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -24994,7 +24187,7 @@ try {
 
 ---
 
-### [422] IV-4.3 — 부적절한 예외 처리
+### [407] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25052,7 +24245,7 @@ try {
 
 ---
 
-### [423] IV-4.3 — 부적절한 예외 처리
+### [408] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25110,7 +24303,7 @@ try {
 
 ---
 
-### [424] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [409] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -25167,7 +24360,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [425] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [410] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -25224,121 +24417,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [426] IV-6.2 — 제거되지 않고 남은 디버그 코드
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-6.2` |
-| **약점명** | 제거되지 않고 남은 디버그 코드 |
-| **위험도** | 🟢 낮음(LOW) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/FetchWpArticleController.java` |
-| **라인** | 97 |
-| **CWE** | CWE-489 |
-| **가이드 참조** | PART4 제6절 2항 (p.476-480) |
-
-#### 탐지 근거
-
-> [IV-6.2] L97에서 위험 패턴이 탐지되었습니다. 조치: 배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용
-
-#### ❌ 취약한 코드
-
-```java
-// Line 97
-//				System.out.println(vo.getMetaValue());
-```
-
-#### 보안 원칙
-
-> **배포 버전에서 디버그 코드, 백도어, 테스트 계정을 제거합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-6.2 디버그 코드 제거
-// ❌ 제거 대상:
-// System.out.println("DEBUG: password=" + password);
-// e.printStackTrace();
-// if (userId.equals("testadmin")) { return true; }  // 테스트 우회
-
-// ✅ 안전: SLF4J Logger + 조건부 디버그 로그
-private static final Logger log = LoggerFactory.getLogger(MyClass.class);
-
-log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBUG 레벨 비활성화
-// logback.xml: <root level="INFO"> (프로덕션)
-
-// 배포 전 검사:
-// grep -rn 'System.out\|e.printStackTrace\|TODO.*debug\|hardcode' src/
-```
-
-#### 조치 설명
-
-> 디버그 코드나 테스트 우회 코드가 배포되면 공격자에게 시스템 내부 정보가 노출됩니다. 배포 전 반드시 System.out.println, printStackTrace, 하드코드된 테스트 계정을 제거하고 프로덕션 로그 레벨을 INFO 이상으로 설정하세요. 가이드 참조: PART4 제6절 2항 디버그 코드 (p.458-461)
-
-#### 참고자료
-
-- PART4 제6절 2항 (p.458-461)
-- CWE-489: Active Debug Code
-
----
-
-### [427] IV-6.2 — 제거되지 않고 남은 디버그 코드
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-6.2` |
-| **약점명** | 제거되지 않고 남은 디버그 코드 |
-| **위험도** | 🟢 낮음(LOW) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/FetchWpArticleController.java` |
-| **라인** | 98 |
-| **CWE** | CWE-489 |
-| **가이드 참조** | PART4 제6절 2항 (p.476-480) |
-
-#### 탐지 근거
-
-> [IV-6.2] L98에서 위험 패턴이 탐지되었습니다. 조치: 배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용
-
-#### ❌ 취약한 코드
-
-```java
-// Line 98
-//				System.out.println("postId = [" + vo.getId() + "], metavalue List = " + list + "\n");
-```
-
-#### 보안 원칙
-
-> **배포 버전에서 디버그 코드, 백도어, 테스트 계정을 제거합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-6.2 디버그 코드 제거
-// ❌ 제거 대상:
-// System.out.println("DEBUG: password=" + password);
-// e.printStackTrace();
-// if (userId.equals("testadmin")) { return true; }  // 테스트 우회
-
-// ✅ 안전: SLF4J Logger + 조건부 디버그 로그
-private static final Logger log = LoggerFactory.getLogger(MyClass.class);
-
-log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBUG 레벨 비활성화
-// logback.xml: <root level="INFO"> (프로덕션)
-
-// 배포 전 검사:
-// grep -rn 'System.out\|e.printStackTrace\|TODO.*debug\|hardcode' src/
-```
-
-#### 조치 설명
-
-> 디버그 코드나 테스트 우회 코드가 배포되면 공격자에게 시스템 내부 정보가 노출됩니다. 배포 전 반드시 System.out.println, printStackTrace, 하드코드된 테스트 계정을 제거하고 프로덕션 로그 레벨을 INFO 이상으로 설정하세요. 가이드 참조: PART4 제6절 2항 디버그 코드 (p.458-461)
-
-#### 참고자료
-
-- PART4 제6절 2항 (p.458-461)
-- CWE-489: Active Debug Code
-
----
-
-### [428] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [411] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -25395,7 +24474,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [429] IV-4.3 — 부적절한 예외 처리
+### [412] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25453,7 +24532,7 @@ try {
 
 ---
 
-### [430] IV-4.3 — 부적절한 예외 처리
+### [413] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25511,7 +24590,7 @@ try {
 
 ---
 
-### [431] IV-4.3 — 부적절한 예외 처리
+### [414] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25569,7 +24648,7 @@ try {
 
 ---
 
-### [432] IV-4.3 — 부적절한 예외 처리
+### [415] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25627,7 +24706,7 @@ try {
 
 ---
 
-### [433] IV-4.3 — 부적절한 예외 처리
+### [416] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25685,7 +24764,7 @@ try {
 
 ---
 
-### [434] IV-4.3 — 부적절한 예외 처리
+### [417] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25743,7 +24822,7 @@ try {
 
 ---
 
-### [435] IV-4.3 — 부적절한 예외 처리
+### [418] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25801,7 +24880,7 @@ try {
 
 ---
 
-### [436] IV-4.3 — 부적절한 예외 처리
+### [419] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25859,7 +24938,7 @@ try {
 
 ---
 
-### [437] IV-4.3 — 부적절한 예외 처리
+### [420] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25917,7 +24996,7 @@ try {
 
 ---
 
-### [438] IV-4.3 — 부적절한 예외 처리
+### [421] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -25975,7 +25054,7 @@ try {
 
 ---
 
-### [439] IV-4.3 — 부적절한 예외 처리
+### [422] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26033,7 +25112,7 @@ try {
 
 ---
 
-### [440] IV-4.3 — 부적절한 예외 처리
+### [423] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26091,7 +25170,7 @@ try {
 
 ---
 
-### [441] IV-4.3 — 부적절한 예외 처리
+### [424] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26149,7 +25228,7 @@ try {
 
 ---
 
-### [442] IV-4.3 — 부적절한 예외 처리
+### [425] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26207,7 +25286,7 @@ try {
 
 ---
 
-### [443] IV-4.3 — 부적절한 예외 처리
+### [426] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26265,7 +25344,7 @@ try {
 
 ---
 
-### [444] IV-4.3 — 부적절한 예외 처리
+### [427] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26323,7 +25402,7 @@ try {
 
 ---
 
-### [445] IV-4.3 — 부적절한 예외 처리
+### [428] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26381,7 +25460,7 @@ try {
 
 ---
 
-### [446] IV-4.3 — 부적절한 예외 처리
+### [429] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26439,7 +25518,7 @@ try {
 
 ---
 
-### [447] IV-4.3 — 부적절한 예외 처리
+### [430] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26497,7 +25576,7 @@ try {
 
 ---
 
-### [448] IV-4.3 — 부적절한 예외 처리
+### [431] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26555,7 +25634,7 @@ try {
 
 ---
 
-### [449] IV-4.3 — 부적절한 예외 처리
+### [432] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26613,7 +25692,7 @@ try {
 
 ---
 
-### [450] IV-4.3 — 부적절한 예외 처리
+### [433] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26671,7 +25750,7 @@ try {
 
 ---
 
-### [451] IV-4.3 — 부적절한 예외 처리
+### [434] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26729,7 +25808,7 @@ try {
 
 ---
 
-### [452] IV-4.3 — 부적절한 예외 처리
+### [435] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26787,7 +25866,7 @@ try {
 
 ---
 
-### [453] IV-4.3 — 부적절한 예외 처리
+### [436] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26845,7 +25924,7 @@ try {
 
 ---
 
-### [454] IV-4.3 — 부적절한 예외 처리
+### [437] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26903,7 +25982,7 @@ try {
 
 ---
 
-### [455] IV-4.3 — 부적절한 예외 처리
+### [438] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -26961,7 +26040,7 @@ try {
 
 ---
 
-### [456] IV-4.3 — 부적절한 예외 처리
+### [439] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27019,7 +26098,7 @@ try {
 
 ---
 
-### [457] IV-4.3 — 부적절한 예외 처리
+### [440] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27077,7 +26156,7 @@ try {
 
 ---
 
-### [458] IV-4.3 — 부적절한 예외 처리
+### [441] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27135,7 +26214,7 @@ try {
 
 ---
 
-### [459] IV-4.3 — 부적절한 예외 처리
+### [442] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27193,7 +26272,7 @@ try {
 
 ---
 
-### [460] IV-4.3 — 부적절한 예외 처리
+### [443] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27251,7 +26330,7 @@ try {
 
 ---
 
-### [461] IV-4.3 — 부적절한 예외 처리
+### [444] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27309,7 +26388,7 @@ try {
 
 ---
 
-### [462] IV-4.3 — 부적절한 예외 처리
+### [445] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27367,7 +26446,7 @@ try {
 
 ---
 
-### [463] IV-4.3 — 부적절한 예외 처리
+### [446] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27425,7 +26504,7 @@ try {
 
 ---
 
-### [464] IV-4.3 — 부적절한 예외 처리
+### [447] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27483,7 +26562,7 @@ try {
 
 ---
 
-### [465] IV-4.3 — 부적절한 예외 처리
+### [448] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27541,7 +26620,7 @@ try {
 
 ---
 
-### [466] IV-4.3 — 부적절한 예외 처리
+### [449] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27599,7 +26678,7 @@ try {
 
 ---
 
-### [467] IV-4.3 — 부적절한 예외 처리
+### [450] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27657,7 +26736,7 @@ try {
 
 ---
 
-### [468] IV-4.3 — 부적절한 예외 처리
+### [451] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27715,7 +26794,7 @@ try {
 
 ---
 
-### [469] IV-4.3 — 부적절한 예외 처리
+### [452] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27773,7 +26852,7 @@ try {
 
 ---
 
-### [470] IV-4.3 — 부적절한 예외 처리
+### [453] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27831,7 +26910,7 @@ try {
 
 ---
 
-### [471] IV-4.3 — 부적절한 예외 처리
+### [454] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27889,7 +26968,7 @@ try {
 
 ---
 
-### [472] IV-4.3 — 부적절한 예외 처리
+### [455] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -27947,7 +27026,7 @@ try {
 
 ---
 
-### [473] IV-4.3 — 부적절한 예외 처리
+### [456] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -28005,7 +27084,7 @@ try {
 
 ---
 
-### [474] IV-4.3 — 부적절한 예외 처리
+### [457] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -28063,7 +27142,7 @@ try {
 
 ---
 
-### [475] IV-4.3 — 부적절한 예외 처리
+### [458] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -28121,7 +27200,7 @@ try {
 
 ---
 
-### [476] IV-4.3 — 부적절한 예외 처리
+### [459] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -28179,7 +27258,7 @@ try {
 
 ---
 
-### [477] IV-4.3 — 부적절한 예외 처리
+### [460] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -28237,7 +27316,7 @@ try {
 
 ---
 
-### [478] IV-6.4 — Private 배열에 Public 데이터 할당
+### [461] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28296,7 +27375,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [479] IV-6.4 — Private 배열에 Public 데이터 할당
+### [462] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28355,7 +27434,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [480] IV-6.4 — Private 배열에 Public 데이터 할당
+### [463] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28414,7 +27493,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [481] IV-6.4 — Private 배열에 Public 데이터 할당
+### [464] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28473,7 +27552,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [482] IV-6.4 — Private 배열에 Public 데이터 할당
+### [465] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28532,7 +27611,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [483] IV-6.4 — Private 배열에 Public 데이터 할당
+### [466] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28591,7 +27670,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [484] IV-6.4 — Private 배열에 Public 데이터 할당
+### [467] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28650,7 +27729,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [485] IV-6.4 — Private 배열에 Public 데이터 할당
+### [468] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28709,7 +27788,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [486] IV-6.4 — Private 배열에 Public 데이터 할당
+### [469] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28768,7 +27847,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [487] IV-6.4 — Private 배열에 Public 데이터 할당
+### [470] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28827,7 +27906,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [488] IV-6.4 — Private 배열에 Public 데이터 할당
+### [471] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28886,7 +27965,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [489] IV-6.4 — Private 배열에 Public 데이터 할당
+### [472] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -28945,7 +28024,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [490] IV-6.4 — Private 배열에 Public 데이터 할당
+### [473] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29004,7 +28083,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [491] IV-6.4 — Private 배열에 Public 데이터 할당
+### [474] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29063,7 +28142,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [492] IV-6.4 — Private 배열에 Public 데이터 할당
+### [475] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29122,7 +28201,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [493] IV-6.4 — Private 배열에 Public 데이터 할당
+### [476] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29181,7 +28260,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [494] IV-6.4 — Private 배열에 Public 데이터 할당
+### [477] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29240,7 +28319,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [495] IV-6.4 — Private 배열에 Public 데이터 할당
+### [478] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29299,7 +28378,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [496] IV-6.4 — Private 배열에 Public 데이터 할당
+### [479] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29358,7 +28437,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [497] IV-6.4 — Private 배열에 Public 데이터 할당
+### [480] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29417,7 +28496,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [498] IV-6.4 — Private 배열에 Public 데이터 할당
+### [481] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29476,7 +28555,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [499] IV-6.4 — Private 배열에 Public 데이터 할당
+### [482] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29535,7 +28614,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [500] IV-6.4 — Private 배열에 Public 데이터 할당
+### [483] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29594,7 +28673,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [501] IV-6.4 — Private 배열에 Public 데이터 할당
+### [484] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29653,7 +28732,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [502] IV-6.4 — Private 배열에 Public 데이터 할당
+### [485] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29712,7 +28791,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [503] IV-6.4 — Private 배열에 Public 데이터 할당
+### [486] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29771,7 +28850,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [504] IV-6.4 — Private 배열에 Public 데이터 할당
+### [487] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29830,7 +28909,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [505] IV-6.4 — Private 배열에 Public 데이터 할당
+### [488] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29889,7 +28968,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [506] IV-6.4 — Private 배열에 Public 데이터 할당
+### [489] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -29948,7 +29027,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [507] IV-6.4 — Private 배열에 Public 데이터 할당
+### [490] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30007,7 +29086,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [508] IV-6.4 — Private 배열에 Public 데이터 할당
+### [491] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30066,7 +29145,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [509] IV-6.4 — Private 배열에 Public 데이터 할당
+### [492] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30125,7 +29204,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [510] IV-6.4 — Private 배열에 Public 데이터 할당
+### [493] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30184,7 +29263,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [511] IV-6.4 — Private 배열에 Public 데이터 할당
+### [494] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30243,7 +29322,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [512] IV-6.4 — Private 배열에 Public 데이터 할당
+### [495] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30302,7 +29381,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [513] IV-6.4 — Private 배열에 Public 데이터 할당
+### [496] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30361,7 +29440,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [514] IV-6.4 — Private 배열에 Public 데이터 할당
+### [497] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30420,7 +29499,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [515] IV-6.4 — Private 배열에 Public 데이터 할당
+### [498] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30479,7 +29558,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [516] IV-6.4 — Private 배열에 Public 데이터 할당
+### [499] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30538,7 +29617,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [517] IV-6.4 — Private 배열에 Public 데이터 할당
+### [500] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30597,7 +29676,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [518] IV-6.4 — Private 배열에 Public 데이터 할당
+### [501] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30656,7 +29735,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [519] IV-6.4 — Private 배열에 Public 데이터 할당
+### [502] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30715,7 +29794,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [520] IV-6.4 — Private 배열에 Public 데이터 할당
+### [503] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30774,7 +29853,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [521] IV-6.4 — Private 배열에 Public 데이터 할당
+### [504] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30833,7 +29912,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [522] IV-6.4 — Private 배열에 Public 데이터 할당
+### [505] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30892,7 +29971,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [523] IV-6.4 — Private 배열에 Public 데이터 할당
+### [506] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -30951,7 +30030,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [524] IV-6.4 — Private 배열에 Public 데이터 할당
+### [507] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31010,7 +30089,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [525] IV-6.4 — Private 배열에 Public 데이터 할당
+### [508] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31069,7 +30148,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [526] IV-6.4 — Private 배열에 Public 데이터 할당
+### [509] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31128,7 +30207,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [527] IV-6.4 — Private 배열에 Public 데이터 할당
+### [510] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31187,7 +30266,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [528] IV-6.4 — Private 배열에 Public 데이터 할당
+### [511] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31246,7 +30325,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [529] IV-6.4 — Private 배열에 Public 데이터 할당
+### [512] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31305,7 +30384,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [530] IV-6.4 — Private 배열에 Public 데이터 할당
+### [513] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31364,7 +30443,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [531] IV-6.4 — Private 배열에 Public 데이터 할당
+### [514] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31423,7 +30502,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [532] IV-6.4 — Private 배열에 Public 데이터 할당
+### [515] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31482,7 +30561,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [533] IV-6.4 — Private 배열에 Public 데이터 할당
+### [516] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31541,7 +30620,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [534] IV-6.4 — Private 배열에 Public 데이터 할당
+### [517] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31600,7 +30679,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [535] IV-6.4 — Private 배열에 Public 데이터 할당
+### [518] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31659,7 +30738,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [536] IV-6.4 — Private 배열에 Public 데이터 할당
+### [519] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31718,7 +30797,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [537] IV-6.4 — Private 배열에 Public 데이터 할당
+### [520] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31777,7 +30856,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [538] IV-6.4 — Private 배열에 Public 데이터 할당
+### [521] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31836,7 +30915,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [539] IV-6.4 — Private 배열에 Public 데이터 할당
+### [522] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31895,7 +30974,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [540] IV-6.4 — Private 배열에 Public 데이터 할당
+### [523] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -31954,7 +31033,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [541] IV-6.4 — Private 배열에 Public 데이터 할당
+### [524] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32013,7 +31092,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [542] IV-6.4 — Private 배열에 Public 데이터 할당
+### [525] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32072,7 +31151,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [543] IV-6.4 — Private 배열에 Public 데이터 할당
+### [526] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32131,7 +31210,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [544] IV-6.4 — Private 배열에 Public 데이터 할당
+### [527] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32190,7 +31269,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [545] IV-6.4 — Private 배열에 Public 데이터 할당
+### [528] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32249,7 +31328,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [546] IV-6.4 — Private 배열에 Public 데이터 할당
+### [529] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32308,7 +31387,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [547] IV-6.4 — Private 배열에 Public 데이터 할당
+### [530] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32367,7 +31446,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [548] IV-6.4 — Private 배열에 Public 데이터 할당
+### [531] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32426,7 +31505,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [549] IV-6.4 — Private 배열에 Public 데이터 할당
+### [532] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32485,7 +31564,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [550] IV-6.4 — Private 배열에 Public 데이터 할당
+### [533] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32544,7 +31623,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [551] IV-6.4 — Private 배열에 Public 데이터 할당
+### [534] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32603,7 +31682,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [552] IV-6.4 — Private 배열에 Public 데이터 할당
+### [535] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32662,7 +31741,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [553] IV-6.4 — Private 배열에 Public 데이터 할당
+### [536] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32721,7 +31800,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [554] IV-6.4 — Private 배열에 Public 데이터 할당
+### [537] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32780,7 +31859,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [555] IV-6.4 — Private 배열에 Public 데이터 할당
+### [538] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32839,7 +31918,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [556] IV-6.4 — Private 배열에 Public 데이터 할당
+### [539] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32898,7 +31977,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [557] IV-6.4 — Private 배열에 Public 데이터 할당
+### [540] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -32957,7 +32036,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [558] IV-6.4 — Private 배열에 Public 데이터 할당
+### [541] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33016,7 +32095,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [559] IV-6.4 — Private 배열에 Public 데이터 할당
+### [542] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33075,7 +32154,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [560] IV-6.4 — Private 배열에 Public 데이터 할당
+### [543] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33134,7 +32213,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [561] IV-6.4 — Private 배열에 Public 데이터 할당
+### [544] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33193,7 +32272,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [562] IV-6.4 — Private 배열에 Public 데이터 할당
+### [545] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33252,7 +32331,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [563] IV-6.4 — Private 배열에 Public 데이터 할당
+### [546] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33311,7 +32390,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [564] IV-6.4 — Private 배열에 Public 데이터 할당
+### [547] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33370,7 +32449,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [565] IV-6.4 — Private 배열에 Public 데이터 할당
+### [548] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33429,7 +32508,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [566] IV-6.4 — Private 배열에 Public 데이터 할당
+### [549] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33488,7 +32567,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [567] IV-6.4 — Private 배열에 Public 데이터 할당
+### [550] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33547,7 +32626,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [568] IV-6.4 — Private 배열에 Public 데이터 할당
+### [551] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33606,7 +32685,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [569] IV-6.4 — Private 배열에 Public 데이터 할당
+### [552] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33665,7 +32744,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [570] IV-6.4 — Private 배열에 Public 데이터 할당
+### [553] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33724,7 +32803,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [571] IV-6.4 — Private 배열에 Public 데이터 할당
+### [554] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33783,7 +32862,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [572] IV-6.4 — Private 배열에 Public 데이터 할당
+### [555] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33842,7 +32921,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [573] IV-6.4 — Private 배열에 Public 데이터 할당
+### [556] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33901,7 +32980,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [574] IV-6.4 — Private 배열에 Public 데이터 할당
+### [557] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -33960,7 +33039,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [575] IV-6.4 — Private 배열에 Public 데이터 할당
+### [558] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34019,7 +33098,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [576] IV-6.4 — Private 배열에 Public 데이터 할당
+### [559] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34078,7 +33157,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [577] IV-6.4 — Private 배열에 Public 데이터 할당
+### [560] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34137,7 +33216,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [578] IV-6.4 — Private 배열에 Public 데이터 할당
+### [561] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34196,7 +33275,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [579] IV-6.4 — Private 배열에 Public 데이터 할당
+### [562] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34255,7 +33334,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [580] IV-6.4 — Private 배열에 Public 데이터 할당
+### [563] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34314,7 +33393,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [581] IV-6.4 — Private 배열에 Public 데이터 할당
+### [564] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34373,7 +33452,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [582] IV-6.4 — Private 배열에 Public 데이터 할당
+### [565] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34432,7 +33511,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [583] IV-6.4 — Private 배열에 Public 데이터 할당
+### [566] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34491,7 +33570,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [584] IV-6.4 — Private 배열에 Public 데이터 할당
+### [567] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34550,7 +33629,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [585] IV-6.4 — Private 배열에 Public 데이터 할당
+### [568] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34609,7 +33688,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [586] IV-6.4 — Private 배열에 Public 데이터 할당
+### [569] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34668,7 +33747,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [587] IV-6.4 — Private 배열에 Public 데이터 할당
+### [570] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34727,7 +33806,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [588] IV-6.4 — Private 배열에 Public 데이터 할당
+### [571] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34786,7 +33865,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [589] IV-6.4 — Private 배열에 Public 데이터 할당
+### [572] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34845,7 +33924,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [590] IV-6.4 — Private 배열에 Public 데이터 할당
+### [573] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34904,7 +33983,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [591] IV-6.4 — Private 배열에 Public 데이터 할당
+### [574] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -34963,7 +34042,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [592] IV-6.4 — Private 배열에 Public 데이터 할당
+### [575] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35022,7 +34101,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [593] IV-6.4 — Private 배열에 Public 데이터 할당
+### [576] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35081,7 +34160,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [594] IV-6.4 — Private 배열에 Public 데이터 할당
+### [577] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35140,7 +34219,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [595] IV-6.4 — Private 배열에 Public 데이터 할당
+### [578] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35199,7 +34278,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [596] IV-6.4 — Private 배열에 Public 데이터 할당
+### [579] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35258,7 +34337,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [597] IV-6.4 — Private 배열에 Public 데이터 할당
+### [580] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35317,7 +34396,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [598] IV-6.4 — Private 배열에 Public 데이터 할당
+### [581] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35376,7 +34455,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [599] IV-6.4 — Private 배열에 Public 데이터 할당
+### [582] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35435,7 +34514,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [600] IV-6.4 — Private 배열에 Public 데이터 할당
+### [583] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35494,7 +34573,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [601] IV-6.4 — Private 배열에 Public 데이터 할당
+### [584] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35553,7 +34632,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [602] IV-6.4 — Private 배열에 Public 데이터 할당
+### [585] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35612,7 +34691,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [603] IV-6.4 — Private 배열에 Public 데이터 할당
+### [586] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35671,7 +34750,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [604] IV-6.4 — Private 배열에 Public 데이터 할당
+### [587] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35730,7 +34809,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [605] IV-6.4 — Private 배열에 Public 데이터 할당
+### [588] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35789,7 +34868,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [606] IV-6.4 — Private 배열에 Public 데이터 할당
+### [589] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35848,7 +34927,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [607] IV-6.4 — Private 배열에 Public 데이터 할당
+### [590] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35907,7 +34986,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [608] IV-6.4 — Private 배열에 Public 데이터 할당
+### [591] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -35966,7 +35045,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [609] IV-6.4 — Private 배열에 Public 데이터 할당
+### [592] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36025,7 +35104,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [610] IV-6.4 — Private 배열에 Public 데이터 할당
+### [593] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36084,7 +35163,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [611] IV-6.4 — Private 배열에 Public 데이터 할당
+### [594] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36143,7 +35222,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [612] IV-6.4 — Private 배열에 Public 데이터 할당
+### [595] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36202,7 +35281,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [613] IV-6.4 — Private 배열에 Public 데이터 할당
+### [596] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36261,7 +35340,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [614] IV-6.4 — Private 배열에 Public 데이터 할당
+### [597] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36320,7 +35399,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [615] IV-6.4 — Private 배열에 Public 데이터 할당
+### [598] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36379,7 +35458,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [616] IV-6.4 — Private 배열에 Public 데이터 할당
+### [599] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36438,7 +35517,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [617] IV-6.4 — Private 배열에 Public 데이터 할당
+### [600] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36497,7 +35576,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [618] IV-6.4 — Private 배열에 Public 데이터 할당
+### [601] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36556,7 +35635,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [619] IV-6.4 — Private 배열에 Public 데이터 할당
+### [602] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36615,7 +35694,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [620] IV-6.4 — Private 배열에 Public 데이터 할당
+### [603] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36674,7 +35753,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [621] IV-6.4 — Private 배열에 Public 데이터 할당
+### [604] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36733,7 +35812,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [622] IV-6.4 — Private 배열에 Public 데이터 할당
+### [605] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36792,7 +35871,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [623] IV-6.4 — Private 배열에 Public 데이터 할당
+### [606] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36851,7 +35930,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [624] IV-6.4 — Private 배열에 Public 데이터 할당
+### [607] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36910,7 +35989,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [625] IV-6.4 — Private 배열에 Public 데이터 할당
+### [608] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -36969,7 +36048,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [626] IV-6.4 — Private 배열에 Public 데이터 할당
+### [609] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37028,7 +36107,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [627] IV-6.4 — Private 배열에 Public 데이터 할당
+### [610] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37087,7 +36166,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [628] IV-6.4 — Private 배열에 Public 데이터 할당
+### [611] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37146,7 +36225,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [629] IV-6.4 — Private 배열에 Public 데이터 할당
+### [612] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37205,7 +36284,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [630] IV-6.4 — Private 배열에 Public 데이터 할당
+### [613] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37264,7 +36343,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [631] IV-6.4 — Private 배열에 Public 데이터 할당
+### [614] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37323,7 +36402,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [632] IV-6.4 — Private 배열에 Public 데이터 할당
+### [615] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37382,7 +36461,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [633] IV-6.4 — Private 배열에 Public 데이터 할당
+### [616] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37441,7 +36520,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [634] IV-6.4 — Private 배열에 Public 데이터 할당
+### [617] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37500,7 +36579,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [635] IV-6.4 — Private 배열에 Public 데이터 할당
+### [618] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37559,7 +36638,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [636] IV-6.4 — Private 배열에 Public 데이터 할당
+### [619] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37618,7 +36697,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [637] IV-6.4 — Private 배열에 Public 데이터 할당
+### [620] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37677,7 +36756,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [638] IV-6.4 — Private 배열에 Public 데이터 할당
+### [621] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37736,7 +36815,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [639] IV-6.4 — Private 배열에 Public 데이터 할당
+### [622] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37795,7 +36874,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [640] IV-6.4 — Private 배열에 Public 데이터 할당
+### [623] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37854,7 +36933,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [641] IV-6.4 — Private 배열에 Public 데이터 할당
+### [624] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37913,7 +36992,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [642] IV-6.4 — Private 배열에 Public 데이터 할당
+### [625] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -37972,7 +37051,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [643] IV-6.4 — Private 배열에 Public 데이터 할당
+### [626] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38031,7 +37110,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [644] IV-6.4 — Private 배열에 Public 데이터 할당
+### [627] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38090,7 +37169,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [645] IV-6.4 — Private 배열에 Public 데이터 할당
+### [628] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38149,7 +37228,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [646] IV-6.4 — Private 배열에 Public 데이터 할당
+### [629] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38208,7 +37287,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [647] IV-6.4 — Private 배열에 Public 데이터 할당
+### [630] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38267,7 +37346,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [648] IV-6.4 — Private 배열에 Public 데이터 할당
+### [631] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38326,7 +37405,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [649] IV-6.4 — Private 배열에 Public 데이터 할당
+### [632] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38385,7 +37464,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [650] IV-6.4 — Private 배열에 Public 데이터 할당
+### [633] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38444,7 +37523,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [651] IV-6.4 — Private 배열에 Public 데이터 할당
+### [634] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38503,7 +37582,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [652] IV-6.4 — Private 배열에 Public 데이터 할당
+### [635] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38562,7 +37641,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [653] IV-6.4 — Private 배열에 Public 데이터 할당
+### [636] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38621,7 +37700,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [654] IV-6.4 — Private 배열에 Public 데이터 할당
+### [637] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38680,7 +37759,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [655] IV-6.4 — Private 배열에 Public 데이터 할당
+### [638] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38739,7 +37818,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [656] IV-6.4 — Private 배열에 Public 데이터 할당
+### [639] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38798,7 +37877,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [657] IV-6.4 — Private 배열에 Public 데이터 할당
+### [640] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38857,7 +37936,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [658] IV-6.4 — Private 배열에 Public 데이터 할당
+### [641] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38916,7 +37995,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [659] IV-6.4 — Private 배열에 Public 데이터 할당
+### [642] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -38975,7 +38054,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [660] IV-6.4 — Private 배열에 Public 데이터 할당
+### [643] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39034,7 +38113,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [661] IV-6.4 — Private 배열에 Public 데이터 할당
+### [644] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39093,7 +38172,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [662] IV-6.4 — Private 배열에 Public 데이터 할당
+### [645] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39152,7 +38231,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [663] IV-6.4 — Private 배열에 Public 데이터 할당
+### [646] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39211,7 +38290,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [664] IV-6.4 — Private 배열에 Public 데이터 할당
+### [647] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39270,7 +38349,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [665] IV-6.4 — Private 배열에 Public 데이터 할당
+### [648] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39329,7 +38408,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [666] IV-6.4 — Private 배열에 Public 데이터 할당
+### [649] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39388,7 +38467,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [667] IV-6.4 — Private 배열에 Public 데이터 할당
+### [650] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39447,7 +38526,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [668] IV-6.4 — Private 배열에 Public 데이터 할당
+### [651] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39506,7 +38585,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [669] IV-6.4 — Private 배열에 Public 데이터 할당
+### [652] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39565,7 +38644,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [670] IV-6.4 — Private 배열에 Public 데이터 할당
+### [653] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39624,7 +38703,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [671] IV-6.4 — Private 배열에 Public 데이터 할당
+### [654] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39683,7 +38762,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [672] IV-6.4 — Private 배열에 Public 데이터 할당
+### [655] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39742,7 +38821,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [673] IV-6.4 — Private 배열에 Public 데이터 할당
+### [656] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39801,7 +38880,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [674] IV-6.4 — Private 배열에 Public 데이터 할당
+### [657] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39860,7 +38939,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [675] IV-6.4 — Private 배열에 Public 데이터 할당
+### [658] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39919,7 +38998,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [676] IV-6.4 — Private 배열에 Public 데이터 할당
+### [659] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -39978,7 +39057,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [677] IV-6.4 — Private 배열에 Public 데이터 할당
+### [660] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40037,7 +39116,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [678] IV-6.4 — Private 배열에 Public 데이터 할당
+### [661] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40096,7 +39175,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [679] IV-6.4 — Private 배열에 Public 데이터 할당
+### [662] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40155,7 +39234,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [680] IV-6.4 — Private 배열에 Public 데이터 할당
+### [663] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40214,7 +39293,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [681] IV-6.4 — Private 배열에 Public 데이터 할당
+### [664] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40273,7 +39352,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [682] IV-6.4 — Private 배열에 Public 데이터 할당
+### [665] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40332,7 +39411,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [683] IV-6.4 — Private 배열에 Public 데이터 할당
+### [666] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40391,7 +39470,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [684] IV-6.4 — Private 배열에 Public 데이터 할당
+### [667] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40450,7 +39529,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [685] IV-6.4 — Private 배열에 Public 데이터 할당
+### [668] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40509,7 +39588,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [686] IV-6.4 — Private 배열에 Public 데이터 할당
+### [669] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40568,7 +39647,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [687] IV-6.4 — Private 배열에 Public 데이터 할당
+### [670] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40627,7 +39706,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [688] IV-6.4 — Private 배열에 Public 데이터 할당
+### [671] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40686,7 +39765,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [689] IV-6.4 — Private 배열에 Public 데이터 할당
+### [672] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40745,7 +39824,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [690] IV-6.4 — Private 배열에 Public 데이터 할당
+### [673] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40804,7 +39883,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [691] IV-6.4 — Private 배열에 Public 데이터 할당
+### [674] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40863,7 +39942,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [692] IV-6.4 — Private 배열에 Public 데이터 할당
+### [675] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40922,7 +40001,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [693] IV-6.4 — Private 배열에 Public 데이터 할당
+### [676] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -40981,7 +40060,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [694] IV-6.4 — Private 배열에 Public 데이터 할당
+### [677] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41040,7 +40119,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [695] IV-6.4 — Private 배열에 Public 데이터 할당
+### [678] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41099,7 +40178,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [696] IV-6.4 — Private 배열에 Public 데이터 할당
+### [679] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41158,7 +40237,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [697] IV-6.4 — Private 배열에 Public 데이터 할당
+### [680] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41217,7 +40296,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [698] IV-6.4 — Private 배열에 Public 데이터 할당
+### [681] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41276,7 +40355,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [699] IV-6.4 — Private 배열에 Public 데이터 할당
+### [682] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41335,7 +40414,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [700] IV-6.4 — Private 배열에 Public 데이터 할당
+### [683] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41394,7 +40473,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [701] IV-6.4 — Private 배열에 Public 데이터 할당
+### [684] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41453,7 +40532,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [702] IV-6.4 — Private 배열에 Public 데이터 할당
+### [685] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41512,7 +40591,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [703] IV-6.4 — Private 배열에 Public 데이터 할당
+### [686] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41571,7 +40650,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [704] IV-6.4 — Private 배열에 Public 데이터 할당
+### [687] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41630,7 +40709,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [705] IV-6.4 — Private 배열에 Public 데이터 할당
+### [688] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41689,7 +40768,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [706] IV-6.4 — Private 배열에 Public 데이터 할당
+### [689] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41748,7 +40827,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [707] IV-6.4 — Private 배열에 Public 데이터 할당
+### [690] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41807,7 +40886,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [708] IV-6.4 — Private 배열에 Public 데이터 할당
+### [691] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41866,7 +40945,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [709] IV-6.4 — Private 배열에 Public 데이터 할당
+### [692] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41925,7 +41004,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [710] IV-6.4 — Private 배열에 Public 데이터 할당
+### [693] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -41984,7 +41063,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [711] IV-6.4 — Private 배열에 Public 데이터 할당
+### [694] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42043,7 +41122,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [712] IV-6.4 — Private 배열에 Public 데이터 할당
+### [695] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42102,7 +41181,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [713] IV-6.4 — Private 배열에 Public 데이터 할당
+### [696] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42161,7 +41240,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [714] IV-6.4 — Private 배열에 Public 데이터 할당
+### [697] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42220,7 +41299,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [715] IV-6.4 — Private 배열에 Public 데이터 할당
+### [698] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42279,7 +41358,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [716] IV-4.3 — 부적절한 예외 처리
+### [699] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -42337,7 +41416,7 @@ try {
 
 ---
 
-### [717] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [700] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -42394,64 +41473,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [718] IV-6.2 — 제거되지 않고 남은 디버그 코드
-
-| 항목 | 내용 |
-|------|------|
-| **진단항목 번호** | `IV-6.2` |
-| **약점명** | 제거되지 않고 남은 디버그 코드 |
-| **위험도** | 🟢 낮음(LOW) |
-| **파일** | `/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/MvcConfig.java` |
-| **라인** | 18 |
-| **CWE** | CWE-489 |
-| **가이드 참조** | PART4 제6절 2항 (p.476-480) |
-
-#### 탐지 근거
-
-> [IV-6.2] L18에서 위험 패턴이 탐지되었습니다. 조치: 배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용
-
-#### ❌ 취약한 코드
-
-```java
-// Line 18
-//		System.out.println("Resource Handler Path: file:" + uploadPath);
-```
-
-#### 보안 원칙
-
-> **배포 버전에서 디버그 코드, 백도어, 테스트 계정을 제거합니다.**
-
-#### ✅ 권고 수정 코드
-
-```java
-// [수정] IV-6.2 디버그 코드 제거
-// ❌ 제거 대상:
-// System.out.println("DEBUG: password=" + password);
-// e.printStackTrace();
-// if (userId.equals("testadmin")) { return true; }  // 테스트 우회
-
-// ✅ 안전: SLF4J Logger + 조건부 디버그 로그
-private static final Logger log = LoggerFactory.getLogger(MyClass.class);
-
-log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBUG 레벨 비활성화
-// logback.xml: <root level="INFO"> (프로덕션)
-
-// 배포 전 검사:
-// grep -rn 'System.out\|e.printStackTrace\|TODO.*debug\|hardcode' src/
-```
-
-#### 조치 설명
-
-> 디버그 코드나 테스트 우회 코드가 배포되면 공격자에게 시스템 내부 정보가 노출됩니다. 배포 전 반드시 System.out.println, printStackTrace, 하드코드된 테스트 계정을 제거하고 프로덕션 로그 레벨을 INFO 이상으로 설정하세요. 가이드 참조: PART4 제6절 2항 디버그 코드 (p.458-461)
-
-#### 참고자료
-
-- PART4 제6절 2항 (p.458-461)
-- CWE-489: Active Debug Code
-
----
-
-### [719] IV-6.4 — Private 배열에 Public 데이터 할당
+### [701] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42510,7 +41532,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [720] IV-6.4 — Private 배열에 Public 데이터 할당
+### [702] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42569,7 +41591,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [721] IV-6.4 — Private 배열에 Public 데이터 할당
+### [703] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42628,7 +41650,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [722] IV-6.4 — Private 배열에 Public 데이터 할당
+### [704] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42687,7 +41709,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [723] IV-6.4 — Private 배열에 Public 데이터 할당
+### [705] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -42746,7 +41768,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [724] IV-4.3 — 부적절한 예외 처리
+### [706] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -42804,7 +41826,7 @@ try {
 
 ---
 
-### [725] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [707] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -42861,7 +41883,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [726] IV-4.3 — 부적절한 예외 처리
+### [708] IV-4.3 — 부적절한 예외 처리
 
 | 항목 | 내용 |
 |------|------|
@@ -42919,7 +41941,7 @@ try {
 
 ---
 
-### [727] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [709] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -42976,7 +41998,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [728] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [710] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -43033,7 +42055,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [729] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [711] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -43090,7 +42112,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [730] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [712] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -43147,7 +42169,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [731] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [713] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|
@@ -43204,7 +42226,7 @@ log.debug("처리 시작 (민감정보 미포함)");  // 프로덕션에서 DEBU
 
 ---
 
-### [732] IV-6.4 — Private 배열에 Public 데이터 할당
+### [714] IV-6.4 — Private 배열에 Public 데이터 할당
 
 | 항목 | 내용 |
 |------|------|
@@ -43263,7 +42285,7 @@ public void setItems(List<String> items) {
 
 ---
 
-### [733] IV-6.2 — 제거되지 않고 남은 디버그 코드
+### [715] IV-6.2 — 제거되지 않고 남은 디버그 코드
 
 | 항목 | 내용 |
 |------|------|

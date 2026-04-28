@@ -4,6 +4,7 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
@@ -12,8 +13,12 @@ import com.sast.engine.rules.RuleLoader;
 import com.sast.engine.rules.SecurityRule;
 import com.sast.engine.sequence.SequenceAnalyzer;
 import com.sast.engine.taint.TaintAnalysisEngine;
+import com.sast.filter.FalsePositiveFilter;
+import com.sast.filter.SuppressionLoader;
+import com.sast.filter.SuppressionRule;
 import com.sast.model.Finding;
 import com.sast.remediation.RemediationService;
+import com.sast.report.PdfReportGenerator;
 import com.sast.report.ReportGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +40,14 @@ import java.util.stream.Collectors;
  *   [2] JavaParser AST 파싱 (SymbolSolver 활성화)
  *   [3] security-rules.json 규칙 로드
  *   [4] TaintAnalysisEngine 오염 흐름 분석
- *   [5] RemediationService 수정 코드 생성
- *   [6] ReportGenerator 리포트 출력 (MD + JSON)
+ *   [5] SequenceAnalyzer TOCTOU 시퀀스 탐지
+ *   [6] PatternAnalyzer 정규식 기반 탐지
+ *   [7] FalsePositiveFilter 오탐 필터링
+ *       - @SuppressWarnings("sast-ignore") 어노테이션 메서드 제외 (IV-6.2)
+ *       - src/test/ 경로 위험도 하향
+ *       - sast-suppressions.json 사용자 정의 억제
+ *   [8] RemediationService 수정 코드 생성
+ *   [9] ReportGenerator 리포트 출력 (MD + JSON + PDF)
  */
 public class SASTEngine {
 
@@ -49,6 +60,7 @@ public class SASTEngine {
     private final RemediationService  remediationService;
     private final ReportGenerator     reportGenerator;
     private final List<SecurityRule>  rules;
+    private final List<SuppressionRule> suppressions;
 
     public SASTEngine() throws IOException {
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
@@ -64,8 +76,10 @@ public class SASTEngine {
         this.remediationService = new RemediationService();
         this.reportGenerator    = new ReportGenerator(remediationService);
 
-        this.rules = RuleLoader.loadFromClasspath("security-rules.json");
-        log.info("[SAST] 보안 규칙 로드 완료: {}개", rules.size());
+        this.rules       = RuleLoader.loadFromClasspath("security-rules.json");
+        this.suppressions = SuppressionLoader.load("sast-suppressions.json");
+        log.info("[SAST] 보안 규칙 로드 완료: {}개, 억제 규칙: {}개",
+                rules.size(), suppressions.size());
     }
 
     // ── Public API ────────────────────────────────────────────────────────
@@ -98,6 +112,17 @@ public class SASTEngine {
         String jsonPath   = outputPath.replace(".md", ".json");
         Files.write(Paths.get(jsonPath), jsonReport.getBytes(java.nio.charset.StandardCharsets.UTF_8));
         log.info("[SAST] JSON 리포트 저장: {}", jsonPath);
+
+        // PDF 리포트 생성
+        try {
+            PdfReportGenerator pdfGen = new PdfReportGenerator();
+            byte[] pdfBytes = pdfGen.generateFromFindings(allFindings, remediationService, sourceDirectory);
+            String pdfPath = outputPath.replace(".md", ".pdf");
+            Files.write(Paths.get(pdfPath), pdfBytes);
+            log.info("[SAST] PDF 리포트 저장: {}", pdfPath);
+        } catch (Exception e) {
+            log.warn("[SAST] PDF 생성 실패 (MD/JSON은 정상 저장됨): {}", e.getMessage());
+        }
     }
 
     public List<Finding> analyzeFile(File javaFile) throws IOException {
@@ -119,6 +144,7 @@ public class SASTEngine {
                 .collect(Collectors.toList());
 
         List<Finding> combined = new ArrayList<>();
+        CompilationUnit cu = null;
 
         // Track A — AST 파싱 필요 (Taint 분석 + Sequence 분석 공용)
         ParseResult<CompilationUnit> result = parser.parse(javaFile);
@@ -126,7 +152,7 @@ public class SASTEngine {
             log.warn("[SAST] 파싱 실패: {}", filePath);
             result.getProblems().forEach(p -> log.warn("  {}", p.getMessage()));
         } else {
-            CompilationUnit cu = result.getResult().get();
+            cu = result.getResult().get();
             combined.addAll(taintEngine.analyze(cu, filePath, taintRules));
 
             // Track B — TOCTOU 시퀀스 분석 (IV-3.1, CWE-367)
@@ -135,16 +161,70 @@ public class SASTEngine {
             }
         }
 
-        // Track C — 소스 텍스트 라인 스캔 (정규식 기반)
+        // Track C — 소스 텍스트 라인 스캔 (정규식 기반, 주석 라인 자동 제외)
         combined.addAll(patternAnalyzer.analyze(filePath, patternRules));
 
-        log.debug("[SAST] {} — Taint {}건 + Pattern {}건", javaFile.getName(),
+        // ── 오탐 필터링 (Post-Processing) ─────────────────────────────────
+
+        // [1] @SuppressWarnings("sast-ignore") 어노테이션 메서드 내 탐지 제외
+        if (cu != null) {
+            combined = filterBySuppressAnnotation(combined, cu);
+        }
+
+        // [2] src/test/ 경로 위험도 하향 (완전 제외 아닌 LOW 표시)
+        combined = FalsePositiveFilter.lowerTestPathSeverity(combined);
+
+        // [3] sast-suppressions.json 사용자 정의 억제 적용
+        combined = FalsePositiveFilter.apply(combined, suppressions);
+
+        log.debug("[SAST] {} — Taint {}건 + Sequence {}건 + Pattern {}건 (필터 후 {}건)",
+                javaFile.getName(),
                 combined.stream().filter(f -> taintRules.stream()
                         .anyMatch(r -> r.getRuleId().equals(f.getRuleId()))).count(),
+                combined.stream().filter(f -> sequenceRules.stream()
+                        .anyMatch(r -> r.getRuleId().equals(f.getRuleId()))).count(),
                 combined.stream().filter(f -> patternRules.stream()
-                        .anyMatch(r -> r.getRuleId().equals(f.getRuleId()))).count());
+                        .anyMatch(r -> r.getRuleId().equals(f.getRuleId()))).count(),
+                combined.size());
 
         return combined;
+    }
+
+    // ── 오탐 필터: @SuppressWarnings("sast-ignore") ───────────────────────
+
+    /**
+     * @SuppressWarnings("sast-ignore") 어노테이션이 붙은 메서드 내부의 탐지 결과를 제거
+     * 소스코드 레벨 오탐 표시를 SAST 분석 결과에 반영 (IV-6.2)
+     */
+    private List<Finding> filterBySuppressAnnotation(List<Finding> findings, CompilationUnit cu) {
+        List<int[]> suppressedRanges = new ArrayList<>();
+
+        cu.findAll(MethodDeclaration.class).forEach(method -> {
+            boolean suppressed = method.getAnnotations().stream()
+                    .anyMatch(a -> a.getNameAsString().equals("SuppressWarnings")
+                                  && a.toString().contains("sast-ignore"));
+            if (suppressed) {
+                int start = method.getBegin().map(p -> p.line).orElse(-1);
+                int end   = method.getEnd().map(p -> p.line).orElse(-1);
+                if (start > 0 && end > 0) {
+                    suppressedRanges.add(new int[]{start, end});
+                    log.debug("[SAST] @SuppressWarnings(sast-ignore) 억제 범위: L{}-L{}", start, end);
+                }
+            }
+        });
+
+        if (suppressedRanges.isEmpty()) return findings;
+
+        List<Finding> filtered = findings.stream()
+                .filter(f -> suppressedRanges.stream()
+                        .noneMatch(r -> f.getLineNumber() >= r[0] && f.getLineNumber() <= r[1]))
+                .collect(Collectors.toList());
+
+        int suppressed = findings.size() - filtered.size();
+        if (suppressed > 0) {
+            log.info("[SAST] @SuppressWarnings(sast-ignore) {}건 억제됨", suppressed);
+        }
+        return filtered;
     }
 
     // ── Utility ───────────────────────────────────────────────────────────

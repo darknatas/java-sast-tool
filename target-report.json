@@ -2,8 +2,8 @@
   "reportTitle": "Java 소스코드 보안약점 진단 리포트",
   "standard": "소프트웨어 보안약점 진단가이드 (2021)",
   "targetProject": "/home/ec2-user/project/target-project/src/main/java",
-  "generatedAt": "2026-04-28T09:38:45.097128352",
-  "totalFindings": 733,
+  "generatedAt": "2026-04-28T11:18:54.706929945",
+  "totalFindings": 715,
   "findings": [
     {
       "no": 1,
@@ -111,51 +111,6 @@
       "severity": "HIGH",
       "severityKorean": "높음",
       "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
-      "lineNumber": 205,
-      "cweIds": ["CWE-306"],
-      "description": "[DS-2.1] L205에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//\tpublic String verify(@ModelAttribute(\"memberVO\") MemberVO memberVO, HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 8,
-      "ruleId": "DS-2.1",
-      "ruleName": "인증 대상 및 방식",
-      "severity": "HIGH",
-      "severityKorean": "높음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
-      "lineNumber": 249,
-      "cweIds": ["CWE-306"],
-      "description": "[DS-2.1] L249에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//                        session = request.getSession(true);",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 9,
-      "ruleId": "DS-2.1",
-      "ruleName": "인증 대상 및 방식",
-      "severity": "HIGH",
-      "severityKorean": "높음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
-      "lineNumber": 266,
-      "cweIds": ["CWE-306"],
-      "description": "[DS-2.1] L266에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//                    session = request.getSession(true);",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 10,
-      "ruleId": "DS-2.1",
-      "ruleName": "인증 대상 및 방식",
-      "severity": "HIGH",
-      "severityKorean": "높음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
       "lineNumber": 299,
       "cweIds": ["CWE-306"],
       "description": "[DS-2.1] L299에서 위험 패턴이 탐지되었습니다. ",
@@ -165,7 +120,7 @@
       "guideRef": ""
     },
     {
-      "no": 11,
+      "no": 8,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -180,7 +135,7 @@
       "guideRef": ""
     },
     {
-      "no": 12,
+      "no": 9,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -195,7 +150,7 @@
       "guideRef": ""
     },
     {
-      "no": 13,
+      "no": 10,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -210,7 +165,7 @@
       "guideRef": ""
     },
     {
-      "no": 14,
+      "no": 11,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -225,7 +180,7 @@
       "guideRef": ""
     },
     {
-      "no": 15,
+      "no": 12,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -240,7 +195,7 @@
       "guideRef": ""
     },
     {
-      "no": 16,
+      "no": 13,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -255,7 +210,7 @@
       "guideRef": ""
     },
     {
-      "no": 17,
+      "no": 14,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -270,7 +225,7 @@
       "guideRef": ""
     },
     {
-      "no": 18,
+      "no": 15,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -285,7 +240,7 @@
       "guideRef": ""
     },
     {
-      "no": 19,
+      "no": 16,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -300,7 +255,7 @@
       "guideRef": ""
     },
     {
-      "no": 20,
+      "no": 17,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -315,7 +270,7 @@
       "guideRef": ""
     },
     {
-      "no": 21,
+      "no": 18,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -330,7 +285,7 @@
       "guideRef": ""
     },
     {
-      "no": 22,
+      "no": 19,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -345,7 +300,7 @@
       "guideRef": ""
     },
     {
-      "no": 23,
+      "no": 20,
       "ruleId": "DS-2.3",
       "ruleName": "비밀번호 관리",
       "severity": "HIGH",
@@ -360,7 +315,7 @@
       "guideRef": ""
     },
     {
-      "no": 24,
+      "no": 21,
       "ruleId": "DS-2.3",
       "ruleName": "비밀번호 관리",
       "severity": "HIGH",
@@ -375,7 +330,7 @@
       "guideRef": ""
     },
     {
-      "no": 25,
+      "no": 22,
       "ruleId": "DS-2.3",
       "ruleName": "비밀번호 관리",
       "severity": "HIGH",
@@ -390,7 +345,7 @@
       "guideRef": ""
     },
     {
-      "no": 26,
+      "no": 23,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -405,7 +360,7 @@
       "guideRef": ""
     },
     {
-      "no": 27,
+      "no": 24,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -420,7 +375,7 @@
       "guideRef": ""
     },
     {
-      "no": 28,
+      "no": 25,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -435,7 +390,7 @@
       "guideRef": ""
     },
     {
-      "no": 29,
+      "no": 26,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -450,7 +405,7 @@
       "guideRef": ""
     },
     {
-      "no": 30,
+      "no": 27,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -465,7 +420,7 @@
       "guideRef": ""
     },
     {
-      "no": 31,
+      "no": 28,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -480,7 +435,7 @@
       "guideRef": ""
     },
     {
-      "no": 32,
+      "no": 29,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -495,7 +450,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 33,
+      "no": 30,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -510,7 +465,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 34,
+      "no": 31,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -525,7 +480,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 35,
+      "no": 32,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -540,7 +495,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 36,
+      "no": 33,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -555,7 +510,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 37,
+      "no": 34,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -570,7 +525,7 @@
       "guideRef": ""
     },
     {
-      "no": 38,
+      "no": 35,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -585,7 +540,7 @@
       "guideRef": ""
     },
     {
-      "no": 39,
+      "no": 36,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -600,7 +555,7 @@
       "guideRef": ""
     },
     {
-      "no": 40,
+      "no": 37,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -615,7 +570,7 @@
       "guideRef": ""
     },
     {
-      "no": 41,
+      "no": 38,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -630,7 +585,7 @@
       "guideRef": ""
     },
     {
-      "no": 42,
+      "no": 39,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -645,7 +600,7 @@
       "guideRef": ""
     },
     {
-      "no": 43,
+      "no": 40,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -660,7 +615,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 44,
+      "no": 41,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -675,7 +630,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 45,
+      "no": 42,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -690,7 +645,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 46,
+      "no": 43,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -705,7 +660,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 47,
+      "no": 44,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -720,7 +675,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 48,
+      "no": 45,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -735,7 +690,7 @@
       "guideRef": ""
     },
     {
-      "no": 49,
+      "no": 46,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -750,7 +705,7 @@
       "guideRef": ""
     },
     {
-      "no": 50,
+      "no": 47,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -765,7 +720,7 @@
       "guideRef": ""
     },
     {
-      "no": 51,
+      "no": 48,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -780,7 +735,7 @@
       "guideRef": ""
     },
     {
-      "no": 52,
+      "no": 49,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -795,7 +750,7 @@
       "guideRef": ""
     },
     {
-      "no": 53,
+      "no": 50,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -810,7 +765,7 @@
       "guideRef": ""
     },
     {
-      "no": 54,
+      "no": 51,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -825,7 +780,7 @@
       "guideRef": ""
     },
     {
-      "no": 55,
+      "no": 52,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -840,7 +795,7 @@
       "guideRef": ""
     },
     {
-      "no": 56,
+      "no": 53,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -855,7 +810,7 @@
       "guideRef": ""
     },
     {
-      "no": 57,
+      "no": 54,
       "ruleId": "IV-1.4",
       "ruleName": "크로스사이트 스크립트",
       "severity": "HIGH",
@@ -879,7 +834,7 @@
       "guideRef": "PART4 제1절 4항 (p.211-222)"
     },
     {
-      "no": 58,
+      "no": 55,
       "ruleId": "DS-1.5",
       "ruleName": "웹 서비스 요청 및 결과 검증",
       "severity": "HIGH",
@@ -894,7 +849,7 @@
       "guideRef": ""
     },
     {
-      "no": 59,
+      "no": 56,
       "ruleId": "DS-1.5",
       "ruleName": "웹 서비스 요청 및 결과 검증",
       "severity": "HIGH",
@@ -909,7 +864,7 @@
       "guideRef": ""
     },
     {
-      "no": 60,
+      "no": 57,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -924,7 +879,7 @@
       "guideRef": ""
     },
     {
-      "no": 61,
+      "no": 58,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -939,7 +894,7 @@
       "guideRef": ""
     },
     {
-      "no": 62,
+      "no": 59,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -954,7 +909,7 @@
       "guideRef": ""
     },
     {
-      "no": 63,
+      "no": 60,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -969,7 +924,7 @@
       "guideRef": ""
     },
     {
-      "no": 64,
+      "no": 61,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -984,7 +939,7 @@
       "guideRef": ""
     },
     {
-      "no": 65,
+      "no": 62,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -999,7 +954,7 @@
       "guideRef": ""
     },
     {
-      "no": 66,
+      "no": 63,
       "ruleId": "IV-5.3",
       "ruleName": "해제된 자원 사용",
       "severity": "HIGH",
@@ -1014,7 +969,7 @@
       "guideRef": "PART4 제5절 3항 (p.454-458)"
     },
     {
-      "no": 67,
+      "no": 64,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1029,7 +984,7 @@
       "guideRef": ""
     },
     {
-      "no": 68,
+      "no": 65,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1044,7 +999,7 @@
       "guideRef": ""
     },
     {
-      "no": 69,
+      "no": 66,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1059,7 +1014,7 @@
       "guideRef": ""
     },
     {
-      "no": 70,
+      "no": 67,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1074,7 +1029,7 @@
       "guideRef": ""
     },
     {
-      "no": 71,
+      "no": 68,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -1089,7 +1044,7 @@
       "guideRef": ""
     },
     {
-      "no": 72,
+      "no": 69,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -1104,7 +1059,7 @@
       "guideRef": ""
     },
     {
-      "no": 73,
+      "no": 70,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -1119,7 +1074,7 @@
       "guideRef": ""
     },
     {
-      "no": 74,
+      "no": 71,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1134,7 +1089,7 @@
       "guideRef": ""
     },
     {
-      "no": 75,
+      "no": 72,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1149,7 +1104,7 @@
       "guideRef": ""
     },
     {
-      "no": 76,
+      "no": 73,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1164,7 +1119,7 @@
       "guideRef": ""
     },
     {
-      "no": 77,
+      "no": 74,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1179,7 +1134,7 @@
       "guideRef": ""
     },
     {
-      "no": 78,
+      "no": 75,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1194,7 +1149,7 @@
       "guideRef": ""
     },
     {
-      "no": 79,
+      "no": 76,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1209,7 +1164,7 @@
       "guideRef": ""
     },
     {
-      "no": 80,
+      "no": 77,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1224,7 +1179,7 @@
       "guideRef": ""
     },
     {
-      "no": 81,
+      "no": 78,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1239,7 +1194,7 @@
       "guideRef": ""
     },
     {
-      "no": 82,
+      "no": 79,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1254,7 +1209,7 @@
       "guideRef": ""
     },
     {
-      "no": 83,
+      "no": 80,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1269,7 +1224,7 @@
       "guideRef": ""
     },
     {
-      "no": 84,
+      "no": 81,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1284,7 +1239,7 @@
       "guideRef": ""
     },
     {
-      "no": 85,
+      "no": 82,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1299,7 +1254,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 86,
+      "no": 83,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1314,7 +1269,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 87,
+      "no": 84,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1329,7 +1284,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 88,
+      "no": 85,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1344,7 +1299,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 89,
+      "no": 86,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1359,7 +1314,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 90,
+      "no": 87,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1374,7 +1329,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 91,
+      "no": 88,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1389,7 +1344,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 92,
+      "no": 89,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1404,7 +1359,7 @@
       "guideRef": ""
     },
     {
-      "no": 93,
+      "no": 90,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1419,7 +1374,7 @@
       "guideRef": ""
     },
     {
-      "no": 94,
+      "no": 91,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1434,7 +1389,7 @@
       "guideRef": ""
     },
     {
-      "no": 95,
+      "no": 92,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1449,7 +1404,7 @@
       "guideRef": ""
     },
     {
-      "no": 96,
+      "no": 93,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -1464,7 +1419,7 @@
       "guideRef": ""
     },
     {
-      "no": 97,
+      "no": 94,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -1479,7 +1434,7 @@
       "guideRef": ""
     },
     {
-      "no": 98,
+      "no": 95,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1494,7 +1449,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 99,
+      "no": 96,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1509,7 +1464,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 100,
+      "no": 97,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1524,7 +1479,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 101,
+      "no": 98,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1539,7 +1494,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 102,
+      "no": 99,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -1554,7 +1509,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 103,
+      "no": 100,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1569,7 +1524,7 @@
       "guideRef": ""
     },
     {
-      "no": 104,
+      "no": 101,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1584,7 +1539,7 @@
       "guideRef": ""
     },
     {
-      "no": 105,
+      "no": 102,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1599,7 +1554,7 @@
       "guideRef": ""
     },
     {
-      "no": 106,
+      "no": 103,
       "ruleId": "DS-1.6",
       "ruleName": "웹 기반 중요 기능 수행 요청 유효성 검증",
       "severity": "HIGH",
@@ -1614,7 +1569,7 @@
       "guideRef": ""
     },
     {
-      "no": 107,
+      "no": 104,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1629,7 +1584,7 @@
       "guideRef": ""
     },
     {
-      "no": 108,
+      "no": 105,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1644,7 +1599,7 @@
       "guideRef": ""
     },
     {
-      "no": 109,
+      "no": 106,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1659,7 +1614,7 @@
       "guideRef": ""
     },
     {
-      "no": 110,
+      "no": 107,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1674,7 +1629,7 @@
       "guideRef": ""
     },
     {
-      "no": 111,
+      "no": 108,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1689,7 +1644,7 @@
       "guideRef": ""
     },
     {
-      "no": 112,
+      "no": 109,
       "ruleId": "DS-4.1",
       "ruleName": "세션 통제",
       "severity": "HIGH",
@@ -1704,7 +1659,7 @@
       "guideRef": "PART3 제4절 1항 (p.165-170)"
     },
     {
-      "no": 113,
+      "no": 110,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1719,7 +1674,7 @@
       "guideRef": ""
     },
     {
-      "no": 114,
+      "no": 111,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1734,7 +1689,7 @@
       "guideRef": ""
     },
     {
-      "no": 115,
+      "no": 112,
       "ruleId": "DS-4.1",
       "ruleName": "세션 통제",
       "severity": "HIGH",
@@ -1749,7 +1704,7 @@
       "guideRef": "PART3 제4절 1항 (p.165-170)"
     },
     {
-      "no": 116,
+      "no": 113,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1764,7 +1719,7 @@
       "guideRef": ""
     },
     {
-      "no": 117,
+      "no": 114,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1779,7 +1734,7 @@
       "guideRef": ""
     },
     {
-      "no": 118,
+      "no": 115,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1794,7 +1749,7 @@
       "guideRef": ""
     },
     {
-      "no": 119,
+      "no": 116,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1809,7 +1764,7 @@
       "guideRef": ""
     },
     {
-      "no": 120,
+      "no": 117,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1824,7 +1779,7 @@
       "guideRef": ""
     },
     {
-      "no": 121,
+      "no": 118,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1839,7 +1794,7 @@
       "guideRef": ""
     },
     {
-      "no": 122,
+      "no": 119,
       "ruleId": "DS-2.3",
       "ruleName": "비밀번호 관리",
       "severity": "HIGH",
@@ -1854,7 +1809,7 @@
       "guideRef": ""
     },
     {
-      "no": 123,
+      "no": 120,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1869,7 +1824,7 @@
       "guideRef": ""
     },
     {
-      "no": 124,
+      "no": 121,
       "ruleId": "DS-1.5",
       "ruleName": "웹 서비스 요청 및 결과 검증",
       "severity": "HIGH",
@@ -1884,7 +1839,7 @@
       "guideRef": ""
     },
     {
-      "no": 125,
+      "no": 122,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1899,7 +1854,7 @@
       "guideRef": ""
     },
     {
-      "no": 126,
+      "no": 123,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1914,7 +1869,7 @@
       "guideRef": ""
     },
     {
-      "no": 127,
+      "no": 124,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -1929,7 +1884,7 @@
       "guideRef": ""
     },
     {
-      "no": 128,
+      "no": 125,
       "ruleId": "IV-5.3",
       "ruleName": "해제된 자원 사용",
       "severity": "HIGH",
@@ -1944,7 +1899,7 @@
       "guideRef": "PART4 제5절 3항 (p.454-458)"
     },
     {
-      "no": 129,
+      "no": 126,
       "ruleId": "IV-1.15",
       "ruleName": "보안기능 결정에 사용되는 부적절한 입력값",
       "severity": "HIGH",
@@ -1968,7 +1923,7 @@
       "guideRef": "PART4 제1절 15항 (p.297-302)"
     },
     {
-      "no": 130,
+      "no": 127,
       "ruleId": "IV-1.15",
       "ruleName": "보안기능 결정에 사용되는 부적절한 입력값",
       "severity": "HIGH",
@@ -1992,7 +1947,7 @@
       "guideRef": "PART4 제1절 15항 (p.297-302)"
     },
     {
-      "no": 131,
+      "no": 128,
       "ruleId": "IV-1.15",
       "ruleName": "보안기능 결정에 사용되는 부적절한 입력값",
       "severity": "HIGH",
@@ -2016,7 +1971,7 @@
       "guideRef": "PART4 제1절 15항 (p.297-302)"
     },
     {
-      "no": 132,
+      "no": 129,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2031,7 +1986,7 @@
       "guideRef": ""
     },
     {
-      "no": 133,
+      "no": 130,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2046,22 +2001,7 @@
       "guideRef": ""
     },
     {
-      "no": 134,
-      "ruleId": "IV-5.3",
-      "ruleName": "해제된 자원 사용",
-      "severity": "HIGH",
-      "severityKorean": "높음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java",
-      "lineNumber": 59,
-      "cweIds": ["CWE-416"],
-      "description": "[IV-5.3] L59에서 위험 패턴이 탐지되었습니다. 조치: 자원 해제 후 변수를 null로 설정하여 재사용 방지",
-      "vulnerableCode": "//\t\t\t\t\tin.close();",
-      "remediatedCode": "// [수정] IV-5.3 해제된 자원 재사용 방지\n// ❌ 취약:\n// connection.close();\n// connection.createStatement();  // 이미 닫힌 연결 사용\n\n// ✅ 안전 1: try-with-resources (범위 밖에서 사용 불가)\ntry (Connection con = dataSource.getConnection()) {\n    // con은 이 블록 안에서만 유효\n}\n// con은 여기서 더 이상 참조할 수 없음\n\n// ✅ 안전 2: 수동 닫기 시 null 할당\nInputStream in = null;\ntry {\n    in = new FileInputStream(file);\n    // 사용\n} finally {\n    if (in != null) { in.close(); in = null; }\n}",
-      "remediationExplanation": "이미 닫힌 스트림·연결을 재사용하면 예외가 발생하고 오류 처리 과정에서 내부 정보가 노출될 수 있습니다. try-with-resources를 사용하거나 close() 후 변수를 null로 설정하세요. 가이드 참조: PART4 제5절 3항 해제된 자원 사용 (p.443-446)",
-      "guideRef": "PART4 제5절 3항 (p.454-458)"
-    },
-    {
-      "no": 135,
+      "no": 131,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2076,7 +2016,7 @@
       "guideRef": ""
     },
     {
-      "no": 136,
+      "no": 132,
       "ruleId": "IV-1.16",
       "ruleName": "메모리 버퍼 오버플로우",
       "severity": "HIGH",
@@ -2091,7 +2031,7 @@
       "guideRef": "PART4 제1절 16항 (p.303-308)"
     },
     {
-      "no": 137,
+      "no": 133,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2106,7 +2046,7 @@
       "guideRef": ""
     },
     {
-      "no": 138,
+      "no": 134,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2121,7 +2061,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 139,
+      "no": 135,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2136,7 +2076,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 140,
+      "no": 136,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2151,7 +2091,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 141,
+      "no": 137,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2166,7 +2106,7 @@
       "guideRef": ""
     },
     {
-      "no": 142,
+      "no": 138,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2181,7 +2121,7 @@
       "guideRef": ""
     },
     {
-      "no": 143,
+      "no": 139,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2196,7 +2136,7 @@
       "guideRef": ""
     },
     {
-      "no": 144,
+      "no": 140,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2211,7 +2151,7 @@
       "guideRef": ""
     },
     {
-      "no": 145,
+      "no": 141,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2226,7 +2166,7 @@
       "guideRef": ""
     },
     {
-      "no": 146,
+      "no": 142,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2241,7 +2181,7 @@
       "guideRef": ""
     },
     {
-      "no": 147,
+      "no": 143,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2256,7 +2196,7 @@
       "guideRef": ""
     },
     {
-      "no": 148,
+      "no": 144,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2271,7 +2211,7 @@
       "guideRef": ""
     },
     {
-      "no": 149,
+      "no": 145,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2286,7 +2226,7 @@
       "guideRef": ""
     },
     {
-      "no": 150,
+      "no": 146,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2301,7 +2241,7 @@
       "guideRef": ""
     },
     {
-      "no": 151,
+      "no": 147,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2316,7 +2256,7 @@
       "guideRef": ""
     },
     {
-      "no": 152,
+      "no": 148,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2331,7 +2271,7 @@
       "guideRef": ""
     },
     {
-      "no": 153,
+      "no": 149,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2346,7 +2286,7 @@
       "guideRef": ""
     },
     {
-      "no": 154,
+      "no": 150,
       "ruleId": "DS-1.10",
       "ruleName": "업로드·다운로드 파일 검증",
       "severity": "HIGH",
@@ -2361,7 +2301,7 @@
       "guideRef": ""
     },
     {
-      "no": 155,
+      "no": 151,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2376,7 +2316,7 @@
       "guideRef": ""
     },
     {
-      "no": 156,
+      "no": 152,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2391,22 +2331,7 @@
       "guideRef": ""
     },
     {
-      "no": 157,
-      "ruleId": "DS-2.1",
-      "ruleName": "인증 대상 및 방식",
-      "severity": "HIGH",
-      "severityKorean": "높음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/util/FileUtils.java",
-      "lineNumber": 104,
-      "cweIds": ["CWE-306"],
-      "description": "[DS-2.1] L104에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//\t\tHttpSession httpSession = request.getSession();",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '인증 대상 및 방식'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 158,
+      "no": 153,
       "ruleId": "DS-2.1",
       "ruleName": "인증 대상 및 방식",
       "severity": "HIGH",
@@ -2421,7 +2346,7 @@
       "guideRef": ""
     },
     {
-      "no": 159,
+      "no": 154,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2436,7 +2361,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 160,
+      "no": 155,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2451,7 +2376,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 161,
+      "no": 156,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2466,7 +2391,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 162,
+      "no": 157,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2481,7 +2406,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 163,
+      "no": 158,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2496,7 +2421,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 164,
+      "no": 159,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2511,7 +2436,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 165,
+      "no": 160,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2526,7 +2451,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 166,
+      "no": 161,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2541,7 +2466,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 167,
+      "no": 162,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2556,7 +2481,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 168,
+      "no": 163,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2571,7 +2496,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 169,
+      "no": 164,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2586,7 +2511,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 170,
+      "no": 165,
       "ruleId": "IV-1.6",
       "ruleName": "위험한 형식 파일 업로드",
       "severity": "HIGH",
@@ -2601,7 +2526,7 @@
       "guideRef": "PART4 제1절 6항 (p.232-238)"
     },
     {
-      "no": 171,
+      "no": 166,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2616,7 +2541,7 @@
       "guideRef": ""
     },
     {
-      "no": 172,
+      "no": 167,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2631,7 +2556,7 @@
       "guideRef": ""
     },
     {
-      "no": 173,
+      "no": 168,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2646,7 +2571,7 @@
       "guideRef": ""
     },
     {
-      "no": 174,
+      "no": 169,
       "ruleId": "DS-2.5",
       "ruleName": "암호키 관리",
       "severity": "HIGH",
@@ -2661,7 +2586,7 @@
       "guideRef": ""
     },
     {
-      "no": 175,
+      "no": 170,
       "ruleId": "IV-1.16",
       "ruleName": "메모리 버퍼 오버플로우",
       "severity": "HIGH",
@@ -2676,7 +2601,7 @@
       "guideRef": "PART4 제1절 16항 (p.303-308)"
     },
     {
-      "no": 176,
+      "no": 171,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2691,7 +2616,7 @@
       "guideRef": ""
     },
     {
-      "no": 177,
+      "no": 172,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2706,7 +2631,7 @@
       "guideRef": ""
     },
     {
-      "no": 178,
+      "no": 173,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2721,7 +2646,7 @@
       "guideRef": ""
     },
     {
-      "no": 179,
+      "no": 174,
       "ruleId": "DS-1.8",
       "ruleName": "허용된 범위내 메모리 접근",
       "severity": "HIGH",
@@ -2736,7 +2661,7 @@
       "guideRef": ""
     },
     {
-      "no": 180,
+      "no": 175,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2751,7 +2676,7 @@
       "guideRef": ""
     },
     {
-      "no": 181,
+      "no": 176,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2766,37 +2691,7 @@
       "guideRef": ""
     },
     {
-      "no": 182,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
-      "lineNumber": 216,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L216에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//\t\t} catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 183,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
-      "lineNumber": 271,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L271에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//\t\t\t}catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 184,
+      "no": 177,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2811,7 +2706,7 @@
       "guideRef": ""
     },
     {
-      "no": 185,
+      "no": 178,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2826,7 +2721,7 @@
       "guideRef": ""
     },
     {
-      "no": 186,
+      "no": 179,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2841,7 +2736,7 @@
       "guideRef": ""
     },
     {
-      "no": 187,
+      "no": 180,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2856,7 +2751,7 @@
       "guideRef": ""
     },
     {
-      "no": 188,
+      "no": 181,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2871,7 +2766,7 @@
       "guideRef": ""
     },
     {
-      "no": 189,
+      "no": 182,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2886,7 +2781,7 @@
       "guideRef": ""
     },
     {
-      "no": 190,
+      "no": 183,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2901,7 +2796,7 @@
       "guideRef": ""
     },
     {
-      "no": 191,
+      "no": 184,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -2916,7 +2811,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 192,
+      "no": 185,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -2931,7 +2826,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 193,
+      "no": 186,
       "ruleId": "IV-2.9",
       "ruleName": "취약한 비밀번호 허용",
       "severity": "MEDIUM",
@@ -2946,7 +2841,7 @@
       "guideRef": "PART4 제2절 9항 (p.370-374)"
     },
     {
-      "no": 194,
+      "no": 187,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -2961,7 +2856,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 195,
+      "no": 188,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -2976,7 +2871,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 196,
+      "no": 189,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -2991,7 +2886,7 @@
       "guideRef": ""
     },
     {
-      "no": 197,
+      "no": 190,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3000,6 +2895,111 @@
       "lineNumber": 206,
       "cweIds": ["CWE-209", "CWE-390"],
       "description": "[DS-3.1] L206에서 위험 패턴이 탐지되었습니다. ",
+      "vulnerableCode": "} catch (Exception e) {",
+      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
+      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
+      "guideRef": ""
+    },
+    {
+      "no": 191,
+      "ruleId": "DS-3.1",
+      "ruleName": "예외처리",
+      "severity": "MEDIUM",
+      "severityKorean": "중간",
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
+      "lineNumber": 271,
+      "cweIds": ["CWE-209", "CWE-390"],
+      "description": "[DS-3.1] L271에서 위험 패턴이 탐지되었습니다. ",
+      "vulnerableCode": "} catch (Exception e) {",
+      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
+      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
+      "guideRef": ""
+    },
+    {
+      "no": 192,
+      "ruleId": "DS-3.1",
+      "ruleName": "예외처리",
+      "severity": "MEDIUM",
+      "severityKorean": "중간",
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
+      "lineNumber": 343,
+      "cweIds": ["CWE-209", "CWE-390"],
+      "description": "[DS-3.1] L343에서 위험 패턴이 탐지되었습니다. ",
+      "vulnerableCode": "} catch (Exception e) {",
+      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
+      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
+      "guideRef": ""
+    },
+    {
+      "no": 193,
+      "ruleId": "DS-3.1",
+      "ruleName": "예외처리",
+      "severity": "MEDIUM",
+      "severityKorean": "중간",
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
+      "lineNumber": 452,
+      "cweIds": ["CWE-209", "CWE-390"],
+      "description": "[DS-3.1] L452에서 위험 패턴이 탐지되었습니다. ",
+      "vulnerableCode": "} catch (Exception e) {",
+      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
+      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
+      "guideRef": ""
+    },
+    {
+      "no": 194,
+      "ruleId": "DS-3.1",
+      "ruleName": "예외처리",
+      "severity": "MEDIUM",
+      "severityKorean": "중간",
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
+      "lineNumber": 478,
+      "cweIds": ["CWE-209", "CWE-390"],
+      "description": "[DS-3.1] L478에서 위험 패턴이 탐지되었습니다. ",
+      "vulnerableCode": "} catch (Exception e) {",
+      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
+      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
+      "guideRef": ""
+    },
+    {
+      "no": 195,
+      "ruleId": "DS-3.1",
+      "ruleName": "예외처리",
+      "severity": "MEDIUM",
+      "severityKorean": "중간",
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
+      "lineNumber": 567,
+      "cweIds": ["CWE-209", "CWE-390"],
+      "description": "[DS-3.1] L567에서 위험 패턴이 탐지되었습니다. ",
+      "vulnerableCode": "} catch (Exception e) {",
+      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
+      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
+      "guideRef": ""
+    },
+    {
+      "no": 196,
+      "ruleId": "IV-1.14",
+      "ruleName": "정수형 오버플로우",
+      "severity": "MEDIUM",
+      "severityKorean": "중간",
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
+      "lineNumber": 328,
+      "cweIds": ["CWE-190"],
+      "description": "[IV-1.14] L328에서 위험 패턴이 탐지되었습니다. 조치: 정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용",
+      "vulnerableCode": "hashtagVO.setObjectId( Long.parseLong(boardVO.getBbsNo()) );",
+      "remediatedCode": "// [수정] IV-1.14 정수형 오버플로우 방지\n// ❌ 취약: int result = Integer.parseInt(request.getParameter(\"count\")) * multiplier;\n// ✅ 안전:\nString countStr = request.getParameter(\"count\");\nlong count;\ntry {\n    count = Long.parseLong(countStr);\n} catch (NumberFormatException e) {\n    throw new IllegalArgumentException(\"유효하지 않은 숫자: \" + countStr);\n}\nif (count < 0 || count > Integer.MAX_VALUE)\n    throw new IllegalArgumentException(\"허용 범위 초과: \" + count);\n// 또는: Math.addExact(a, b) — 오버플로우 시 ArithmeticException 발생",
+      "remediationExplanation": "외부 입력 정수를 검증 없이 연산에 사용하면 오버플로우로 예상치 못한 결과가 발생합니다. Long으로 파싱 후 Integer 범위 검증, 또는 Math.addExact()로 오버플로우를 예외로 처리하세요. 가이드 참조: PART4 제1절 14항 정수형 오버플로우 (p.290-296)",
+      "guideRef": "PART4 제1절 14항 (p.290-296)"
+    },
+    {
+      "no": 197,
+      "ruleId": "DS-3.1",
+      "ruleName": "예외처리",
+      "severity": "MEDIUM",
+      "severityKorean": "중간",
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
+      "lineNumber": 145,
+      "cweIds": ["CWE-209", "CWE-390"],
+      "description": "[DS-3.1] L145에서 위험 패턴이 탐지되었습니다. ",
       "vulnerableCode": "} catch (Exception e) {",
       "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
       "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
@@ -3011,10 +3011,10 @@
       "ruleName": "예외처리",
       "severity": "MEDIUM",
       "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
-      "lineNumber": 271,
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
+      "lineNumber": 206,
       "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L271에서 위험 패턴이 탐지되었습니다. ",
+      "description": "[DS-3.1] L206에서 위험 패턴이 탐지되었습니다. ",
       "vulnerableCode": "} catch (Exception e) {",
       "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
       "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
@@ -3026,10 +3026,10 @@
       "ruleName": "예외처리",
       "severity": "MEDIUM",
       "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
-      "lineNumber": 343,
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
+      "lineNumber": 271,
       "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L343에서 위험 패턴이 탐지되었습니다. ",
+      "description": "[DS-3.1] L271에서 위험 패턴이 탐지되었습니다. ",
       "vulnerableCode": "} catch (Exception e) {",
       "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
       "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
@@ -3041,10 +3041,10 @@
       "ruleName": "예외처리",
       "severity": "MEDIUM",
       "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
-      "lineNumber": 452,
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
+      "lineNumber": 343,
       "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L452에서 위험 패턴이 탐지되었습니다. ",
+      "description": "[DS-3.1] L343에서 위험 패턴이 탐지되었습니다. ",
       "vulnerableCode": "} catch (Exception e) {",
       "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
       "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
@@ -3056,10 +3056,10 @@
       "ruleName": "예외처리",
       "severity": "MEDIUM",
       "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
-      "lineNumber": 478,
+      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
+      "lineNumber": 452,
       "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L478에서 위험 패턴이 탐지되었습니다. ",
+      "description": "[DS-3.1] L452에서 위험 패턴이 탐지되었습니다. ",
       "vulnerableCode": "} catch (Exception e) {",
       "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
       "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
@@ -3071,111 +3071,6 @@
       "ruleName": "예외처리",
       "severity": "MEDIUM",
       "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
-      "lineNumber": 567,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L567에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "} catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 203,
-      "ruleId": "IV-1.14",
-      "ruleName": "정수형 오버플로우",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/BizStoryController.java",
-      "lineNumber": 328,
-      "cweIds": ["CWE-190"],
-      "description": "[IV-1.14] L328에서 위험 패턴이 탐지되었습니다. 조치: 정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용",
-      "vulnerableCode": "hashtagVO.setObjectId( Long.parseLong(boardVO.getBbsNo()) );",
-      "remediatedCode": "// [수정] IV-1.14 정수형 오버플로우 방지\n// ❌ 취약: int result = Integer.parseInt(request.getParameter(\"count\")) * multiplier;\n// ✅ 안전:\nString countStr = request.getParameter(\"count\");\nlong count;\ntry {\n    count = Long.parseLong(countStr);\n} catch (NumberFormatException e) {\n    throw new IllegalArgumentException(\"유효하지 않은 숫자: \" + countStr);\n}\nif (count < 0 || count > Integer.MAX_VALUE)\n    throw new IllegalArgumentException(\"허용 범위 초과: \" + count);\n// 또는: Math.addExact(a, b) — 오버플로우 시 ArithmeticException 발생",
-      "remediationExplanation": "외부 입력 정수를 검증 없이 연산에 사용하면 오버플로우로 예상치 못한 결과가 발생합니다. Long으로 파싱 후 Integer 범위 검증, 또는 Math.addExact()로 오버플로우를 예외로 처리하세요. 가이드 참조: PART4 제1절 14항 정수형 오버플로우 (p.290-296)",
-      "guideRef": "PART4 제1절 14항 (p.290-296)"
-    },
-    {
-      "no": 204,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
-      "lineNumber": 145,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L145에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "} catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 205,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
-      "lineNumber": 206,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L206에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "} catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 206,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
-      "lineNumber": 271,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L271에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "} catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 207,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
-      "lineNumber": 343,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L343에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "} catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 208,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
-      "lineNumber": 452,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L452에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "} catch (Exception e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 209,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
       "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/EsgStoryController.java",
       "lineNumber": 478,
       "cweIds": ["CWE-209", "CWE-390"],
@@ -3186,7 +3081,7 @@
       "guideRef": ""
     },
     {
-      "no": 210,
+      "no": 203,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3201,7 +3096,7 @@
       "guideRef": ""
     },
     {
-      "no": 211,
+      "no": 204,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3216,7 +3111,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 212,
+      "no": 205,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3231,7 +3126,7 @@
       "guideRef": ""
     },
     {
-      "no": 213,
+      "no": 206,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3246,7 +3141,7 @@
       "guideRef": ""
     },
     {
-      "no": 214,
+      "no": 207,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3261,7 +3156,7 @@
       "guideRef": ""
     },
     {
-      "no": 215,
+      "no": 208,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3276,7 +3171,7 @@
       "guideRef": ""
     },
     {
-      "no": 216,
+      "no": 209,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3291,22 +3186,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 217,
-      "ruleId": "IV-2.8",
-      "ruleName": "적절하지 않은 난수 값 사용",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/FetchWpArticleController.java",
-      "lineNumber": 60,
-      "cweIds": ["CWE-330"],
-      "description": "[IV-2.8] L60에서 위험 패턴이 탐지되었습니다. 조치: java.security.SecureRandom으로 교체",
-      "vulnerableCode": "//\t\t\t\tlong delay = 1000 + (long)(Math.random() * 800); // 1~1.8초",
-      "remediatedCode": "// [수정] IV-2.8 적절하지 않은 난수 값 사용 방지\n//\n// ▶ 취약 원인: java.util.Random은 선형합동 알고리즘(LCG) 기반 — 시드 예측 후 값 추측 가능\n// ▶ 보안 원칙: 보안 목적 난수는 반드시 java.security.SecureRandom 사용\n//\n// 필요 import:\n//   import java.security.SecureRandom;\n//   import java.util.Base64;\n\n// ── Step 1. SecureRandom 인스턴스 생성 ─────────────────────────\n// SecureRandom은 OS 엔트로피 소스(/dev/urandom 등)를 사용\n// 클래스 레벨 필드로 선언해 재사용 (인스턴스 생성 비용이 높음)\nprivate static final SecureRandom SECURE_RANDOM = new SecureRandom();\n\n// ── Step 2. 정수 범위 난수 생성 ─────────────────────────────────\n// ❌ 취약: new Random().nextInt(bound)  — 예측 가능\n// ✅ 안전:\nint randomInt = SECURE_RANDOM.nextInt(bound);   // [0, bound) 범위\n\n// ── Step 3. 세션 토큰 / 인증 코드 생성 (바이트 배열 방식) ───────\n// 256비트(32바이트) = 충분한 엔트로피\nbyte[] tokenBytes = new byte[32];\nSECURE_RANDOM.nextBytes(tokenBytes);\n\n// URL-safe Base64 인코딩 (패딩 제거)\nString sessionToken = Base64.getUrlEncoder().withoutPadding()\n                           .encodeToString(tokenBytes);\n// 예: \"dGhpcyBpcyBhIHRlc3Q\" (43자, URL-safe)\n\n// ── Step 4. 인증 코드(숫자 6자리) 생성 예시 ──────────────────────\nint authCode = 100000 + SECURE_RANDOM.nextInt(900000);  // [100000, 999999]\nString authCodeStr = String.valueOf(authCode);\n\n// ── Step 5. UUID 기반 식별자 생성 (간편 대안) ──────────────────\n// UUID.randomUUID()는 내부적으로 SecureRandom을 사용 (Java 표준)\nString uniqueId = java.util.UUID.randomUUID().toString();\n\n// ── [주의] 보안 목적이 아닌 경우 ──────────────────────────────\n// 성능이 중요하고 보안이 불필요한 경우(게임 아이템 드랍률 등)에만\n// java.util.Random 또는 ThreadLocalRandom 사용 가능\n// int nonSecureRandom = ThreadLocalRandom.current().nextInt(100);",
-      "remediationExplanation": "java.util.Random은 시드를 알면 이후 모든 값 예측이 가능합니다. 세션 토큰, 인증 코드, 암호화 키 등 보안 목적에는 반드시 SecureRandom을 사용하세요. 인스턴스는 재사용 가능하므로 클래스 레벨 static 필드로 선언하는 것이 효율적입니다. 가이드 참조: PART4 제2절 8항 적절하지 않은 난수 값 사용 (p.364-369)",
-      "guideRef": "PART4 제2절 8항 (p.364-369)"
-    },
-    {
-      "no": 218,
+      "no": 210,
       "ruleId": "IV-4.1",
       "ruleName": "오류 메시지 정보노출",
       "severity": "MEDIUM",
@@ -3321,7 +3201,7 @@
       "guideRef": "PART4 제4절 1항 (p.419-424)"
     },
     {
-      "no": 219,
+      "no": 211,
       "ruleId": "IV-4.1",
       "ruleName": "오류 메시지 정보노출",
       "severity": "MEDIUM",
@@ -3336,7 +3216,7 @@
       "guideRef": "PART4 제4절 1항 (p.419-424)"
     },
     {
-      "no": 220,
+      "no": 212,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3351,7 +3231,7 @@
       "guideRef": ""
     },
     {
-      "no": 221,
+      "no": 213,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3366,7 +3246,7 @@
       "guideRef": ""
     },
     {
-      "no": 222,
+      "no": 214,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3381,7 +3261,7 @@
       "guideRef": ""
     },
     {
-      "no": 223,
+      "no": 215,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3396,7 +3276,7 @@
       "guideRef": ""
     },
     {
-      "no": 224,
+      "no": 216,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3411,7 +3291,7 @@
       "guideRef": ""
     },
     {
-      "no": 225,
+      "no": 217,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3426,7 +3306,7 @@
       "guideRef": ""
     },
     {
-      "no": 226,
+      "no": 218,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3441,7 +3321,7 @@
       "guideRef": ""
     },
     {
-      "no": 227,
+      "no": 219,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3456,7 +3336,7 @@
       "guideRef": ""
     },
     {
-      "no": 228,
+      "no": 220,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3471,7 +3351,7 @@
       "guideRef": ""
     },
     {
-      "no": 229,
+      "no": 221,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -3486,7 +3366,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 230,
+      "no": 222,
       "ruleId": "DS-1.7",
       "ruleName": "HTTP 프로토콜 유효성 검증",
       "severity": "MEDIUM",
@@ -3501,7 +3381,7 @@
       "guideRef": ""
     },
     {
-      "no": 231,
+      "no": 223,
       "ruleId": "DS-1.7",
       "ruleName": "HTTP 프로토콜 유효성 검증",
       "severity": "MEDIUM",
@@ -3516,7 +3396,7 @@
       "guideRef": ""
     },
     {
-      "no": 232,
+      "no": 224,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3531,7 +3411,7 @@
       "guideRef": ""
     },
     {
-      "no": 233,
+      "no": 225,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -3546,7 +3426,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 234,
+      "no": 226,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -3561,7 +3441,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 235,
+      "no": 227,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -3576,7 +3456,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 236,
+      "no": 228,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3591,7 +3471,7 @@
       "guideRef": ""
     },
     {
-      "no": 237,
+      "no": 229,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3606,7 +3486,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 238,
+      "no": 230,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3621,7 +3501,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 239,
+      "no": 231,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3636,7 +3516,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 240,
+      "no": 232,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3651,7 +3531,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 241,
+      "no": 233,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3666,7 +3546,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 242,
+      "no": 234,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3681,7 +3561,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 243,
+      "no": 235,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3696,7 +3576,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 244,
+      "no": 236,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3711,7 +3591,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 245,
+      "no": 237,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3726,7 +3606,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 246,
+      "no": 238,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3741,7 +3621,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 247,
+      "no": 239,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3756,7 +3636,7 @@
       "guideRef": ""
     },
     {
-      "no": 248,
+      "no": 240,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3771,7 +3651,7 @@
       "guideRef": ""
     },
     {
-      "no": 249,
+      "no": 241,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3786,7 +3666,7 @@
       "guideRef": ""
     },
     {
-      "no": 250,
+      "no": 242,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3801,7 +3681,7 @@
       "guideRef": ""
     },
     {
-      "no": 251,
+      "no": 243,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3816,7 +3696,7 @@
       "guideRef": ""
     },
     {
-      "no": 252,
+      "no": 244,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3831,7 +3711,7 @@
       "guideRef": ""
     },
     {
-      "no": 253,
+      "no": 245,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3846,7 +3726,7 @@
       "guideRef": ""
     },
     {
-      "no": 254,
+      "no": 246,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -3861,7 +3741,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 255,
+      "no": 247,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3876,7 +3756,7 @@
       "guideRef": ""
     },
     {
-      "no": 256,
+      "no": 248,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3891,7 +3771,7 @@
       "guideRef": ""
     },
     {
-      "no": 257,
+      "no": 249,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3906,7 +3786,7 @@
       "guideRef": ""
     },
     {
-      "no": 258,
+      "no": 250,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3921,7 +3801,7 @@
       "guideRef": ""
     },
     {
-      "no": 259,
+      "no": 251,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3936,7 +3816,7 @@
       "guideRef": ""
     },
     {
-      "no": 260,
+      "no": 252,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3951,7 +3831,7 @@
       "guideRef": ""
     },
     {
-      "no": 261,
+      "no": 253,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3966,7 +3846,7 @@
       "guideRef": ""
     },
     {
-      "no": 262,
+      "no": 254,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3981,7 +3861,7 @@
       "guideRef": ""
     },
     {
-      "no": 263,
+      "no": 255,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -3996,7 +3876,7 @@
       "guideRef": ""
     },
     {
-      "no": 264,
+      "no": 256,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4011,7 +3891,7 @@
       "guideRef": ""
     },
     {
-      "no": 265,
+      "no": 257,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4026,7 +3906,7 @@
       "guideRef": ""
     },
     {
-      "no": 266,
+      "no": 258,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4041,7 +3921,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 267,
+      "no": 259,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4056,7 +3936,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 268,
+      "no": 260,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4071,7 +3951,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 269,
+      "no": 261,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4086,7 +3966,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 270,
+      "no": 262,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4101,7 +3981,7 @@
       "guideRef": ""
     },
     {
-      "no": 271,
+      "no": 263,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4116,7 +3996,7 @@
       "guideRef": ""
     },
     {
-      "no": 272,
+      "no": 264,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4131,7 +4011,7 @@
       "guideRef": ""
     },
     {
-      "no": 273,
+      "no": 265,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -4146,7 +4026,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 274,
+      "no": 266,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -4161,7 +4041,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 275,
+      "no": 267,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -4176,7 +4056,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 276,
+      "no": 268,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -4191,7 +4071,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 277,
+      "no": 269,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4206,7 +4086,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 278,
+      "no": 270,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4221,7 +4101,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 279,
+      "no": 271,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4236,7 +4116,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 280,
+      "no": 272,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4251,7 +4131,7 @@
       "guideRef": ""
     },
     {
-      "no": 281,
+      "no": 273,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4266,7 +4146,7 @@
       "guideRef": ""
     },
     {
-      "no": 282,
+      "no": 274,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4281,7 +4161,7 @@
       "guideRef": ""
     },
     {
-      "no": 283,
+      "no": 275,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -4296,7 +4176,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 284,
+      "no": 276,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4311,7 +4191,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 285,
+      "no": 277,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4326,7 +4206,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 286,
+      "no": 278,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4341,7 +4221,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 287,
+      "no": 279,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -4356,7 +4236,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 288,
+      "no": 280,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4371,7 +4251,7 @@
       "guideRef": ""
     },
     {
-      "no": 289,
+      "no": 281,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4386,7 +4266,7 @@
       "guideRef": ""
     },
     {
-      "no": 290,
+      "no": 282,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4401,7 +4281,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 291,
+      "no": 283,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4416,7 +4296,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 292,
+      "no": 284,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4431,7 +4311,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 293,
+      "no": 285,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4446,7 +4326,7 @@
       "guideRef": ""
     },
     {
-      "no": 294,
+      "no": 286,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4461,7 +4341,7 @@
       "guideRef": ""
     },
     {
-      "no": 295,
+      "no": 287,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4476,7 +4356,7 @@
       "guideRef": ""
     },
     {
-      "no": 296,
+      "no": 288,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4491,7 +4371,7 @@
       "guideRef": ""
     },
     {
-      "no": 297,
+      "no": 289,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -4506,7 +4386,7 @@
       "guideRef": ""
     },
     {
-      "no": 298,
+      "no": 290,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -4521,7 +4401,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 299,
+      "no": 291,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4536,7 +4416,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 300,
+      "no": 292,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4551,7 +4431,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 301,
+      "no": 293,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4566,7 +4446,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 302,
+      "no": 294,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4581,7 +4461,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 303,
+      "no": 295,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4596,7 +4476,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 304,
+      "no": 296,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4611,7 +4491,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 305,
+      "no": 297,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4626,7 +4506,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 306,
+      "no": 298,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4641,7 +4521,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 307,
+      "no": 299,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4656,7 +4536,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 308,
+      "no": 300,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4671,7 +4551,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 309,
+      "no": 301,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4686,7 +4566,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 310,
+      "no": 302,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4701,7 +4581,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 311,
+      "no": 303,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4716,7 +4596,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 312,
+      "no": 304,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4731,7 +4611,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 313,
+      "no": 305,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4746,7 +4626,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 314,
+      "no": 306,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4761,7 +4641,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 315,
+      "no": 307,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4776,7 +4656,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 316,
+      "no": 308,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4791,7 +4671,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 317,
+      "no": 309,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4806,7 +4686,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 318,
+      "no": 310,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4821,7 +4701,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 319,
+      "no": 311,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4836,7 +4716,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 320,
+      "no": 312,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4851,7 +4731,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 321,
+      "no": 313,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4866,7 +4746,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 322,
+      "no": 314,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4881,7 +4761,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 323,
+      "no": 315,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4896,7 +4776,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 324,
+      "no": 316,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4911,7 +4791,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 325,
+      "no": 317,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4926,7 +4806,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 326,
+      "no": 318,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4941,7 +4821,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 327,
+      "no": 319,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4956,7 +4836,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 328,
+      "no": 320,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4971,7 +4851,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 329,
+      "no": 321,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -4986,7 +4866,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 330,
+      "no": 322,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5001,7 +4881,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 331,
+      "no": 323,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5016,7 +4896,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 332,
+      "no": 324,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5031,7 +4911,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 333,
+      "no": 325,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5046,7 +4926,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 334,
+      "no": 326,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5061,7 +4941,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 335,
+      "no": 327,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5076,7 +4956,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 336,
+      "no": 328,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5091,7 +4971,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 337,
+      "no": 329,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5106,7 +4986,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 338,
+      "no": 330,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5121,7 +5001,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 339,
+      "no": 331,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5136,7 +5016,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 340,
+      "no": 332,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5151,7 +5031,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 341,
+      "no": 333,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5166,7 +5046,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 342,
+      "no": 334,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5181,7 +5061,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 343,
+      "no": 335,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5196,7 +5076,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 344,
+      "no": 336,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5211,7 +5091,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 345,
+      "no": 337,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5226,7 +5106,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 346,
+      "no": 338,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5241,7 +5121,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 347,
+      "no": 339,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5256,7 +5136,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 348,
+      "no": 340,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5271,7 +5151,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 349,
+      "no": 341,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5286,7 +5166,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 350,
+      "no": 342,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5301,7 +5181,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 351,
+      "no": 343,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5316,7 +5196,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 352,
+      "no": 344,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5331,7 +5211,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 353,
+      "no": 345,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5346,7 +5226,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 354,
+      "no": 346,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5361,7 +5241,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 355,
+      "no": 347,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5376,7 +5256,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 356,
+      "no": 348,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5391,7 +5271,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 357,
+      "no": 349,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5406,7 +5286,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 358,
+      "no": 350,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -5421,7 +5301,7 @@
       "guideRef": ""
     },
     {
-      "no": 359,
+      "no": 351,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -5436,7 +5316,7 @@
       "guideRef": ""
     },
     {
-      "no": 360,
+      "no": 352,
       "ruleId": "IV-4.1",
       "ruleName": "오류 메시지 정보노출",
       "severity": "MEDIUM",
@@ -5451,82 +5331,7 @@
       "guideRef": "PART4 제4절 1항 (p.419-424)"
     },
     {
-      "no": 361,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java",
-      "lineNumber": 54,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L54에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//\t\t} catch (IOException e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 362,
-      "ruleId": "DS-3.1",
-      "ruleName": "예외처리",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java",
-      "lineNumber": 60,
-      "cweIds": ["CWE-209", "CWE-390"],
-      "description": "[DS-3.1] L60에서 위험 패턴이 탐지되었습니다. ",
-      "vulnerableCode": "//\t\t\t\t} catch (IOException e) {",
-      "remediatedCode": "// 해당 약점의 수정 방법을 가이드에서 확인하세요: ",
-      "remediationExplanation": "보안약점 '예외처리'의 조치방안을 가이드에서 확인하세요.",
-      "guideRef": ""
-    },
-    {
-      "no": 363,
-      "ruleId": "IV-3.2",
-      "ruleName": "종료되지 않는 반복문 또는 재귀 함수",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java",
-      "lineNumber": 40,
-      "cweIds": ["CWE-835"],
-      "description": "[IV-3.2] L40에서 위험 패턴이 탐지되었습니다. 조치: 반복문·재귀 함수에 명확한 종료 조건 및 최대 반복 횟수 제한 추가",
-      "vulnerableCode": "//\t\t\t\twhile (true) {",
-      "remediatedCode": "// [수정] IV-3.2 무한 반복문 방지: 명확한 종료 조건 추가\n// ❌ 취약: while(true) { ... } / for(;;) { ... }\n// ✅ 안전:\nint maxRetries = 3;\nint attempt = 0;\nwhile (attempt < maxRetries && !isComplete()) {\n    process();\n    attempt++;\n}\nif (attempt >= maxRetries) log.warn(\"최대 재시도 횟수 초과\");\n\n// 재귀 함수: 최대 깊이 제한\nprivate void recurse(int depth) {\n    if (depth > 100) throw new RuntimeException(\"최대 재귀 깊이 초과\");\n    // ...\n    recurse(depth + 1);\n}",
-      "remediationExplanation": "종료 조건 없는 반복문은 서비스 거부(DoS) 공격에 악용되거나 CPU를 고갈시킬 수 있습니다. 외부 입력에 의존하는 반복에는 반드시 최대 반복 횟수나 타임아웃을 설정하세요. 가이드 참조: PART4 제3절 2항 종료되지 않는 반복문 (p.415-418)",
-      "guideRef": "PART4 제3절 2항 (p.415-418)"
-    },
-    {
-      "no": 364,
-      "ruleId": "IV-5.2",
-      "ruleName": "부적절한 자원 해제",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java",
-      "lineNumber": 29,
-      "cweIds": ["CWE-772"],
-      "description": "[IV-5.2] L29에서 위험 패턴이 탐지되었습니다. 조치: try-with-resources 구문으로 자원 자동 해제 보장",
-      "vulnerableCode": "//\t\t\t\tin = new FileInputStream(storePath);",
-      "remediatedCode": "// [수정] IV-5.2 자원 반환 누락 방지: try-with-resources 사용\n// ❌ 취약:\n// InputStream in = new FileInputStream(file);\n// // 예외 발생 시 in.close() 호출 안 됨\n\n// ✅ 안전:\ntry (InputStream in = new FileInputStream(file);\n     BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {\n    String line;\n    while ((line = reader.readLine()) != null) {\n        // 처리\n    }\n} catch (IOException e) {\n    log.error(\"파일 읽기 오류: {}\", e.getMessage(), e);\n}\n// DB 연결:\ntry (Connection con = dataSource.getConnection();\n     PreparedStatement pstmt = con.prepareStatement(sql)) { ... }",
-      "remediationExplanation": "파일·DB 연결 등의 자원을 finally 블록 없이 사용하면 예외 발생 시 자원이 누수됩니다. Java 7+ try-with-resources를 사용하면 예외 발생 여부와 관계없이 자원이 자동으로 닫힙니다. 가이드 참조: PART4 제5절 2항 자원 반환 누락 (p.438-442)",
-      "guideRef": "PART4 제5절 2항 (p.445-453)"
-    },
-    {
-      "no": 365,
-      "ruleId": "IV-5.4",
-      "ruleName": "초기화되지 않은 변수 사용",
-      "severity": "MEDIUM",
-      "severityKorean": "중간",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/FileServerController.java",
-      "lineNumber": 8,
-      "cweIds": ["CWE-457"],
-      "description": "[IV-5.4] L8에서 위험 패턴이 탐지되었습니다. 조치: 모든 변수를 선언 시 명시적으로 초기화",
-      "vulnerableCode": "//\tprivate String uploadPath;",
-      "remediatedCode": "// [수정] IV-5.4 초기화되지 않은 변수 사용 방지\n// ❌ 취약:\n// int count;\n// if (condition) count = 5;\n// process(count);  // count가 초기화되지 않을 수 있음\n\n// ✅ 안전: 선언 시 기본값 설정\nint count = 0;  // 안전한 기본값\nString message = \"\";  // null 대신 빈 문자열\nList<String> items = new ArrayList<>();  // null 대신 빈 컬렉션\n\nif (condition) count = fetchCount();\nprocess(count);\n\n// 객체형: Optional 활용\nOptional<User> user = Optional.empty();\nif (authenticated) user = Optional.of(loadUser());\nuser.ifPresent(u -> process(u));",
-      "remediationExplanation": "초기화되지 않은 변수를 사용하면 예측 불가한 값으로 처리되어 보안 검사가 우회될 수 있습니다. 항상 선언과 동시에 안전한 기본값(0, \"\", false, null 검사 후 Optional)을 할당하세요. 가이드 참조: PART4 제5절 4항 초기화되지 않은 변수 사용 (p.447-450)",
-      "guideRef": "PART4 제5절 4항 (p.459-461)"
-    },
-    {
-      "no": 366,
+      "no": 353,
       "ruleId": "DS-1.7",
       "ruleName": "HTTP 프로토콜 유효성 검증",
       "severity": "MEDIUM",
@@ -5541,7 +5346,7 @@
       "guideRef": ""
     },
     {
-      "no": 367,
+      "no": 354,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5556,7 +5361,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 368,
+      "no": 355,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5571,7 +5376,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 369,
+      "no": 356,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5586,7 +5391,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 370,
+      "no": 357,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5601,7 +5406,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 371,
+      "no": 358,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5616,7 +5421,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 372,
+      "no": 359,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5631,7 +5436,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 373,
+      "no": 360,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5646,7 +5451,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 374,
+      "no": 361,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5661,7 +5466,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 375,
+      "no": 362,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5676,7 +5481,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 376,
+      "no": 363,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5691,7 +5496,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 377,
+      "no": 364,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5706,7 +5511,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 378,
+      "no": 365,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5721,7 +5526,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 379,
+      "no": 366,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5736,7 +5541,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 380,
+      "no": 367,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -5751,7 +5556,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 381,
+      "no": 368,
       "ruleId": "DS-1.7",
       "ruleName": "HTTP 프로토콜 유효성 검증",
       "severity": "MEDIUM",
@@ -5766,7 +5571,7 @@
       "guideRef": ""
     },
     {
-      "no": 382,
+      "no": 369,
       "ruleId": "IV-5.2",
       "ruleName": "부적절한 자원 해제",
       "severity": "MEDIUM",
@@ -5781,7 +5586,7 @@
       "guideRef": "PART4 제5절 2항 (p.445-453)"
     },
     {
-      "no": 383,
+      "no": 370,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5796,7 +5601,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 384,
+      "no": 371,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -5811,7 +5616,7 @@
       "guideRef": ""
     },
     {
-      "no": 385,
+      "no": 372,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -5826,7 +5631,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 386,
+      "no": 373,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -5841,7 +5646,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 387,
+      "no": 374,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -5856,7 +5661,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 388,
+      "no": 375,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -5871,7 +5676,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 389,
+      "no": 376,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -5886,7 +5691,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 390,
+      "no": 377,
       "ruleId": "IV-3.1",
       "ruleName": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
       "severity": "MEDIUM",
@@ -5901,7 +5706,7 @@
       "guideRef": "PART4 제3절 1항 (p.406-414)"
     },
     {
-      "no": 391,
+      "no": 378,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5916,7 +5721,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 392,
+      "no": 379,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5931,7 +5736,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 393,
+      "no": 380,
       "ruleId": "IV-5.4",
       "ruleName": "초기화되지 않은 변수 사용",
       "severity": "MEDIUM",
@@ -5946,7 +5751,7 @@
       "guideRef": "PART4 제5절 4항 (p.459-461)"
     },
     {
-      "no": 394,
+      "no": 381,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -5961,7 +5766,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 395,
+      "no": 382,
       "ruleId": "DS-3.1",
       "ruleName": "예외처리",
       "severity": "MEDIUM",
@@ -5976,7 +5781,7 @@
       "guideRef": ""
     },
     {
-      "no": 396,
+      "no": 383,
       "ruleId": "IV-1.14",
       "ruleName": "정수형 오버플로우",
       "severity": "MEDIUM",
@@ -5991,7 +5796,7 @@
       "guideRef": "PART4 제1절 14항 (p.290-296)"
     },
     {
-      "no": 397,
+      "no": 384,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6006,7 +5811,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 398,
+      "no": 385,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6021,37 +5826,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 399,
-      "ruleId": "IV-4.3",
-      "ruleName": "부적절한 예외 처리",
-      "severity": "LOW",
-      "severityKorean": "낮음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
-      "lineNumber": 216,
-      "cweIds": ["CWE-754"],
-      "description": "[IV-4.3] L216에서 위험 패턴이 탐지되었습니다. 조치: 포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리",
-      "vulnerableCode": "//\t\t} catch (Exception e) {",
-      "remediatedCode": "// [수정] IV-4.3 과도한 예외 처리 개선\n// ❌ 취약: catch (Exception e) { /* 모든 예외를 하나로 */ }\n// ✅ 안전: 예외 종류별 분리 처리\ntry {\n    // 구체적인 예외 먼저 처리\n} catch (java.sql.SQLException e) {\n    // DB 관련 처리\n    log.error(\"[DB] SQL 오류: errorCode={}\", e.getErrorCode(), e);\n} catch (java.io.IOException e) {\n    // 파일/네트워크 처리\n    log.error(\"[IO] 입출력 오류\", e);\n} catch (RuntimeException e) {\n    log.error(\"[Runtime] 런타임 오류\", e);\n    throw e;  // 재발생\n}",
-      "remediationExplanation": "catch(Exception e)는 복구 불가능한 오류(OutOfMemoryError 제외)를 포함하여 의도치 않은 처리가 됩니다. 구체적인 예외 타입별로 분리하여 오류 원인을 명확히 파악하고 적절한 복구 로직을 적용하세요. 가이드 참조: PART4 제4절 3항 과도하게 광범위한 예외 처리 (p.429-432)",
-      "guideRef": "PART4 제4절 3항 (p.429-432)"
-    },
-    {
-      "no": 400,
-      "ruleId": "IV-4.3",
-      "ruleName": "부적절한 예외 처리",
-      "severity": "LOW",
-      "severityKorean": "낮음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/AdminMemberController.java",
-      "lineNumber": 271,
-      "cweIds": ["CWE-754"],
-      "description": "[IV-4.3] L271에서 위험 패턴이 탐지되었습니다. 조치: 포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리",
-      "vulnerableCode": "//\t\t\t}catch (Exception e) {",
-      "remediatedCode": "// [수정] IV-4.3 과도한 예외 처리 개선\n// ❌ 취약: catch (Exception e) { /* 모든 예외를 하나로 */ }\n// ✅ 안전: 예외 종류별 분리 처리\ntry {\n    // 구체적인 예외 먼저 처리\n} catch (java.sql.SQLException e) {\n    // DB 관련 처리\n    log.error(\"[DB] SQL 오류: errorCode={}\", e.getErrorCode(), e);\n} catch (java.io.IOException e) {\n    // 파일/네트워크 처리\n    log.error(\"[IO] 입출력 오류\", e);\n} catch (RuntimeException e) {\n    log.error(\"[Runtime] 런타임 오류\", e);\n    throw e;  // 재발생\n}",
-      "remediationExplanation": "catch(Exception e)는 복구 불가능한 오류(OutOfMemoryError 제외)를 포함하여 의도치 않은 처리가 됩니다. 구체적인 예외 타입별로 분리하여 오류 원인을 명확히 파악하고 적절한 복구 로직을 적용하세요. 가이드 참조: PART4 제4절 3항 과도하게 광범위한 예외 처리 (p.429-432)",
-      "guideRef": "PART4 제4절 3항 (p.429-432)"
-    },
-    {
-      "no": 401,
+      "no": 386,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6066,7 +5841,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 402,
+      "no": 387,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6081,7 +5856,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 403,
+      "no": 388,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6096,7 +5871,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 404,
+      "no": 389,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6111,7 +5886,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 405,
+      "no": 390,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6126,7 +5901,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 406,
+      "no": 391,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6141,7 +5916,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 407,
+      "no": 392,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6156,7 +5931,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 408,
+      "no": 393,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6171,7 +5946,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 409,
+      "no": 394,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6186,7 +5961,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 410,
+      "no": 395,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6201,7 +5976,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 411,
+      "no": 396,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6216,7 +5991,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 412,
+      "no": 397,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6231,7 +6006,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 413,
+      "no": 398,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6246,7 +6021,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 414,
+      "no": 399,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6261,7 +6036,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 415,
+      "no": 400,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6276,7 +6051,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 416,
+      "no": 401,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6291,7 +6066,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 417,
+      "no": 402,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6306,7 +6081,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 418,
+      "no": 403,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6321,7 +6096,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 419,
+      "no": 404,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6336,7 +6111,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 420,
+      "no": 405,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6351,7 +6126,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 421,
+      "no": 406,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6366,7 +6141,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 422,
+      "no": 407,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6381,7 +6156,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 423,
+      "no": 408,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6396,7 +6171,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 424,
+      "no": 409,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -6411,7 +6186,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 425,
+      "no": 410,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -6426,37 +6201,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 426,
-      "ruleId": "IV-6.2",
-      "ruleName": "제거되지 않고 남은 디버그 코드",
-      "severity": "LOW",
-      "severityKorean": "낮음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/FetchWpArticleController.java",
-      "lineNumber": 97,
-      "cweIds": ["CWE-489"],
-      "description": "[IV-6.2] L97에서 위험 패턴이 탐지되었습니다. 조치: 배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용",
-      "vulnerableCode": "//\t\t\t\tSystem.out.println(vo.getMetaValue());",
-      "remediatedCode": "// [수정] IV-6.2 디버그 코드 제거\n// ❌ 제거 대상:\n// System.out.println(\"DEBUG: password=\" + password);\n// e.printStackTrace();\n// if (userId.equals(\"testadmin\")) { return true; }  // 테스트 우회\n\n// ✅ 안전: SLF4J Logger + 조건부 디버그 로그\nprivate static final Logger log = LoggerFactory.getLogger(MyClass.class);\n\nlog.debug(\"처리 시작 (민감정보 미포함)\");  // 프로덕션에서 DEBUG 레벨 비활성화\n// logback.xml: <root level=\"INFO\"> (프로덕션)\n\n// 배포 전 검사:\n// grep -rn 'System.out\\|e.printStackTrace\\|TODO.*debug\\|hardcode' src/",
-      "remediationExplanation": "디버그 코드나 테스트 우회 코드가 배포되면 공격자에게 시스템 내부 정보가 노출됩니다. 배포 전 반드시 System.out.println, printStackTrace, 하드코드된 테스트 계정을 제거하고 프로덕션 로그 레벨을 INFO 이상으로 설정하세요. 가이드 참조: PART4 제6절 2항 디버그 코드 (p.458-461)",
-      "guideRef": "PART4 제6절 2항 (p.476-480)"
-    },
-    {
-      "no": 427,
-      "ruleId": "IV-6.2",
-      "ruleName": "제거되지 않고 남은 디버그 코드",
-      "severity": "LOW",
-      "severityKorean": "낮음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/controller/FetchWpArticleController.java",
-      "lineNumber": 98,
-      "cweIds": ["CWE-489"],
-      "description": "[IV-6.2] L98에서 위험 패턴이 탐지되었습니다. 조치: 배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용",
-      "vulnerableCode": "//\t\t\t\tSystem.out.println(\"postId = [\" + vo.getId() + \"], metavalue List = \" + list + \"\\n\");",
-      "remediatedCode": "// [수정] IV-6.2 디버그 코드 제거\n// ❌ 제거 대상:\n// System.out.println(\"DEBUG: password=\" + password);\n// e.printStackTrace();\n// if (userId.equals(\"testadmin\")) { return true; }  // 테스트 우회\n\n// ✅ 안전: SLF4J Logger + 조건부 디버그 로그\nprivate static final Logger log = LoggerFactory.getLogger(MyClass.class);\n\nlog.debug(\"처리 시작 (민감정보 미포함)\");  // 프로덕션에서 DEBUG 레벨 비활성화\n// logback.xml: <root level=\"INFO\"> (프로덕션)\n\n// 배포 전 검사:\n// grep -rn 'System.out\\|e.printStackTrace\\|TODO.*debug\\|hardcode' src/",
-      "remediationExplanation": "디버그 코드나 테스트 우회 코드가 배포되면 공격자에게 시스템 내부 정보가 노출됩니다. 배포 전 반드시 System.out.println, printStackTrace, 하드코드된 테스트 계정을 제거하고 프로덕션 로그 레벨을 INFO 이상으로 설정하세요. 가이드 참조: PART4 제6절 2항 디버그 코드 (p.458-461)",
-      "guideRef": "PART4 제6절 2항 (p.476-480)"
-    },
-    {
-      "no": 428,
+      "no": 411,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -6471,7 +6216,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 429,
+      "no": 412,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6486,7 +6231,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 430,
+      "no": 413,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6501,7 +6246,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 431,
+      "no": 414,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6516,7 +6261,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 432,
+      "no": 415,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6531,7 +6276,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 433,
+      "no": 416,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6546,7 +6291,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 434,
+      "no": 417,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6561,7 +6306,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 435,
+      "no": 418,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6576,7 +6321,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 436,
+      "no": 419,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6591,7 +6336,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 437,
+      "no": 420,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6606,7 +6351,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 438,
+      "no": 421,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6621,7 +6366,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 439,
+      "no": 422,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6636,7 +6381,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 440,
+      "no": 423,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6651,7 +6396,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 441,
+      "no": 424,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6666,7 +6411,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 442,
+      "no": 425,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6681,7 +6426,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 443,
+      "no": 426,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6696,7 +6441,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 444,
+      "no": 427,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6711,7 +6456,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 445,
+      "no": 428,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6726,7 +6471,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 446,
+      "no": 429,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6741,7 +6486,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 447,
+      "no": 430,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6756,7 +6501,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 448,
+      "no": 431,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6771,7 +6516,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 449,
+      "no": 432,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6786,7 +6531,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 450,
+      "no": 433,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6801,7 +6546,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 451,
+      "no": 434,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6816,7 +6561,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 452,
+      "no": 435,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6831,7 +6576,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 453,
+      "no": 436,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6846,7 +6591,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 454,
+      "no": 437,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6861,7 +6606,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 455,
+      "no": 438,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6876,7 +6621,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 456,
+      "no": 439,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6891,7 +6636,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 457,
+      "no": 440,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6906,7 +6651,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 458,
+      "no": 441,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6921,7 +6666,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 459,
+      "no": 442,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6936,7 +6681,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 460,
+      "no": 443,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6951,7 +6696,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 461,
+      "no": 444,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6966,7 +6711,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 462,
+      "no": 445,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6981,7 +6726,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 463,
+      "no": 446,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -6996,7 +6741,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 464,
+      "no": 447,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7011,7 +6756,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 465,
+      "no": 448,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7026,7 +6771,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 466,
+      "no": 449,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7041,7 +6786,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 467,
+      "no": 450,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7056,7 +6801,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 468,
+      "no": 451,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7071,7 +6816,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 469,
+      "no": 452,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7086,7 +6831,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 470,
+      "no": 453,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7101,7 +6846,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 471,
+      "no": 454,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7116,7 +6861,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 472,
+      "no": 455,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7131,7 +6876,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 473,
+      "no": 456,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7146,7 +6891,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 474,
+      "no": 457,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7161,7 +6906,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 475,
+      "no": 458,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7176,7 +6921,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 476,
+      "no": 459,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7191,7 +6936,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 477,
+      "no": 460,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -7206,7 +6951,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 478,
+      "no": 461,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7221,7 +6966,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 479,
+      "no": 462,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7236,7 +6981,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 480,
+      "no": 463,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7251,7 +6996,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 481,
+      "no": 464,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7266,7 +7011,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 482,
+      "no": 465,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7281,7 +7026,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 483,
+      "no": 466,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7296,7 +7041,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 484,
+      "no": 467,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7311,7 +7056,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 485,
+      "no": 468,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7326,7 +7071,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 486,
+      "no": 469,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7341,7 +7086,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 487,
+      "no": 470,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7356,7 +7101,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 488,
+      "no": 471,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7371,7 +7116,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 489,
+      "no": 472,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7386,7 +7131,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 490,
+      "no": 473,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7401,7 +7146,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 491,
+      "no": 474,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7416,7 +7161,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 492,
+      "no": 475,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7431,7 +7176,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 493,
+      "no": 476,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7446,7 +7191,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 494,
+      "no": 477,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7461,7 +7206,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 495,
+      "no": 478,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7476,7 +7221,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 496,
+      "no": 479,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7491,7 +7236,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 497,
+      "no": 480,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7506,7 +7251,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 498,
+      "no": 481,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7521,7 +7266,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 499,
+      "no": 482,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7536,7 +7281,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 500,
+      "no": 483,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7551,7 +7296,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 501,
+      "no": 484,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7566,7 +7311,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 502,
+      "no": 485,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7581,7 +7326,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 503,
+      "no": 486,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7596,7 +7341,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 504,
+      "no": 487,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7611,7 +7356,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 505,
+      "no": 488,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7626,7 +7371,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 506,
+      "no": 489,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7641,7 +7386,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 507,
+      "no": 490,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7656,7 +7401,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 508,
+      "no": 491,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7671,7 +7416,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 509,
+      "no": 492,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7686,7 +7431,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 510,
+      "no": 493,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7701,7 +7446,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 511,
+      "no": 494,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7716,7 +7461,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 512,
+      "no": 495,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7731,7 +7476,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 513,
+      "no": 496,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7746,7 +7491,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 514,
+      "no": 497,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7761,7 +7506,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 515,
+      "no": 498,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7776,7 +7521,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 516,
+      "no": 499,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7791,7 +7536,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 517,
+      "no": 500,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7806,7 +7551,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 518,
+      "no": 501,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7821,7 +7566,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 519,
+      "no": 502,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7836,7 +7581,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 520,
+      "no": 503,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7851,7 +7596,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 521,
+      "no": 504,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7866,7 +7611,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 522,
+      "no": 505,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7881,7 +7626,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 523,
+      "no": 506,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7896,7 +7641,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 524,
+      "no": 507,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7911,7 +7656,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 525,
+      "no": 508,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7926,7 +7671,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 526,
+      "no": 509,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7941,7 +7686,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 527,
+      "no": 510,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7956,7 +7701,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 528,
+      "no": 511,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7971,7 +7716,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 529,
+      "no": 512,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -7986,7 +7731,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 530,
+      "no": 513,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8001,7 +7746,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 531,
+      "no": 514,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8016,7 +7761,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 532,
+      "no": 515,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8031,7 +7776,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 533,
+      "no": 516,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8046,7 +7791,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 534,
+      "no": 517,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8061,7 +7806,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 535,
+      "no": 518,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8076,7 +7821,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 536,
+      "no": 519,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8091,7 +7836,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 537,
+      "no": 520,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8106,7 +7851,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 538,
+      "no": 521,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8121,7 +7866,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 539,
+      "no": 522,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8136,7 +7881,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 540,
+      "no": 523,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8151,7 +7896,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 541,
+      "no": 524,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8166,7 +7911,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 542,
+      "no": 525,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8181,7 +7926,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 543,
+      "no": 526,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8196,7 +7941,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 544,
+      "no": 527,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8211,7 +7956,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 545,
+      "no": 528,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8226,7 +7971,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 546,
+      "no": 529,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8241,7 +7986,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 547,
+      "no": 530,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8256,7 +8001,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 548,
+      "no": 531,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8271,7 +8016,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 549,
+      "no": 532,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8286,7 +8031,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 550,
+      "no": 533,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8301,7 +8046,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 551,
+      "no": 534,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8316,7 +8061,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 552,
+      "no": 535,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8331,7 +8076,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 553,
+      "no": 536,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8346,7 +8091,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 554,
+      "no": 537,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8361,7 +8106,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 555,
+      "no": 538,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8376,7 +8121,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 556,
+      "no": 539,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8391,7 +8136,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 557,
+      "no": 540,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8406,7 +8151,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 558,
+      "no": 541,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8421,7 +8166,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 559,
+      "no": 542,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8436,7 +8181,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 560,
+      "no": 543,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8451,7 +8196,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 561,
+      "no": 544,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8466,7 +8211,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 562,
+      "no": 545,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8481,7 +8226,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 563,
+      "no": 546,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8496,7 +8241,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 564,
+      "no": 547,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8511,7 +8256,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 565,
+      "no": 548,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8526,7 +8271,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 566,
+      "no": 549,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8541,7 +8286,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 567,
+      "no": 550,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8556,7 +8301,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 568,
+      "no": 551,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8571,7 +8316,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 569,
+      "no": 552,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8586,7 +8331,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 570,
+      "no": 553,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8601,7 +8346,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 571,
+      "no": 554,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8616,7 +8361,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 572,
+      "no": 555,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8631,7 +8376,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 573,
+      "no": 556,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8646,7 +8391,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 574,
+      "no": 557,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8661,7 +8406,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 575,
+      "no": 558,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8676,7 +8421,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 576,
+      "no": 559,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8691,7 +8436,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 577,
+      "no": 560,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8706,7 +8451,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 578,
+      "no": 561,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8721,7 +8466,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 579,
+      "no": 562,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8736,7 +8481,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 580,
+      "no": 563,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8751,7 +8496,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 581,
+      "no": 564,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8766,7 +8511,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 582,
+      "no": 565,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8781,7 +8526,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 583,
+      "no": 566,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8796,7 +8541,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 584,
+      "no": 567,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8811,7 +8556,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 585,
+      "no": 568,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8826,7 +8571,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 586,
+      "no": 569,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8841,7 +8586,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 587,
+      "no": 570,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8856,7 +8601,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 588,
+      "no": 571,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8871,7 +8616,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 589,
+      "no": 572,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8886,7 +8631,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 590,
+      "no": 573,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8901,7 +8646,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 591,
+      "no": 574,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8916,7 +8661,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 592,
+      "no": 575,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8931,7 +8676,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 593,
+      "no": 576,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8946,7 +8691,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 594,
+      "no": 577,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8961,7 +8706,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 595,
+      "no": 578,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8976,7 +8721,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 596,
+      "no": 579,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -8991,7 +8736,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 597,
+      "no": 580,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9006,7 +8751,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 598,
+      "no": 581,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9021,7 +8766,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 599,
+      "no": 582,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9036,7 +8781,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 600,
+      "no": 583,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9051,7 +8796,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 601,
+      "no": 584,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9066,7 +8811,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 602,
+      "no": 585,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9081,7 +8826,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 603,
+      "no": 586,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9096,7 +8841,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 604,
+      "no": 587,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9111,7 +8856,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 605,
+      "no": 588,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9126,7 +8871,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 606,
+      "no": 589,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9141,7 +8886,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 607,
+      "no": 590,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9156,7 +8901,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 608,
+      "no": 591,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9171,7 +8916,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 609,
+      "no": 592,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9186,7 +8931,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 610,
+      "no": 593,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9201,7 +8946,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 611,
+      "no": 594,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9216,7 +8961,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 612,
+      "no": 595,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9231,7 +8976,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 613,
+      "no": 596,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9246,7 +8991,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 614,
+      "no": 597,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9261,7 +9006,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 615,
+      "no": 598,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9276,7 +9021,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 616,
+      "no": 599,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9291,7 +9036,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 617,
+      "no": 600,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9306,7 +9051,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 618,
+      "no": 601,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9321,7 +9066,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 619,
+      "no": 602,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9336,7 +9081,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 620,
+      "no": 603,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9351,7 +9096,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 621,
+      "no": 604,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9366,7 +9111,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 622,
+      "no": 605,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9381,7 +9126,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 623,
+      "no": 606,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9396,7 +9141,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 624,
+      "no": 607,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9411,7 +9156,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 625,
+      "no": 608,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9426,7 +9171,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 626,
+      "no": 609,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9441,7 +9186,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 627,
+      "no": 610,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9456,7 +9201,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 628,
+      "no": 611,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9471,7 +9216,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 629,
+      "no": 612,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9486,7 +9231,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 630,
+      "no": 613,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9501,7 +9246,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 631,
+      "no": 614,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9516,7 +9261,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 632,
+      "no": 615,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9531,7 +9276,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 633,
+      "no": 616,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9546,7 +9291,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 634,
+      "no": 617,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9561,7 +9306,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 635,
+      "no": 618,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9576,7 +9321,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 636,
+      "no": 619,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9591,7 +9336,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 637,
+      "no": 620,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9606,7 +9351,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 638,
+      "no": 621,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9621,7 +9366,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 639,
+      "no": 622,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9636,7 +9381,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 640,
+      "no": 623,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9651,7 +9396,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 641,
+      "no": 624,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9666,7 +9411,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 642,
+      "no": 625,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9681,7 +9426,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 643,
+      "no": 626,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9696,7 +9441,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 644,
+      "no": 627,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9711,7 +9456,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 645,
+      "no": 628,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9726,7 +9471,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 646,
+      "no": 629,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9741,7 +9486,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 647,
+      "no": 630,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9756,7 +9501,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 648,
+      "no": 631,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9771,7 +9516,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 649,
+      "no": 632,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9786,7 +9531,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 650,
+      "no": 633,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9801,7 +9546,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 651,
+      "no": 634,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9816,7 +9561,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 652,
+      "no": 635,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9831,7 +9576,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 653,
+      "no": 636,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9846,7 +9591,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 654,
+      "no": 637,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9861,7 +9606,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 655,
+      "no": 638,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9876,7 +9621,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 656,
+      "no": 639,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9891,7 +9636,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 657,
+      "no": 640,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9906,7 +9651,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 658,
+      "no": 641,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9921,7 +9666,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 659,
+      "no": 642,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9936,7 +9681,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 660,
+      "no": 643,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9951,7 +9696,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 661,
+      "no": 644,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9966,7 +9711,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 662,
+      "no": 645,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9981,7 +9726,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 663,
+      "no": 646,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -9996,7 +9741,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 664,
+      "no": 647,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10011,7 +9756,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 665,
+      "no": 648,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10026,7 +9771,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 666,
+      "no": 649,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10041,7 +9786,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 667,
+      "no": 650,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10056,7 +9801,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 668,
+      "no": 651,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10071,7 +9816,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 669,
+      "no": 652,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10086,7 +9831,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 670,
+      "no": 653,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10101,7 +9846,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 671,
+      "no": 654,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10116,7 +9861,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 672,
+      "no": 655,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10131,7 +9876,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 673,
+      "no": 656,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10146,7 +9891,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 674,
+      "no": 657,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10161,7 +9906,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 675,
+      "no": 658,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10176,7 +9921,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 676,
+      "no": 659,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10191,7 +9936,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 677,
+      "no": 660,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10206,7 +9951,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 678,
+      "no": 661,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10221,7 +9966,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 679,
+      "no": 662,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10236,7 +9981,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 680,
+      "no": 663,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10251,7 +9996,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 681,
+      "no": 664,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10266,7 +10011,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 682,
+      "no": 665,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10281,7 +10026,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 683,
+      "no": 666,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10296,7 +10041,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 684,
+      "no": 667,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10311,7 +10056,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 685,
+      "no": 668,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10326,7 +10071,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 686,
+      "no": 669,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10341,7 +10086,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 687,
+      "no": 670,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10356,7 +10101,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 688,
+      "no": 671,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10371,7 +10116,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 689,
+      "no": 672,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10386,7 +10131,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 690,
+      "no": 673,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10401,7 +10146,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 691,
+      "no": 674,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10416,7 +10161,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 692,
+      "no": 675,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10431,7 +10176,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 693,
+      "no": 676,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10446,7 +10191,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 694,
+      "no": 677,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10461,7 +10206,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 695,
+      "no": 678,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10476,7 +10221,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 696,
+      "no": 679,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10491,7 +10236,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 697,
+      "no": 680,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10506,7 +10251,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 698,
+      "no": 681,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10521,7 +10266,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 699,
+      "no": 682,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10536,7 +10281,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 700,
+      "no": 683,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10551,7 +10296,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 701,
+      "no": 684,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10566,7 +10311,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 702,
+      "no": 685,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10581,7 +10326,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 703,
+      "no": 686,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10596,7 +10341,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 704,
+      "no": 687,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10611,7 +10356,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 705,
+      "no": 688,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10626,7 +10371,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 706,
+      "no": 689,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10641,7 +10386,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 707,
+      "no": 690,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10656,7 +10401,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 708,
+      "no": 691,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10671,7 +10416,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 709,
+      "no": 692,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10686,7 +10431,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 710,
+      "no": 693,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10701,7 +10446,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 711,
+      "no": 694,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10716,7 +10461,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 712,
+      "no": 695,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10731,7 +10476,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 713,
+      "no": 696,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10746,7 +10491,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 714,
+      "no": 697,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10761,7 +10506,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 715,
+      "no": 698,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10776,7 +10521,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 716,
+      "no": 699,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -10791,7 +10536,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 717,
+      "no": 700,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -10806,22 +10551,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 718,
-      "ruleId": "IV-6.2",
-      "ruleName": "제거되지 않고 남은 디버그 코드",
-      "severity": "LOW",
-      "severityKorean": "낮음",
-      "filePath": "/home/ec2-user/project/target-project/src/main/java/com/skecoplant/newsroom/adm/common/MvcConfig.java",
-      "lineNumber": 18,
-      "cweIds": ["CWE-489"],
-      "description": "[IV-6.2] L18에서 위험 패턴이 탐지되었습니다. 조치: 배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용",
-      "vulnerableCode": "//\t\tSystem.out.println(\"Resource Handler Path: file:\" + uploadPath);",
-      "remediatedCode": "// [수정] IV-6.2 디버그 코드 제거\n// ❌ 제거 대상:\n// System.out.println(\"DEBUG: password=\" + password);\n// e.printStackTrace();\n// if (userId.equals(\"testadmin\")) { return true; }  // 테스트 우회\n\n// ✅ 안전: SLF4J Logger + 조건부 디버그 로그\nprivate static final Logger log = LoggerFactory.getLogger(MyClass.class);\n\nlog.debug(\"처리 시작 (민감정보 미포함)\");  // 프로덕션에서 DEBUG 레벨 비활성화\n// logback.xml: <root level=\"INFO\"> (프로덕션)\n\n// 배포 전 검사:\n// grep -rn 'System.out\\|e.printStackTrace\\|TODO.*debug\\|hardcode' src/",
-      "remediationExplanation": "디버그 코드나 테스트 우회 코드가 배포되면 공격자에게 시스템 내부 정보가 노출됩니다. 배포 전 반드시 System.out.println, printStackTrace, 하드코드된 테스트 계정을 제거하고 프로덕션 로그 레벨을 INFO 이상으로 설정하세요. 가이드 참조: PART4 제6절 2항 디버그 코드 (p.458-461)",
-      "guideRef": "PART4 제6절 2항 (p.476-480)"
-    },
-    {
-      "no": 719,
+      "no": 701,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10836,7 +10566,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 720,
+      "no": 702,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10851,7 +10581,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 721,
+      "no": 703,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10866,7 +10596,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 722,
+      "no": 704,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10881,7 +10611,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 723,
+      "no": 705,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -10896,7 +10626,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 724,
+      "no": 706,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -10911,7 +10641,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 725,
+      "no": 707,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -10926,7 +10656,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 726,
+      "no": 708,
       "ruleId": "IV-4.3",
       "ruleName": "부적절한 예외 처리",
       "severity": "LOW",
@@ -10941,7 +10671,7 @@
       "guideRef": "PART4 제4절 3항 (p.429-432)"
     },
     {
-      "no": 727,
+      "no": 709,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -10956,7 +10686,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 728,
+      "no": 710,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -10971,7 +10701,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 729,
+      "no": 711,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -10986,7 +10716,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 730,
+      "no": 712,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -11001,7 +10731,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 731,
+      "no": 713,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",
@@ -11016,7 +10746,7 @@
       "guideRef": "PART4 제6절 2항 (p.476-480)"
     },
     {
-      "no": 732,
+      "no": 714,
       "ruleId": "IV-6.4",
       "ruleName": "Private 배열에 Public 데이터 할당",
       "severity": "LOW",
@@ -11031,7 +10761,7 @@
       "guideRef": "PART4 제6절 4항 (p.487-491)"
     },
     {
-      "no": 733,
+      "no": 715,
       "ruleId": "IV-6.2",
       "ruleName": "제거되지 않고 남은 디버그 코드",
       "severity": "LOW",

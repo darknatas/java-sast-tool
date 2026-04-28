@@ -1,8 +1,13 @@
 package com.sast.web;
 
+import com.sast.report.PdfReportGenerator;
 import com.sast.web.model.AnalysisResultView;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +17,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * SAST 웹 컨트롤러 — ZIP 업로드 → 분석 → 결과 대시보드
+ * SAST 웹 컨트롤러 — ZIP 업로드 → 분석 → 결과 대시보드 + PDF 다운로드
  */
 @Controller
 public class SastWebController {
 
     private static final Logger log = LoggerFactory.getLogger(SastWebController.class);
 
-    private final SastAnalysisService analysisService;
+    // 세션 키: 마지막 분석 결과 저장용 (PDF 다운로드에 재사용)
+    private static final String SESSION_KEY_RESULT = "lastAnalysisResult";
 
-    public SastWebController(SastAnalysisService analysisService) {
-        this.analysisService = analysisService;
+    private final SastAnalysisService analysisService;
+    private final PdfReportGenerator  pdfReportGenerator;
+
+    public SastWebController(SastAnalysisService analysisService,
+                             PdfReportGenerator pdfReportGenerator) {
+        this.analysisService    = analysisService;
+        this.pdfReportGenerator = pdfReportGenerator;
     }
 
     @GetMapping("/")
@@ -30,9 +41,14 @@ public class SastWebController {
         return "index";
     }
 
+    /**
+     * ZIP 업로드 → SAST 분석 → 결과 뷰 반환
+     * 분석 결과를 세션에도 저장하여 /report/download 엔드포인트에서 재사용
+     */
     @PostMapping("/analyze")
     public String analyze(
             @RequestParam("zipFile") MultipartFile zipFile,
+            HttpSession session,
             Model model,
             RedirectAttributes redirectAttributes) {
 
@@ -50,9 +66,14 @@ public class SastWebController {
         }
 
         try {
-            log.info("[SAST-Web] 분석 요청: {}, 크기: {} bytes", zipFile.getOriginalFilename(), zipFile.getSize());
+            log.info("[SAST-Web] 분석 요청: {}, 크기: {} bytes",
+                    zipFile.getOriginalFilename(), zipFile.getSize());
             AnalysisResultView result = analysisService.analyze(zipFile);
+
+            // 세션 저장 — PDF 다운로드 시 재사용 (단일 사용자 도구 기준, 세션 메모리)
+            session.setAttribute(SESSION_KEY_RESULT, result);
             model.addAttribute("result", result);
+            model.addAttribute("hasPdfDownload", true);
             return "results";
 
         } catch (SecurityException e) {
@@ -63,6 +84,37 @@ public class SastWebController {
             log.error("[SAST-Web] 분석 중 오류: {}", e.getMessage(), e);
             redirectAttributes.addFlashAttribute("error", "분석 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
             return "redirect:/";
+        }
+    }
+
+    /**
+     * 마지막 분석 결과를 PDF로 다운로드
+     * 세션에 저장된 AnalysisResultView를 PDFBox로 변환하여 반환
+     *
+     * GET /report/download
+     */
+    @GetMapping("/report/download")
+    public ResponseEntity<byte[]> downloadPdf(HttpSession session) {
+        AnalysisResultView result = (AnalysisResultView) session.getAttribute(SESSION_KEY_RESULT);
+        if (result == null) {
+            log.warn("[SAST-Web] PDF 다운로드 요청 — 세션에 분석 결과 없음");
+            return ResponseEntity.notFound().build();
+        }
+
+        try {
+            log.info("[SAST-Web] PDF 리포트 생성 시작 — {}건", result.getTotalFindings());
+            byte[] pdf = pdfReportGenerator.generate(result);
+            log.info("[SAST-Web] PDF 생성 완료 — {}KB", pdf.length / 1024);
+
+            String filename = "sast-report-" + result.getUploadedFileName().replaceAll("[^a-zA-Z0-9._-]", "_") + ".pdf";
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdf);
+
+        } catch (Exception e) {
+            log.error("[SAST-Web] PDF 생성 실패: {}", e.getMessage(), e);
+            return ResponseEntity.internalServerError().build();
         }
     }
 }

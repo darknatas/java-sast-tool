@@ -45,6 +45,13 @@ public class PatternAnalyzer {
                 String lineText = lines.get(i);
                 String dedupKey = rule.getRuleId() + ":" + (i + 1);
 
+                // 주석 라인 건너뜀: 주석 처리된 코드에서 패턴 매칭 방지 (오탐 감소)
+                // 대상: // 라인 주석, /* 블록 시작, * 블록 내부 라인
+                if (isCommentLine(lineText)) {
+                    log.debug("[PatternAnalyzer] 주석 라인 건너뜀: L{} {}", i + 1, lineText.trim());
+                    continue;
+                }
+
                 for (Pattern pattern : compiled) {
                     Matcher m = pattern.matcher(lineText);
                     if (m.find() && reported.add(dedupKey)) {
@@ -71,6 +78,19 @@ public class PatternAnalyzer {
 
         log.debug("[PatternAnalyzer] {} — {}건 탐지", filePath, findings.size());
         return findings;
+    }
+
+    /**
+     * 라인이 순수 주석인지 판별 (블록 주석 내부·시작 / 라인 주석)
+     * 인라인 주석(코드 뒤 //)은 완전 제외하지 않아 과도한 오탐 억제 방지
+     */
+    private boolean isCommentLine(String line) {
+        String t = line.stripLeading();
+        return t.startsWith("//")
+                || t.startsWith("/*")
+                || t.startsWith("* ")
+                || t.equals("*/")
+                || t.startsWith("**/");
     }
 
     private List<Pattern> compilePatterns(SecurityRule rule) {

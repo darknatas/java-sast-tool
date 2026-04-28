@@ -1,0 +1,10 @@
+{
+  "suppressions": [
+    {
+      "file": "Sample_",
+      "ruleId": null,
+      "line": null,
+      "reason": "샘플 파일은 취약 패턴을 의도적으로 포함하므로 억제"
+    }
+  ]
+}

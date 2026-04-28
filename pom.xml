@@ -33,6 +33,7 @@
         <commons-io.version>2.16.1</commons-io.version>
         <commons-compress.version>1.26.2</commons-compress.version>
         <xz.version>1.9</xz.version>
+        <openpdf.version>2.0.3</openpdf.version>
         <!-- Spring Boot parent이 Jackson/SLF4J/Logback/JUnit 버전을 관리함 -->
     </properties>
 
@@ -88,6 +89,14 @@
             <groupId>org.tukaani</groupId>
             <artifactId>xz</artifactId>
             <version>${xz.version}</version>
+        </dependency>
+
+        <!-- ── PDF 리포트 생성 (OpenPDF — CFF/OTF 한국어 지원) ──────── -->
+        <!-- OpenPDF는 iText 4 포크, BaseFont.IDENTITY_H로 CFF 기반 OTF 한국어 폰트 지원 -->
+        <dependency>
+            <groupId>com.github.librepdf</groupId>
+            <artifactId>openpdf</artifactId>
+            <version>${openpdf.version}</version>
         </dependency>
 
         <!-- ── 테스트 ────────────────────────────────────────────────── -->
