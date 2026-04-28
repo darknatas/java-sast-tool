@@ -261,9 +261,15 @@
       "cwe": ["CWE-488"],
       "severity": "HIGH",
       "phase": "DESIGN",
-      "description": "세션 생성·만료·재사용 방지 메커니즘 설계",
-      "relatedImplRules": ["IV-6.1"]
-    ,
+      "taintAnalysis": true,
+      "description": "서비스·유틸 레이어 메서드가 HttpSession 객체 자체를 파라미터로 직접 받는 것은 보안 설계 위반이다. ① 세션 객체 전달 시 불필요한 세션 데이터 전체에 접근·변조 가능, ② Session Fixation 공격에 취약, ③ 세션 만료 시 NullPointerException 위험이 있다. 컨트롤러에서 필요한 속성값(사용자 ID, 권한 코드 등)만 추출하여 서비스 레이어에 전달해야 한다. 세션 만료 시간은 20분 이내로 설정하고, 인증 성공 후 반드시 session.invalidate() 후 새 세션을 발급하여 Session Fixation을 방지하라.",
+      "relatedImplRules": ["IV-6.1"],
+      "remediation": {
+        "strategy": "SESSION_DESIGN",
+        "description": "컨트롤러에서 session.getAttribute(\"사용자키\")로 필요한 값만 추출 후 서비스 레이어에 전달하라. HttpSession 객체를 서비스 메서드 파라미터로 직접 선언하지 말 것. 세션 타임아웃은 web.xml 또는 setMaxInactiveInterval(1200)로 20분 설정. 로그인 성공 시 session.invalidate() 후 request.getSession(true)로 새 세션 발급.",
+        "guideRef": "PART3 제4절 1항 (p.165-170)",
+        "remediationCode": "// [수정] DS-4.1 세션 통제: HttpSession 객체 직접 전달 금지\n// ❌ 취약: 서비스 메서드가 HttpSession 전체를 받음\n// public BoardVO setMemberInfo(BoardVO vo, HttpSession session) { ... }\n\n// ✅ 안전: 컨트롤러에서 필요한 값만 추출하여 전달\n// [Controller]\nMemberVO memberVo = (MemberVO) session.getAttribute(\"admin\");\nif (memberVo == null) throw new UnauthorizedException(\"로그인이 필요합니다.\");\nvo = boardService.setMemberInfo(vo, memberVo.getId(), memberVo.getName());\n\n// [Service]\npublic BoardVO setMemberInfo(BoardVO vo, String userId, String userName) {\n    if (userId != null) {\n        vo.setRegId(userId);\n        vo.setRegName(userName);\n        vo.setUpdId(userId);\n        vo.setUpdName(userName);\n    }\n    return vo;\n}\n\n// [세션 만료 설정 — web.xml]\n// <session-config><session-timeout>20</session-timeout></session-config>\n\n// [Session Fixation 방지 — 로그인 성공 후]\nHttpSession oldSession = request.getSession(false);\nif (oldSession != null) oldSession.invalidate();\nHttpSession newSession = request.getSession(true);  // 새 ID 발급\nnewSession.setAttribute(\"admin\", authenticatedMember);"
+      },
       "dangerousPatterns": ["getSession\\(|setMaxInactiveInterval|session\\.invalidate"]
     },
 
@@ -316,8 +322,9 @@
       ],
       "remediation": {
         "strategy": "USE_PREPARED_STATEMENT",
-        "description": "PreparedStatement를 사용하여 파라미터를 바인딩하고 동적 쿼리 문자열 연결을 제거",
-        "guideRef": "PART4 제1절 1항 (p.180-193)"
+        "description": "외부 입력값을 SQL 문자열에 직접 연결(+)하면 공격자가 SQL 문법을 주입하여 인증 우회, 데이터 탈취, 데이터 변조가 가능하다. PreparedStatement의 ?·플레이스홀더를 사용하면 SQL 구조가 컴파일 시점에 확정되어 입력값이 순수 데이터로만 처리된다. MyBatis 환경에서는 ${ } 대신 #{ } 바인딩 파라미터를 사용하라.",
+        "guideRef": "PART4 제1절 1항 (p.180-193)",
+        "remediationCode": "// [수정] IV-1.1 SQL 삽입 방지: PreparedStatement 사용\n// ❌ 취약: String sql = \"SELECT * FROM board WHERE id='\" + userId + \"'\";\n// ✅ 안전:\nString sql = \"SELECT * FROM board WHERE id = ?\";\ntry (PreparedStatement pstmt = con.prepareStatement(sql)) {\n    pstmt.setString(1, userId);\n    try (ResultSet rs = pstmt.executeQuery()) {\n        while (rs.next()) { /* 처리 */ }\n    }\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 실행 오류: {}\", e.getMessage(), e);\n    throw new RuntimeException(\"데이터 조회 중 오류가 발생했습니다.\", e);\n}\n// MyBatis: WHERE b_gubun = #{userId}  (${userId} 사용 금지)"
       }
     },
     {
@@ -380,8 +387,9 @@
       ],
       "remediation": {
         "strategy": "PATH_CANONICALIZATION",
-        "description": "경로순회 문자열(../, ..\\) 제거 후 정규화된 절대경로 비교 검증",
-        "guideRef": "PART4 제1절 3항 (p.201-210)"
+        "description": "외부 입력 파일명/경로에 '../'(상위 디렉터리 탈출), '%2e%2e%2f'(URL 인코딩) 등이 포함되면 허용된 디렉터리를 벗어나 임의 파일 접근이 가능하다. getCanonicalPath()로 경로를 정규화한 후 허용 기본 디렉터리(base directory) 내부에 있는지 Path.startsWith()로 검증하라. String.startsWith() 사용 시 /data2가 /data로 오인되는 문제가 발생하므로 반드시 Path API 사용.",
+        "guideRef": "PART4 제1절 3항 (p.201-210)",
+        "remediationCode": "// [수정] IV-1.3 경로 조작 방지: canonicalize 후 허용 범위 검증\nString fileName = request.getParameter(\"fileName\");\nif (fileName == null || !fileName.matches(\"^[a-zA-Z0-9._-]{1,255}$\"))\n    throw new SecurityException(\"허용되지 않는 파일명\");\nFile baseDir = new File(\"/app/uploads\").getCanonicalFile();\nFile target  = new File(baseDir, fileName).getCanonicalFile();\nif (!target.toPath().startsWith(baseDir.toPath()))\n    throw new SecurityException(\"허용되지 않는 경로 접근\");\ntry (FileInputStream fis = new FileInputStream(target)) { /* 처리 */ }"
       }
     },
     {
@@ -841,12 +849,15 @@
     // 제3절 시간 및 상태 (2개)
     {
       "ruleId": "IV-3.1", "part": "PART4", "section": "시간 및 상태",
-      "name": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)", "cwe": ["CWE-367"],
+      "name": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)", "cwe": ["CWE-367", "CWE-362"],
       "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false, "sequenceAnalysis": true,
       "sinks": ["f.exists()", "f.canRead()", "f.isFile()"],
+      "description": "파일에 대해 exists()/isFile()/canRead() 등으로 상태를 검사(Check)한 후, 다른 연산(Use)을 수행하기 전에 다른 스레드나 프로세스가 해당 파일을 생성·삭제·교체할 수 있다(TOCTOU — Time Of Check To Time Of Use). 대표 공격 패턴: ① 심볼릭 링크 치환(exists() 후 임의 파일로 교체), ② 파일 삭제 경쟁(exists() 후 delete() 전 삭제). f.exists() → f.delete(), f.exists() → FileUtils.readFileToByteArray(f), f.exists() → new FileInputStream(f), f.exists() → f.mkdirs() 패턴이 모두 해당된다. 중간에 f.isFile() 등의 추가 검사가 있어도 동일 객체에 대한 연산이면 여전히 TOCTOU 위험이 있다.",
       "remediation": { "strategy": "ATOMIC_FILE_OPERATION",
-        "description": "파일 존재 확인과 열기를 원자적으로 처리(try-with-resources 직접 오픈)",
-        "guideRef": "PART4 제3절 1항 (p.406-414)" }
+        "description": "exists() 검사 없이 직접 연산을 시도하고 예외로 실패를 처리하라. ① 파일 삭제: Files.deleteIfExists(path) 또는 try { Files.delete(path) } catch(NoSuchFileException e) {}. ② 파일 읽기: try { Files.readAllBytes(path) } catch(NoSuchFileException e) {}. ③ 파일 생성: Files.newOutputStream(path, StandardOpenOption.CREATE_NEW). 이렇게 하면 검사와 사용이 단일 시스템 콜로 원자적으로 처리된다.",
+        "guideRef": "PART4 제3절 1항 (p.406-414)",
+        "remediationCode": "// [수정] IV-3.1 TOCTOU 방지: exists() 검사 제거 후 원자적 연산 사용\n\n// ❌ 취약 패턴 1: exists() → delete()\n// File f = new File(path);\n// if (f.exists()) { f.delete(); }  // TOCTOU!\n\n// ✅ 안전 패턴 1: 원자적 삭제\nPath filePath = Path.of(path);\ntry {\n    Files.delete(filePath);\n} catch (NoSuchFileException e) {\n    log.debug(\"[FileOp] 이미 삭제된 파일: {}\", filePath);\n} catch (IOException e) {\n    log.error(\"[FileOp] 파일 삭제 실패: {}\", filePath, e);\n}\n\n// ❌ 취약 패턴 2: exists() → FileUtils.readFileToByteArray(file)\n// File file = new File(filename);\n// if (file.exists()) {\n//     byte[] bytes = FileUtils.readFileToByteArray(file);  // TOCTOU!\n// }\n\n// ✅ 안전 패턴 2: 원자적 읽기\ntry {\n    byte[] bytes = Files.readAllBytes(Path.of(filename));\n    // ... 처리\n} catch (NoSuchFileException e) {\n    log.warn(\"[FileOp] 파일 없음: {}\", filename);\n} catch (IOException e) {\n    log.error(\"[FileOp] 파일 읽기 오류: {}\", filename, e);\n}\n\n// ❌ 취약 패턴 3: exists() → mkdirs()\n// File dir = new File(dirPath);\n// if (!dir.exists()) { dir.mkdirs(); }  // TOCTOU!\n\n// ✅ 안전 패턴 3: Files.createDirectories()(이미 존재해도 예외 없음)\nFiles.createDirectories(Path.of(dirPath));"
+      }
     },
     {
       "ruleId": "IV-3.2", "part": "PART4", "section": "시간 및 상태",

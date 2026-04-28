@@ -28,9 +28,22 @@ public class SequenceAnalyzer {
             "exists", "canRead", "canWrite", "isFile", "isDirectory", "isReadOnly", "length"
     );
 
-    // TOCTOU Use 단계: 파일을 실제로 사용/변경하는 메서드들 (IV-3.1)
+    // TOCTOU Use 단계: 파일 객체를 scope로 사용/변경하는 메서드들 (IV-3.1)
     private static final Set<String> USE_METHODS = Set.of(
             "delete", "renameTo", "createNewFile", "mkdir", "mkdirs", "write", "transferTo"
+    );
+
+    // TOCTOU Use 단계: 파일 객체를 인자(argument)로 받아 사용하는 정적/유틸 메서드들 (IV-3.1)
+    // 예: FileUtils.readFileToByteArray(file) — scope는 FileUtils이지만 file이 인자
+    private static final Set<String> USE_ARG_METHODS = Set.of(
+            // Apache Commons IO
+            "readFileToByteArray", "readFileToString", "readLines",
+            "copyFile", "copyFileToDirectory", "moveFile", "moveFileToDirectory",
+            "deleteQuietly", "forceDelete", "writeByteArrayToFile",
+            // java.nio.file.Files (static)
+            "readAllBytes", "readString", "readAllLines",
+            "copy", "move", "deleteIfExists",
+            "newInputStream", "newOutputStream", "newBufferedReader", "newBufferedWriter"
     );
 
     // 파일을 여는 생성자 호출 — 이전에 checked된 변수를 인자로 받으면 TOCTOU
@@ -76,18 +89,41 @@ public class SequenceAnalyzer {
         String methodName = call.getNameAsString();
         int line = call.getBegin().map(p -> p.line).orElse(-1);
         String target = extractScopeTarget(call);
-        if (target == null) return;
 
-        if (CHECK_METHODS.contains(methodName)) {
-            // Check 단계: 변수에 검사 호출 기록
-            checkMap.put(target, new CheckInfo(methodName, line, call.toString()));
-        } else if (USE_METHODS.contains(methodName)) {
-            // Use 단계: 이전에 checked된 변수라면 TOCTOU
-            CheckInfo check = checkMap.get(target);
-            if (check != null) {
-                String key = target + ":" + check.line + ":" + line;
-                if (reported.add(key)) {
-                    findings.add(buildFinding(rule, filePath, check, target, call.toString(), line));
+        // ── 스코프(scope) 기반 탐지 ───────────────────────────────────────
+        // file.exists() → [중간에 file.isFile() 등이 있어도] → file.delete() 패턴
+        if (target != null) {
+            if (CHECK_METHODS.contains(methodName)) {
+                // Check 단계: 변수에 검사 호출 기록 (이전 check 항목을 덮어씀)
+                // exists() 이후 isFile() 호출도 check로 등록 → 이후 delete() 탐지 유지
+                checkMap.put(target, new CheckInfo(methodName, line, call.toString()));
+            } else if (USE_METHODS.contains(methodName)) {
+                // Use 단계: 이전에 checked된 변수라면 TOCTOU
+                CheckInfo check = checkMap.get(target);
+                if (check != null) {
+                    String key = target + ":" + check.line + ":" + line;
+                    if (reported.add(key)) {
+                        findings.add(buildFinding(rule, filePath, check, target, call.toString(), line));
+                    }
+                }
+            }
+        }
+
+        // ── 인자(argument) 기반 탐지 ─────────────────────────────────────
+        // FileUtils.readFileToByteArray(file) 처럼 file을 인자로 받는 유틸 메서드 패턴
+        // scope는 FileUtils이지만, checked 변수가 인자로 전달되면 TOCTOU
+        if (USE_ARG_METHODS.contains(methodName)) {
+            for (Expression arg : call.getArguments()) {
+                if (arg instanceof NameExpr ne) {
+                    String varName = ne.getNameAsString();
+                    CheckInfo check = checkMap.get(varName);
+                    if (check != null) {
+                        String key = varName + ":" + check.line + ":" + line + ":arg";
+                        if (reported.add(key)) {
+                            findings.add(buildFinding(rule, filePath, check, varName,
+                                    call.toString(), line));
+                        }
+                    }
                 }
             }
         }

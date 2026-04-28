@@ -1,6 +1,7 @@
 package com.sast.engine.taint;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.*;
@@ -28,7 +29,8 @@ public class TaintAnalysisEngine {
             "getParameter", "getAttribute", "getQueryString",
             "getHeader", "getCookies", "getInputStream", "getReader",
             "getenv", "getProperty",
-            "readLine", "readAllBytes"
+            "readLine", "readAllBytes",
+            "getSession"   // DS-4.1: 세션 객체 전달 탐지용 (서비스 레이어 전달 시 DS-4.1 위반)
             // readObject / readUnshared 는 IV-5.5 의 Sink — Source 에 두지 않음
     ));
 
@@ -113,6 +115,12 @@ public class TaintAnalysisEngine {
         findings.clear();
 
         for (SecurityRule rule : rules) {
+            // DS-4.1: 세션 객체가 서비스 레이어 메서드 파라미터로 선언된 패턴을 구조적으로 탐지
+            if ("DS-4.1".equals(rule.getRuleId())) {
+                findings.addAll(detectSessionParamInService(cu, filePath, rule));
+                continue;
+            }
+
             if (!rule.isTaintAnalysis()) continue;
             this.currentRule = rule;
 
@@ -123,6 +131,65 @@ public class TaintAnalysisEngine {
         }
         log.debug("[TaintAnalysis] {} — {}건 탐지", filePath, findings.size());
         return Collections.unmodifiableList(new ArrayList<>(findings));
+    }
+
+    /**
+     * DS-4.1 세션 통제 — 구조적 탐지
+     *
+     * 컨트롤러가 아닌 서비스/유틸 클래스의 메서드가 HttpSession 객체를 파라미터로
+     * 직접 받는 패턴을 탐지한다. 세션 객체 전체를 전달하면:
+     *   1) 세션 데이터 변조 가능성
+     *   2) 세션 고정(Session Fixation) 공격 취약
+     *   3) 세션 만료 시 NPE 위험
+     * 대신 필요한 속성값(ID, 권한 등)만 추출하여 인수로 전달해야 한다.
+     */
+    private List<Finding> detectSessionParamInService(CompilationUnit cu, String filePath,
+                                                       SecurityRule rule) {
+        List<Finding> result = new ArrayList<>();
+        String guideRef = rule.getGuideRef();
+
+        cu.findAll(ClassOrInterfaceDeclaration.class).forEach(classDecl -> {
+            // 컨트롤러 계층은 제외 (Spring MVC는 컨트롤러에서 HttpSession 주입을 허용)
+            boolean isController = classDecl.getAnnotations().stream()
+                    .anyMatch(a -> {
+                        String n = a.getNameAsString();
+                        return n.contains("Controller") || n.contains("WebServlet");
+                    });
+            // 클래스 이름에 Controller가 포함되어도 컨트롤러로 간주 (어노테이션 미탐지 보완)
+            if (isController || classDecl.getNameAsString().endsWith("Controller")) return;
+
+            classDecl.getMethods().forEach(method -> {
+                method.getParameters().forEach(param -> {
+                    String typeName = param.getTypeAsString();
+                    // HttpSession 타입 파라미터 탐지
+                    if (!typeName.contains("HttpSession")) return;
+
+                    int paramLine = param.getBegin().map(p -> p.line).orElse(-1);
+                    String methodSig = classDecl.getNameAsString() + "." +
+                            method.getNameAsString() + "(" + typeName + " " +
+                            param.getNameAsString() + ", ...)";
+
+                    result.add(Finding.builder()
+                            .ruleId(rule.getRuleId())
+                            .ruleName(rule.getName())
+                            .severity(Finding.Severity.valueOf(rule.getSeverity()))
+                            .filePath(filePath)
+                            .lineNumber(paramLine)
+                            .vulnerableCode(method.getDeclarationAsString(false, false, true))
+                            .description(String.format(
+                                    "서비스/유틸 클래스 '%s'의 메서드 '%s'가 HttpSession 객체를 직접 파라미터로 " +
+                                    "받습니다. 세션 객체 전달 시 불필요한 데이터 접근·변조 위험이 있으므로, " +
+                                    "session.getAttribute(\"admin\") 등 필요한 속성값만 추출하여 전달하세요.",
+                                    classDecl.getNameAsString(), method.getNameAsString()))
+                            .taintFlows(Collections.emptyList())
+                            .guideRef(guideRef)
+                            .cweIds(rule.getCwe())
+                            .build());
+                });
+            });
+        });
+
+        return result;
     }
 
     // ────────────────────────────────────────────────────────────────────
