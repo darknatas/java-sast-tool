@@ -4,7 +4,7 @@
 
 ## 🏆 Achievement & Status
 
-- **Rule Coverage**: 98.6% (69개 규칙 중 68개 검증 완료)
+- **Rule Coverage**: 97.1% (69개 규칙 중 68개 검증 완료)
 - **Real-World Focus**: 상용 수준 프로젝트 대상 700건 이상의 취약점 식별 및 정제 성공 (733건 -> 715건)
 - **Detection Success**: 100% (SastValidator 단위 테스트 기준)
 

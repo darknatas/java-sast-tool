@@ -1,5 +1,7 @@
 package com.sast.filter;
 
+import com.sast.model.Finding;
+
 /**
  * sast-suppressions.json 억제 규칙 항목 (IV-6.2 오탐 관리)
  *
@@ -13,4 +15,16 @@ public record SuppressionRule(
         String  ruleId,  // 규칙 ID (예: "IV-1.1")
         Integer line,    // 정확한 라인 번호
         String  reason   // 억제 이유 (문서 목적)
-) {}
+) {
+    /**
+     * file, ruleId, line이 모두 null인 빈 규칙은 전체 억제 방지를 위해 false 반환.
+     * 그 외에는 각 필드를 Finding과 대조하여 매칭 여부를 반환한다.
+     */
+    public boolean matches(Finding f) {
+        if (file == null && ruleId == null && line == null) return false;
+        if (file   != null && !f.getFilePath().contains(file))     return false;
+        if (ruleId != null && !ruleId.equals(f.getRuleId()))       return false;
+        if (line   != null && !line.equals(f.getLineNumber()))     return false;
+        return true;
+    }
+}

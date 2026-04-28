@@ -58,14 +58,24 @@ public class FalsePositiveFilter {
     }
 
     /**
+     * src/test/resources/samples 경로 여부 판별 — 검증용 샘플은 필터링 제외
+     */
+    private static boolean isSamplePath(String filePath) {
+        if (filePath == null) return false;
+        return filePath.contains("src/test/resources/samples")
+                || filePath.contains("src\\test\\resources\\samples");
+    }
+
+    /**
      * sast-suppressions.json 기반 억제 적용
-     * 억제 조건이 모두 일치하는 Finding은 결과에서 제외
+     * 억제 조건이 모두 일치하는 Finding은 결과에서 제외.
+     * 단, src/test/resources/samples 경로의 파일은 억제를 건너뛴다(Bypass).
      */
     public static List<Finding> apply(List<Finding> findings, List<SuppressionRule> suppressions) {
         if (suppressions == null || suppressions.isEmpty()) return findings;
 
         List<Finding> filtered = findings.stream()
-                .filter(f -> !isSuppressed(f, suppressions))
+                .filter(f -> isSamplePath(f.getFilePath()) || !isSuppressed(f, suppressions))
                 .collect(Collectors.toList());
 
         int suppressed = findings.size() - filtered.size();
@@ -77,13 +87,7 @@ public class FalsePositiveFilter {
 
     private static boolean isSuppressed(Finding f, List<SuppressionRule> rules) {
         for (SuppressionRule r : rules) {
-            // file: 부분 경로 포함 여부 (null이면 모든 파일 매칭)
-            if (r.file() != null && !f.getFilePath().contains(r.file())) continue;
-            // ruleId: 정확한 ID 일치 (null이면 모든 규칙 매칭)
-            if (r.ruleId() != null && !r.ruleId().equals(f.getRuleId())) continue;
-            // line: 정확한 라인 번호 (null이면 모든 라인 매칭)
-            if (r.line() != null && r.line() != f.getLineNumber()) continue;
-
+            if (!r.matches(f)) continue;
             log.debug("[FP-Filter] 억제 적용: {} L{} ({}) — 이유: {}",
                     f.getFilePath(), f.getLineNumber(), f.getRuleId(), r.reason());
             return true;
