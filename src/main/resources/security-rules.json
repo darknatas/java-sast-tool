@@ -1,289 +1,594 @@
+// security-rules.json — 행정안전부 소프트웨어 보안약점 진단가이드 2021
+// PART3 (DS-x.x): 설계단계 20개 항목 | PART4 (IV-x.x): 구현단계 49개 항목
 {
   "version": "2021.1",
   "source": "소프트웨어 보안약점 진단가이드 (2021), 행정안전부",
   "rules": [
-
-    // ────────────────────────────────────────────────
-    // PART3 : 설계단계 보안설계 기준 (총 20개)
-    // ────────────────────────────────────────────────
     {
       "ruleId": "DS-1.1",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "DBMS 조회 및 결과 검증",
-      "cwe": ["CWE-89"],
+      "cwe": [
+        "CWE-89"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "SQL 질의문 내 입력값 유효성 검증 및 바인딩 방식 적용 설계",
-      "relatedImplRules": ["IV-1.1"]
-    ,
-      "dangerousPatterns": ["executeQuery\\(|executeUpdate\\(|Statement.*execute"]
+      "relatedImplRules": [
+        "IV-1.1"
+      ],
+      "dangerousPatterns": [
+        "executeQuery\\(|executeUpdate\\(|Statement.*execute"
+      ],
+      "remediation": {
+        "strategy": "USE_PREPARED_STATEMENT",
+        "description": "SQL 질의문 내 입력값 유효성 검증 및 바인딩 방식 적용 설계",
+        "guideRef": "PART3 제1절 1항 (p.47-55)",
+        "remediationCode": "// [수정] DS-1.1 DBMS 조회 설계: PreparedStatement 바인딩 방식 의무화\n// ❌ 취약: SQL 문자열에 외부 입력값 직접 연결\nString sql = \"SELECT * FROM user WHERE id='\" + id + \"'\";\nStatement stmt = con.createStatement();\nResultSet rs = stmt.executeQuery(sql);\n\n// ✅ 안전: PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM user WHERE id = ?\";\ntry (PreparedStatement ps = con.prepareStatement(sql)) {\n    ps.setString(1, id);\n    try (ResultSet rs = ps.executeQuery()) {\n        while (rs.next()) { /* 처리 */ }\n    }\n}\n// MyBatis: WHERE id = #{id}  (${id} 사용 금지)"
+      },
+      "codeExamples": {
+        "bad": "// ❌ SQL 문자열에 외부 입력값 직접 연결\nString sql = \"SELECT * FROM user WHERE id='\" + id + \"'\";\nStatement stmt = con.createStatement();\nResultSet rs = stmt.executeQuery(sql);",
+        "good": "// ✅ PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM user WHERE id = ?\";\nPreparedStatement ps = con.prepareStatement(sql);\nps.setString(1, id);\nResultSet rs = ps.executeQuery();\n// MyBatis: WHERE id = #{id}  (${id} 사용 금지)"
+      }
     },
     {
       "ruleId": "DS-1.2",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "XML 조회 및 결과 검증",
-      "cwe": ["CWE-652", "CWE-643"],
+      "cwe": [
+        "CWE-652",
+        "CWE-643"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "XPath·XQuery 질의문에 사용되는 파라미터 필터링 또는 바인딩 설계",
-      "relatedImplRules": ["IV-1.9", "IV-1.10"]
-    ,
-      "dangerousPatterns": ["xpath\\.evaluate|XPath\\.compile|executeXPath"]
+      "relatedImplRules": [
+        "IV-1.9",
+        "IV-1.10"
+      ],
+      "dangerousPatterns": [
+        "xpath\\.evaluate|XPath\\.compile|executeXPath"
+      ],
+      "remediation": {
+        "strategy": "PARAMETERIZED_XPATH",
+        "description": "XPath·XQuery 질의문에 사용되는 파라미터 필터링 또는 바인딩 설계",
+        "guideRef": "PART3 제1절 2항 (p.56-62)",
+        "remediationCode": "// [수정] DS-1.2 XML 조회 설계: XPath 변수 바인딩 사용\n// ❌ 취약: 외부 입력값을 XPath 표현식에 직접 삽입\nString expr = \"/users/user[name='\" + userName + \"']\";\nxpath.evaluate(expr, doc, XPathConstants.NODESET);\n\n// ✅ 안전: XPathVariableResolver로 변수 바인딩\nXPath xp = XPathFactory.newInstance().newXPath();\nxp.setXPathVariableResolver(qn ->\n    \"name\".equals(qn.getLocalPart()) ? userName : null);\nNodeList result = (NodeList) xp.evaluate(\n    \"/users/user[name=$name]\", doc, XPathConstants.NODESET);\n// 특수문자 필터링: userName.replaceAll(\"['\\\"\\[\\]*]\", \"\")"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 XPath 표현식에 직접 삽입\nString expr = \"/users/user[name='\" + userName + \"']\";\nNodeList nl = (NodeList) xpath.evaluate(expr, doc, XPathConstants.NODESET);",
+        "good": "// ✅ 특수문자 제거 후 화이트리스트 검증\nString safe = userName.replaceAll(\"[^a-zA-Z0-9가-힣]\", \"\");\nif (!safe.matches(\"[a-zA-Z0-9가-힣]{1,50}\")) {\n    throw new IllegalArgumentException(\"허용되지 않은 입력값\");\n}\nString expr = \"/users/user[name='\" + safe + \"']\";\nNodeList nl = (NodeList) xpath.evaluate(expr, doc, XPathConstants.NODESET);"
+      }
     },
     {
       "ruleId": "DS-1.3",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "디렉토리 서비스 조회 및 결과 검증",
-      "cwe": ["CWE-90"],
+      "cwe": [
+        "CWE-90"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "LDAP 질의에 사용되는 입력값 필터링 설계",
-      "relatedImplRules": ["IV-1.10"]
-    ,
-      "dangerousPatterns": ["DirContext|InitialDirContext|\\.search\\("]
+      "relatedImplRules": [
+        "IV-1.10"
+      ],
+      "dangerousPatterns": [
+        "DirContext|InitialDirContext|\\.search\\("
+      ],
+      "remediation": {
+        "strategy": "LDAP_ENCODING",
+        "description": "LDAP 질의에 사용되는 입력값 필터링 설계",
+        "guideRef": "PART3 제1절 3항 (p.63-68)",
+        "remediationCode": "// [수정] DS-1.3 LDAP 조회 설계: 특수문자 인코딩 후 사용\n// ❌ 취약: 외부 입력값을 LDAP 필터에 직접 삽입\nString filter = \"(uid=\" + userId + \")\";\nctx.search(\"ou=people,dc=example,dc=com\", filter, null);\n\n// ✅ 안전: LDAP 특수문자 인코딩 (RFC 4515)\nprivate String encodeLdap(String input) {\n    return input.replace(\"\\\\\", \"\\\\5c\")\n                .replace(\"*\",  \"\\\\2a\")\n                .replace(\"(\",  \"\\\\28\")\n                .replace(\")\",  \"\\\\29\")\n                .replace(\"\\0\", \"\\\\00\");\n}\nString safeUid = encodeLdap(userId);\nString filter = \"(uid=\" + safeUid + \")\";\nctx.search(\"ou=people,dc=example,dc=com\", filter, null);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 LDAP 필터에 직접 삽입\nString filter = \"(uid=\" + userName + \")\";\nNamingEnumeration<?> result = ctx.search(base, filter, controls);",
+        "good": "// ✅ LDAP 특수문자 이스케이프 후 삽입\nString safe = userName.replaceAll(\"[\\\\*\\\\(\\\\)\\\\\\\\\\0]\", \"\");\nString filter = \"(uid=\" + safe + \")\";\nNamingEnumeration<?> result = ctx.search(base, filter, controls);\n// 또는 Spring Security LdapUtils.escapeLdapSearchFilter() 활용"
+      }
     },
     {
       "ruleId": "DS-1.4",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "시스템 자원 접근 및 명령어 수행 입력값 검증",
-      "cwe": ["CWE-78", "CWE-22", "CWE-99"],
+      "cwe": [
+        "CWE-78",
+        "CWE-22",
+        "CWE-99"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "파일 경로·OS 명령어에 사용되는 외부 입력값 검증 설계",
-      "relatedImplRules": ["IV-1.3", "IV-1.5"]
-    ,
-      "dangerousPatterns": ["Runtime\\.getRuntime\\(\\)\\.exec|new ProcessBuilder"]
+      "relatedImplRules": [
+        "IV-1.3",
+        "IV-1.5"
+      ],
+      "dangerousPatterns": [
+        "Runtime\\.getRuntime\\(\\)\\.exec|new ProcessBuilder"
+      ],
+      "remediation": {
+        "strategy": "AVOID_OS_COMMAND",
+        "description": "파일 경로·OS 명령어에 사용되는 외부 입력값 검증 설계",
+        "guideRef": "PART3 제1절 4항 (p.69-76)",
+        "remediationCode": "// [수정] DS-1.4 시스템 자원 접근 설계: 화이트리스트 + 배열 인자 방식\n// ❌ 취약: 외부 입력값으로 OS 명령어 문자열 구성\nString cmd = \"convert \" + request.getParameter(\"file\");\nRuntime.getRuntime().exec(cmd);\n\n// ✅ 안전: 화이트리스트 검증 + ProcessBuilder 배열 방식\nString fileId = request.getParameter(\"fileId\");\nif (!fileId.matches(\"^[a-zA-Z0-9_-]{1,50}$\"))\n    throw new SecurityException(\"허용되지 않는 파일 ID\");\nProcessBuilder pb = new ProcessBuilder(\n    \"/usr/bin/convert\",\n    \"/secure/uploads/\" + fileId + \".jpg\",\n    \"-resize\", \"200x200\",\n    \"/secure/thumbs/\" + fileId + \"_thumb.jpg\");\npb.start().waitFor();\n// OS 명령어 대신 Java API 사용 권장: Files.copy(), Files.delete()"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 OS 명령어에 직접 삽입\nString cmd = \"cmd.exe /c ping \" + ipAddress;\nRuntime.getRuntime().exec(cmd);",
+        "good": "// ✅ Java API 직접 사용 (OS 명령어 우회)\nInetAddress addr = InetAddress.getByName(ipAddress);\nboolean reachable = addr.isReachable(3000);\n// 불가피하게 exec() 사용 시: 화이트리스트 검증\nif (!ipAddress.matches(\"^\\\\d{1,3}(\\\\.\\\\d{1,3}){3}$\")) {\n    throw new IllegalArgumentException(\"잘못된 IP 주소\");\n}\nString[] cmd = {\"ping\", \"-c\", \"1\", ipAddress};\nRuntime.getRuntime().exec(cmd);"
+      }
     },
     {
       "ruleId": "DS-1.5",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "웹 서비스 요청 및 결과 검증",
-      "cwe": ["CWE-79"],
+      "cwe": [
+        "CWE-79"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "웹 서비스 응답 데이터 XSS 필터링 및 인코딩 설계",
-      "relatedImplRules": ["IV-1.4"]
-    ,
-      "dangerousPatterns": ["out\\.print\\(|response\\.getWriter"]
+      "relatedImplRules": [
+        "IV-1.4"
+      ],
+      "dangerousPatterns": [
+        "out\\.print\\(|response\\.getWriter"
+      ],
+      "remediation": {
+        "strategy": "OUTPUT_ENCODING",
+        "description": "웹 서비스 응답 데이터 XSS 필터링 및 인코딩 설계",
+        "guideRef": "PART3 제1절 5항 (p.77-82)",
+        "remediationCode": "// [수정] DS-1.5 웹 출력 설계: 컨텍스트별 출력 인코딩 의무화\n// ❌ 취약: 외부 입력값을 HTML에 그대로 출력\nString name = request.getParameter(\"name\");\nout.println(\"<div>안녕하세요, \" + name + \"님</div>\");\n\n// ✅ 안전 (HTML 컨텍스트): Spring HtmlUtils 또는 ESAPI 사용\nimport org.springframework.web.util.HtmlUtils;\nString safe = HtmlUtils.htmlEscape(name);\nout.println(\"<div>안녕하세요, \" + safe + \"님</div>\");\n\n// JSP: <c:out value=\"${name}\"/>  (EL 기본 인코딩)\n// JS 컨텍스트: ESAPI.encoder().encodeForJavaScript(name)\n// URL 파라미터: URLEncoder.encode(name, StandardCharsets.UTF_8)"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 HTML에 직접 출력 (XSS)\nout.println(\"<p>안녕하세요, \" + request.getParameter(\"name\") + \"</p>\");",
+        "good": "// ✅ HTML 인코딩 후 출력\nString name = request.getParameter(\"name\");\nString safe = name.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\")\n                  .replace(\">\", \"&gt;\").replace(\"\\\"\", \"&quot;\")\n                  .replace(\"'\", \"&#x27;\");\nout.println(\"<p>안녕하세요, \" + safe + \"</p>\");\n// 또는 OWASP Java Encoder: Encode.forHtml(name)"
+      }
     },
     {
       "ruleId": "DS-1.6",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "웹 기반 중요 기능 수행 요청 유효성 검증",
-      "cwe": ["CWE-352"],
+      "cwe": [
+        "CWE-352"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "CSRF 방지를 위한 토큰 생성 및 검증 메커니즘 설계",
-      "relatedImplRules": ["IV-1.11"]
-    ,
-      "dangerousPatterns": ["void doPost\\(|@PostMapping"]
+      "relatedImplRules": [
+        "IV-1.11"
+      ],
+      "dangerousPatterns": [
+        "void doPost\\(|@PostMapping"
+      ],
+      "remediation": {
+        "strategy": "CSRF_TOKEN",
+        "description": "CSRF 방지를 위한 토큰 생성 및 검증 메커니즘 설계",
+        "guideRef": "PART3 제1절 6항 (p.83-87)",
+        "remediationCode": "// [수정] DS-1.6 CSRF 방지 설계: Synchronizer Token Pattern 적용\n// ❌ 취약: POST 요청에 CSRF 토큰 검증 없음\nprotected void doPost(HttpServletRequest req, ...) {\n    userService.delete(req.getParameter(\"userId\"));\n}\n\n// ✅ 안전: 토큰 생성(세션 저장) + 요청 시 검증\n// [로그인 성공 시 토큰 생성]\nbyte[] bytes = new byte[32];\nnew SecureRandom().nextBytes(bytes);\nString token = Base64.getUrlEncoder().withoutPadding()\n    .encodeToString(bytes);\nsession.setAttribute(\"_csrf\", token);\n// [POST 처리 시]\nString req = request.getParameter(\"_csrf\");\nString ses = (String) session.getAttribute(\"_csrf\");\nif (!MessageDigest.isEqual(req.getBytes(), ses.getBytes()))\n    throw new SecurityException(\"CSRF 토큰 불일치\");\n// Spring Security: @EnableWebSecurity 설정으로 자동 적용"
+      },
+      "codeExamples": {
+        "bad": "// ❌ CSRF 토큰 없이 상태 변경 요청 처리\n@PostMapping(\"/transfer\")\npublic String transfer(String toAccount, int amount, HttpSession session) {\n    accountService.transfer(session.getAttribute(\"userId\"), toAccount, amount);\n    return \"success\";\n}",
+        "good": "// ✅ CSRF 토큰 검증\n@PostMapping(\"/transfer\")\npublic String transfer(String csrfToken, String toAccount, int amount,\n                       HttpSession session) {\n    String expected = (String) session.getAttribute(\"csrfToken\");\n    if (expected == null || !expected.equals(csrfToken)) {\n        throw new SecurityException(\"CSRF 토큰 불일치\");\n    }\n    accountService.transfer(session.getAttribute(\"userId\"), toAccount, amount);\n    return \"success\";\n}"
+      }
     },
     {
       "ruleId": "DS-1.7",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "HTTP 프로토콜 유효성 검증",
-      "cwe": ["CWE-113"],
+      "cwe": [
+        "CWE-113"
+      ],
       "severity": "MEDIUM",
       "phase": "DESIGN",
       "description": "HTTP 응답분할 방지를 위한 헤더 값 검증 설계",
-      "relatedImplRules": ["IV-1.13"]
-    ,
-      "dangerousPatterns": ["setHeader\\(|addHeader\\("]
+      "relatedImplRules": [
+        "IV-1.13"
+      ],
+      "dangerousPatterns": [
+        "setHeader\\(|addHeader\\("
+      ],
+      "remediation": {
+        "strategy": "CRLF_REMOVAL",
+        "description": "HTTP 응답분할 방지를 위한 헤더 값 검증 설계",
+        "guideRef": "PART3 제1절 7항 (p.88-92)",
+        "remediationCode": "// [수정] DS-1.7 HTTP 헤더 검증 설계: CR/LF 문자 제거\n// ❌ 취약: 외부 입력값을 HTTP 헤더에 직접 삽입\nString lang = request.getParameter(\"lang\");\nresponse.setHeader(\"Content-Language\", lang);\n\n// ✅ 안전: CR(\\r)·LF(\\n) 및 유사 제어 문자 제거\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n\\\\u0085\\\\u2028\\\\u2029]\", \"\");\n    if (!lang.matches(\"^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{2,8})*$\"))\n        lang = \"ko\";\n    response.setHeader(\"Content-Language\", lang);\n}\n// sendRedirect URL도 동일하게 CR/LF 제거 후 사용"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 HTTP 헤더에 직접 삽입 (CRLF 삽입 가능)\nString lang = request.getParameter(\"lang\");\nresponse.setHeader(\"Content-Language\", lang);",
+        "good": "// ✅ CR/LF 문자 제거 후 헤더에 설정\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n]\", \"\");\n    // 화이트리스트 검증 추가\n    if (lang.matches(\"[a-zA-Z\\\\-]{2,10}\")) {\n        response.setHeader(\"Content-Language\", lang);\n    }\n}"
+      }
     },
     {
       "ruleId": "DS-1.8",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "허용된 범위내 메모리 접근",
-      "cwe": ["CWE-119", "CWE-190"],
+      "cwe": [
+        "CWE-119",
+        "CWE-190"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "버퍼 접근 범위 제한 및 정수 오버플로우 방지 설계",
-      "relatedImplRules": ["IV-1.14", "IV-1.16"]
-    ,
-      "dangerousPatterns": ["byte\\[\\]|System\\.arraycopy|ByteBuffer"]
+      "relatedImplRules": [
+        "IV-1.14",
+        "IV-1.16"
+      ],
+      "dangerousPatterns": [
+        "byte\\[\\]|System\\.arraycopy|ByteBuffer"
+      ],
+      "remediation": {
+        "strategy": "BOUNDS_CHECK",
+        "description": "버퍼 접근 범위 제한 및 정수 오버플로우 방지 설계",
+        "guideRef": "PART3 제1절 8항 (p.93-98)",
+        "remediationCode": "// [수정] DS-1.8 메모리 접근 설계: 정수 범위 검사 + 안전 연산\n// ❌ 취약: 입력값으로 배열 크기/인덱스를 직접 사용\nint size = Integer.parseInt(request.getParameter(\"size\"));\nbyte[] buf = new byte[size];  // 음수/대용량 가능\n\n// ✅ 안전: 범위 제한 검사\nint size = Integer.parseInt(request.getParameter(\"size\"));\nif (size < 1 || size > 1024 * 1024)\n    throw new IllegalArgumentException(\"허용 범위 초과 (1~1MB)\");\nbyte[] buf = new byte[size];\n\n// 정수 오버플로우 방지: Math.addExact / multiplyExact\nint a = Integer.parseInt(request.getParameter(\"a\"));\nint b = Integer.parseInt(request.getParameter(\"b\"));\ntry {\n    int sum = Math.addExact(a, b);\n} catch (ArithmeticException e) {\n    throw new IllegalArgumentException(\"계산 결과가 범위를 초과합니다.\");\n}"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 정수형 오버플로우로 잘못된 배열 크기 산출\nint size = width * height;   // width=65536, height=65536 → 오버플로우 → 0\nbyte[] buf = new byte[size]; // 의도하지 않은 크기",
+        "good": "// ✅ 경계 검사 후 안전하게 연산\nif (width <= 0 || height <= 0 || width > 10000 || height > 10000) {\n    throw new IllegalArgumentException(\"허용 범위 초과: \" + width + \"x\" + height);\n}\nlong size = (long) width * height;\nif (size > Integer.MAX_VALUE) {\n    throw new IllegalArgumentException(\"버퍼 크기 초과\");\n}\nbyte[] buf = new byte[(int) size];"
+      }
     },
     {
       "ruleId": "DS-1.9",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "보안기능 입력값 검증",
-      "cwe": ["CWE-807", "CWE-476"],
+      "cwe": [
+        "CWE-807",
+        "CWE-476"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "보안결정에 사용되는 입력값 검증 로직 설계",
-      "relatedImplRules": ["IV-1.15"]
-    ,
-      "dangerousPatterns": ["getParameter.*role|getParameter.*admin|getParameter.*permission"]
+      "relatedImplRules": [
+        "IV-1.15"
+      ],
+      "dangerousPatterns": [
+        "getParameter.*role|getParameter.*admin|getParameter.*permission"
+      ],
+      "remediation": {
+        "strategy": "SERVER_SIDE_AUTH_CHECK",
+        "description": "보안결정에 사용되는 입력값 검증 로직 설계",
+        "guideRef": "PART3 제1절 9항 (p.99-103)",
+        "remediationCode": "// [수정] DS-1.9 보안 결정 입력값 설계: 서버 측 세션·권한 정보만 사용\n// ❌ 취약: 클라이언트가 전달한 role 파라미터로 권한 결정\nString role = request.getParameter(\"role\");\nif (\"admin\".equals(role)) { performAdminAction(); }\n\n// ✅ 안전: 서버 세션에서만 권한 확인\nHttpSession session = request.getSession(false);\nif (session == null)\n    throw new UnauthorizedException(\"로그인이 필요합니다.\");\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user == null || !\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"관리자 권한이 없습니다.\");\nperformAdminAction();\n// Spring Security: @PreAuthorize(\"hasRole('ADMIN')\")"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 클라이언트 파라미터로 보안 결정 (우회 가능)\nString role = request.getParameter(\"role\"); // 공격자가 \"admin\" 전달 가능\nif (\"admin\".equals(role)) {\n    showAdminPage(response);\n}",
+        "good": "// ✅ 서버 세션 기반 보안 결정\nHttpSession session = request.getSession(false);\nif (session == null) {\n    response.sendRedirect(\"/login\");\n    return;\n}\nString role = (String) session.getAttribute(\"role\");\nif (\"admin\".equals(role)) {\n    showAdminPage(response);\n}"
+      }
     },
     {
       "ruleId": "DS-1.10",
       "part": "PART3",
       "section": "입력데이터 검증 및 표현",
       "name": "업로드·다운로드 파일 검증",
-      "cwe": ["CWE-434", "CWE-494"],
+      "cwe": [
+        "CWE-434",
+        "CWE-494"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "업로드 파일 유형·크기 검증 및 다운로드 경로 검증 설계",
-      "relatedImplRules": ["IV-1.6"]
-    ,
-      "dangerousPatterns": ["getOriginalFilename\\(\\)|getPart\\(|transferTo\\("]
+      "relatedImplRules": [
+        "IV-1.6"
+      ],
+      "dangerousPatterns": [
+        "getOriginalFilename\\(\\)|getPart\\(|transferTo\\("
+      ],
+      "remediation": {
+        "strategy": "FILE_EXTENSION_WHITELIST",
+        "description": "업로드 파일 유형·크기 검증 및 다운로드 경로 검증 설계",
+        "guideRef": "PART3 제1절 10항 (p.104-110)",
+        "remediationCode": "// [수정] DS-1.10 파일 업/다운로드 설계: 확장자·크기·경로 검증\n// ❌ 취약: 원본 파일명 검증 없이 그대로 저장\nString name = file.getOriginalFilename();\nfile.transferTo(new File(\"/uploads/\" + name));\n\n// ✅ 안전: 확장자 화이트리스트 + 경로 검증 + 파일명 랜덤화\nSet<String> ALLOWED = Set.of(\"jpg\",\"jpeg\",\"png\",\"gif\",\"pdf\");\nString ext = FilenameUtils.getExtension(\n    file.getOriginalFilename()).toLowerCase();\nif (!ALLOWED.contains(ext))\n    throw new SecurityException(\"허용되지 않는 확장자: \" + ext);\nif (file.getSize() > 10 * 1024 * 1024)\n    throw new SecurityException(\"파일 크기 초과 (최대 10MB)\");\nString saveName = UUID.randomUUID() + \".\" + ext;\nPath dest = Paths.get(\"/var/secure-uploads\", saveName).normalize();\nif (!dest.startsWith(Paths.get(\"/var/secure-uploads\")))\n    throw new SecurityException(\"경로 탈출 시도 감지\");\nfile.transferTo(dest);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 파일 확장자·Content-Type 검증 없이 업로드 허용\nString fileName = item.getName();\nFile dest = new File(uploadDir, fileName);\nitem.write(dest); // .jsp, .php 등 실행 파일 업로드 가능",
+        "good": "// ✅ 화이트리스트 확장자 검증 + 저장명 랜덤화\nSet<String> allowed = new HashSet<>(Arrays.asList(\"jpg\", \"png\", \"pdf\"));\nString origName = item.getName();\nString ext = origName.substring(origName.lastIndexOf('.') + 1).toLowerCase();\nif (!allowed.contains(ext)) {\n    throw new SecurityException(\"허용되지 않는 파일 형식: \" + ext);\n}\nString safeName = UUID.randomUUID().toString() + \".\" + ext;\nitem.write(new File(uploadDir, safeName));"
+      }
     },
     {
       "ruleId": "DS-2.1",
       "part": "PART3",
       "section": "보안기능",
       "name": "인증 대상 및 방식",
-      "cwe": ["CWE-306"],
+      "cwe": [
+        "CWE-306"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "중요 기능에 대한 적절한 인증 수단 적용 설계",
-      "relatedImplRules": ["IV-2.1"]
-    ,
-      "dangerousPatterns": ["HttpSession|getSession\\(|session\\.getAttribute"]
+      "relatedImplRules": [
+        "IV-2.1"
+      ],
+      "dangerousPatterns": [
+        "HttpSession|getSession\\(|session\\.getAttribute"
+      ],
+      "remediation": {
+        "strategy": "AUTH_GATE_FILTER",
+        "description": "중요 기능에 대한 적절한 인증 수단 적용 설계",
+        "guideRef": "PART3 제2절 1항 (p.113-118)",
+        "remediationCode": "// [수정] DS-2.1 인증 설계: AuthFilter로 중요 기능 일괄 인증 검사\n// ❌ 취약: 각 서블릿에 인증 로직 산발 배치 (누락 위험)\n// class OrderServlet { doGet() { /* 인증 없음 */ } }\n// ✅ 안전: AuthFilter로 일괄 적용\n@WebFilter(\"/*\")\npublic class AuthFilter implements Filter {\n    private static final Set<String> PUBLIC =\n        Set.of(\"/login\", \"/css/\", \"/js/\", \"/api/health\");\n    public void doFilter(ServletRequest req, ...) {\n        String path = ((HttpServletRequest) req).getRequestURI();\n        boolean pub = PUBLIC.stream().anyMatch(path::startsWith);\n        HttpSession ses = ((HttpServletRequest)req).getSession(false);\n        if (!pub && (ses == null ||\n                ses.getAttribute(\"loginUser\") == null)) {\n            ((HttpServletResponse)res).sendRedirect(\"/login\");\n            return;\n        }\n        chain.doFilter(req, res);\n    }\n}"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 인증 없이 중요 기능 접근 허용\n@GetMapping(\"/admin/users\")\npublic List<User> listUsers() {\n    return userService.findAll(); // 로그인 여부 미확인\n}",
+        "good": "// ✅ 인증 필터 또는 어노테이션으로 접근 통제\n// Spring Security 사용 시:\n@GetMapping(\"/admin/users\")\n@PreAuthorize(\"hasRole('ADMIN')\")\npublic List<User> listUsers() {\n    return userService.findAll();\n}\n// 또는 직접 세션 확인:\nHttpSession session = request.getSession(false);\nif (session == null || session.getAttribute(\"userId\") == null) {\n    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);\n    return;\n}"
+      }
     },
     {
       "ruleId": "DS-2.2",
       "part": "PART3",
       "section": "보안기능",
       "name": "인증 수행 제한",
-      "cwe": ["CWE-307"],
+      "cwe": [
+        "CWE-307"
+      ],
       "severity": "MEDIUM",
       "phase": "DESIGN",
       "description": "반복 인증 시도 제한(계정 잠금) 메커니즘 설계",
-      "relatedImplRules": ["IV-2.16"]
-    ,
-      "dangerousPatterns": ["loginAttempt|failCount|lockAccount|attemptCount"]
+      "relatedImplRules": [
+        "IV-2.16"
+      ],
+      "dangerousPatterns": [
+        "loginAttempt|failCount|lockAccount|attemptCount"
+      ],
+      "remediation": {
+        "strategy": "ACCOUNT_LOCKOUT",
+        "description": "반복 인증 시도 제한(계정 잠금) 메커니즘 설계",
+        "guideRef": "PART3 제2절 2항 (p.119-123)",
+        "remediationCode": "// [수정] DS-2.2 인증 시도 제한 설계: 계정 잠금 메커니즘\n// ❌ 취약: 실패 횟수 제한 없음 — if(!login()) return \"실패\";\n// ✅ 안전: 실패 횟수 추적 + 잠금\nMap<String, Integer> failMap = new ConcurrentHashMap<>();\nMap<String, Long> lockMap   = new ConcurrentHashMap<>();\nfinal int MAX = 5;\nfinal long LOCK_MS = 30 * 60 * 1000L;\nLong lockedUntil = lockMap.get(userId);\nif (lockedUntil != null && System.currentTimeMillis() < lockedUntil)\n    throw new AccountLockedException(\"계정 잠김 (30분 후 재시도)\");\nif (!authService.login(userId, password)) {\n    int fails = failMap.merge(userId, 1, Integer::sum);\n    if (fails >= MAX) {\n        lockMap.put(userId, System.currentTimeMillis() + LOCK_MS);\n        failMap.remove(userId);\n        throw new AccountLockedException(\"5회 실패 — 30분 잠금\");\n    }\n    throw new AuthException(\"실패 (\" + fails + \"/\" + MAX + \")\");\n}\nfailMap.remove(userId);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 로그인 시도 횟수 제한 없음 (무차별 대입 허용)\npublic boolean login(String id, String pw) {\n    return userDao.checkPassword(id, pw); // 실패 횟수 미추적\n}",
+        "good": "// ✅ 5회 실패 시 계정 잠금 (30분)\npublic boolean login(String id, String pw) {\n    int failCount = loginAttemptCache.getOrDefault(id, 0);\n    if (failCount >= 5) {\n        throw new LockedException(\"계정이 잠겼습니다. 30분 후 재시도하세요.\");\n    }\n    if (!userDao.checkPassword(id, pw)) {\n        loginAttemptCache.put(id, failCount + 1);\n        return false;\n    }\n    loginAttemptCache.remove(id);\n    return true;\n}"
+      }
     },
     {
       "ruleId": "DS-2.3",
       "part": "PART3",
       "section": "보안기능",
       "name": "비밀번호 관리",
-      "cwe": ["CWE-521"],
+      "cwe": [
+        "CWE-521"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "비밀번호 복잡성 정책 및 안전한 저장 방식 설계",
-      "relatedImplRules": ["IV-2.9"]
-    ,
-      "dangerousPatterns": ["password\\s*=\\s*\"|setPassword\\("]
+      "relatedImplRules": [
+        "IV-2.9"
+      ],
+      "dangerousPatterns": [
+        "password\\s*=\\s*\"|setPassword\\("
+      ],
+      "remediation": {
+        "strategy": "PASSWORD_POLICY",
+        "description": "비밀번호 복잡성 정책 및 안전한 저장 방식 설계",
+        "guideRef": "PART3 제2절 3항 (p.124-130)",
+        "remediationCode": "// [수정] DS-2.3 비밀번호 관리 설계: 복잡성 정책 + 안전한 저장\n// ❌ 취약: 비밀번호 평문 저장 또는 단순 MD5\nString hash = DigestUtils.md5Hex(password);  // 레인보우 테이블 취약\n\n// ✅ 안전: 복잡성 검증 + BCrypt/PBKDF2 저장\n// [복잡성 정책]\nPattern PW = Pattern.compile(\n    \"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,20}$\");\nif (!PW.matcher(password).matches())\n    throw new ValidationException(\n        \"8~20자, 대/소문자·숫자·특수문자 포함 필수\");\n// [BCrypt 해시 저장 — Spring Security]\nBCryptPasswordEncoder enc = new BCryptPasswordEncoder(12);\nString stored = enc.encode(password);   // 솔트 자동 포함\n// [검증]\nboolean ok = enc.matches(rawPassword, stored);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 비밀번호 복잡도 검증 없이 저장\npublic void changePassword(String newPw) {\n    userDao.updatePassword(userId, newPw); // \"1234\" 같은 단순 비밀번호 허용\n}",
+        "good": "// ✅ 복잡도 정책 적용: 8자 이상, 영문+숫자+특수문자 포함\npublic void changePassword(String newPw) {\n    if (newPw == null || newPw.length() < 8) {\n        throw new IllegalArgumentException(\"비밀번호는 8자 이상이어야 합니다.\");\n    }\n    boolean hasLetter  = newPw.matches(\".*[a-zA-Z].*\");\n    boolean hasDigit   = newPw.matches(\".*\\\\d.*\");\n    boolean hasSpecial = newPw.matches(\".*[!@#$%^&*].*\");\n    if (!hasLetter || !hasDigit || !hasSpecial) {\n        throw new IllegalArgumentException(\"영문·숫자·특수문자를 모두 포함해야 합니다.\");\n    }\n    userDao.updatePassword(userId, hash(newPw));\n}"
+      }
     },
     {
       "ruleId": "DS-2.4",
       "part": "PART3",
       "section": "보안기능",
       "name": "중요자원 접근통제",
-      "cwe": ["CWE-285", "CWE-732"],
+      "cwe": [
+        "CWE-285",
+        "CWE-732"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "중요 자원에 대한 접근권한 최소화 및 통제 설계",
-      "relatedImplRules": ["IV-2.2", "IV-2.3"]
-    ,
-      "dangerousPatterns": ["setReadable\\(|setWritable\\(|PosixFilePermissions"]
+      "relatedImplRules": [
+        "IV-2.2",
+        "IV-2.3"
+      ],
+      "dangerousPatterns": [
+        "setReadable\\(|setWritable\\(|PosixFilePermissions"
+      ],
+      "remediation": {
+        "strategy": "LEAST_PRIVILEGE",
+        "description": "중요 자원에 대한 접근권한 최소화 및 통제 설계",
+        "guideRef": "PART3 제2절 4항 (p.131-137)",
+        "remediationCode": "// [수정] DS-2.4 중요자원 접근통제 설계: 최소 권한 원칙\n// ❌ 취약: 파일에 모든 사용자 읽기/쓰기 권한 부여\nFile cfg = new File(\"/app/config/db.properties\");\ncfg.setReadable(true, false);  // everyone readable\ncfg.setWritable(true, false);  // everyone writable\n\n// ✅ 안전: 소유자만 접근 가능하도록 제한\nimport java.nio.file.attribute.*;\nPath cfgPath = Paths.get(\"/app/config/db.properties\");\nSet<PosixFilePermission> perms =\n    PosixFilePermissions.fromString(\"rw-------\");\nFiles.setPosixFilePermissions(cfgPath, perms);\n\n// 임시 파일도 최소 권한으로 생성\nPath temp = Files.createTempFile(\"upload_\", \".tmp\",\n    PosixFilePermissions.asFileAttribute(\n        PosixFilePermissions.fromString(\"rw-------\")));\n// 앱 실행 계정을 전용 서비스 계정으로 분리 (root 실행 금지)"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 로그인 여부만 확인, 자원 소유권 미검증\n@GetMapping(\"/document/{id}\")\npublic Document getDoc(@PathVariable Long id, HttpSession session) {\n    if (session.getAttribute(\"userId\") == null) throw new UnauthorizedException();\n    return docService.findById(id); // 타인 문서 접근 가능\n}",
+        "good": "// ✅ 자원 소유자 또는 권한 확인\n@GetMapping(\"/document/{id}\")\npublic Document getDoc(@PathVariable Long id, HttpSession session) {\n    Long userId = (Long) session.getAttribute(\"userId\");\n    if (userId == null) throw new UnauthorizedException();\n    Document doc = docService.findById(id);\n    if (!doc.getOwnerId().equals(userId)) {\n        throw new ForbiddenException(\"접근 권한이 없습니다.\");\n    }\n    return doc;\n}"
+      }
     },
     {
       "ruleId": "DS-2.5",
       "part": "PART3",
       "section": "보안기능",
       "name": "암호키 관리",
-      "cwe": ["CWE-321"],
+      "cwe": [
+        "CWE-321"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "암호키 생성·저장·폐기 생명주기 관리 설계",
-      "relatedImplRules": ["IV-2.6"]
-    ,
-      "dangerousPatterns": ["KeyGenerator\\.getInstance|new SecretKeySpec|KeyStore\\.getInstance"]
+      "relatedImplRules": [
+        "IV-2.6"
+      ],
+      "dangerousPatterns": [
+        "KeyGenerator\\.getInstance|new SecretKeySpec|KeyStore\\.getInstance"
+      ],
+      "remediation": {
+        "strategy": "EXTERNALIZE_SECRETS",
+        "description": "암호키 생성·저장·폐기 생명주기 관리 설계",
+        "guideRef": "PART3 제2절 5항 (p.138-144)",
+        "remediationCode": "// [수정] DS-2.5 암호키 관리 설계: 외부화 + KeyStore 보관\n// ❌ 취약: 암호키를 소스코드에 하드코딩\nbyte[] keyBytes = \"MySecretKey12345\".getBytes();\nSecretKey key = new SecretKeySpec(keyBytes, \"AES\");\n\n// ✅ 안전 방법 1: 환경변수에서 로드\nString keyB64 = System.getenv(\"APP_AES_KEY\");\nSecretKey key = new SecretKeySpec(\n    Base64.getDecoder().decode(keyB64), \"AES\");\n\n// ✅ 안전 방법 2: Java KeyStore (PKCS12)\nKeyStore ks = KeyStore.getInstance(\"PKCS12\");\nks.load(new FileInputStream(\"keystore.p12\"),\n    System.getenv(\"KS_PASS\").toCharArray());\nSecretKey key = (SecretKey) ks.getKey(\"mykey\",\n    System.getenv(\"KEY_PASS\").toCharArray());\n// ✅ 안전 방법 3: HashiCorp Vault / AWS Secrets Manager"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 소스코드에 암호키 하드코딩\nprivate static final String SECRET_KEY = \"myHardCodedKey123!\";\nSecretKeySpec keySpec = new SecretKeySpec(SECRET_KEY.getBytes(), \"AES\");",
+        "good": "// ✅ 환경변수 또는 외부 키 저장소에서 키 로드\nString keyVal = System.getenv(\"APP_SECRET_KEY\");\nif (keyVal == null || keyVal.length() < 32) {\n    throw new IllegalStateException(\"암호키 환경변수(APP_SECRET_KEY) 미설정\");\n}\nSecretKeySpec keySpec = new SecretKeySpec(keyVal.getBytes(\"UTF-8\"), \"AES\");\n// 운영환경: AWS Secrets Manager / HashiCorp Vault 활용 권장"
+      }
     },
     {
       "ruleId": "DS-2.6",
       "part": "PART3",
       "section": "보안기능",
       "name": "암호연산",
-      "cwe": ["CWE-327", "CWE-326"],
+      "cwe": [
+        "CWE-327",
+        "CWE-326"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "안전한 암호 알고리즘 및 충분한 키 길이 사용 설계",
-      "relatedImplRules": ["IV-2.4", "IV-2.7"]
-    ,
-      "dangerousPatterns": ["Cipher\\.getInstance|MessageDigest\\.getInstance"]
+      "relatedImplRules": [
+        "IV-2.4",
+        "IV-2.7"
+      ],
+      "dangerousPatterns": [
+        "Cipher\\.getInstance|MessageDigest\\.getInstance"
+      ],
+      "remediation": {
+        "strategy": "STRONG_CRYPTO",
+        "description": "안전한 암호 알고리즘 및 충분한 키 길이 사용 설계",
+        "guideRef": "PART3 제2절 6항 (p.145-152)",
+        "remediationCode": "// [수정] DS-2.6 암호 알고리즘 설계: 안전한 알고리즘 선택\n// ❌ 취약: DES, RC4, MD5, SHA-1 등 취약 알고리즘 사용\nCipher c = Cipher.getInstance(\"DES/ECB/PKCS5Padding\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\n\n// ✅ 안전: AES-256-GCM (암호화), SHA-256 이상 (해시)\n// [대칭 암호화 — AES-256-GCM]\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256, new SecureRandom());\nSecretKey key = kg.generateKey();\nbyte[] iv = new byte[12];\nnew SecureRandom().nextBytes(iv);\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\ncipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));\nbyte[] enc = cipher.doFinal(plaintext.getBytes(\"UTF-8\"));\n// [해시 — SHA-256]\nbyte[] hash = MessageDigest.getInstance(\"SHA-256\").digest(data);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 취약한 암호 알고리즘 사용 (DES, MD5)\nCipher cipher = Cipher.getInstance(\"DES\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\nbyte[] hash = md.digest(password.getBytes());",
+        "good": "// ✅ 안전한 알고리즘 사용 (AES-256, SHA-256)\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\nGCMParameterSpec spec = new GCMParameterSpec(128, iv);\ncipher.init(Cipher.ENCRYPT_MODE, secretKey, spec);\n// 패스워드 해시: PBKDF2 사용\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nKeySpec ks = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(ks).getEncoded();"
+      }
     },
     {
       "ruleId": "DS-2.7",
       "part": "PART3",
       "section": "보안기능",
       "name": "중요정보 저장",
-      "cwe": ["CWE-312", "CWE-539"],
+      "cwe": [
+        "CWE-312",
+        "CWE-539"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "중요정보 암호화 저장 및 쿠키 보안 속성 설계",
-      "relatedImplRules": ["IV-2.5", "IV-2.12"]
-    ,
-      "dangerousPatterns": ["new Cookie\\(|addCookie\\("]
+      "relatedImplRules": [
+        "IV-2.5",
+        "IV-2.12"
+      ],
+      "dangerousPatterns": [
+        "new Cookie\\(|addCookie\\("
+      ],
+      "remediation": {
+        "strategy": "ENCRYPT_SENSITIVE_DATA",
+        "description": "중요정보 암호화 저장 및 쿠키 보안 속성 설계",
+        "guideRef": "PART3 제2절 7항 (p.153-159)",
+        "remediationCode": "// [수정] DS-2.7 중요정보 저장 설계: 암호화 저장 + 쿠키 보안\n// ❌ 취약: 중요정보 평문 쿠키 저장\nCookie c = new Cookie(\"userId\", userId);\nresponse.addCookie(c);\n\n// ✅ 안전: HttpOnly·Secure·SameSite 속성 + 중요정보 제거\nCookie c = new Cookie(\"SESSIONID\", session.getId());\nc.setHttpOnly(true);    // JS 접근 차단\nc.setSecure(true);      // HTTPS 전용\nc.setPath(\"/\");\nc.setMaxAge(-1);        // 세션 쿠키\n// SameSite 설정 (Set-Cookie 헤더 직접)\nresponse.addHeader(\"Set-Cookie\",\n    \"SESSIONID=\" + session.getId() +\n    \"; HttpOnly; Secure; SameSite=Strict; Path=/\");\n// DB: 주민번호·카드번호 등은 AES-256 암호화 후 저장"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 중요 정보(비밀번호) 평문 저장\nuserDao.save(new User(id, password)); // password를 그대로 DB에 저장",
+        "good": "// ✅ PBKDF2 + Salt 해시 저장\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nKeySpec ks = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(ks).getEncoded();\nString encoded = Base64.getEncoder().encodeToString(salt)\n                 + \":\" + Base64.getEncoder().encodeToString(hash);\nuserDao.save(new User(id, encoded));"
+      }
     },
     {
       "ruleId": "DS-2.8",
       "part": "PART3",
       "section": "보안기능",
       "name": "중요정보 전송",
-      "cwe": ["CWE-319"],
+      "cwe": [
+        "CWE-319"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "description": "중요정보 전송 시 암호화 채널(TLS) 사용 설계",
-      "relatedImplRules": []
-    ,
-      "dangerousPatterns": ["new URL.*http://|HttpURLConnection|openConnection\\("]
+      "relatedImplRules": [],
+      "dangerousPatterns": [
+        "new URL.*http://|HttpURLConnection|openConnection\\("
+      ],
+      "remediation": {
+        "strategy": "GENERIC",
+        "description": "중요정보 전송 시 암호화 채널(TLS) 사용 설계",
+        "guideRef": "PART3 제2절 8항 (p.160-164)",
+        "remediationCode": "// [수정] DS-2.8 중요정보 전송 설계: TLS 암호화 채널 사용 의무화\n// ❌ 취약: HTTP 평문으로 중요정보 전송\nURL url = new URL(\"http://payment.internal/api/charge\");\nHttpURLConnection conn = (HttpURLConnection) url.openConnection();\n\n// ✅ 안전: HTTPS + 기본 인증서 검증 사용\nURL url = new URL(\"https://payment.internal/api/charge\");\nHttpsURLConnection conn = (HttpsURLConnection) url.openConnection();\n// 기본 HostnameVerifier 유지 (ALLOW_ALL 절대 금지)\nconn.setHostnameVerifier(HttpsURLConnection\n    .getDefaultHostnameVerifier());\nconn.setConnectTimeout(5000);\nconn.setReadTimeout(10000);\n// Spring Boot application.yml:\n//   server.ssl.enabled: true\n//   server.ssl.protocol: TLS\n// Tomcat server.xml: SSLEnabled=\"true\", protocol=\"TLSv1.2\"\n// HTTP → HTTPS 강제 리다이렉트 설정 필수"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 중요 데이터를 평문 HTTP로 전송\n// application.properties:\n// server.port=8080  (HTTPS 미설정)\n// 결과: 로그인 자격증명이 네트워크에서 평문 노출",
+        "good": "// ✅ HTTPS 강제 및 HSTS 설정\n// Spring Security 설정:\nhttp.requiresChannel().anyRequest().requiresSecure()\n    .and()\n    .headers().httpStrictTransportSecurity()\n        .includeSubDomains(true).maxAgeInSeconds(31536000);\n// server.properties: server.ssl.enabled=true\n// 민감 쿠키: response.addHeader(\"Set-Cookie\",\n//            \"sessionId=\" + id + \"; Secure; HttpOnly; SameSite=Strict\");"
+      }
     },
     {
       "ruleId": "DS-3.1",
       "part": "PART3",
       "section": "에러처리",
       "name": "예외처리",
-      "cwe": ["CWE-209", "CWE-390"],
+      "cwe": [
+        "CWE-209",
+        "CWE-390"
+      ],
       "severity": "MEDIUM",
       "phase": "DESIGN",
       "description": "예외 발생 시 시스템 정보 미노출 및 안전한 처리 흐름 설계",
-      "relatedImplRules": ["IV-4.1", "IV-4.2", "IV-4.3"]
-    ,
-      "dangerousPatterns": ["e\\.printStackTrace\\(\\)|catch.*Exception.*\\{"]
+      "relatedImplRules": [
+        "IV-4.1",
+        "IV-4.2",
+        "IV-4.3"
+      ],
+      "dangerousPatterns": [
+        "e\\.printStackTrace\\(\\)|catch.*Exception.*\\{"
+      ],
+      "remediation": {
+        "strategy": "GENERIC_ERROR_MESSAGE",
+        "description": "예외 발생 시 시스템 정보 미노출 및 안전한 처리 흐름 설계",
+        "guideRef": "PART3 제3절 1항 (p.167-172)",
+        "remediationCode": "// [수정] DS-3.1 예외처리 설계: 내부정보 미노출 + 안전한 처리 흐름\n// ❌ 취약: 스택트레이스·DB 오류를 클라이언트에 노출\n// e.printStackTrace(); out.println(\"오류: \" + e.getMessage());\n\n// ✅ 안전: 서버 로그 기록 + 클라이언트에 일반 메시지\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 오류: {}\", e.getMessage(), e);\n    response.sendError(500, \"서비스 오류가 발생했습니다.\");\n}\n// Spring Boot 전역 처리기\n@ControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(Exception.class)\n    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)\n    public Map<String, String> handle(Exception e) {\n        log.error(\"[GLOBAL] 처리되지 않은 예외\", e);\n        return Map.of(\"error\", \"서비스 오류가 발생했습니다.\");\n    }\n}"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 상세 예외 정보를 사용자에게 노출\ntry {\n    userService.login(id, pw);\n} catch (SQLException e) {\n    response.getWriter().println(\"DB 오류: \" + e.getMessage()); // 내부 정보 노출\n}",
+        "good": "// ✅ 범용 오류 메시지 출력, 상세 정보는 로그에만 기록\ntry {\n    userService.login(id, pw);\n} catch (SQLException e) {\n    log.error(\"[LOGIN] DB 오류: {}\", e.getMessage(), e);\n    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,\n                       \"서비스 오류가 발생했습니다. 관리자에게 문의하세요.\");\n}"
+      }
     },
     {
       "ruleId": "DS-4.1",
       "part": "PART3",
       "section": "세션통제",
       "name": "세션 통제",
-      "cwe": ["CWE-488"],
+      "cwe": [
+        "CWE-488"
+      ],
       "severity": "HIGH",
       "phase": "DESIGN",
       "taintAnalysis": true,
       "description": "서비스·유틸 레이어 메서드가 HttpSession 객체 자체를 파라미터로 직접 받는 것은 보안 설계 위반이다. ① 세션 객체 전달 시 불필요한 세션 데이터 전체에 접근·변조 가능, ② Session Fixation 공격에 취약, ③ 세션 만료 시 NullPointerException 위험이 있다. 컨트롤러에서 필요한 속성값(사용자 ID, 권한 코드 등)만 추출하여 서비스 레이어에 전달해야 한다. 세션 만료 시간은 20분 이내로 설정하고, 인증 성공 후 반드시 session.invalidate() 후 새 세션을 발급하여 Session Fixation을 방지하라.",
-      "relatedImplRules": ["IV-6.1"],
+      "relatedImplRules": [
+        "IV-6.1"
+      ],
       "remediation": {
         "strategy": "SESSION_DESIGN",
         "description": "컨트롤러에서 session.getAttribute(\"사용자키\")로 필요한 값만 추출 후 서비스 레이어에 전달하라. HttpSession 객체를 서비스 메서드 파라미터로 직접 선언하지 말 것. 세션 타임아웃은 web.xml 또는 setMaxInactiveInterval(1200)로 20분 설정. 로그인 성공 시 session.invalidate() 후 request.getSession(true)로 새 세션 발급.",
         "guideRef": "PART3 제4절 1항 (p.165-170)",
         "remediationCode": "// [수정] DS-4.1 세션 통제: HttpSession 객체 직접 전달 금지\n// ❌ 취약: 서비스 메서드가 HttpSession 전체를 받음\n// public BoardVO setMemberInfo(BoardVO vo, HttpSession session) { ... }\n\n// ✅ 안전: 컨트롤러에서 필요한 값만 추출하여 전달\n// [Controller]\nMemberVO memberVo = (MemberVO) session.getAttribute(\"admin\");\nif (memberVo == null) throw new UnauthorizedException(\"로그인이 필요합니다.\");\nvo = boardService.setMemberInfo(vo, memberVo.getId(), memberVo.getName());\n\n// [Service]\npublic BoardVO setMemberInfo(BoardVO vo, String userId, String userName) {\n    if (userId != null) {\n        vo.setRegId(userId);\n        vo.setRegName(userName);\n        vo.setUpdId(userId);\n        vo.setUpdName(userName);\n    }\n    return vo;\n}\n\n// [세션 만료 설정 — web.xml]\n// <session-config><session-timeout>20</session-timeout></session-config>\n\n// [Session Fixation 방지 — 로그인 성공 후]\nHttpSession oldSession = request.getSession(false);\nif (oldSession != null) oldSession.invalidate();\nHttpSession newSession = request.getSession(true);  // 새 ID 발급\nnewSession.setAttribute(\"admin\", authenticatedMember);"
       },
-      "dangerousPatterns": ["getSession\\(|setMaxInactiveInterval|session\\.invalidate"]
+      "dangerousPatterns": [
+        "getSession\\(|setMaxInactiveInterval|session\\.invalidate"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 로그아웃 시 세션 미파기 → 세션 재사용 가능\n@GetMapping(\"/logout\")\npublic String logout(HttpSession session) {\n    session.removeAttribute(\"userId\"); // 세션 자체는 유지됨\n    return \"redirect:/login\";\n}",
+        "good": "// ✅ 로그아웃 시 세션 완전 파기 + 새 세션 발급\n@GetMapping(\"/logout\")\npublic String logout(HttpServletRequest request, HttpServletResponse response) {\n    HttpSession session = request.getSession(false);\n    if (session != null) {\n        session.invalidate(); // 세션 완전 파기\n    }\n    // 세션 쿠키 명시적 삭제\n    Cookie cookie = new Cookie(\"JSESSIONID\", null);\n    cookie.setMaxAge(0);\n    cookie.setPath(\"/\");\n    response.addCookie(cookie);\n    return \"redirect:/login\";\n}"
+      }
     },
-
-    // ────────────────────────────────────────────────
-    // PART4 : 구현단계 보안약점 제거 기준 (총 49개)
-    // ────────────────────────────────────────────────
-
-    // 제1절 입력데이터 검증 및 표현 (17개)
     {
       "ruleId": "IV-1.1",
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "SQL 삽입",
-      "cwe": ["CWE-89"],
+      "cwe": [
+        "CWE-89"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
@@ -325,6 +630,10 @@
         "description": "외부 입력값을 SQL 문자열에 직접 연결(+)하면 공격자가 SQL 문법을 주입하여 인증 우회, 데이터 탈취, 데이터 변조가 가능하다. PreparedStatement의 ?·플레이스홀더를 사용하면 SQL 구조가 컴파일 시점에 확정되어 입력값이 순수 데이터로만 처리된다. MyBatis 환경에서는 ${ } 대신 #{ } 바인딩 파라미터를 사용하라.",
         "guideRef": "PART4 제1절 1항 (p.180-193)",
         "remediationCode": "// [수정] IV-1.1 SQL 삽입 방지: PreparedStatement 사용\n// ❌ 취약: String sql = \"SELECT * FROM board WHERE id='\" + userId + \"'\";\n// ✅ 안전:\nString sql = \"SELECT * FROM board WHERE id = ?\";\ntry (PreparedStatement pstmt = con.prepareStatement(sql)) {\n    pstmt.setString(1, userId);\n    try (ResultSet rs = pstmt.executeQuery()) {\n        while (rs.next()) { /* 처리 */ }\n    }\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 실행 오류: {}\", e.getMessage(), e);\n    throw new RuntimeException(\"데이터 조회 중 오류가 발생했습니다.\", e);\n}\n// MyBatis: WHERE b_gubun = #{userId}  (${userId} 사용 금지)"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 SQL 문자열에 직접 연결\nString sql = \"SELECT * FROM board WHERE b_gubun='\" + gubun + \"'\";\nResultSet rs = stmt.executeQuery(sql);",
+        "good": "// ✅ PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM board WHERE b_gubun = ?\";\nPreparedStatement pstmt = con.prepareStatement(sql);\npstmt.setString(1, gubun);\nResultSet rs = pstmt.executeQuery();\n// MyBatis: WHERE b_gubun = #{gubun}  (${gubun} 사용 금지)"
       }
     },
     {
@@ -332,11 +641,17 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "코드삽입",
-      "cwe": ["CWE-94", "CWE-95"],
+      "cwe": [
+        "CWE-94",
+        "CWE-95"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter", "request.getAttribute"],
+      "sources": [
+        "request.getParameter",
+        "request.getAttribute"
+      ],
       "sinks": [
         "Runtime.exec",
         "ProcessBuilder",
@@ -345,11 +660,20 @@
         "Method.invoke",
         "groovy.lang.GroovyShell.evaluate"
       ],
-      "sanitizers": ["replaceAll", "matches", "Pattern.compile"],
+      "sanitizers": [
+        "replaceAll",
+        "matches",
+        "Pattern.compile"
+      ],
       "remediation": {
         "strategy": "WHITELIST_VALIDATION",
         "description": "허용된 값 목록(화이트리스트)으로 입력값을 제한하고 동적 코드 실행 금지",
-        "guideRef": "PART4 제1절 2항 (p.194-200)"
+        "guideRef": "PART4 제1절 2항 (p.194-200)",
+        "remediationCode": "// [수정] IV-1.2 코드삽입 방지: 동적 코드 실행 금지 + 화이트리스트\n// ❌ 취약: 외부 입력을 ScriptEngine.eval()로 실행\nString code = request.getParameter(\"script\");\nnew ScriptEngineManager().getEngineByName(\"js\").eval(code);\n\n// ✅ 안전 방법 1: 동적 코드 실행 제거 (강력 권장)\n// eval(), exec(), Class.forName(userInput) 등 제거\n\n// ✅ 안전 방법 2: 화이트리스트 기반 분기\nString action = request.getParameter(\"action\");\nint result = switch (action) {\n    case \"add\"      -> a + b;\n    case \"subtract\" -> a - b;\n    case \"multiply\" -> a * b;\n    default -> throw new IllegalArgumentException(\n        \"허용되지 않는 연산: \" + action);\n};"
+      },
+      "codeExamples": {
+        "bad": "// ❌ ScriptEngine에 외부 입력값 직접 실행 (코드 삽입)\nScriptEngine engine = new ScriptEngineManager().getEngineByName(\"JavaScript\");\nString script = request.getParameter(\"expr\");\nengine.eval(script); // 임의 코드 실행 가능",
+        "good": "// ✅ 화이트리스트 허용 표현식만 실행\nString expr = request.getParameter(\"expr\");\nif (!expr.matches(\"[0-9+\\\\-*/(). ]+\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 표현식\");\n}\n// 안전한 수식 파서 라이브러리 사용 권장 (예: exp4j)\n// ScriptEngine 사용 자체를 피하는 것이 최선"
       }
     },
     {
@@ -357,11 +681,20 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "경로 조작 및 자원 삽입",
-      "cwe": ["CWE-22", "CWE-99", "CWE-78"],
+      "cwe": [
+        "CWE-22",
+        "CWE-99",
+        "CWE-78"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter", "request.getAttribute", "args[]", "getenv"],
+      "sources": [
+        "request.getParameter",
+        "request.getAttribute",
+        "args[]",
+        "getenv"
+      ],
       "sinks": [
         "new File(",
         "new FileInputStream(",
@@ -390,6 +723,10 @@
         "description": "외부 입력 파일명/경로에 '../'(상위 디렉터리 탈출), '%2e%2e%2f'(URL 인코딩) 등이 포함되면 허용된 디렉터리를 벗어나 임의 파일 접근이 가능하다. getCanonicalPath()로 경로를 정규화한 후 허용 기본 디렉터리(base directory) 내부에 있는지 Path.startsWith()로 검증하라. String.startsWith() 사용 시 /data2가 /data로 오인되는 문제가 발생하므로 반드시 Path API 사용.",
         "guideRef": "PART4 제1절 3항 (p.201-210)",
         "remediationCode": "// [수정] IV-1.3 경로 조작 방지: canonicalize 후 허용 범위 검증\nString fileName = request.getParameter(\"fileName\");\nif (fileName == null || !fileName.matches(\"^[a-zA-Z0-9._-]{1,255}$\"))\n    throw new SecurityException(\"허용되지 않는 파일명\");\nFile baseDir = new File(\"/app/uploads\").getCanonicalFile();\nFile target  = new File(baseDir, fileName).getCanonicalFile();\nif (!target.toPath().startsWith(baseDir.toPath()))\n    throw new SecurityException(\"허용되지 않는 경로 접근\");\ntry (FileInputStream fis = new FileInputStream(target)) { /* 처리 */ }"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값으로 파일 경로 직접 구성 (경로 탈출 가능)\nString fileName = request.getParameter(\"file\");\nFile f = new File(\"/uploads/\" + fileName); // \"../../etc/passwd\" 가능\nFileInputStream fis = new FileInputStream(f);",
+        "good": "// ✅ 정규화 경로가 기준 디렉터리 내에 있는지 검증\nString fileName = request.getParameter(\"file\");\nFile base = new File(\"/uploads\").getCanonicalFile();\nFile target = new File(base, fileName).getCanonicalFile();\nif (!target.getPath().startsWith(base.getPath() + File.separator)) {\n    throw new SecurityException(\"허용되지 않는 경로 접근\");\n}\nFileInputStream fis = new FileInputStream(target);"
       }
     },
     {
@@ -397,11 +734,17 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "크로스사이트 스크립트",
-      "cwe": ["CWE-79"],
+      "cwe": [
+        "CWE-79"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter", "request.getAttribute", "request.getCookies"],
+      "sources": [
+        "request.getParameter",
+        "request.getAttribute",
+        "request.getCookies"
+      ],
       "sinks": [
         "response.getWriter().print",
         "response.getWriter().println",
@@ -420,7 +763,12 @@
       "remediation": {
         "strategy": "OUTPUT_ENCODING",
         "description": "출력 시 HTML 특수문자 인코딩(OWASP ESAPI 또는 Spring HtmlUtils 사용)",
-        "guideRef": "PART4 제1절 4항 (p.211-222)"
+        "guideRef": "PART4 제1절 4항 (p.211-222)",
+        "remediationCode": "// [수정] IV-1.4 XSS 방지: 출력 컨텍스트별 인코딩 적용\n// ❌ 취약: 외부 입력을 HTML에 그대로 출력\nString name = request.getParameter(\"name\");\nout.println(\"<b>안녕하세요, \" + name + \"님</b>\");\n\n// ✅ 안전 (HTML): Spring HtmlUtils\nimport org.springframework.web.util.HtmlUtils;\nout.println(\"<b>안녕하세요, \" +\n    HtmlUtils.htmlEscape(name) + \"님</b>\");\n// JSP: <c:out value=\"${param.name}\"/>  (자동 인코딩)\n\n// ✅ 안전 (JS 컨텍스트): ESAPI\nout.println(\"<script>var x='\" +\n    ESAPI.encoder().encodeForJavaScript(name) + \"';</script>\");\n// ✅ 안전 (URL 파라미터):\nString safeUrl = URLEncoder.encode(name, StandardCharsets.UTF_8);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 HTML에 인코딩 없이 직접 출력 (XSS)\nString name = request.getParameter(\"name\");\nout.println(\"<div>\" + name + \"</div>\");",
+        "good": "// ✅ HTML 인코딩 후 출력\nString name = request.getParameter(\"name\");\nString safe = name.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\")\n                  .replace(\">\", \"&gt;\").replace(\"\\\"\", \"&quot;\")\n                  .replace(\"'\", \"&#x27;\");\nout.println(\"<div>\" + safe + \"</div>\");\n// OWASP Java Encoder: Encode.forHtml(name)"
       }
     },
     {
@@ -428,21 +776,36 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "운영체제 명령어 삽입",
-      "cwe": ["CWE-78"],
+      "cwe": [
+        "CWE-78"
+      ],
       "severity": "CRITICAL",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter", "request.getAttribute", "args[]"],
+      "sources": [
+        "request.getParameter",
+        "request.getAttribute",
+        "args[]"
+      ],
       "sinks": [
         "Runtime.getRuntime().exec",
         "new ProcessBuilder(",
         "ProcessBuilder.command"
       ],
-      "sanitizers": ["replaceAll", "Pattern.matches", "whitelist"],
+      "sanitizers": [
+        "replaceAll",
+        "Pattern.matches",
+        "whitelist"
+      ],
       "remediation": {
         "strategy": "AVOID_OS_COMMAND",
         "description": "OS 명령어 직접 실행 금지; 불가피한 경우 화이트리스트 기반 입력값 검증 적용",
-        "guideRef": "PART4 제1절 5항 (p.223-231)"
+        "guideRef": "PART4 제1절 5항 (p.223-231)",
+        "remediationCode": "// [수정] IV-1.5 OS 명령어 삽입 방지: 직접 실행 금지\n// ❌ 취약: 외부 입력을 Runtime.exec() 문자열에 포함\n// Runtime.getRuntime().exec(\"ls -la \" + file);  → 명령어 주입!\n\n// ✅ 안전 방법 1: Java API로 대체\n// ls → Files.list(Paths.get(dir))\n// rm → Files.deleteIfExists(path)\n// cp → Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING)\n\n// ✅ 안전 방법 2: 화이트리스트 + 배열 인자 (불가피 시)\nString fileId = request.getParameter(\"fileId\");\nif (!fileId.matches(\"^[a-zA-Z0-9_-]{1,50}$\"))\n    throw new SecurityException(\"허용되지 않는 파일 ID\");\nProcessBuilder pb = new ProcessBuilder(\n    \"/usr/bin/convert\",\n    \"/safe/uploads/\" + fileId + \".jpg\",\n    \"-thumbnail\", \"200x200\",\n    \"/safe/thumbs/\" + fileId + \"_thumb.jpg\");\npb.start().waitFor();"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 OS 명령어에 직접 삽입\nString ip = request.getParameter(\"ip\");\nString[] cmd = {\"sh\", \"-c\", \"ping -c 1 \" + ip}; // '; rm -rf /' 가능\nRuntime.getRuntime().exec(cmd);",
+        "good": "// ✅ Java API 직접 사용 + 불가피 시 화이트리스트 검증\nString ip = request.getParameter(\"ip\");\nif (!ip.matches(\"^\\\\d{1,3}(\\\\.\\\\d{1,3}){3}$\")) {\n    throw new IllegalArgumentException(\"잘못된 IP 형식\");\n}\nInetAddress addr = InetAddress.getByName(ip);\nboolean reachable = addr.isReachable(3000);\n// Runtime.exec() 사용 시 반드시 배열 형태로 전달 (쉘 해석 방지)"
       }
     },
     {
@@ -450,37 +813,73 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "위험한 형식 파일 업로드",
-      "cwe": ["CWE-434"],
+      "cwe": [
+        "CWE-434"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": false,
-      "sources": ["request.getPart", "MultipartFile.getOriginalFilename"],
-      "sinks": ["new File(", "transferTo", "write("],
-      "sanitizers": ["endsWith", "matches", "FilenameUtils.getExtension"],
+      "sources": [
+        "request.getPart",
+        "MultipartFile.getOriginalFilename"
+      ],
+      "sinks": [
+        "new File(",
+        "transferTo",
+        "write("
+      ],
+      "sanitizers": [
+        "endsWith",
+        "matches",
+        "FilenameUtils.getExtension"
+      ],
       "remediation": {
         "strategy": "FILE_EXTENSION_WHITELIST",
         "description": "허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화",
-        "guideRef": "PART4 제1절 6항 (p.232-238)"
+        "guideRef": "PART4 제1절 6항 (p.232-238)",
+        "remediationCode": "// [수정] IV-1.6 파일 업로드 보안: 확장자·크기·경로 검증\n// ❌ 취약: 원본 파일명 검증 없이 저장\nString name = file.getOriginalFilename();\nfile.transferTo(new File(\"/uploads/\" + name));\n\n// ✅ 안전: 화이트리스트 + 크기 제한 + 파일명 랜덤화\nprivate static final Set<String> ALLOWED =\n    Set.of(\"jpg\",\"jpeg\",\"png\",\"gif\",\"hwp\",\"pdf\",\"xlsx\");\nString ext = FilenameUtils.getExtension(\n    file.getOriginalFilename()).toLowerCase();\nif (!ALLOWED.contains(ext))\n    throw new SecurityException(\"허용되지 않는 확장자: \" + ext);\nif (file.getSize() > 10 * 1024 * 1024)\n    throw new SecurityException(\"파일 크기 초과 (최대 10MB)\");\nString saveName = UUID.randomUUID() + \".\" + ext;\nPath dest = Paths.get(\"/var/secure-uploads\", saveName).normalize();\nif (!dest.startsWith(Paths.get(\"/var/secure-uploads\")))\n    throw new SecurityException(\"경로 탈출 시도 감지\");\nfile.transferTo(dest);"
+      },
+      "dangerousPatterns": [
+        "getOriginalFilename\\(\\)|getPart\\(|MultipartFile"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 파일 확장자 검증 없이 업로드 허용\nString fileName = fileItem.getName();\nFile dest = new File(uploadDir + \"/\" + fileName);\nfileItem.write(dest); // .jsp 등 실행 파일 업로드 가능",
+        "good": "// ✅ 화이트리스트 확장자 검증 + 저장명 UUID 랜덤화\nSet<String> allowed = new HashSet<>(Arrays.asList(\"jpg\", \"png\", \"gif\", \"pdf\"));\nString origName = fileItem.getName();\nint dotIdx = origName.lastIndexOf('.');\nString ext = (dotIdx >= 0) ? origName.substring(dotIdx + 1).toLowerCase() : \"\";\nif (!allowed.contains(ext)) {\n    throw new SecurityException(\"허용되지 않는 파일 형식\");\n}\nString safeName = UUID.randomUUID().toString() + \".\" + ext;\nfileItem.write(new File(uploadDir, safeName));"
       }
-    ,
-      "dangerousPatterns": ["getOriginalFilename\\(\\)|getPart\\(|MultipartFile"]
     },
     {
       "ruleId": "IV-1.7",
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "신뢰되지 않는 URL 주소로 자동접속 연결",
-      "cwe": ["CWE-601"],
+      "cwe": [
+        "CWE-601"
+      ],
       "severity": "MEDIUM",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter"],
-      "sinks": ["sendRedirect", "setHeader.*Location", "response.encodeRedirectURL"],
-      "sanitizers": ["startsWith", "matches", "allowedDomains.contains"],
+      "sources": [
+        "request.getParameter"
+      ],
+      "sinks": [
+        "sendRedirect",
+        "setHeader.*Location",
+        "response.encodeRedirectURL"
+      ],
+      "sanitizers": [
+        "startsWith",
+        "matches",
+        "allowedDomains.contains"
+      ],
       "remediation": {
         "strategy": "REDIRECT_WHITELIST",
         "description": "리다이렉트 대상 URL을 서버 측에서 허용 목록과 비교 검증",
-        "guideRef": "PART4 제1절 7항 (p.239-243)"
+        "guideRef": "PART4 제1절 7항 (p.239-243)",
+        "remediationCode": "// [수정] IV-1.7 오픈 리다이렉트 방지: 허용 도메인 화이트리스트\n// ❌ 취약: 외부 입력 URL로 무조건 리다이렉트\nString url = request.getParameter(\"returnUrl\");\nresponse.sendRedirect(url);\n\n// ✅ 안전: 허용 호스트 검증 또는 상대경로만 허용\nprivate static final Set<String> ALLOWED =\n    Set.of(\"example.com\", \"www.example.com\");\nString url = request.getParameter(\"returnUrl\");\ntry {\n    URI uri = new URI(url);\n    if (uri.isAbsolute() &&\n        !ALLOWED.contains(uri.getHost()))\n        url = \"/\";  // 허용 목록 외 → 홈으로\n} catch (URISyntaxException e) {\n    url = \"/\";\n}\nresponse.sendRedirect(url);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력 URL로 무조건 리다이렉트 (Open Redirect)\nString url = request.getParameter(\"returnUrl\");\nresponse.sendRedirect(url); // 피싱 사이트로 유도 가능",
+        "good": "// ✅ 화이트리스트 허용 도메인만 리다이렉트\nString url = request.getParameter(\"returnUrl\");\nList<String> allowedHosts = Arrays.asList(\"example.com\", \"www.example.com\");\ntry {\n    URI uri = new URI(url);\n    if (!allowedHosts.contains(uri.getHost())) {\n        url = \"/\"; // 허용되지 않으면 홈으로\n    }\n} catch (URISyntaxException e) {\n    url = \"/\";\n}\nresponse.sendRedirect(url);"
       }
     },
     {
@@ -488,11 +887,16 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "부적절한 XML 외부개체 참조",
-      "cwe": ["CWE-611"],
+      "cwe": [
+        "CWE-611"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": false,
-      "sources": ["request.getInputStream", "request.getReader"],
+      "sources": [
+        "request.getInputStream",
+        "request.getReader"
+      ],
       "sinks": [
         "DocumentBuilderFactory",
         "SAXParserFactory",
@@ -507,27 +911,51 @@
       "remediation": {
         "strategy": "DISABLE_XML_ENTITY",
         "description": "XML 파서에서 외부 엔티티 참조 및 DOCTYPE 선언을 비활성화",
-        "guideRef": "PART4 제1절 8항 (p.244-250)"
+        "guideRef": "PART4 제1절 8항 (p.244-250)",
+        "remediationCode": "// [수정] IV-1.8 XXE 방지: XML 파서 외부 엔티티 비활성화\n// ❌ 취약: 기본 설정 XML 파서 사용 (외부 엔티티 허용)\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\nDocument doc = dbf.newDocumentBuilder().parse(inputStream);\n\n// ✅ 안전: DOCTYPE 및 외부 엔티티 완전 비활성화\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\ndbf.setFeature(\n    \"http://apache.org/xml/features/disallow-doctype-decl\", true);\ndbf.setFeature(\n    \"http://xml.org/sax/features/external-general-entities\", false);\ndbf.setFeature(\n    \"http://xml.org/sax/features/external-parameter-entities\", false);\ndbf.setExpandEntityReferences(false);\ndbf.setXIncludeAware(false);\nDocument doc = dbf.newDocumentBuilder().parse(inputStream);"
+      },
+      "dangerousPatterns": [
+        "DocumentBuilderFactory|SAXParserFactory|XMLInputFactory"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ XML 외부 엔티티(XXE) 미차단\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\nDocumentBuilder db = dbf.newDocumentBuilder();\nDocument doc = db.parse(xmlInput); // XXE 취약",
+        "good": "// ✅ DOCTYPE 및 외부 엔티티 참조 비활성화\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\ndbf.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\ndbf.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\ndbf.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\ndbf.setXIncludeAware(false);\ndbf.setExpandEntityReferences(false);\nDocumentBuilder db = dbf.newDocumentBuilder();\nDocument doc = db.parse(xmlInput);"
       }
-    ,
-      "dangerousPatterns": ["DocumentBuilderFactory|SAXParserFactory|XMLInputFactory"]
     },
     {
       "ruleId": "IV-1.9",
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "XML 삽입",
-      "cwe": ["CWE-652", "CWE-643"],
+      "cwe": [
+        "CWE-652",
+        "CWE-643"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter"],
-      "sinks": ["XPath.evaluate", "XQuery.execute", "executeXPath"],
-      "sanitizers": ["replaceAll", "encodeForXPath", "ESAPI.encoder"],
+      "sources": [
+        "request.getParameter"
+      ],
+      "sinks": [
+        "XPath.evaluate",
+        "XQuery.execute",
+        "executeXPath"
+      ],
+      "sanitizers": [
+        "replaceAll",
+        "encodeForXPath",
+        "ESAPI.encoder"
+      ],
       "remediation": {
         "strategy": "PARAMETERIZED_XPATH",
         "description": "XPath 변수 바인딩 사용 또는 특수문자 필터링 적용",
-        "guideRef": "PART4 제1절 9항 (p.251-263)"
+        "guideRef": "PART4 제1절 9항 (p.251-263)",
+        "remediationCode": "// [수정] IV-1.9 XPath 삽입 방지: 변수 바인딩 사용\n// ❌ 취약: 외부 입력값을 XPath 표현식에 직접 연결\nString expr = \"//user[name='\" + name + \"' and pwd='\" + pwd + \"']\";\nxpath.evaluate(expr, doc, XPathConstants.NODESET);\n\n// ✅ 안전: XPathVariableResolver로 파라미터 바인딩\nXPath xp = XPathFactory.newInstance().newXPath();\nxp.setXPathVariableResolver(var -> {\n    if (\"name\".equals(var.getLocalPart())) return name;\n    if (\"pwd\".equals(var.getLocalPart()))  return pwd;\n    return null;\n});\nNodeList result = (NodeList) xp.evaluate(\n    \"//user[name=$name and pwd=$pwd]\", doc,\n    XPathConstants.NODESET);\n// 또는: 특수문자(\\' \\\" [ ] * /) 필터링"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 XPath 표현식에 직접 삽입\nString user = request.getParameter(\"user\");\nString expr = \"/accounts/user[name='\" + user + \"']/password\";\nString pwd = (String) xpath.evaluate(expr, doc, XPathConstants.STRING);",
+        "good": "// ✅ 특수문자 제거 + 화이트리스트 검증\nString user = request.getParameter(\"user\");\nif (!user.matches(\"[a-zA-Z0-9_]{1,30}\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 사용자명\");\n}\nString expr = \"/accounts/user[name='\" + user + \"']/password\";\nString pwd = (String) xpath.evaluate(expr, doc, XPathConstants.STRING);"
       }
     },
     {
@@ -535,17 +963,34 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "LDAP 삽입",
-      "cwe": ["CWE-90"],
+      "cwe": [
+        "CWE-90"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter"],
-      "sinks": ["DirContext.search", "InitialDirContext", "NamingEnumeration"],
-      "sanitizers": ["encodeForLDAP", "ESAPI.encoder", "replaceAll"],
+      "sources": [
+        "request.getParameter"
+      ],
+      "sinks": [
+        "DirContext.search",
+        "InitialDirContext",
+        "NamingEnumeration"
+      ],
+      "sanitizers": [
+        "encodeForLDAP",
+        "ESAPI.encoder",
+        "replaceAll"
+      ],
       "remediation": {
         "strategy": "LDAP_ENCODING",
         "description": "LDAP 필터에 사용되는 입력값에 LDAP 특수문자 인코딩 적용",
-        "guideRef": "PART4 제1절 10항 (p.264-271)"
+        "guideRef": "PART4 제1절 10항 (p.264-271)",
+        "remediationCode": "// [수정] IV-1.10 LDAP 삽입 방지: 특수문자 인코딩\n// ❌ 취약: 외부 입력을 LDAP 필터에 직접 사용\nString filter = \"(&(uid=\" + userId + \")(pwd=\" + pwd + \"))\";\nctx.search(base, filter, null);\n\n// ✅ 안전: LDAP 특수문자 인코딩 (RFC 4515)\nprivate String encodeLdap(String s) {\n    return s.replace(\"\\\\\", \"\\\\5c\")\n            .replace(\"*\",  \"\\\\2a\")\n            .replace(\"(\",  \"\\\\28\")\n            .replace(\")\",  \"\\\\29\")\n            .replace(\"\\0\", \"\\\\00\");\n}\nString safeUid = encodeLdap(userId);\nString filter = \"(&(uid=\" + safeUid + \"))\";\n// 비밀번호는 필터에 넣지 말고 LDAP bind 인증으로 처리\nctx.addToEnvironment(Context.SECURITY_CREDENTIALS, pwd);\nctx.search(base, filter, null);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 LDAP 필터에 직접 삽입\nString uid = request.getParameter(\"uid\");\nString filter = \"(uid=\" + uid + \")\";\nNamingEnumeration<?> ne = ctx.search(base, filter, controls);",
+        "good": "// ✅ LDAP 특수문자 이스케이프\nString uid = request.getParameter(\"uid\");\nString safe = uid.replaceAll(\"[\\\\\\\\*\\\\(\\\\)\\0/]\", \"\");\nif (!safe.matches(\"[a-zA-Z0-9._-]{1,64}\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 UID\");\n}\nString filter = \"(uid=\" + safe + \")\";\nNamingEnumeration<?> ne = ctx.search(base, filter, controls);"
       }
     },
     {
@@ -553,37 +998,71 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "크로스사이트 요청 위조",
-      "cwe": ["CWE-352"],
+      "cwe": [
+        "CWE-352"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": false,
       "sources": [],
-      "sinks": ["doPost", "doPut", "doDelete"],
-      "sanitizers": ["csrfToken", "validateToken", "SynchronizerTokenPattern"],
+      "sinks": [
+        "doPost",
+        "doPut",
+        "doDelete"
+      ],
+      "sanitizers": [
+        "csrfToken",
+        "validateToken",
+        "SynchronizerTokenPattern"
+      ],
       "remediation": {
         "strategy": "CSRF_TOKEN",
         "description": "중요 기능 요청에 CSRF 토큰 생성·검증 또는 SameSite 쿠키 속성 적용",
-        "guideRef": "PART4 제1절 11항 (p.272-275)"
+        "guideRef": "PART4 제1절 11항 (p.272-275)",
+        "remediationCode": "// [수정] IV-1.11 CSRF 방지: Synchronizer Token 패턴 구현\n// ❌ 취약: POST 요청에 CSRF 토큰 검증 없음\nprotected void doPost(HttpServletRequest req, ...) {\n    userService.delete(req.getParameter(\"userId\"));\n}\n\n// ✅ 안전: 토큰 생성 + 검증\n// [로그인 시 생성]\nbyte[] bytes = new byte[32];\nnew SecureRandom().nextBytes(bytes);\nsession.setAttribute(\"_csrf\",\n    Base64.getUrlEncoder().withoutPadding().encodeToString(bytes));\n// [폼 히든 필드]\n// <input type=\"hidden\" name=\"_csrf\" value=\"${sessionScope._csrf}\">\n// [POST 검증]\nString req = request.getParameter(\"_csrf\");\nString ses = (String) session.getAttribute(\"_csrf\");\nif (!MessageDigest.isEqual(req.getBytes(), ses.getBytes()))\n    throw new SecurityException(\"CSRF 토큰 불일치\");\n// Spring Security: 자동 처리 (@EnableWebSecurity)"
+      },
+      "dangerousPatterns": [
+        "void doPost\\(HttpServletRequest|void doPut\\(|void doDelete\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ CSRF 토큰 없는 상태 변경 요청\n// POST /deleteAccount — 토큰 검증 없음\npublic void deleteAccount(HttpServletRequest req) {\n    String userId = (String) req.getSession().getAttribute(\"userId\");\n    userService.delete(userId);\n}",
+        "good": "// ✅ Synchronizer Token 패턴으로 CSRF 방어\npublic void deleteAccount(HttpServletRequest req) {\n    HttpSession session = req.getSession(false);\n    String expected = (String) session.getAttribute(\"csrfToken\");\n    String received = req.getParameter(\"csrfToken\");\n    if (expected == null || !expected.equals(received)) {\n        throw new SecurityException(\"CSRF 토큰 불일치\");\n    }\n    String userId = (String) session.getAttribute(\"userId\");\n    userService.delete(userId);\n}"
       }
-    ,
-      "dangerousPatterns": ["void doPost\\(HttpServletRequest|void doPut\\(|void doDelete\\("]
     },
     {
       "ruleId": "IV-1.12",
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "서버사이드 요청 위조",
-      "cwe": ["CWE-918"],
+      "cwe": [
+        "CWE-918"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter"],
-      "sinks": ["new URL(", "openConnection", "HttpClient", "RestTemplate.getForObject"],
-      "sanitizers": ["allowedHosts.contains", "InetAddress.getByName", "URI.getHost"],
+      "sources": [
+        "request.getParameter"
+      ],
+      "sinks": [
+        "new URL(",
+        "openConnection",
+        "HttpClient",
+        "RestTemplate.getForObject"
+      ],
+      "sanitizers": [
+        "allowedHosts.contains",
+        "InetAddress.getByName",
+        "URI.getHost"
+      ],
       "remediation": {
         "strategy": "SSRF_ALLOWLIST",
         "description": "서버 측에서 허용된 호스트 목록 검증 후 외부 요청 실행",
-        "guideRef": "PART4 제1절 12항 (p.276-283)"
+        "guideRef": "PART4 제1절 12항 (p.276-283)",
+        "remediationCode": "// [수정] IV-1.12 SSRF 방지: 허용 호스트 화이트리스트 검증\n// ❌ 취약: 외부 입력 URL로 서버가 직접 요청\nString targetUrl = request.getParameter(\"url\");\nInputStream is = new URL(targetUrl).openStream();\n\n// ✅ 안전: 스킴·호스트 엄격 검증\nprivate static final Set<String> ALLOWED_HOSTS =\n    Set.of(\"api.partner.com\", \"cdn.example.com\");\nString targetUrl = request.getParameter(\"url\");\nURI uri = new URI(targetUrl);\nif (!\"https\".equalsIgnoreCase(uri.getScheme()))\n    throw new SecurityException(\"HTTPS만 허용\");\nString host = uri.getHost();\nif (host == null || !ALLOWED_HOSTS.contains(host.toLowerCase()))\n    throw new SecurityException(\"허용되지 않는 호스트: \" + host);\nHttpsURLConnection conn =\n    (HttpsURLConnection) uri.toURL().openConnection();"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력 URL을 서버에서 직접 요청 (SSRF)\nString url = request.getParameter(\"imageUrl\");\nURL target = new URL(url); // 내부망(169.254.x.x, 10.x.x.x) 접근 가능\nInputStream is = target.openStream();",
+        "good": "// ✅ 허용 도메인 화이트리스트 + 내부 IP 차단\nString url = request.getParameter(\"imageUrl\");\nURI uri = new URI(url);\nString host = uri.getHost();\nInetAddress addr = InetAddress.getByName(host);\nif (addr.isLoopbackAddress() || addr.isSiteLocalAddress()\n        || addr.isLinkLocalAddress()) {\n    throw new SecurityException(\"내부 네트워크 접근 불가\");\n}\nList<String> allowedHosts = Arrays.asList(\"cdn.example.com\");\nif (!allowedHosts.contains(host)) {\n    throw new SecurityException(\"허용되지 않는 호스트\");\n}"
       }
     },
     {
@@ -591,17 +1070,34 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "HTTP 응답분할",
-      "cwe": ["CWE-113"],
+      "cwe": [
+        "CWE-113"
+      ],
       "severity": "MEDIUM",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter", "request.getHeader"],
-      "sinks": ["response.setHeader", "response.addHeader", "response.sendRedirect"],
-      "sanitizers": ["replaceAll.*\\\\r|\\\\n", "encodeForHTTP"],
+      "sources": [
+        "request.getParameter",
+        "request.getHeader"
+      ],
+      "sinks": [
+        "response.setHeader",
+        "response.addHeader",
+        "response.sendRedirect"
+      ],
+      "sanitizers": [
+        "replaceAll.*\\\\r|\\\\n",
+        "encodeForHTTP"
+      ],
       "remediation": {
         "strategy": "CRLF_REMOVAL",
         "description": "HTTP 헤더 값에 포함되는 입력값에서 CR(\\r), LF(\\n) 문자 제거",
-        "guideRef": "PART4 제1절 13항 (p.284-289)"
+        "guideRef": "PART4 제1절 13항 (p.284-289)",
+        "remediationCode": "// [수정] IV-1.13 HTTP 응답분할 방지: CR/LF 문자 제거\n// ❌ 취약: 외부 입력값을 HTTP 헤더에 직접 삽입\nString lang = request.getParameter(\"lang\");\nresponse.setHeader(\"Content-Language\", lang);\n\n// ✅ 안전: CR·LF 및 유사 제어 문자 제거 후 설정\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\n        \"[\\\\r\\\\n\\\\u0085\\\\u2028\\\\u2029]\", \"\");\n    if (!lang.matches(\"^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{2,8})*$\"))\n        lang = \"ko\";\n    response.setHeader(\"Content-Language\", lang);\n}\n// sendRedirect URL도 동일하게 CR/LF 제거\nString loc = request.getParameter(\"returnUrl\");\nif (loc != null)\n    loc = loc.replaceAll(\"[\\\\r\\\\n]\", \"\");\nresponse.sendRedirect(loc);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 HTTP 헤더에 직접 삽입 (CRLF 삽입)\nString lang = request.getParameter(\"lang\");\n// lang = \"ko\\r\\nSet-Cookie: session=evil\" 같은 공격 가능\nresponse.setHeader(\"Content-Language\", lang);",
+        "good": "// ✅ CR/LF 문자 제거 + 화이트리스트 검증\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n]\", \"\");\n    if (!lang.matches(\"[a-zA-Z]{2,8}(-[a-zA-Z]{2,8})?\")) {\n        lang = \"ko\";\n    }\n    response.setHeader(\"Content-Language\", lang);\n}"
       }
     },
     {
@@ -609,37 +1105,71 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "정수형 오버플로우",
-      "cwe": ["CWE-190"],
+      "cwe": [
+        "CWE-190"
+      ],
       "severity": "MEDIUM",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": false,
-      "sources": ["request.getParameter"],
+      "sources": [
+        "request.getParameter"
+      ],
       "sinks": [],
-      "sanitizers": ["Math.addExact", "StrictMath", "BigInteger", "Integer.MAX_VALUE"],
+      "sanitizers": [
+        "Math.addExact",
+        "StrictMath",
+        "BigInteger",
+        "Integer.MAX_VALUE"
+      ],
       "remediation": {
         "strategy": "BOUNDS_CHECK",
         "description": "정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용",
-        "guideRef": "PART4 제1절 14항 (p.290-296)"
+        "guideRef": "PART4 제1절 14항 (p.290-296)",
+        "remediationCode": "// [수정] IV-1.14 정수형 오버플로우 방지: 범위 검사 + 안전 연산\n// ❌ 취약: 입력값 범위 검사 없이 정수 연산\nint count = Integer.parseInt(request.getParameter(\"count\"));\nint total = count * unitPrice;  // 오버플로우 가능\n\n// ✅ 안전 방법 1: Math.multiplyExact (오버플로우 시 예외)\nint count = Integer.parseInt(request.getParameter(\"count\"));\nif (count < 1 || count > 10000)\n    throw new IllegalArgumentException(\"수량 초과 (1~10000)\");\nlong total;\ntry {\n    total = Math.multiplyExact((long) count, unitPrice);\n} catch (ArithmeticException e) {\n    throw new IllegalArgumentException(\"계산 결과 범위 초과\");\n}\n\n// ✅ 안전 방법 2: BigDecimal (금융 계산)\nBigDecimal amount = BigDecimal.valueOf(count)\n    .multiply(BigDecimal.valueOf(unitPrice));"
+      },
+      "dangerousPatterns": [
+        "Integer\\.parseInt\\(|Long\\.parseLong\\(|\\(byte\\)\\s*\\w"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ int 연산에서 정수형 오버플로우 미검증\nint price = Integer.parseInt(request.getParameter(\"price\"));\nint qty   = Integer.parseInt(request.getParameter(\"qty\"));\nint total = price * qty; // 오버플로우 시 음수 → 요금 우회 가능",
+        "good": "// ✅ long 타입 사용 또는 범위 사전 검증\nint price = Integer.parseInt(request.getParameter(\"price\"));\nint qty   = Integer.parseInt(request.getParameter(\"qty\"));\nif (price <= 0 || price > 1_000_000 || qty <= 0 || qty > 10_000) {\n    throw new IllegalArgumentException(\"입력값 범위 초과\");\n}\nlong total = (long) price * qty; // long으로 계산"
       }
-    ,
-      "dangerousPatterns": ["Integer\\.parseInt\\(|Long\\.parseLong\\(|\\(byte\\)\\s*\\w"]
     },
     {
       "ruleId": "IV-1.15",
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "보안기능 결정에 사용되는 부적절한 입력값",
-      "cwe": ["CWE-807"],
+      "cwe": [
+        "CWE-807"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter", "request.getCookies", "request.getHeader"],
-      "sinks": ["if.*isAdmin", "if.*role", "if.*permission", "session.getAttribute.*auth"],
-      "sanitizers": ["session.getAttribute", "SecurityContext"],
+      "sources": [
+        "request.getParameter",
+        "request.getCookies",
+        "request.getHeader"
+      ],
+      "sinks": [
+        "if.*isAdmin",
+        "if.*role",
+        "if.*permission",
+        "session.getAttribute.*auth"
+      ],
+      "sanitizers": [
+        "session.getAttribute",
+        "SecurityContext"
+      ],
       "remediation": {
         "strategy": "SERVER_SIDE_AUTH_CHECK",
         "description": "보안 결정은 서버 측 세션/SecurityContext에서만 수행, 클라이언트 입력값 사용 금지",
-        "guideRef": "PART4 제1절 15항 (p.297-302)"
+        "guideRef": "PART4 제1절 15항 (p.297-302)",
+        "remediationCode": "// [수정] IV-1.15 보안 결정 입력값 방지: 클라이언트 값 사용 금지\n// ❌ 취약: 클라이언트 파라미터로 권한 결정\nString role = request.getParameter(\"role\");\nif (\"admin\".equals(role)) grantAccess();\n\n// ✅ 안전: 서버 세션·SecurityContext에서만 판단\nHttpSession session = request.getSession(false);\nif (session == null)\n    throw new UnauthorizedException(\"로그인 필요\");\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user == null || !\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"권한 없음\");\ngrantAccess();\n// Spring Security: @PreAuthorize(\"hasRole('ADMIN')\")\n// SecurityContextHolder.getContext().getAuthentication()"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 클라이언트 파라미터로 보안 결정 (은닉 필드·쿠키 조작 가능)\nString role = request.getParameter(\"role\"); // 공격자가 \"admin\" 전달\nif (\"admin\".equals(role)) { grantAdminAccess(); }",
+        "good": "// ✅ 서버 세션 기반 보안 결정\nHttpSession session = request.getSession(false);\nif (session == null) { response.sendRedirect(\"/login\"); return; }\nString role = (String) session.getAttribute(\"role\");\nif (\"admin\".equals(role)) {\n    grantAdminAccess();\n}"
       }
     },
     {
@@ -647,7 +1177,9 @@
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "메모리 버퍼 오버플로우",
-      "cwe": ["CWE-119"],
+      "cwe": [
+        "CWE-119"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": false,
@@ -657,368 +1189,914 @@
       "remediation": {
         "strategy": "SAFE_ARRAY_ACCESS",
         "description": "배열·버퍼 접근 전 경계값 검사, Java의 경우 NIO Buffer API 활용",
-        "guideRef": "PART4 제1절 16항 (p.303-308)"
+        "guideRef": "PART4 제1절 16항 (p.303-308)",
+        "remediationCode": "// [수정] IV-1.16 버퍼 오버플로우 방지: 경계 검사 + NIO Buffer API\n// ❌ 취약: 외부 입력값으로 배열 크기·인덱스 지정\nint size = Integer.parseInt(request.getParameter(\"size\"));\nbyte[] buf = new byte[size];  // 음수/대용량 가능\n\n// ✅ 안전: 범위 검사 후 NIO Buffer API 사용\nint size = Integer.parseInt(request.getParameter(\"size\"));\nif (size <= 0 || size > 65536)\n    throw new IllegalArgumentException(\"크기 범위 초과: \" + size);\nByteBuffer buf = ByteBuffer.allocate(size);\n// System.arraycopy 범위 검사\nif (length < 0 || srcOff < 0 || srcOff + length > src.length)\n    throw new ArrayIndexOutOfBoundsException(\"복사 범위 초과\");\nbyte[] copy = Arrays.copyOfRange(src, srcOff, srcOff + length);"
+      },
+      "dangerousPatterns": [
+        "System\\.arraycopy\\(|byte\\[\\].*=.*new byte|ByteBuffer\\.allocate"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 경계 검사 없이 배열 접근 (버퍼 오버플로우)\nbyte[] buf = new byte[64];\nint len = Integer.parseInt(request.getParameter(\"len\"));\nSystem.arraycopy(srcData, 0, buf, 0, len); // len > 64 시 예외",
+        "good": "// ✅ 배열 크기 범위 내로 복사 길이 제한\nbyte[] buf = new byte[64];\nint len = Integer.parseInt(request.getParameter(\"len\"));\nif (len < 0 || len > buf.length || len > srcData.length) {\n    throw new IllegalArgumentException(\"복사 길이 범위 초과: \" + len);\n}\nSystem.arraycopy(srcData, 0, buf, 0, len);"
       }
-    ,
-      "dangerousPatterns": ["System\\.arraycopy\\(|byte\\[\\].*=.*new byte|ByteBuffer\\.allocate"]
     },
     {
       "ruleId": "IV-1.17",
       "part": "PART4",
       "section": "입력데이터 검증 및 표현",
       "name": "포맷 스트링 삽입",
-      "cwe": ["CWE-134"],
+      "cwe": [
+        "CWE-134"
+      ],
       "severity": "HIGH",
       "phase": "IMPLEMENTATION",
       "taintAnalysis": true,
-      "sources": ["request.getParameter"],
-      "sinks": ["String.format(", "printf(", "MessageFormat.format(", "logger.*format"],
-      "sanitizers": ["replaceAll.*%", "Pattern.matches"],
+      "sources": [
+        "request.getParameter"
+      ],
+      "sinks": [
+        "String.format(",
+        "printf(",
+        "MessageFormat.format(",
+        "logger.*format"
+      ],
+      "sanitizers": [
+        "replaceAll.*%",
+        "Pattern.matches"
+      ],
       "remediation": {
         "strategy": "LITERAL_FORMAT_STRING",
         "description": "String.format 첫 인자를 리터럴로 고정, 외부 입력값을 포맷 문자열로 사용 금지",
-        "guideRef": "PART4 제1절 17항 (p.309-313)"
+        "guideRef": "PART4 제1절 17항 (p.309-313)",
+        "remediationCode": "// [수정] IV-1.17 포맷 스트링 삽입 방지: 포맷 문자열을 리터럴로 고정\n// ❌ 취약: 외부 입력을 String.format() 첫 인자로 사용\nString fmt = request.getParameter(\"format\");\nString out = String.format(fmt, args);  // %n, %s 등 임의 지정자 주입\n\n// ✅ 안전: 포맷 문자열은 코드에 리터럴로 고정\nString name = request.getParameter(\"name\");\nString out = String.format(\"안녕하세요, %s님!\", name);\n\n// 로그도 동일 원칙 적용\n// ❌ log.info(userInput);          → 포맷 인자 주입 가능\n// ✅ log.info(\"입력: {}\", userInput);  → 안전\n// ✅ log.info(\"입력: {}\", sanitized);  → 외부 입력도 인자로만"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 외부 입력값을 포맷 문자열로 직접 사용\nString fmt = request.getParameter(\"format\"); // \"%n%n%n...\" 공격 가능\nString output = String.format(fmt, userData);\nlog.info(fmt); // 로그에서도 동일한 문제",
+        "good": "// ✅ 포맷 문자열을 상수로 고정\nString userData = request.getParameter(\"data\");\nString output = String.format(\"%s\", userData); // 포맷 문자열 고정\nlog.info(\"수신 데이터: {}\", userData); // SLF4J {}는 포맷 삽입 불가"
       }
     },
-
-    // 제2절 보안기능 (16개)
     {
-      "ruleId": "IV-2.1",  "part": "PART4", "section": "보안기능",
-      "name": "적절한 인증 없는 중요기능 허용", "cwe": ["CWE-306"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "AUTH_GATE_FILTER",
+      "ruleId": "IV-2.1",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "적절한 인증 없는 중요기능 허용",
+      "cwe": [
+        "CWE-306"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "AUTH_GATE_FILTER",
         "description": "모든 중요 기능 진입 전 인증 상태 확인 필터 적용",
-        "guideRef": "PART4 제2절 1항 (p.314-318)" }
-    ,
-      "dangerousPatterns": ["void doPost\\(HttpServletRequest|void doGet\\(HttpServletRequest"]
+        "guideRef": "PART4 제2절 1항 (p.314-318)",
+        "remediationCode": "// [수정] IV-2.1 인증 없는 중요기능 접근 방지\n// ❌ 취약: 중요 기능 앞에 인증 검사 없음\npublic void transferMoney(String toAcc, int amt) {\n    bankService.transfer(fromAcc, toAcc, amt);  // 인증 없음!\n}\n\n// ✅ 안전: 진입 전 인증·세션 확인\npublic void transferMoney(HttpServletRequest req,\n        String toAcc, int amt) {\n    HttpSession ses = req.getSession(false);\n    if (ses == null)\n        throw new UnauthorizedException(\"로그인이 필요합니다.\");\n    UserVO user = (UserVO) ses.getAttribute(\"loginUser\");\n    if (user == null)\n        throw new UnauthorizedException(\"세션이 만료되었습니다.\");\n    bankService.transfer(user.getAccountId(), toAcc, amt);\n}\n// Spring Security:\n// .authorizeRequests().antMatchers(\"/transfer/**\").authenticated()"
+      },
+      "dangerousPatterns": [
+        "void doPost\\(HttpServletRequest|void doGet\\(HttpServletRequest"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 인증 확인 없이 중요 기능 접근\n@GetMapping(\"/admin/deleteUser\")\npublic String deleteUser(String userId) {\n    userService.delete(userId); // 인증 미확인\n    return \"success\";\n}",
+        "good": "// ✅ 세션 인증 + 역할 권한 확인\n@GetMapping(\"/admin/deleteUser\")\npublic String deleteUser(String userId, HttpServletRequest request) {\n    HttpSession session = request.getSession(false);\n    if (session == null || !\"admin\".equals(session.getAttribute(\"role\"))) {\n        throw new SecurityException(\"접근 권한이 없습니다.\");\n    }\n    userService.delete(userId);\n    return \"success\";\n}"
+      }
     },
     {
-      "ruleId": "IV-2.2",  "part": "PART4", "section": "보안기능",
-      "name": "부적절한 인가", "cwe": ["CWE-285"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "RBAC_CHECK",
+      "ruleId": "IV-2.2",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "부적절한 인가",
+      "cwe": [
+        "CWE-285"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "RBAC_CHECK",
         "description": "기능별 권한 검사 로직 추가(RBAC/ABAC 패턴 적용)",
-        "guideRef": "PART4 제2절 2항 (p.319-324)" }
-    ,
-      "dangerousPatterns": ["isAdmin\\(\\)|\\.getRole\\(\\)|hasPermission\\("]
+        "guideRef": "PART4 제2절 2항 (p.319-324)",
+        "remediationCode": "// [수정] IV-2.2 부적절한 인가 방지: 역할 기반 접근 제어(RBAC)\n// ❌ 취약: 로그인 여부만 확인하고 권한 미검사\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user != null) adminService.deleteUser(targetId);\n\n// ✅ 안전: 역할(Role) 검사 + 본인 리소스 검증\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user == null)\n    throw new UnauthorizedException(\"로그인 필요\");\nif (!\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"관리자만 접근 가능\");\n// 수평적 권한 상승 방지: 본인 리소스만 수정\nif (!user.getId().equals(targetId) &&\n    !\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"본인 계정만 수정 가능\");\nadminService.deleteUser(targetId);"
+      },
+      "dangerousPatterns": [
+        "isAdmin\\(\\)|\\.getRole\\(\\)|hasPermission\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 로그인 여부만 확인, 자원 소유권 미검증 (수평적 권한 상승)\npublic Order getOrder(Long orderId, HttpSession session) {\n    if (session.getAttribute(\"userId\") == null) throw new UnauthorizedException();\n    return orderDao.findById(orderId); // 타인 주문 조회 가능\n}",
+        "good": "// ✅ 자원 소유자 검증\npublic Order getOrder(Long orderId, HttpSession session) {\n    Long userId = (Long) session.getAttribute(\"userId\");\n    if (userId == null) throw new UnauthorizedException();\n    Order order = orderDao.findById(orderId);\n    if (!order.getUserId().equals(userId)) {\n        throw new ForbiddenException(\"본인 주문만 조회 가능합니다.\");\n    }\n    return order;\n}"
+      }
     },
     {
-      "ruleId": "IV-2.3",  "part": "PART4", "section": "보안기능",
-      "name": "중요한 자원에 대한 잘못된 권한 설정", "cwe": ["CWE-732"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "LEAST_PRIVILEGE",
+      "ruleId": "IV-2.3",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "중요한 자원에 대한 잘못된 권한 설정",
+      "cwe": [
+        "CWE-732"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "LEAST_PRIVILEGE",
         "description": "파일·디렉터리 권한을 최소 권한 원칙으로 설정",
-        "guideRef": "PART4 제2절 3항 (p.325-329)" }
-    ,
-      "dangerousPatterns": ["setReadable\\(true|setWritable\\(true"]
+        "guideRef": "PART4 제2절 3항 (p.325-329)",
+        "remediationCode": "// [수정] IV-2.3 잘못된 권한 설정 방지: 최소 권한 원칙\n// ❌ 취약: 파일에 모든 사용자 읽기/쓰기 허용\nFile cfg = new File(\"/app/config/db.properties\");\ncfg.setReadable(true, false);  // everyone readable\ncfg.setWritable(true, false);  // everyone writable\n\n// ✅ 안전: 소유자만 접근 가능\nPath cfgPath = Paths.get(\"/app/config/db.properties\");\nSet<PosixFilePermission> perms =\n    PosixFilePermissions.fromString(\"rw-------\");\nFiles.setPosixFilePermissions(cfgPath, perms);\n\n// 임시 파일도 최소 권한\nPath temp = Files.createTempFile(\"upload_\", \".tmp\",\n    PosixFilePermissions.asFileAttribute(\n        PosixFilePermissions.fromString(\"rw-------\")));\n// chmod 600 /app/config/*.properties  (배포 스크립트 적용)"
+      },
+      "dangerousPatterns": [
+        "setReadable\\(true|setWritable\\(true"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 민감 파일에 과도한 권한 설정\nFile configFile = new File(\"/app/config/db.properties\");\nconfigFile.setReadable(true, false);  // 모든 사용자 읽기 가능\nconfigFile.setWritable(true, false);  // 모든 사용자 쓰기 가능",
+        "good": "// ✅ 소유자만 읽기/쓰기 권한 부여\nFile configFile = new File(\"/app/config/db.properties\");\nconfigFile.setReadable(false, false); // 전체 읽기 제거\nconfigFile.setReadable(true, true);   // 소유자만 읽기\nconfigFile.setWritable(false, false); // 전체 쓰기 제거\nconfigFile.setWritable(true, true);   // 소유자만 쓰기\n// OS 수준: chmod 600 /app/config/db.properties"
+      }
     },
     {
-      "ruleId": "IV-2.4",  "part": "PART4", "section": "보안기능",
-      "name": "취약한 암호화 알고리즘 사용", "cwe": ["CWE-327"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["DES", "RC4", "MD5", "SHA-1", "Blowfish"],
-      "remediation": { "strategy": "STRONG_CRYPTO",
+      "ruleId": "IV-2.4",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "취약한 암호화 알고리즘 사용",
+      "cwe": [
+        "CWE-327"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "DES",
+        "RC4",
+        "MD5",
+        "SHA-1",
+        "Blowfish"
+      ],
+      "remediation": {
+        "strategy": "STRONG_CRYPTO",
         "description": "AES-256, SHA-256 이상의 안전한 알고리즘으로 교체",
-        "guideRef": "PART4 제2절 4항 (p.330-336)" }
-    ,
-      "dangerousPatterns": ["getInstance.*DES|getInstance.*RC4|getInstance.*Blowfish"]
+        "guideRef": "PART4 제2절 4항 (p.330-336)",
+        "remediationCode": "// [수정] IV-2.4 취약 암호화 알고리즘 → 안전한 알고리즘으로 교체\n// ❌ 취약: DES, RC4, MD5, SHA-1 등 취약 알고리즘\nCipher c = Cipher.getInstance(\"DES/ECB/PKCS5Padding\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\n\n// ✅ 안전: AES-256-GCM (암호화), SHA-256+ (해시)\n// [대칭 암호화 — AES-256-GCM]\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256, new SecureRandom());\nSecretKey key = kg.generateKey();\nbyte[] iv = new byte[12];\nnew SecureRandom().nextBytes(iv);\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\ncipher.init(Cipher.ENCRYPT_MODE, key,\n    new GCMParameterSpec(128, iv));\nbyte[] ciphertext = cipher.doFinal(plaintext);\n// [해시 — SHA-256]\nbyte[] hash = MessageDigest.getInstance(\"SHA-256\").digest(data);"
+      },
+      "dangerousPatterns": [
+        "getInstance.*DES|getInstance.*RC4|getInstance.*Blowfish"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 취약한 암호 알고리즘 사용 (DES, 3DES, RC4, MD5)\nCipher c = Cipher.getInstance(\"DES\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\nbyte[] hash = md.digest(data.getBytes());",
+        "good": "// ✅ 안전한 알고리즘: AES-256/GCM, SHA-256 이상\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256);\nSecretKey key = kg.generateKey();\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\nbyte[] iv = new byte[12];\nnew SecureRandom().nextBytes(iv);\ncipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));\nbyte[] encrypted = cipher.doFinal(data.getBytes(\"UTF-8\"));"
+      }
     },
     {
-      "ruleId": "IV-2.5",  "part": "PART4", "section": "보안기능",
-      "name": "암호화되지 않은 중요정보", "cwe": ["CWE-312"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "ENCRYPT_SENSITIVE_DATA",
+      "ruleId": "IV-2.5",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "암호화되지 않은 중요정보",
+      "cwe": [
+        "CWE-312"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "ENCRYPT_SENSITIVE_DATA",
         "description": "중요정보(비밀번호, 주민번호 등) 저장 전 암호화 적용",
-        "guideRef": "PART4 제2절 5항 (p.337-349)" }
-    ,
-      "dangerousPatterns": ["password.*getParameter|password.*cleartext|plainTextPassword"]
+        "guideRef": "PART4 제2절 5항 (p.337-349)",
+        "remediationCode": "// [수정] IV-2.5 중요정보 암호화: 평문 저장·로그 출력 금지\n// ❌ 취약: 비밀번호·개인정보 평문 저장\nuser.setPassword(request.getParameter(\"password\"));\nuserDao.save(user);  // 평문 DB 저장\nlog.info(\"id={}, pw={}\", userId, password);  // 로그 노출!\n\n// ✅ 안전: BCrypt 해시 저장 + 로그에서 민감정보 제외\nBCryptPasswordEncoder enc = new BCryptPasswordEncoder(12);\nString hashed = enc.encode(request.getParameter(\"password\"));\nuser.setPassword(hashed);\nuserDao.save(user);\nlog.info(\"사용자 등록: id={}\", userId);  // 비밀번호 제외\n\n// 개인식별정보 암호화 저장\nString encSsn = aesEncryptService.encrypt(ssn);  // AES-256\npersonDao.saveEncryptedSsn(encSsn);"
+      },
+      "dangerousPatterns": [
+        "password.*getParameter|password.*cleartext|plainTextPassword"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 중요 정보(비밀번호)를 평문으로 저장\n// DB: INSERT INTO users (id, password) VALUES (?, ?)\npstmt.setString(2, rawPassword); // 평문 저장",
+        "good": "// ✅ PBKDF2 + Salt 해시 후 저장\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nPBEKeySpec spec = new PBEKeySpec(rawPassword.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\nString encoded = Base64.getEncoder().encodeToString(salt)\n                 + \":\" + Base64.getEncoder().encodeToString(hash);\npstmt.setString(2, encoded);"
+      }
     },
     {
-      "ruleId": "IV-2.6",  "part": "PART4", "section": "보안기능",
-      "name": "하드코드된 중요정보", "cwe": ["CWE-321"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "dangerousPatterns": ["password\\s*=\\s*\"[^\"]+\"", "secretKey\\s*=\\s*\"[^\"]+\"", "apiKey\\s*=\\s*\"[^\"]+\""],
-      "remediation": { "strategy": "EXTERNALIZE_SECRETS",
+      "ruleId": "IV-2.6",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "하드코드된 중요정보",
+      "cwe": [
+        "CWE-321"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "dangerousPatterns": [
+        "password\\s*=\\s*\"[^\"]+\"",
+        "secretKey\\s*=\\s*\"[^\"]+\"",
+        "apiKey\\s*=\\s*\"[^\"]+\""
+      ],
+      "remediation": {
+        "strategy": "EXTERNALIZE_SECRETS",
         "description": "소스코드에서 비밀정보 제거, 환경변수·외부 설정 파일·Vault 사용",
-        "guideRef": "PART4 제2절 6항 (p.350-359)" }
+        "guideRef": "PART4 제2절 6항 (p.350-359)",
+        "remediationCode": "// [수정] IV-2.6 하드코드된 비밀정보 제거: 외부 설정으로 이전\n// ❌ 취약: 소스코드에 비밀정보 직접 기재\nprivate static final String DB_PASS = \"P@ssw0rd123!\";\nprivate static final String API_KEY  = \"sk-abc123xyz789\";\n\n// ✅ 안전 방법 1: 환경변수\nString dbPass = System.getenv(\"DB_PASSWORD\");\nString apiKey = System.getenv(\"EXTERNAL_API_KEY\");\n\n// ✅ 안전 방법 2: Spring @Value + 외부 설정 파일\n// application-prod.yml (Git 미포함, 배포 환경에서만)\n// db.password: ${DB_PASSWORD}\n@Value(\"${db.password}\") private String dbPassword;\n\n// ✅ 안전 방법 3: HashiCorp Vault / AWS Secrets Manager\n// VaultTemplate.read(\"secret/myapp\").get(\"password\")\n// 배포 파이프라인에 gitleaks 비밀정보 스캔 도구 통합 권장"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 소스코드에 중요 정보 하드코딩\nprivate static final String DB_PASSWORD = \"admin1234!\"; // 소스 노출 시 유출\nprivate static final String API_KEY = \"sk-abc123xyz\";   // VCS 히스토리에 잔존",
+        "good": "// ✅ 환경변수 또는 설정 파일에서 로드\nString dbPassword = System.getenv(\"DB_PASSWORD\");\nif (dbPassword == null || dbPassword.isEmpty()) {\n    throw new IllegalStateException(\"DB_PASSWORD 환경변수가 설정되지 않았습니다.\");\n}\n// application.properties 사용 시 DB에서 암호화 저장 필수\n// 운영 환경: AWS Secrets Manager / Vault 사용 권장"
+      }
     },
     {
-      "ruleId": "IV-2.7",  "part": "PART4", "section": "보안기능",
-      "name": "충분하지 않은 키 길이 사용", "cwe": ["CWE-326"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "MIN_KEY_SIZE",
+      "ruleId": "IV-2.7",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "충분하지 않은 키 길이 사용",
+      "cwe": [
+        "CWE-326"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "MIN_KEY_SIZE",
         "description": "RSA 2048bit 이상, AES 128bit 이상, ECC 224bit 이상 키 길이 사용",
-        "guideRef": "PART4 제2절 7항 (p.360-363)" }
-    ,
-      "dangerousPatterns": ["\\.initialize\\(512\\)|\\.initialize\\(1024\\)"]
+        "guideRef": "PART4 제2절 7항 (p.360-363)",
+        "remediationCode": "// [수정] IV-2.7 충분한 키 길이 사용: 최소 권고 기준 준수\n// ❌ 취약: RSA 1024bit, AES 56bit(DES) 등 짧은 키\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(1024);  // RSA 1024bit — 취약\n\n// ✅ 안전: 최소 권고 키 길이 준수\n// RSA: 2048bit 이상 (권장 4096bit)\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(2048, new SecureRandom());\n\n// AES: 128bit 이상 (권장 256bit)\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256, new SecureRandom());\nSecretKey aesKey = kg.generateKey();\n\n// ECC: 224bit 이상 (권장 256bit)\nKeyPairGenerator ecKpg = KeyPairGenerator.getInstance(\"EC\");\necKpg.initialize(new ECGenParameterSpec(\"secp256r1\"));"
+      },
+      "dangerousPatterns": [
+        "\\.initialize\\(512\\)|\\.initialize\\(1024\\)"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 충분하지 않은 키 길이 사용\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(512); // RSA 512비트 — 현재 해독 가능\n\nCipher c = Cipher.getInstance(\"DES\"); // 56비트 — 취약",
+        "good": "// ✅ 권장 키 길이 사용\n// RSA: 2048비트 이상\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(2048);\nKeyPair keyPair = kpg.generateKeyPair();\n\n// AES: 128비트 이상 (256비트 권장)\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256);\nSecretKey aesKey = kg.generateKey();"
+      }
     },
     {
-      "ruleId": "IV-2.8",  "part": "PART4", "section": "보안기능",
-      "name": "적절하지 않은 난수 값 사용", "cwe": ["CWE-330"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["new Random(", "Math.random("],
-      "remediation": { "strategy": "SECURE_RANDOM",
+      "ruleId": "IV-2.8",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "적절하지 않은 난수 값 사용",
+      "cwe": [
+        "CWE-330"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "new Random(",
+        "Math.random("
+      ],
+      "remediation": {
+        "strategy": "SECURE_RANDOM",
         "description": "java.security.SecureRandom으로 교체",
-        "guideRef": "PART4 제2절 8항 (p.364-369)" }
-    ,
-      "dangerousPatterns": ["new Random\\(\\)|Math\\.random\\(\\)"]
+        "guideRef": "PART4 제2절 8항 (p.364-369)",
+        "remediationCode": "// [수정] IV-2.8 난수 취약점 방지: SecureRandom 사용\n// ❌ 취약: java.util.Random / Math.random() — 예측 가능\nRandom rnd = new Random();\nString token = String.valueOf(rnd.nextLong());\nint otp = (int)(Math.random() * 1_000_000);\n\n// ✅ 안전: java.security.SecureRandom 사용\nSecureRandom secRnd = new SecureRandom();\n// 세션 토큰 (128비트 무작위)\nbyte[] bytes = new byte[16];\nsecRnd.nextBytes(bytes);\nString token = Base64.getUrlEncoder()\n    .withoutPadding().encodeToString(bytes);\n// OTP (6자리)\nint otp = secRnd.nextInt(1_000_000);\nString otpStr = String.format(\"%06d\", otp);"
+      },
+      "dangerousPatterns": [
+        "new Random\\(\\)|Math\\.random\\(\\)"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ java.util.Random으로 보안 토큰 생성 (예측 가능)\nRandom rnd = new Random();\nString token = Long.toHexString(rnd.nextLong()); // 시드 예측 시 토큰 예측 가능",
+        "good": "// ✅ java.security.SecureRandom 사용\nSecureRandom secureRnd = new SecureRandom();\nbyte[] tokenBytes = new byte[32];\nsecureRnd.nextBytes(tokenBytes);\nString token = Base64.getUrlEncoder().withoutPadding()\n               .encodeToString(tokenBytes);"
+      }
     },
     {
-      "ruleId": "IV-2.9",  "part": "PART4", "section": "보안기능",
-      "name": "취약한 비밀번호 허용", "cwe": ["CWE-521"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "PASSWORD_POLICY",
+      "ruleId": "IV-2.9",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "취약한 비밀번호 허용",
+      "cwe": [
+        "CWE-521"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "PASSWORD_POLICY",
         "description": "길이 8자 이상, 대소문자·숫자·특수문자 조합 필수 검증 로직 구현",
-        "guideRef": "PART4 제2절 9항 (p.370-374)" }
-    ,
-      "dangerousPatterns": ["password\\.length\\(\\)\\s*<|minPasswordLength\\s*=\\s*[1-7]"]
+        "guideRef": "PART4 제2절 9항 (p.370-374)",
+        "remediationCode": "// [수정] IV-2.9 비밀번호 복잡성 정책: 강력한 검증 구현\n// ❌ 취약: 길이만 검사하거나 너무 약한 기준\nif (password.length() < 4)\n    throw new ValidationException(\"너무 짧습니다.\");\n\n// ✅ 안전: 길이·문자 조합·금지 패턴 검증\nprivate static final Pattern PW = Pattern.compile(\n    \"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,20}$\");\npublic void validatePassword(String pw, String userId) {\n    if (!PW.matcher(pw).matches())\n        throw new ValidationException(\n            \"8~20자, 대/소문자·숫자·특수문자 조합 필수\");\n    if (pw.equalsIgnoreCase(userId))\n        throw new ValidationException(\"아이디와 동일한 비밀번호 금지\");\n    // 이전 비밀번호 재사용 금지 (최근 3개 이력)\n    if (pwHistoryService.isRecentPassword(userId, pw))\n        throw new ValidationException(\"이전 비밀번호 재사용 불가\");\n}"
+      },
+      "dangerousPatterns": [
+        "password\\.length\\(\\)\\s*<|minPasswordLength\\s*=\\s*[1-7]"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 비밀번호 복잡도 검증 없이 허용\npublic void register(String id, String pw) {\n    userDao.insert(id, pw); // \"1234\", \"password\" 같은 단순 비밀번호 허용\n}",
+        "good": "// ✅ 복잡도 정책 강제: 8자 이상, 영문+숫자+특수문자\npublic void register(String id, String pw) {\n    if (pw == null || pw.length() < 8) throw new IllegalArgumentException(\"8자 이상 입력\");\n    if (!pw.matches(\".*[a-zA-Z].*\")) throw new IllegalArgumentException(\"영문자 포함 필요\");\n    if (!pw.matches(\".*\\\\d.*\"))     throw new IllegalArgumentException(\"숫자 포함 필요\");\n    if (!pw.matches(\".*[!@#$%^&*].*\")) throw new IllegalArgumentException(\"특수문자 포함 필요\");\n    userDao.insert(id, hash(pw));\n}"
+      }
     },
     {
-      "ruleId": "IV-2.10", "part": "PART4", "section": "보안기능",
-      "name": "부적절한 전자서명 확인", "cwe": ["CWE-347"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "VERIFY_SIGNATURE",
+      "ruleId": "IV-2.10",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "부적절한 전자서명 확인",
+      "cwe": [
+        "CWE-347"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "VERIFY_SIGNATURE",
         "description": "전자서명 검증 실패 시 처리를 중단하고 예외 반환",
-        "guideRef": "PART4 제2절 10항 (p.375-378)" }
-    ,
-      "dangerousPatterns": ["Signature\\.getInstance|sig\\.verify\\("]
+        "guideRef": "PART4 제2절 10항 (p.375-378)",
+        "remediationCode": "// [수정] IV-2.10 전자서명 검증 결과 반드시 확인\n// ❌ 취약: verify() 반환값을 무시하고 진행\nSignature sig = Signature.getInstance(\"SHA256withRSA\");\nsig.initVerify(publicKey);\nsig.update(data);\nsig.verify(signature);  // 반환값 무시! 서명 실패도 계속 진행\nprocessData(data);\n\n// ✅ 안전: verify() 결과 검사 + 실패 시 즉시 중단\nSignature sig = Signature.getInstance(\"SHA256withRSA\");\nsig.initVerify(publicKey);\nsig.update(data);\nboolean valid = sig.verify(signature);\nif (!valid) {\n    log.warn(\"[SIG] 서명 검증 실패\");\n    throw new SecurityException(\"전자서명 검증에 실패했습니다.\");\n}\nprocessData(data);"
+      },
+      "dangerousPatterns": [
+        "Signature\\.getInstance|sig\\.verify\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 전자서명 검증 없이 데이터 신뢰\nbyte[] data = receiveData();\nprocessData(data); // 서명 검증 없이 처리 → 위변조 감지 불가",
+        "good": "// ✅ RSA 서명 검증 후 데이터 처리\nbyte[] data = receiveData();\nbyte[] signature = receiveSignature();\nSignature sig = Signature.getInstance(\"SHA256withRSA\");\nsig.initVerify(publicKey);\nsig.update(data);\nif (!sig.verify(signature)) {\n    throw new SecurityException(\"전자서명 검증 실패 — 데이터 위변조 의심\");\n}\nprocessData(data);"
+      }
     },
     {
-      "ruleId": "IV-2.11", "part": "PART4", "section": "보안기능",
-      "name": "부적절한 인증서 유효성 검증", "cwe": ["CWE-295"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["setHostnameVerifier", "TrustManager", "X509TrustManager"],
-      "remediation": { "strategy": "PROPER_CERT_VALIDATION",
+      "ruleId": "IV-2.11",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "부적절한 인증서 유효성 검증",
+      "cwe": [
+        "CWE-295"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "setHostnameVerifier",
+        "TrustManager",
+        "X509TrustManager"
+      ],
+      "remediation": {
+        "strategy": "PROPER_CERT_VALIDATION",
         "description": "사용자 정의 TrustManager 내 인증서 체인 및 호스트명 검증 구현",
-        "guideRef": "PART4 제2절 11항 (p.379-382)" }
-    ,
-      "dangerousPatterns": ["setHostnameVerifier|ALLOW_ALL_HOSTNAME_VERIFIER|X509TrustManager"]
+        "guideRef": "PART4 제2절 11항 (p.379-382)",
+        "remediationCode": "// [수정] IV-2.11 인증서 검증 우회 금지: 기본 검증 사용\n// ❌ 취약: 모든 인증서를 무조건 신뢰하는 TrustManager\nTrustManager[] tm = new TrustManager[] {\n    new X509TrustManager() {\n        public void checkServerTrusted(X509Certificate[] c, String t) {}\n        public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }\n    }\n};\nSSLContext ctx = SSLContext.getInstance(\"TLS\");\nctx.init(null, tm, new SecureRandom());\n\n// ✅ 안전: JDK 기본 PKIX 검증 사용\nSSLContext ctx = SSLContext.getInstance(\"TLSv1.2\");\nTrustManagerFactory tmf = TrustManagerFactory.getInstance(\n    TrustManagerFactory.getDefaultAlgorithm());\ntmf.init((KeyStore) null);  // JDK cacerts 사용\nctx.init(null, tmf.getTrustManagers(), new SecureRandom());\n// HostnameVerifier도 기본값 유지 (ALLOW_ALL 절대 금지)"
+      },
+      "dangerousPatterns": [
+        "setHostnameVerifier|ALLOW_ALL_HOSTNAME_VERIFIER|X509TrustManager"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 모든 인증서를 신뢰하는 TrustManager (MITM 취약)\nTrustManager[] trustAll = new TrustManager[] {\n    new X509TrustManager() {\n        public void checkClientTrusted(X509Certificate[] c, String a) {}\n        public void checkServerTrusted(X509Certificate[] c, String a) {}\n        public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }\n    }\n};",
+        "good": "// ✅ 기본 TrustManager 사용 (JDK 신뢰 체인 검증)\nSSLContext sslContext = SSLContext.getInstance(\"TLS\");\n// 직접 TrustManager 지정하지 않으면 JDK 기본 검증 사용\n// sslContext.init(null, null, null);\nHttpsURLConnection conn = (HttpsURLConnection) url.openConnection();\n// 자체 서명 인증서 필요 시: keystore에 CA 인증서 추가\n// keytool -importcert -alias myca -file ca.crt -keystore truststore.jks"
+      }
     },
     {
-      "ruleId": "IV-2.12", "part": "PART4", "section": "보안기능",
-      "name": "사용자 하드디스크에 저장되는 쿠키를 통한 정보 노출", "cwe": ["CWE-539"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["new Cookie(", "addCookie("],
-      "remediation": { "strategy": "SECURE_COOKIE_ATTRIBUTES",
+      "ruleId": "IV-2.12",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "사용자 하드디스크에 저장되는 쿠키를 통한 정보 노출",
+      "cwe": [
+        "CWE-539"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "new Cookie(",
+        "addCookie("
+      ],
+      "remediation": {
+        "strategy": "SECURE_COOKIE_ATTRIBUTES",
         "description": "쿠키에 HttpOnly, Secure, SameSite 속성 설정, 중요정보 쿠키 저장 금지",
-        "guideRef": "PART4 제2절 12항 (p.383-386)" }
-    ,
-      "dangerousPatterns": ["new Cookie\\(|addCookie\\("]
+        "guideRef": "PART4 제2절 12항 (p.383-386)",
+        "remediationCode": "// [수정] IV-2.12 쿠키 보안 속성 설정: HttpOnly·Secure·SameSite\n// ❌ 취약: 보안 속성 없는 쿠키\nCookie c = new Cookie(\"userId\", userId);\nresponse.addCookie(c);\n\n// ✅ 안전: 모든 보안 속성 명시\nCookie c = new Cookie(\"SESSIONID\", session.getId());\nc.setHttpOnly(true);    // JS 접근 차단 (XSS 쿠키 탈취 방지)\nc.setSecure(true);      // HTTPS 전용\nc.setPath(\"/\");\nc.setMaxAge(-1);        // 세션 쿠키\n// SameSite: 서블릿 API 미지원 → 헤더 직접 설정\nresponse.addHeader(\"Set-Cookie\",\n    \"SESSIONID=\" + session.getId() +\n    \"; HttpOnly; Secure; SameSite=Strict; Path=/\");\n// 쿠키에 userId·password 등 민감정보 저장 금지"
+      },
+      "dangerousPatterns": [
+        "new Cookie\\(|addCookie\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ HttpOnly, Secure 속성 없는 쿠키 설정\nCookie cookie = new Cookie(\"sessionId\", sessionId);\ncookie.setPath(\"/\");\nresponse.addCookie(cookie); // JS 접근 가능, HTTP 전송 가능",
+        "good": "// ✅ HttpOnly + Secure + SameSite 속성 설정\nCookie cookie = new Cookie(\"sessionId\", sessionId);\ncookie.setPath(\"/\");\ncookie.setHttpOnly(true);   // JS에서 접근 불가\ncookie.setSecure(true);     // HTTPS 전송만 허용\ncookie.setMaxAge(1800);     // 30분 만료\nresponse.addCookie(cookie);\n// SameSite 속성 추가 (Servlet 쿠키 API 미지원 시 헤더 직접 설정):\nresponse.addHeader(\"Set-Cookie\",\n    \"sessionId=\" + sessionId + \"; Path=/; Secure; HttpOnly; SameSite=Strict\");"
+      }
     },
     {
-      "ruleId": "IV-2.13", "part": "PART4", "section": "보안기능",
-      "name": "주석문 안에 포함된 시스템 주요정보", "cwe": ["CWE-615"],
-      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "dangerousPatterns": ["//.*password", "//.*secret", "/\\*.*password.*\\*/"],
-      "remediation": { "strategy": "REMOVE_SENSITIVE_COMMENTS",
+      "ruleId": "IV-2.13",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "주석문 안에 포함된 시스템 주요정보",
+      "cwe": [
+        "CWE-615"
+      ],
+      "severity": "LOW",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "dangerousPatterns": [
+        "//.*password",
+        "//.*secret",
+        "/\\*.*password.*\\*/"
+      ],
+      "remediation": {
+        "strategy": "REMOVE_SENSITIVE_COMMENTS",
         "description": "소스코드 주석에서 비밀번호·키·경로 등 민감정보 제거",
-        "guideRef": "PART4 제2절 13항 (p.387-390)" }
+        "guideRef": "PART4 제2절 13항 (p.387-390)",
+        "remediationCode": "// [수정] IV-2.13 주석의 민감정보 완전 제거\n// ❌ 취약: 주석에 비밀번호·키·내부 경로 포함\n// DB: jdbc:oracle:thin:@192.168.1.10:1521/PROD\n// 관리자: admin / P@ssw0rd123!\n// API KEY: sk-abc123xyz789abcdef\n// TODO: 배포 전 이 계정 삭제\n\n// ✅ 안전: 주석에서 민감정보 완전 제거\n// DB 접속은 환경변수 또는 Vault로 관리\n// 계정 정보는 코드·README에 기재 금지\n// API KEY는 .env 또는 Secrets Manager 사용\n// 배포 파이프라인에 gitleaks 등 비밀정보 스캔 통합\n// git history에도 민감정보 노출 시 git filter-branch 정리 필요"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 주석에 시스템 주요 정보 포함\n// DB 접속 정보: jdbc:oracle:thin:@192.168.1.100:1521:ORCL\n// 관리자 계정: admin / Admin@1234!\n// TODO: 운영 전 이 계정 삭제 필요\nConnection con = DriverManager.getConnection(url, user, pw);",
+        "good": "// ✅ 주석에서 민감 정보 제거\n// DB 연결 설정은 application.properties 또는 환경변수에서 로드\nString url  = System.getenv(\"DB_URL\");\nString user = System.getenv(\"DB_USER\");\nString pw   = System.getenv(\"DB_PASSWORD\");\nConnection con = DriverManager.getConnection(url, user, pw);"
+      }
     },
     {
-      "ruleId": "IV-2.14", "part": "PART4", "section": "보안기능",
-      "name": "솔트 없이 일방향 해쉬 함수 사용", "cwe": ["CWE-759"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["MessageDigest.getInstance.*MD5", "MessageDigest.getInstance.*SHA-1"],
-      "remediation": { "strategy": "SALTED_HASH",
+      "ruleId": "IV-2.14",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "솔트 없이 일방향 해쉬 함수 사용",
+      "cwe": [
+        "CWE-759"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "MessageDigest.getInstance.*MD5",
+        "MessageDigest.getInstance.*SHA-1"
+      ],
+      "remediation": {
+        "strategy": "SALTED_HASH",
         "description": "bcrypt, PBKDF2, Argon2 등 솔트를 포함하는 해시 함수 사용",
-        "guideRef": "PART4 제2절 14항 (p.391-394)" }
-    ,
-      "dangerousPatterns": ["MessageDigest\\.getInstance.*MD5|MessageDigest\\.getInstance.*SHA-1"]
+        "guideRef": "PART4 제2절 14항 (p.391-394)",
+        "remediationCode": "// [수정] IV-2.14 솔트 없는 해시 방지: 적응형 해시 함수 사용\n// ❌ 취약: 솔트 없이 MD5·SHA-1 단순 해시\nString hash = DigestUtils.md5Hex(password);  // 레인보우 테이블 취약\n\n// ✅ 안전 방법 1: BCrypt (Spring Security, 권장)\nBCryptPasswordEncoder enc = new BCryptPasswordEncoder(12);\nString stored = enc.encode(rawPassword);  // 솔트 자동 포함\nboolean match = enc.matches(rawPassword, stored);\n\n// ✅ 안전 방법 2: PBKDF2WithHmacSHA256\nSecretKeyFactory skf = SecretKeyFactory\n    .getInstance(\"PBKDF2WithHmacSHA256\");\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nKeySpec spec = new PBEKeySpec(\n    password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\n// salt와 hash를 함께 저장 (구분자 사용)"
+      },
+      "dangerousPatterns": [
+        "MessageDigest\\.getInstance.*MD5|MessageDigest\\.getInstance.*SHA-1"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 솔트 없이 단순 해시 저장 (레인보우 테이블 공격 가능)\nMessageDigest md = MessageDigest.getInstance(\"SHA-256\");\nbyte[] hash = md.digest(password.getBytes(\"UTF-8\"));\nString hex = DatatypeConverter.printHexBinary(hash);\nuserDao.savePassword(userId, hex);",
+        "good": "// ✅ 랜덤 Salt + PBKDF2 반복 해시\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nPBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\nString stored = Base64.getEncoder().encodeToString(salt)\n                + \":\" + Base64.getEncoder().encodeToString(hash);\nuserDao.savePassword(userId, stored);"
+      }
     },
     {
-      "ruleId": "IV-2.15", "part": "PART4", "section": "보안기능",
-      "name": "무결성 검사 없는 코드 다운로드", "cwe": ["CWE-494"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "CHECKSUM_VERIFY",
+      "ruleId": "IV-2.15",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "무결성 검사 없는 코드 다운로드",
+      "cwe": [
+        "CWE-494"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "CHECKSUM_VERIFY",
         "description": "다운로드된 코드·라이브러리에 대해 체크섬(SHA-256) 검증 후 실행",
-        "guideRef": "PART4 제2절 15항 (p.395-399)" }
-    ,
-      "dangerousPatterns": ["openStream\\(\\)|URLConnection.*getInputStream"]
+        "guideRef": "PART4 제2절 15항 (p.395-399)",
+        "remediationCode": "// [수정] IV-2.15 다운로드 무결성 검증: SHA-256 체크섬 확인\n// ❌ 취약: 다운로드 파일을 체크섬 없이 바로 실행\nFiles.copy(new URL(\"https://cdn.example.com/plugin.jar\")\n    .openStream(), Paths.get(\"plugin.jar\"),\n    StandardCopyOption.REPLACE_EXISTING);\n// 무결성 검증 없이 로드 → 공급망 공격(Supply Chain Attack)!\n\n// ✅ 안전: SHA-256 체크섬 검증 후 사용\nprivate static final String EXPECTED =\n    \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\";\nPath target = Paths.get(\"plugin.jar\");\nFiles.copy(new URL(\"https://cdn.example.com/plugin.jar\")\n    .openStream(), target, StandardCopyOption.REPLACE_EXISTING);\nbyte[] hash = MessageDigest.getInstance(\"SHA-256\")\n    .digest(Files.readAllBytes(target));\nString actual = HexFormat.of().formatHex(hash);\nif (!MessageDigest.isEqual(actual.getBytes(), EXPECTED.getBytes()))\n    throw new SecurityException(\"파일 무결성 검증 실패!\");"
+      },
+      "dangerousPatterns": [
+        "openStream\\(\\)|URLConnection.*getInputStream"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 무결성 검사 없이 외부 코드 다운로드 후 실행\nURL fileUrl = new URL(\"http://update.example.com/agent.jar\");\nFileUtils.copyURLToFile(fileUrl, new File(\"/app/agent.jar\"));\nRuntime.getRuntime().exec(\"java -jar /app/agent.jar\");",
+        "good": "// ✅ SHA-256 해시 검증 후 실행\nURL fileUrl = new URL(\"https://update.example.com/agent.jar\");\nbyte[] data = downloadBytes(fileUrl);\nMessageDigest md = MessageDigest.getInstance(\"SHA-256\");\nString actual = DatatypeConverter.printHexBinary(md.digest(data)).toLowerCase();\nString expected = getExpectedHash(); // 신뢰된 소스에서 검증값 로드\nif (!expected.equals(actual)) {\n    throw new SecurityException(\"파일 무결성 검증 실패\");\n}\nFiles.write(Paths.get(\"/app/agent.jar\"), data);"
+      }
     },
     {
-      "ruleId": "IV-2.16", "part": "PART4", "section": "보안기능",
-      "name": "반복된 인증시도 제한 기능 부재", "cwe": ["CWE-307"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "ACCOUNT_LOCKOUT",
+      "ruleId": "IV-2.16",
+      "part": "PART4",
+      "section": "보안기능",
+      "name": "반복된 인증시도 제한 기능 부재",
+      "cwe": [
+        "CWE-307"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "ACCOUNT_LOCKOUT",
         "description": "로그인 실패 횟수 임계값 설정 및 계정 잠금/CAPTCHA 메커니즘 구현",
-        "guideRef": "PART4 제2절 16항 (p.400-405)" }
-    ,
-      "dangerousPatterns": ["authenticate\\(|checkLogin\\(|verifyPassword\\("]
+        "guideRef": "PART4 제2절 16항 (p.400-405)",
+        "remediationCode": "// [수정] IV-2.16 반복 인증 시도 제한: 계정 잠금 구현\n// ❌ 취약: 실패 횟수 제한 없음 — if(!login()) return \"실패\";\n// ✅ 안전: 실패 횟수 추적 + 잠금\nMap<String, Integer> failMap = new ConcurrentHashMap<>();\nMap<String, Long> lockMap   = new ConcurrentHashMap<>();\nfinal int MAX = 5;\nfinal long LOCK_MS = 30 * 60 * 1000L;\nLong lockedUntil = lockMap.get(userId);\nif (lockedUntil != null && System.currentTimeMillis() < lockedUntil)\n    throw new AccountLockedException(\"계정 잠김 (30분 후 재시도)\");\nif (!authService.login(userId, password)) {\n    int fails = failMap.merge(userId, 1, Integer::sum);\n    if (fails >= MAX) {\n        lockMap.put(userId, System.currentTimeMillis() + LOCK_MS);\n        failMap.remove(userId);\n        throw new AccountLockedException(\"5회 실패 — 30분 잠금\");\n    }\n    throw new AuthException(\"실패 (\" + fails + \"/\" + MAX + \")\");\n}\nfailMap.remove(userId);"
+      },
+      "dangerousPatterns": [
+        "authenticate\\(|checkLogin\\(|verifyPassword\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 로그인 실패 횟수 제한 없음 (무차별 대입 허용)\npublic boolean login(String id, String pw) {\n    return userDao.checkPassword(id, pw);\n}",
+        "good": "// ✅ 5회 실패 시 계정 30분 잠금\nprivate final Map<String, Integer> failMap = new ConcurrentHashMap<>();\nprivate final Map<String, Long>    lockMap = new ConcurrentHashMap<>();\npublic boolean login(String id, String pw) {\n    Long lockedUntil = lockMap.get(id);\n    if (lockedUntil != null && System.currentTimeMillis() < lockedUntil) {\n        throw new LockedException(\"계정 잠금 중\");\n    }\n    if (!userDao.checkPassword(id, pw)) {\n        int cnt = failMap.merge(id, 1, Integer::sum);\n        if (cnt >= 5) lockMap.put(id, System.currentTimeMillis() + 1800_000L);\n        return false;\n    }\n    failMap.remove(id); lockMap.remove(id);\n    return true;\n}"
+      }
     },
-
-    // 제3절 시간 및 상태 (2개)
     {
-      "ruleId": "IV-3.1", "part": "PART4", "section": "시간 및 상태",
-      "name": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)", "cwe": ["CWE-367", "CWE-362"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false, "sequenceAnalysis": true,
-      "sinks": ["f.exists()", "f.canRead()", "f.isFile()"],
+      "ruleId": "IV-3.1",
+      "part": "PART4",
+      "section": "시간 및 상태",
+      "name": "경쟁조건: 검사 시점과 사용 시점(TOCTOU)",
+      "cwe": [
+        "CWE-367",
+        "CWE-362"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sequenceAnalysis": true,
+      "sinks": [
+        "f.exists()",
+        "f.canRead()",
+        "f.isFile()"
+      ],
       "description": "파일에 대해 exists()/isFile()/canRead() 등으로 상태를 검사(Check)한 후, 다른 연산(Use)을 수행하기 전에 다른 스레드나 프로세스가 해당 파일을 생성·삭제·교체할 수 있다(TOCTOU — Time Of Check To Time Of Use). 대표 공격 패턴: ① 심볼릭 링크 치환(exists() 후 임의 파일로 교체), ② 파일 삭제 경쟁(exists() 후 delete() 전 삭제). f.exists() → f.delete(), f.exists() → FileUtils.readFileToByteArray(f), f.exists() → new FileInputStream(f), f.exists() → f.mkdirs() 패턴이 모두 해당된다. 중간에 f.isFile() 등의 추가 검사가 있어도 동일 객체에 대한 연산이면 여전히 TOCTOU 위험이 있다.",
-      "remediation": { "strategy": "ATOMIC_FILE_OPERATION",
+      "remediation": {
+        "strategy": "ATOMIC_FILE_OPERATION",
         "description": "exists() 검사 없이 직접 연산을 시도하고 예외로 실패를 처리하라. ① 파일 삭제: Files.deleteIfExists(path) 또는 try { Files.delete(path) } catch(NoSuchFileException e) {}. ② 파일 읽기: try { Files.readAllBytes(path) } catch(NoSuchFileException e) {}. ③ 파일 생성: Files.newOutputStream(path, StandardOpenOption.CREATE_NEW). 이렇게 하면 검사와 사용이 단일 시스템 콜로 원자적으로 처리된다.",
         "guideRef": "PART4 제3절 1항 (p.406-414)",
         "remediationCode": "// [수정] IV-3.1 TOCTOU 방지: exists() 검사 제거 후 원자적 연산 사용\n\n// ❌ 취약 패턴 1: exists() → delete()\n// File f = new File(path);\n// if (f.exists()) { f.delete(); }  // TOCTOU!\n\n// ✅ 안전 패턴 1: 원자적 삭제\nPath filePath = Path.of(path);\ntry {\n    Files.delete(filePath);\n} catch (NoSuchFileException e) {\n    log.debug(\"[FileOp] 이미 삭제된 파일: {}\", filePath);\n} catch (IOException e) {\n    log.error(\"[FileOp] 파일 삭제 실패: {}\", filePath, e);\n}\n\n// ❌ 취약 패턴 2: exists() → FileUtils.readFileToByteArray(file)\n// File file = new File(filename);\n// if (file.exists()) {\n//     byte[] bytes = FileUtils.readFileToByteArray(file);  // TOCTOU!\n// }\n\n// ✅ 안전 패턴 2: 원자적 읽기\ntry {\n    byte[] bytes = Files.readAllBytes(Path.of(filename));\n    // ... 처리\n} catch (NoSuchFileException e) {\n    log.warn(\"[FileOp] 파일 없음: {}\", filename);\n} catch (IOException e) {\n    log.error(\"[FileOp] 파일 읽기 오류: {}\", filename, e);\n}\n\n// ❌ 취약 패턴 3: exists() → mkdirs()\n// File dir = new File(dirPath);\n// if (!dir.exists()) { dir.mkdirs(); }  // TOCTOU!\n\n// ✅ 안전 패턴 3: Files.createDirectories()(이미 존재해도 예외 없음)\nFiles.createDirectories(Path.of(dirPath));"
+      },
+      "codeExamples": {
+        "bad": "// ❌ TOCTOU: 파일 존재 검사와 삭제 사이 경쟁조건\nFile f = new File(filePath);\nif (f.exists()) {\n    // 다른 스레드가 f를 다른 파일로 교체할 수 있음\n    f.delete();\n}",
+        "good": "// ✅ 원자적 파일 삭제 + 재시도 없는 단일 호출\nPath path = Paths.get(filePath);\ntry {\n    Files.deleteIfExists(path); // 원자적 연산\n} catch (IOException e) {\n    log.error(\"[파일 삭제 실패] {}: {}\", filePath, e.getMessage(), e);\n    throw new RuntimeException(\"파일 삭제 오류\", e);\n}\n// 공유 자원 접근 시 synchronized 또는 ReentrantLock 사용"
       }
     },
     {
-      "ruleId": "IV-3.2", "part": "PART4", "section": "시간 및 상태",
-      "name": "종료되지 않는 반복문 또는 재귀 함수", "cwe": ["CWE-835"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "TERMINATION_CONDITION",
+      "ruleId": "IV-3.2",
+      "part": "PART4",
+      "section": "시간 및 상태",
+      "name": "종료되지 않는 반복문 또는 재귀 함수",
+      "cwe": [
+        "CWE-835"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "TERMINATION_CONDITION",
         "description": "반복문·재귀 함수에 명확한 종료 조건 및 최대 반복 횟수 제한 추가",
-        "guideRef": "PART4 제3절 2항 (p.415-418)" }
-    ,
-      "dangerousPatterns": ["while\\s*\\(\\s*true\\s*\\)|for\\s*\\(\\s*;\\s*;\\s*\\)"]
+        "guideRef": "PART4 제3절 2항 (p.415-418)",
+        "remediationCode": "// [수정] IV-3.2 무한 루프·재귀 방지: 명시적 종료 조건 + 최대 횟수\n// ❌ 취약: 종료 조건 불명확한 무한 루프\n// while (true) { data = readNext(); if (data == null) continue; }\n\n// ✅ 안전: 최대 반복 횟수 + 명시적 break\nint MAX_ITER = 10000;\nfor (int iter = 0; iter < MAX_ITER; iter++) {\n    data = readNext();\n    if (data == null) break;  // 명확한 종료\n    process(data);\n}\nif (data != null)\n    log.warn(\"[LOOP] 최대 반복 횟수 초과 — 강제 종료\");\n\n// ✅ 안전: 재귀 깊이 제한\nvoid traverse(Node node, int depth) {\n    if (node == null || depth > 1000) return;\n    traverse(node.left, depth + 1);\n    traverse(node.right, depth + 1);\n}"
+      },
+      "dangerousPatterns": [
+        "while\\s*\\(\\s*true\\s*\\)|for\\s*\\(\\s*;\\s*;\\s*\\)"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 종료 조건 없는 재귀 → StackOverflowError\npublic int factorial(int n) {\n    return n * factorial(n - 1); // n <= 0 검사 없음\n}\n// ❌ 종료 조건 없는 반복문 → 무한루프\nwhile (true) {\n    processNextItem(); // 탈출 조건 없음\n}",
+        "good": "// ✅ 재귀: 기저 조건 + 최대 깊이 제한\npublic int factorial(int n) {\n    if (n < 0 || n > 20) throw new IllegalArgumentException(\"범위 초과: \" + n);\n    if (n <= 1) return 1;\n    return n * factorial(n - 1);\n}\n// ✅ 반복문: 명시적 상한 조건\nint maxIter = 10_000;\nfor (int i = 0; i < maxIter && hasNextItem(); i++) {\n    processNextItem();\n}"
+      }
     },
-
-    // 제4절 에러처리 (3개)
     {
-      "ruleId": "IV-4.1", "part": "PART4", "section": "에러처리",
-      "name": "오류 메시지 정보노출", "cwe": ["CWE-209"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["e.printStackTrace()", "e.getMessage()", "response.getWriter.*Exception"],
-      "remediation": { "strategy": "GENERIC_ERROR_MESSAGE",
+      "ruleId": "IV-4.1",
+      "part": "PART4",
+      "section": "에러처리",
+      "name": "오류 메시지 정보노출",
+      "cwe": [
+        "CWE-209"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "e.printStackTrace()",
+        "e.getMessage()",
+        "response.getWriter.*Exception"
+      ],
+      "remediation": {
+        "strategy": "GENERIC_ERROR_MESSAGE",
         "description": "사용자에게 일반 오류 메시지만 출력, 상세 오류는 서버 로그에만 기록",
-        "guideRef": "PART4 제4절 1항 (p.419-424)" }
-    ,
-      "dangerousPatterns": ["e\\.printStackTrace\\(\\)|out\\.print.*getMessage"]
+        "guideRef": "PART4 제4절 1항 (p.419-424)",
+        "remediationCode": "// [수정] IV-4.1 오류 메시지 정보노출 방지: 일반 메시지 반환\n// ❌ 취약: 스택트레이스·DB 오류를 클라이언트에 노출\n// e.printStackTrace(); out.println(\"오류: \" + e.getMessage());\n\n// ✅ 안전: 서버 로그 상세 기록 + 클라이언트에 일반 메시지\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 오류: {}\", e.getMessage(), e);\n    response.sendError(500, \"서비스 처리 중 오류가 발생했습니다.\");\n}\n// Spring Boot 전역 처리기\n@ControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(Exception.class)\n    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)\n    public Map<String, String> handle(Exception e) {\n        log.error(\"[GLOBAL] 처리되지 않은 예외\", e);\n        return Map.of(\"error\", \"서비스 오류가 발생했습니다.\");\n    }\n}"
+      },
+      "dangerousPatterns": [
+        "e\\.printStackTrace\\(\\)|out\\.print.*getMessage"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 예외 상세 정보를 사용자에게 직접 노출\ntry {\n    Connection con = DriverManager.getConnection(url, user, pw);\n} catch (SQLException e) {\n    out.println(\"오류: \" + e.getMessage()); // DB 구조·경로 노출\n}",
+        "good": "// ✅ 범용 메시지 출력, 상세 정보는 서버 로그에만 기록\ntry {\n    Connection con = DriverManager.getConnection(url, user, pw);\n} catch (SQLException e) {\n    log.error(\"[DB] 연결 오류: {}\", e.getMessage(), e);\n    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,\n                       \"서비스 오류가 발생했습니다.\");\n}"
+      }
     },
     {
-      "ruleId": "IV-4.2", "part": "PART4", "section": "에러처리",
-      "name": "오류상황 대응 부재", "cwe": ["CWE-390"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "dangerousPatterns": ["catch\\s*\\(.*\\)\\s*\\{\\s*\\}"],
-      "remediation": { "strategy": "HANDLE_ALL_EXCEPTIONS",
+      "ruleId": "IV-4.2",
+      "part": "PART4",
+      "section": "에러처리",
+      "name": "오류상황 대응 부재",
+      "cwe": [
+        "CWE-390"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "dangerousPatterns": [
+        "catch\\s*\\(.*\\)\\s*\\{\\s*\\}"
+      ],
+      "remediation": {
+        "strategy": "HANDLE_ALL_EXCEPTIONS",
         "description": "빈 catch 블록 제거, 모든 예외에 대한 적절한 처리·로깅 구현",
-        "guideRef": "PART4 제4절 2항 (p.425-428)" }
+        "guideRef": "PART4 제4절 2항 (p.425-428)",
+        "remediationCode": "// [수정] IV-4.2 빈 catch 블록 금지: 모든 예외 처리 또는 전파\n// ❌ 취약: 빈 catch 블록으로 예외 무시 (IV-4.2 위반)\n// try { performOperation(); } catch (Exception e) { }\n\n// ✅ 안전 방법 1: 로그 기록 + 예외 전파\ntry {\n    performOperation();\n} catch (IOException e) {\n    log.error(\"[IO] 작업 실패: {}\", e.getMessage(), e);\n    throw new ServiceException(\"파일 처리 오류\", e);\n}\n\n// ✅ 안전 방법 2: checked → unchecked 변환\ntry {\n    riskyMethod();\n} catch (CheckedException e) {\n    throw new RuntimeException(\"예상치 못한 오류\", e);\n}\n// 예외 삼킴(swallowing)은 반드시 명시적 이유와 로그가 있어야 함"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 오류 상황을 빈 catch 블록으로 무시 (가이드 IV-4.2 위반)\ntry {\n    processPayment(order);\n} catch (PaymentException e) {\n    // 아무 처리 없음 — 결제 실패가 조용히 무시됨\n}",
+        "good": "// ✅ 오류 로깅 + 적절한 응답 처리\ntry {\n    processPayment(order);\n} catch (PaymentException e) {\n    log.error(\"[결제 오류] orderId={}: {}\", order.getId(), e.getMessage(), e);\n    // 트랜잭션 롤백\n    transactionManager.rollback(status);\n    throw new ServiceException(\"결제 처리 중 오류가 발생했습니다.\", e);\n}"
+      }
     },
     {
-      "ruleId": "IV-4.3", "part": "PART4", "section": "에러처리",
-      "name": "부적절한 예외 처리", "cwe": ["CWE-754"],
-      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "SPECIFIC_EXCEPTION_HANDLING",
+      "ruleId": "IV-4.3",
+      "part": "PART4",
+      "section": "에러처리",
+      "name": "부적절한 예외 처리",
+      "cwe": [
+        "CWE-754"
+      ],
+      "severity": "LOW",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "SPECIFIC_EXCEPTION_HANDLING",
         "description": "포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리",
-        "guideRef": "PART4 제4절 3항 (p.429-432)" }
-    ,
-      "dangerousPatterns": ["catch\\s*\\(\\s*Exception\\s+\\w|catch\\s*\\(\\s*Throwable\\s+\\w"]
+        "guideRef": "PART4 제4절 3항 (p.429-432)",
+        "remediationCode": "// [수정] IV-4.3 포괄적 예외 처리 개선: 구체적 예외 타입 처리\n// ❌ 취약: Exception 하나로 모든 예외 처리 (원인 파악 불가)\n// try { openFile(); parseXml(); queryDB();\n// } catch (Exception e) { log.error(\"오류\", e); }\n// ✅ 안전: 구체적 예외 타입별 처리\ntry {\n    openFile();\n} catch (FileNotFoundException e) {\n    log.warn(\"[FILE] 파일 없음: {}\", path);\n    throw new BusinessException(\"파일을 찾을 수 없습니다.\", e);\n} catch (IOException e) {\n    log.error(\"[IO] 파일 읽기 실패\", e);\n    throw new ServiceException(\"파일 읽기 오류\", e);\n}\ntry {\n    queryDB();\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 실패: SQLSTATE={}\", e.getSQLState(), e);\n    throw new DataAccessException(\"데이터 조회 오류\", e);\n}"
+      },
+      "dangerousPatterns": [
+        "catch\\s*\\(\\s*Exception\\s+\\w|catch\\s*\\(\\s*Throwable\\s+\\w"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ Exception/Throwable을 통째로 catch → 심각한 오류도 삼킴\ntry {\n    riskyOperation();\n} catch (Exception e) {\n    log.warn(\"오류 발생\"); // OutOfMemoryError, NPE 등도 무시\n}",
+        "good": "// ✅ 구체적 예외 타입 별도 처리\ntry {\n    riskyOperation();\n} catch (IOException e) {\n    log.error(\"[IO 오류]: {}\", e.getMessage(), e);\n    throw new ServiceException(\"파일 처리 오류\", e);\n} catch (IllegalArgumentException e) {\n    log.warn(\"[입력값 오류]: {}\", e.getMessage());\n    throw e;\n}"
+      }
     },
-
-    // 제5절 코드오류 (5개)
     {
-      "ruleId": "IV-5.1", "part": "PART4", "section": "코드오류",
-      "name": "Null Pointer 역참조", "cwe": ["CWE-476"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "NULL_CHECK",
+      "ruleId": "IV-5.1",
+      "part": "PART4",
+      "section": "코드오류",
+      "name": "Null Pointer 역참조",
+      "cwe": [
+        "CWE-476"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "NULL_CHECK",
         "description": "객체 사용 전 null 검사 추가 또는 Optional 패턴 활용",
-        "guideRef": "PART4 제5절 1항 (p.433-444)" }
-    ,
-      "dangerousPatterns": ["\\.get\\(\\)\\.\\w|getResult\\(\\)\\.get\\("]
+        "guideRef": "PART4 제5절 1항 (p.433-444)",
+        "remediationCode": "// [수정] IV-5.1 NullPointerException 방지: null 검사 또는 Optional\n// ❌ 취약: null 검사 없이 메서드 호출\nString userId = request.getParameter(\"userId\");\nString upper = userId.toUpperCase();  // userId=null → NPE\n\n// ✅ 안전 방법 1: 명시적 null 검사\nString userId = request.getParameter(\"userId\");\nif (userId == null || userId.isBlank())\n    throw new IllegalArgumentException(\"userId가 필요합니다.\");\nString upper = userId.toUpperCase();\n\n// ✅ 안전 방법 2: Optional 패턴\nString upper = Optional.ofNullable(request.getParameter(\"userId\"))\n    .filter(s -> !s.isBlank())\n    .map(String::toUpperCase)\n    .orElseThrow(() -> new IllegalArgumentException(\"userId 필요\"));\n\n// ✅ 안전 방법 3: Objects.requireNonNull\nString userId = Objects.requireNonNull(\n    request.getParameter(\"userId\"), \"userId는 필수입니다.\");"
+      },
+      "dangerousPatterns": [
+        "\\.get\\(\\)\\.\\w|getResult\\(\\)\\.get\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ null 반환값 검사 없이 메서드 호출 (NullPointerException)\nString value = map.get(\"key\"); // null일 수 있음\nint len = value.length();       // NullPointerException 발생",
+        "good": "// ✅ null 검사 후 사용\nString value = map.get(\"key\");\nif (value == null) {\n    log.warn(\"[MAP] 키 'key'에 해당하는 값 없음\");\n    return;\n}\nint len = value.length();\n// 또는 getOrDefault() 활용:\nString val2 = map.getOrDefault(\"key\", \"\");"
+      }
     },
     {
-      "ruleId": "IV-5.2", "part": "PART4", "section": "코드오류",
-      "name": "부적절한 자원 해제", "cwe": ["CWE-772"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["new FileInputStream(", "new Connection(", "getConnection("],
-      "remediation": { "strategy": "TRY_WITH_RESOURCES",
+      "ruleId": "IV-5.2",
+      "part": "PART4",
+      "section": "코드오류",
+      "name": "부적절한 자원 해제",
+      "cwe": [
+        "CWE-772"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "new FileInputStream(",
+        "new Connection(",
+        "getConnection("
+      ],
+      "remediation": {
+        "strategy": "TRY_WITH_RESOURCES",
         "description": "try-with-resources 구문으로 자원 자동 해제 보장",
-        "guideRef": "PART4 제5절 2항 (p.445-453)" }
-    ,
-      "dangerousPatterns": ["new FileInputStream\\(|getConnection\\(\\)|new BufferedReader\\("]
+        "guideRef": "PART4 제5절 2항 (p.445-453)",
+        "remediationCode": "// [수정] IV-5.2 자원 누수 방지: try-with-resources 사용\n// ❌ 취약: finally 없어 자원 해제 누락 가능\n// Connection con = null; PreparedStatement ps = null;\n// try { con = ds.getConnection(); ps = con.prepareStatement(sql);\n//     ps.executeQuery(); } catch (SQLException e) { ... }\n// 커넥션 누수!\n\n// ✅ 안전: try-with-resources로 자동 해제\ntry (Connection con = ds.getConnection();\n     PreparedStatement ps = con.prepareStatement(sql);\n     ResultSet rs = ps.executeQuery()) {\n    while (rs.next()) { /* 처리 */ }\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 실패\", e);\n    throw new ServiceException(\"데이터 조회 오류\", e);\n}\n// AutoCloseable 구현 자원 모두 적용 가능\n// (InputStream, OutputStream, Connection, Session 등)"
+      },
+      "dangerousPatterns": [
+        "new FileInputStream\\(|getConnection\\(\\)|new BufferedReader\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ finally 블록 없이 스트림 미해제 → 자원 누수\npublic void readFile(String path) throws IOException {\n    FileInputStream fis = new FileInputStream(path);\n    int b;\n    while ((b = fis.read()) != -1) { process(b); }\n    // fis.close() 누락 — 예외 발생 시 자원 영구 누수\n}",
+        "good": "// ✅ try-with-resources로 자동 해제 (JDK 7+)\npublic void readFile(String path) throws IOException {\n    try (FileInputStream fis = new FileInputStream(path)) {\n        int b;\n        while ((b = fis.read()) != -1) { process(b); }\n    } // 블록 종료 시 자동으로 fis.close() 호출\n}"
+      }
     },
     {
-      "ruleId": "IV-5.3", "part": "PART4", "section": "코드오류",
-      "name": "해제된 자원 사용", "cwe": ["CWE-416"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "NULL_AFTER_CLOSE",
+      "ruleId": "IV-5.3",
+      "part": "PART4",
+      "section": "코드오류",
+      "name": "해제된 자원 사용",
+      "cwe": [
+        "CWE-416"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "NULL_AFTER_CLOSE",
         "description": "자원 해제 후 변수를 null로 설정하여 재사용 방지",
-        "guideRef": "PART4 제5절 3항 (p.454-458)" }
-    ,
-      "dangerousPatterns": ["\\.close\\(\\);"]
+        "guideRef": "PART4 제5절 3항 (p.454-458)",
+        "remediationCode": "// [수정] IV-5.3 해제된 자원 재사용 방지\n// ❌ 취약: close() 후 동일 변수를 재사용\n// InputStream is = new FileInputStream(\"file.txt\");\n// is.readAllBytes(); is.close(); is.read();  // IOException!\n\n// ✅ 안전 방법 1: try-with-resources로 스코프 제한\ntry (InputStream is = new FileInputStream(\"file.txt\")) {\n    byte[] data = is.readAllBytes();\n}  // is 자동 해제 — 블록 외부에서 접근 불가\n\n// ✅ 안전 방법 2: close() 후 null 할당\nInputStream is = null;\ntry {\n    is = new FileInputStream(\"file.txt\");\n    byte[] data = is.readAllBytes();\n} finally {\n    if (is != null) { is.close(); is = null; }\n}\n// is.read() → NullPointerException → 의도적 오류로 조기 발견"
+      },
+      "dangerousPatterns": [
+        "\\.close\\(\\);"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 자원 해제 후 재사용 시도\nInputStream is = getStream();\nis.close();\n// ... 다른 코드 ...\nint b = is.read(); // IOException: Stream closed",
+        "good": "// ✅ 자원 해제 후 참조를 null로 설정하고 재사용 방지\nInputStream is = getStream();\ntry {\n    int b = is.read();\n    processData(b);\n} finally {\n    try { is.close(); } catch (IOException e) { log.warn(\"close 오류\", e); }\n    is = null; // 해제 후 참조 제거\n}\n// is 이후 사용 코드에서 null 체크 필요"
+      }
     },
     {
-      "ruleId": "IV-5.4", "part": "PART4", "section": "코드오류",
-      "name": "초기화되지 않은 변수 사용", "cwe": ["CWE-457"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "INITIALIZE_VARIABLES",
+      "ruleId": "IV-5.4",
+      "part": "PART4",
+      "section": "코드오류",
+      "name": "초기화되지 않은 변수 사용",
+      "cwe": [
+        "CWE-457"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "INITIALIZE_VARIABLES",
         "description": "모든 변수를 선언 시 명시적으로 초기화",
-        "guideRef": "PART4 제5절 4항 (p.459-461)" }
-    ,
-      "dangerousPatterns": ["private int \\w+;|private String \\w+;|private Object \\w+;"]
+        "guideRef": "PART4 제5절 4항 (p.459-461)",
+        "remediationCode": "// [수정] IV-5.4 초기화되지 않은 변수 방지: 선언 시 명시 초기화\n// ❌ 취약: 선언만 하고 초기화 없이 사용 (NPE·논리 오류 위험)\nprivate String result;      // null\nprivate List<String> items; // null\nprivate int count;          // 0이지만 명시 권장\n\n// ✅ 안전: 선언 시 명시적 초기화\nprivate String result = \"\";\nprivate List<String> items = new ArrayList<>();\nprivate int count = 0;\n\n// 지역 변수: 컴파일러가 미초기화 사용 감지 (단, 복잡한 분기에서 누락 가능)\nString status;\nif (condition) status = \"OK\";\nelse           status = \"FAIL\";  // else 없으면 컴파일 오류\nlog.info(\"상태: {}\", status);"
+      },
+      "dangerousPatterns": [
+        "private int \\w+;|private String \\w+;|private Object \\w+;"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 변수 초기화 전 사용 시도\nint result;\nif (condition) {\n    result = compute();\n}\nSystem.out.println(result); // condition이 false면 초기화 안 됨",
+        "good": "// ✅ 선언 시 기본값으로 초기화\nint result = 0; // 기본값 명시\nif (condition) {\n    result = compute();\n}\nlog.info(\"결과: {}\", result);\n// 또는 else 분기로 항상 초기화 보장:\nint result2 = condition ? compute() : -1;"
+      }
     },
     {
-      "ruleId": "IV-5.5", "part": "PART4", "section": "코드오류",
-      "name": "신뢰할 수 없는 데이터의 역직렬화", "cwe": ["CWE-502"],
-      "severity": "CRITICAL", "phase": "IMPLEMENTATION", "taintAnalysis": true,
-      "sources": ["request.getInputStream", "ObjectInputStream"],
-      "sinks": ["ObjectInputStream.readObject", "readUnshared"],
-      "sanitizers": ["SerialKiller", "ValidatingObjectInputStream", "allowClasses"],
-      "remediation": { "strategy": "SAFE_DESERIALIZATION",
+      "ruleId": "IV-5.5",
+      "part": "PART4",
+      "section": "코드오류",
+      "name": "신뢰할 수 없는 데이터의 역직렬화",
+      "cwe": [
+        "CWE-502"
+      ],
+      "severity": "CRITICAL",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": true,
+      "sources": [
+        "request.getInputStream",
+        "ObjectInputStream"
+      ],
+      "sinks": [
+        "ObjectInputStream.readObject",
+        "readUnshared"
+      ],
+      "sanitizers": [
+        "SerialKiller",
+        "ValidatingObjectInputStream",
+        "allowClasses"
+      ],
+      "remediation": {
+        "strategy": "SAFE_DESERIALIZATION",
         "description": "역직렬화 필터(ObjectInputFilter) 적용 또는 JSON/XML 등 안전한 형식으로 교체",
-        "guideRef": "PART4 제5절 5항 (p.462-468)" }
+        "guideRef": "PART4 제5절 5항 (p.462-468)",
+        "remediationCode": "// [수정] IV-5.5 역직렬화 취약점 방지: 필터 적용 또는 JSON 대체\n// ❌ 취약: 신뢰할 수 없는 입력을 무제한 역직렬화\nObjectInputStream ois = new ObjectInputStream(req.getInputStream());\nObject obj = ois.readObject();  // 임의 클래스 인스턴스화 → RCE!\n\n// ✅ 안전 방법 1: ObjectInputFilter (Java 9+)\nObjectInputStream ois = new ObjectInputStream(req.getInputStream());\nois.setObjectInputFilter(info -> {\n    Class<?> c = info.serialClass();\n    if (c == null) return ObjectInputFilter.Status.UNDECIDED;\n    if (c == MyData.class) return ObjectInputFilter.Status.ALLOWED;\n    return ObjectInputFilter.Status.REJECTED;  // 나머지 모두 차단\n});\nMyData data = (MyData) ois.readObject();\n\n// ✅ 안전 방법 2: JSON 역직렬화로 교체 (권장)\nString json = new String(req.getInputStream().readAllBytes(),\n    StandardCharsets.UTF_8);\nMyData data = new ObjectMapper().readValue(json, MyData.class);"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 신뢰할 수 없는 데이터 역직렬화 (RCE 가능)\nObjectInputStream ois = new ObjectInputStream(request.getInputStream());\nObject obj = ois.readObject(); // 악의적 직렬화 페이로드 실행 가능",
+        "good": "// ✅ 역직렬화 금지 또는 허용 클래스 화이트리스트 적용\n// 방법 1: Java 직렬화 대신 JSON 사용 (권장)\nObjectMapper mapper = new ObjectMapper();\nMyDto dto = mapper.readValue(request.getInputStream(), MyDto.class);\n\n// 방법 2: 화이트리스트 기반 ObjectInputStream 사용\nObjectInputStream ois = new ObjectInputStream(input) {\n    protected Class<?> resolveClass(ObjectStreamClass desc)\n            throws IOException, ClassNotFoundException {\n        if (!desc.getName().startsWith(\"com.myapp.\"))\n            throw new InvalidClassException(\"허용되지 않는 클래스\", desc.getName());\n        return super.resolveClass(desc);\n    }\n};"
+      }
     },
-
-    // 제6절 캡슐화 (4개)
     {
-      "ruleId": "IV-6.1", "part": "PART4", "section": "캡슐화",
-      "name": "잘못된 세션에 의한 데이터 정보 노출", "cwe": ["CWE-488"],
-      "severity": "HIGH", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "SESSION_ISOLATION",
+      "ruleId": "IV-6.1",
+      "part": "PART4",
+      "section": "캡슐화",
+      "name": "잘못된 세션에 의한 데이터 정보 노출",
+      "cwe": [
+        "CWE-488"
+      ],
+      "severity": "HIGH",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "SESSION_ISOLATION",
         "description": "스레드 로컬 또는 요청별 세션 격리, 공유 객체에 사용자 데이터 저장 금지",
-        "guideRef": "PART4 제6절 1항 (p.469-475)" }
-    ,
-      "dangerousPatterns": ["static.*HttpSession|public static.*Session"]
+        "guideRef": "PART4 제6절 1항 (p.469-475)",
+        "remediationCode": "// [수정] IV-6.1 세션 데이터 격리: static 세션 공유 금지\n// ❌ 취약: static 필드에 세션 저장 (스레드 간 데이터 혼용)\n// class UserService { private static HttpSession s; }  // 위험!\n\n// ✅ 안전: 요청 단위로 세션 조회, static 공유 금지\npublic class UserService {\n    public UserVO getUser(HttpServletRequest req) {\n        HttpSession ses = req.getSession(false);\n        return ses != null\n            ? (UserVO) ses.getAttribute(\"loginUser\") : null;\n    }\n}\n// ThreadLocal 사용 시 반드시 finally에서 제거\nThreadLocal<UserVO> holder = new ThreadLocal<>();\ntry {\n    holder.set(getUser(request));\n    processRequest();\n} finally {\n    holder.remove();  // 스레드 풀 재사용 시 이전 데이터 노출 방지\n}"
+      },
+      "dangerousPatterns": [
+        "static.*HttpSession|public static.*Session"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 로그아웃 후 세션 데이터 잔존 → 세션 재사용으로 타인 정보 노출\n@GetMapping(\"/logout\")\npublic String logout(HttpSession session) {\n    session.removeAttribute(\"userId\"); // 세션 자체가 유지됨\n    return \"redirect:/login\";\n}",
+        "good": "// ✅ 세션 완전 파기 후 새 세션 발급\n@GetMapping(\"/logout\")\npublic String logout(HttpServletRequest request) {\n    HttpSession session = request.getSession(false);\n    if (session != null) {\n        session.invalidate();\n    }\n    return \"redirect:/login\";\n}"
+      }
     },
     {
-      "ruleId": "IV-6.2", "part": "PART4", "section": "캡슐화",
-      "name": "제거되지 않고 남은 디버그 코드", "cwe": ["CWE-489"],
-      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "dangerousPatterns": ["System\\.out\\.print", "e\\.printStackTrace"],
-      "remediation": { "strategy": "REMOVE_DEBUG_CODE",
+      "ruleId": "IV-6.2",
+      "part": "PART4",
+      "section": "캡슐화",
+      "name": "제거되지 않고 남은 디버그 코드",
+      "cwe": [
+        "CWE-489"
+      ],
+      "severity": "LOW",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "dangerousPatterns": [
+        "System\\.out\\.print",
+        "e\\.printStackTrace"
+      ],
+      "remediation": {
+        "strategy": "REMOVE_DEBUG_CODE",
         "description": "배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용",
-        "guideRef": "PART4 제6절 2항 (p.476-480)" }
+        "guideRef": "PART4 제6절 2항 (p.476-480)",
+        "remediationCode": "// [수정] IV-6.2 디버그 코드 제거: SLF4J 표준 로거로 교체\n// ❌ 취약: 배포 코드에 남은 디버그 출력\nSystem.out.println(\"userId = \" + userId);\nSystem.out.println(\"DB 쿼리: \" + sql);\ne.printStackTrace();  // 스택트레이스 노출 위험\n\n// ✅ 안전: SLF4J/Logback 표준 로거 사용\nprivate static final Logger log =\n    LoggerFactory.getLogger(MyService.class);\n\n// 개발 디버깅 (운영 환경에서 DEBUG 자동 비활성)\nlog.debug(\"userId={}\", userId);\nlog.debug(\"SQL: {}\", sql);\n\n// 예외 처리 (스택트레이스는 서버 로그에만)\n} catch (Exception e) {\n    log.error(\"[SERVICE] 처리 오류: {}\", e.getMessage(), e);\n    throw new ServiceException(\"서비스 오류\", e);\n}\n// logback.xml: <root level=\"WARN\"> (운영), <root level=\"DEBUG\"> (개발)"
+      },
+      "codeExamples": {
+        "bad": "// ❌ 운영 코드에 디버그 코드 잔존\npublic void processOrder(Order order) {\n    System.out.println(\"[DEBUG] order=\" + order);\n    e.printStackTrace(); // 스택트레이스 직접 출력\n    // TODO: 테스트용 마스터 비밀번호 제거 필요\n    if (\"masterkey\".equals(inputPw)) return; // 백도어\n}",
+        "good": "// ✅ 디버그 코드 제거 + 로깅 레벨로 대체\npublic void processOrder(Order order) {\n    log.debug(\"[주문 처리] orderId={}\", order.getId());\n    // System.out, printStackTrace, 하드코딩 비밀번호 없음\n    orderService.process(order);\n}"
+      }
     },
     {
-      "ruleId": "IV-6.3", "part": "PART4", "section": "캡슐화",
-      "name": "Public 메소드부터 반환된 Private 배열", "cwe": ["CWE-495"],
-      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "DEFENSIVE_COPY",
+      "ruleId": "IV-6.3",
+      "part": "PART4",
+      "section": "캡슐화",
+      "name": "Public 메소드부터 반환된 Private 배열",
+      "cwe": [
+        "CWE-495"
+      ],
+      "severity": "LOW",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "DEFENSIVE_COPY",
         "description": "private 배열 반환 시 Arrays.copyOf()로 방어적 복사 후 반환",
-        "guideRef": "PART4 제6절 3항 (p.481-486)" }
-    ,
-      "dangerousPatterns": ["public\\s+\\w+\\[\\]\\s+get\\w+\\(\\)"]
+        "guideRef": "PART4 제6절 3항 (p.481-486)",
+        "remediationCode": "// [수정] IV-6.3 private 배열 직접 반환 금지: 방어적 복사\n// ❌ 취약: private 배열 참조를 그대로 반환 → 외부에서 수정 가능\npublic class Config {\n    private String[] allowedRoles = {\"USER\", \"ADMIN\"};\n    public String[] getAllowedRoles() {\n        return allowedRoles;  // 외부: allowedRoles[0]=\"HACKER\" 가능!\n    }\n}\n\n// ✅ 안전 방법 1: Arrays.copyOf()로 방어적 복사\npublic class Config {\n    private String[] allowedRoles = {\"USER\", \"ADMIN\"};\n    public String[] getAllowedRoles() {\n        return Arrays.copyOf(allowedRoles, allowedRoles.length);\n    }\n}\n// ✅ 안전 방법 2: 불변 컬렉션 반환 (권장)\npublic List<String> getAllowedRoleList() {\n    return Collections.unmodifiableList(Arrays.asList(allowedRoles));\n}"
+      },
+      "dangerousPatterns": [
+        "public\\s+\\w+\\[\\]\\s+get\\w+\\(\\)"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ private 배열을 외부에서 수정 가능한 참조로 반환\nprivate String[] sensitiveData = {\"key1\", \"key2\"};\n\npublic String[] getData() {\n    return sensitiveData; // 참조 반환 → 외부에서 배열 원소 변경 가능\n}",
+        "good": "// ✅ 방어적 복사본 반환\nprivate String[] sensitiveData = {\"key1\", \"key2\"};\n\npublic String[] getData() {\n    return Arrays.copyOf(sensitiveData, sensitiveData.length);\n}\n// 또는 Collections.unmodifiableList() 활용 (List 사용 시)"
+      }
     },
     {
-      "ruleId": "IV-6.4", "part": "PART4", "section": "캡슐화",
-      "name": "Private 배열에 Public 데이터 할당", "cwe": ["CWE-496"],
-      "severity": "LOW", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "remediation": { "strategy": "DEFENSIVE_COPY_INPUT",
+      "ruleId": "IV-6.4",
+      "part": "PART4",
+      "section": "캡슐화",
+      "name": "Private 배열에 Public 데이터 할당",
+      "cwe": [
+        "CWE-496"
+      ],
+      "severity": "LOW",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "remediation": {
+        "strategy": "DEFENSIVE_COPY_INPUT",
         "description": "외부 배열을 private 필드에 할당 시 Arrays.copyOf()로 방어적 복사",
-        "guideRef": "PART4 제6절 4항 (p.487-491)" }
-    ,
-      "dangerousPatterns": ["this\\.\\w+\\s*=\\s*\\w+;"]
+        "guideRef": "PART4 제6절 4항 (p.487-491)",
+        "remediationCode": "// [수정] IV-6.4 외부 배열 직접 할당 금지: 방어적 복사\n// ❌ 취약: 파라미터 배열을 private 필드에 직접 할당\n// class Config { private String[] roles;\n//   public void setRoles(String[] r) { this.roles = r; } }\n// 호출자가 r[0]=\"HACKER\"로 수정하면 내부도 변경됨!\n\n// ✅ 안전: Arrays.copyOf()로 방어적 복사\npublic class Config {\n    private String[] allowedRoles;\n    public void setAllowedRoles(String[] roles) {\n        if (roles == null)\n            throw new IllegalArgumentException(\"roles must not be null\");\n        this.allowedRoles = Arrays.copyOf(roles, roles.length);\n    }\n}\n// 또는 불변 리스트로 받기 (권장)\npublic void setRoles(List<String> roles) {\n    this.allowedRoles = roles.toArray(new String[0]);\n}"
+      },
+      "dangerousPatterns": [
+        "this\\.\\w+\\s*=\\s*\\w+;"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 외부에서 전달받은 배열을 private 필드에 직접 할당\nprivate int[] permissions;\n\npublic void setPermissions(int[] perm) {\n    this.permissions = perm; // 외부가 perm을 수정하면 내부 상태도 변경됨\n}",
+        "good": "// ✅ 방어적 복사 후 내부 필드에 저장\nprivate int[] permissions;\n\npublic void setPermissions(int[] perm) {\n    if (perm == null) throw new IllegalArgumentException(\"권한 배열은 null 불가\");\n    this.permissions = Arrays.copyOf(perm, perm.length);\n}"
+      }
     },
-
-    // 제7절 API 오용 (2개)
     {
-      "ruleId": "IV-7.1", "part": "PART4", "section": "API 오용",
-      "name": "DNS lookup에 의존한 보안결정", "cwe": ["CWE-350"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["InetAddress.getByName", "getHostName", "getCanonicalHostName"],
-      "remediation": { "strategy": "IP_BASED_CHECK",
+      "ruleId": "IV-7.1",
+      "part": "PART4",
+      "section": "API 오용",
+      "name": "DNS lookup에 의존한 보안결정",
+      "cwe": [
+        "CWE-350"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "InetAddress.getByName",
+        "getHostName",
+        "getCanonicalHostName"
+      ],
+      "remediation": {
+        "strategy": "IP_BASED_CHECK",
         "description": "DNS 역방향 조회 결과 대신 IP 주소 기반으로 보안 결정 수행",
-        "guideRef": "PART4 제7절 1항 (p.492-496)" }
-    ,
-      "dangerousPatterns": ["InetAddress\\.getByName\\(|getHostName\\(\\)|getCanonicalHostName\\(\\)"]
+        "guideRef": "PART4 제7절 1항 (p.492-496)",
+        "remediationCode": "// [수정] IV-7.1 DNS lookup 기반 보안 결정 금지: IP 직접 비교\n// ❌ 취약: 역방향 DNS 조회(getHostName)로 보안 결정\nInetAddress addr = InetAddress.getByName(clientIp);\nString host = addr.getHostName();\nif (\"trusted.internal.com\".equals(host))\n    grantAccess();  // DNS 스푸핑으로 우회 가능!\n\n// ✅ 안전: IP 주소 화이트리스트로 직접 비교\nprivate static final Set<String> TRUSTED =\n    Set.of(\"192.168.1.10\", \"192.168.1.11\", \"10.0.0.5\");\nString clientIp = request.getRemoteAddr();\nif (!TRUSTED.contains(clientIp))\n    throw new ForbiddenException(\"접근 금지 IP: \" + clientIp);\ngrantAccess();\n// X-Forwarded-For는 조작 가능 — 직접 연결 IP 사용\n// 프록시 환경: 신뢰할 수 있는 프록시만 허용 후 IP 추출"
+      },
+      "dangerousPatterns": [
+        "InetAddress\\.getByName\\(|getHostName\\(\\)|getCanonicalHostName\\(\\)"
+      ],
+      "codeExamples": {
+        "bad": "// ❌ DNS lookup 결과로 보안 결정 (DNS 스푸핑 가능)\nString ip = InetAddress.getByName(\"trusted.internal.com\").getHostAddress();\nif (\"10.0.0.5\".equals(ip)) {\n    grantAccess(); // DNS 스푸핑 시 공격자 IP가 신뢰됨\n}",
+        "good": "// ✅ IP 주소를 설정 파일에서 직접 로드하여 비교\n// application.properties: trusted.ip=10.0.0.5\nString trustedIp = config.getProperty(\"trusted.ip\");\nString remoteIp  = request.getRemoteAddr();\nif (!trustedIp.equals(remoteIp)) {\n    throw new SecurityException(\"허가되지 않은 접근 IP: \" + remoteIp);\n}\ngrantAccess();"
+      }
     },
     {
-      "ruleId": "IV-7.2", "part": "PART4", "section": "API 오용",
-      "name": "취약한 API 사용", "cwe": ["CWE-676"],
-      "severity": "MEDIUM", "phase": "IMPLEMENTATION", "taintAnalysis": false,
-      "sinks": ["Runtime.exec(", "System.loadLibrary("],
-      "remediation": { "strategy": "SAFE_API_REPLACEMENT",
+      "ruleId": "IV-7.2",
+      "part": "PART4",
+      "section": "API 오용",
+      "name": "취약한 API 사용",
+      "cwe": [
+        "CWE-676"
+      ],
+      "severity": "MEDIUM",
+      "phase": "IMPLEMENTATION",
+      "taintAnalysis": false,
+      "sinks": [
+        "Runtime.exec(",
+        "System.loadLibrary("
+      ],
+      "remediation": {
+        "strategy": "SAFE_API_REPLACEMENT",
         "description": "보안 취약점이 알려진 API를 안전한 대체 API로 교체",
-        "guideRef": "PART4 제7절 2항 (p.497-505)" }
-    ,
-      "dangerousPatterns": ["Runtime\\.exec\\(|System\\.loadLibrary\\("]
+        "guideRef": "PART4 제7절 2항 (p.497-505)",
+        "remediationCode": "// [수정] IV-7.2 취약한 API 대체: 안전한 Java API 사용\n// ❌ 취약: 보안 취약점이 있는 레거시 API\nRuntime.getRuntime().exec(\"cmd \" + userInput);  // OS 명령어 주입\nThread.stop();                                  // deprecated(데드락 위험)\nDate d = new Date(year, month, day);            // deprecated\n\n// ✅ 안전: 권장 대체 API\n// OS 명령어 → ProcessBuilder 배열 방식\nnew ProcessBuilder(\"/usr/bin/safe-tool\",\n    \"--arg\", sanitizedInput).start();\n\n// 스레드 종료 → 협력적 종료\nvolatile boolean running = true;\n// while (running) { ... }  / running = false;\n\n// 날짜 → java.time API\nLocalDate date = LocalDate.of(year, month, day);\nZonedDateTime now = ZonedDateTime.now(ZoneId.of(\"Asia/Seoul\"));\n// System.loadLibrary → 검증된 경로 + 화이트리스트"
+      },
+      "dangerousPatterns": [
+        "Runtime\\.exec\\(|System\\.loadLibrary\\("
+      ],
+      "codeExamples": {
+        "bad": "// ❌ 취약하거나 위험한 API 사용\n// Thread.stop()          — 비결정적 상태 유발\n// System.runFinalizersOnExit(true) — 비권고 API\n// Runtime.exec(String)   — 쉘 삽입 위험 (배열 형태 미사용)\nRuntime.getRuntime().exec(\"ls \" + userInput);",
+        "good": "// ✅ 안전한 대안 API 사용\n// Thread.stop() 대신 → 인터럽트 메커니즘\nthread.interrupt();\n\n// Runtime.exec(String) 대신 → 배열 형태 사용\nString[] cmd = {\"ls\", \"-l\", safeDir};\nProcess proc = Runtime.getRuntime().exec(cmd);\n\n// 또는 ProcessBuilder 사용 (권장)\nProcessBuilder pb = new ProcessBuilder(\"ls\", \"-l\", safeDir);\npb.redirectErrorStream(true);\nProcess p = pb.start();"
+      }
     }
   ]
 }

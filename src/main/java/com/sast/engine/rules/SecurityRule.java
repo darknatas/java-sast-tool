@@ -30,20 +30,36 @@ public class SecurityRule {
     private List<String> dangerousPatterns;
 
     private Remediation remediation;
+    private CodeExamples codeExamples;
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class CodeExamples {
+        private String bad;
+        private String good;
+
+        public String getBad()  { return bad; }
+        public String getGood() { return good; }
+
+        public void setBad(String v)  { this.bad = v; }
+        public void setGood(String v) { this.good = v; }
+    }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Remediation {
         private String strategy;
         private String description;
         private String guideRef;
+        private String remediationCode;
 
-        public String getStrategy()    { return strategy; }
-        public String getDescription() { return description; }
-        public String getGuideRef()    { return guideRef; }
+        public String getStrategy()        { return strategy; }
+        public String getDescription()     { return description; }
+        public String getGuideRef()        { return guideRef; }
+        public String getRemediationCode() { return remediationCode; }
 
-        public void setStrategy(String v)    { this.strategy = v; }
-        public void setDescription(String v) { this.description = v; }
-        public void setGuideRef(String v)    { this.guideRef = v; }
+        public void setStrategy(String v)        { this.strategy = v; }
+        public void setDescription(String v)     { this.description = v; }
+        public void setGuideRef(String v)        { this.guideRef = v; }
+        public void setRemediationCode(String v) { this.remediationCode = v; }
     }
 
     // ── Getters ──────────────────────────────────────────────────────────
@@ -67,7 +83,8 @@ public class SecurityRule {
         return remediation != null ? remediation.getGuideRef() : "";
     }
 
-    public Remediation getRemediation() { return remediation; }
+    public Remediation getRemediation()   { return remediation; }
+    public CodeExamples getCodeExamples() { return codeExamples; }
 
     // ── Setters (Jackson 역직렬화용) ─────────────────────────────────────
 
@@ -84,5 +101,6 @@ public class SecurityRule {
     public void setSinks(List<String> v)    { this.sinks = v; }
     public void setSanitizers(List<String> v) { this.sanitizers = v; }
     public void setDangerousPatterns(List<String> v) { this.dangerousPatterns = v; }
-    public void setRemediation(Remediation v) { this.remediation = v; }
+    public void setRemediation(Remediation v)   { this.remediation = v; }
+    public void setCodeExamples(CodeExamples v) { this.codeExamples = v; }
 }

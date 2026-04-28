@@ -1,5 +1,7 @@
 package com.sast.remediation;
 
+import com.sast.engine.rules.RuleLoader;
+import com.sast.engine.rules.SecurityRule;
 import com.sast.model.Finding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,16 +9,33 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * RemediationService — 탐지된 보안약점에 대한 수정 코드 자동 생성
  * 규칙별 Contextual Suggestion: 실제 변수명을 수정 템플릿에 삽입
+ * JSON의 remediationCode를 GENERIC 전략 폴백으로 사용
  */
 public class RemediationService {
 
     private static final Logger log = LoggerFactory.getLogger(RemediationService.class);
+
+    private final Map<String, SecurityRule> ruleIndex;
+
+    public RemediationService() {
+        Map<String, SecurityRule> index;
+        try {
+            index = RuleLoader.loadFromClasspath("security-rules.json").stream()
+                    .collect(Collectors.toMap(SecurityRule::getRuleId, r -> r));
+        } catch (Exception e) {
+            log.warn("[Remediation] 규칙 로드 실패 — JSON remediationCode 폴백 비활성: {}", e.getMessage());
+            index = Collections.emptyMap();
+        }
+        this.ruleIndex = index;
+    }
 
     public RemediationResult suggest(Finding finding) {
         String strategy = resolveStrategy(finding.getRuleId());
@@ -2012,13 +2031,29 @@ public class RemediationService {
     // ── 기본 수정 제안 ────────────────────────────────────────────────────
 
     private RemediationResult remediateGeneric(Finding finding) {
+        // JSON의 remediationCode를 우선 사용
+        SecurityRule rule = ruleIndex.get(finding.getRuleId());
+        String jsonCode = null;
+        String jsonDesc = null;
+        if (rule != null && rule.getRemediation() != null) {
+            jsonCode = rule.getRemediation().getRemediationCode();
+            jsonDesc = rule.getRemediation().getDescription();
+        }
+
+        String code = (jsonCode != null && !jsonCode.isBlank())
+                ? jsonCode
+                : "// 해당 약점의 수정 방법을 가이드에서 확인하세요: " + finding.getGuideRef();
+        String desc = (jsonDesc != null && !jsonDesc.isBlank())
+                ? jsonDesc
+                : "보안약점 '" + finding.getRuleName() + "'의 조치방안을 가이드에서 확인하세요.";
+
         return RemediationResult.builder()
                 .ruleId(finding.getRuleId())
                 .strategy("GENERIC")
-                .securityPrinciple("가이드에서 해당 약점의 조치 방안을 확인하세요.")
+                .securityPrinciple(desc)
                 .vulnerableCode(finding.getVulnerableCode())
-                .remediatedCode("// 해당 약점의 수정 방법을 가이드에서 확인하세요: " + finding.getGuideRef())
-                .explanation("보안약점 '" + finding.getRuleName() + "'의 조치방안을 가이드에서 확인하세요.")
+                .remediatedCode(code)
+                .explanation(desc + " 가이드 참조: " + finding.getGuideRef())
                 .references(Collections.singletonList(finding.getGuideRef()))
                 .build();
     }
@@ -2123,7 +2158,26 @@ public class RemediationService {
             // ── PART4 제7절 ──
             case "IV-7.1"  -> "IP_BASED_CHECK";
             case "IV-7.2"  -> "SAFE_API_REPLACEMENT";
-            // ── PART3 설계단계 ──
+            // ── PART3 설계단계 — 관련 PART4 전략으로 위임 ──
+            case "DS-1.1"  -> "USE_PREPARED_STATEMENT";   // IV-1.1
+            case "DS-1.2"  -> "PARAMETERIZED_XPATH";      // IV-1.9
+            case "DS-1.3"  -> "LDAP_ENCODING";            // IV-1.10
+            case "DS-1.4"  -> "AVOID_OS_COMMAND";         // IV-1.5
+            case "DS-1.5"  -> "OUTPUT_ENCODING";          // IV-1.4
+            case "DS-1.6"  -> "CSRF_TOKEN";               // IV-1.11
+            case "DS-1.7"  -> "CRLF_REMOVAL";             // IV-1.13
+            case "DS-1.8"  -> "BOUNDS_CHECK";             // IV-1.14
+            case "DS-1.9"  -> "SERVER_SIDE_AUTH_CHECK";   // IV-1.15
+            case "DS-1.10" -> "FILE_EXTENSION_WHITELIST"; // IV-1.6
+            case "DS-2.1"  -> "AUTH_GATE_FILTER";         // IV-2.1
+            case "DS-2.2"  -> "ACCOUNT_LOCKOUT";          // IV-2.16
+            case "DS-2.3"  -> "PASSWORD_POLICY";          // IV-2.9
+            case "DS-2.4"  -> "LEAST_PRIVILEGE";          // IV-2.3
+            case "DS-2.5"  -> "EXTERNALIZE_SECRETS";      // IV-2.6
+            case "DS-2.6"  -> "STRONG_CRYPTO";            // IV-2.4
+            case "DS-2.7"  -> "ENCRYPT_SENSITIVE_DATA";   // IV-2.5
+            case "DS-2.8"  -> "GENERIC";                  // 전용 TLS 조치 — JSON fallback
+            case "DS-3.1"  -> "GENERIC_ERROR_MESSAGE";    // IV-4.1
             case "DS-4.1"  -> "SESSION_DESIGN";
             default        -> "GENERIC";
         };

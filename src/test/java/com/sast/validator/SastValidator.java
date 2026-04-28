@@ -4,6 +4,8 @@ import com.sast.SASTEngine;
 import com.sast.engine.rules.RuleLoader;
 import com.sast.engine.rules.SecurityRule;
 import com.sast.model.Finding;
+import com.sast.remediation.RemediationService;
+import com.sast.report.PdfReportGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -65,6 +67,7 @@ public class SastValidator {
 
         SASTEngine engine = new SASTEngine();
         Map<String, CoverageResult> resultMap = new LinkedHashMap<>();
+        List<Finding> allFindings = new ArrayList<>();
 
         for (SecurityRule rule : rules) {
             AnalysisType type = classifyRule(rule);
@@ -85,6 +88,7 @@ public class SastValidator {
             if (type != AnalysisType.NOT_SUPPORTED && cr.sampleExists) {
                 try {
                     List<Finding> findings = engine.analyzeFile(sampleFile.toFile());
+                    allFindings.addAll(findings);
                     String ruleId = rule.getRuleId();
                     cr.findingCount = (int) findings.stream()
                             .filter(f -> ruleId.equals(f.getRuleId()))
@@ -97,6 +101,23 @@ public class SastValidator {
         }
 
         printReport(resultMap);
+        generatePdfReport(allFindings);
+    }
+
+    private void generatePdfReport(List<Finding> findings) {
+        Path pdfPath = Paths.get("target/sast-report.pdf");
+        try {
+            Files.createDirectories(pdfPath.getParent());
+            RemediationService remService = new RemediationService();
+            PdfReportGenerator pdfGen    = new PdfReportGenerator();
+            byte[] pdfBytes = pdfGen.generateFromFindings(
+                    findings, remService, "SastValidator Coverage Run");
+            Files.write(pdfPath, pdfBytes);
+            System.out.println("[PDF] PDF 리포트 생성 완료: " + pdfPath.toAbsolutePath());
+        } catch (Exception e) {
+            System.err.println("[PDF] PDF 생성 실패: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     // ── 규칙 분류 ───────────────────────────────────────────────────────────

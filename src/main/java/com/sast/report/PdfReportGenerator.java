@@ -2,10 +2,13 @@ package com.sast.report;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
+import com.sast.engine.rules.RuleLoader;
+import com.sast.engine.rules.SecurityRule;
 import com.sast.model.Finding;
 import com.sast.remediation.RemediationService;
 import com.sast.web.model.AnalysisResultView;
 import com.sast.web.model.FindingView;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -42,8 +45,26 @@ public class PdfReportGenerator {
     // 한국어 OTF (CFF 기반) — OpenPDF BaseFont.IDENTITY_H로 지원
     private static final String FONT_KOR_REG  = "/usr/share/fonts/google-noto-cjk/NotoSansCJKkr-Regular.otf";
     private static final String FONT_KOR_BOLD = "/usr/share/fonts/google-noto-cjk/NotoSansCJKkr-Bold.otf";
-    // 코드 블록용 고정폭 폰트
-    private static final String FONT_MONO     = "/usr/share/fonts/dejavu-sans-mono-fonts/DejaVuSansMono.ttf";
+    // 코드 블록용 한글 지원 고정폭 폰트 (Noto Sans Mono CJK KR — index 6 in TTC)
+    private static final String FONT_MONO_KOR = "/usr/share/fonts/google-noto-cjk/NotoSansCJK-Regular.ttc,6";
+    // 한글 미지원 Latin 폴백
+    private static final String FONT_MONO_LAT = "/usr/share/fonts/dejavu-sans-mono-fonts/DejaVuSansMono.ttf";
+
+    // 규칙 ID → SecurityRule (codeExamples 조회용)
+    private final Map<String, SecurityRule> ruleMap = new HashMap<>();
+
+    @PostConstruct
+    private void initRuleMap() {
+        try {
+            List<SecurityRule> rules = RuleLoader.loadFromClasspath("security-rules.json");
+            for (SecurityRule r : rules) {
+                ruleMap.put(r.getRuleId(), r);
+            }
+            log.info("[PDF] 보안 규칙 {}개 로드 완료 (codeExamples 렌더링 준비)", ruleMap.size());
+        } catch (Exception e) {
+            log.warn("[PDF] 규칙 로드 실패 — codeExamples 섹션이 생략됩니다: {}", e.getMessage());
+        }
+    }
 
     // 색상 팔레트
     private static final Color NAVY      = new Color(30,  58, 138);
@@ -59,6 +80,7 @@ public class PdfReportGenerator {
      * AnalysisResultView → PDF 바이트 배열
      */
     public byte[] generate(AnalysisResultView result) throws IOException {
+        if (ruleMap.isEmpty()) initRuleMap();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Document document = new Document(PageSize.A4, 40, 40, 40, 50);
         PdfWriter writer = PdfWriter.getInstance(document, out);
@@ -126,14 +148,23 @@ public class PdfReportGenerator {
         }
         if (bold == null) bold = reg;
 
+        // 1순위: Noto Sans Mono CJK KR (한글 지원 고정폭, TTC index 6)
         BaseFont mono = null;
-        if (new File(FONT_MONO).exists()) {
+        try {
+            mono = BaseFont.createFont(FONT_MONO_KOR, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            log.info("[PDF] 한글 모노 폰트 로드: Noto Sans Mono CJK KR");
+        } catch (Exception e) {
+            log.warn("[PDF] 한글 모노 폰트 로드 실패, Latin 폴백 시도: {}", e.getMessage());
+        }
+        // 2순위: DejaVu Sans Mono (Latin 전용)
+        if (mono == null && new File(FONT_MONO_LAT).exists()) {
             try {
-                mono = BaseFont.createFont(FONT_MONO, BaseFont.WINANSI, BaseFont.EMBEDDED);
+                mono = BaseFont.createFont(FONT_MONO_LAT, BaseFont.WINANSI, BaseFont.EMBEDDED);
             } catch (Exception e) {
-                log.warn("[PDF] 모노 폰트 로드 실패: {}", e.getMessage());
+                log.warn("[PDF] Latin 모노 폰트 로드 실패: {}", e.getMessage());
             }
         }
+        // 3순위: 내장 Courier
         if (mono == null) {
             try {
                 mono = BaseFont.createFont(BaseFont.COURIER, BaseFont.WINANSI, false);
@@ -391,6 +422,25 @@ public class PdfReportGenerator {
             doc.add(codeBlock(f, remCode, new Color(34, 197, 94)));
         }
 
+        // ── 코드 예시 (보안 가이드) ────────────────────────────────────
+        SecurityRule rule = ruleMap.get(finding.getRuleId());
+        if (rule != null && rule.getCodeExamples() != null) {
+            SecurityRule.CodeExamples ex = rule.getCodeExamples();
+            boolean hasBad  = ex.getBad()  != null && !ex.getBad().isBlank();
+            boolean hasGood = ex.getGood() != null && !ex.getGood().isBlank();
+            if (hasBad || hasGood) {
+                doc.add(subLabel(f, "코드 예시 (보안 가이드)"));
+                if (hasBad) {
+                    doc.add(codeExampleLabel(f, "[취약 코드 예시]", new Color(239, 68, 68)));
+                    doc.add(codeBlock(f, ex.getBad(), new Color(239, 68, 68)));
+                }
+                if (hasGood) {
+                    doc.add(codeExampleLabel(f, "[안전한 수정 예시]", new Color(22, 163, 74)));
+                    doc.add(codeBlock(f, ex.getGood(), new Color(22, 163, 74)));
+                }
+            }
+        }
+
         // ── 구분선 ────────────────────────────────────────────────────
         doc.add(divider());
     }
@@ -451,6 +501,26 @@ public class PdfReportGenerator {
         return t;
     }
 
+    private Element codeExampleLabel(FontSet f, String label, Color accent) {
+        PdfPTable t = tbl(1, new float[]{1});
+        t.setSpacingBefore(4);
+        t.setSpacingAfter(0);
+        PdfPCell c = new PdfPCell();
+        c.setBorder(Rectangle.NO_BORDER);
+        c.setBorderWidthLeft(3);
+        c.setBorderColorLeft(accent);
+        c.setBackgroundColor(new Color(
+                Math.min(accent.getRed()   + 200, 255),
+                Math.min(accent.getGreen() + 200, 255),
+                Math.min(accent.getBlue()  + 200, 255)));
+        c.setPaddingLeft(6);
+        c.setPaddingTop(3);
+        c.setPaddingBottom(3);
+        c.addElement(new Paragraph(label, new Font(f.bold(), 8, Font.NORMAL, accent)));
+        addCell(t, c);
+        return t;
+    }
+
     private PdfPTable codeBlock(FontSet f, String code, Color accentColor) {
         // 상단 강조선 + 배경색 블록
         PdfPTable outer = tbl(1, new float[]{1});
@@ -464,19 +534,20 @@ public class PdfReportGenerator {
         c.setBorderColorTop(accentColor);
         c.setPadding(6);
 
+        Font monoFont = new Font(f.mono(), 8, Font.NORMAL, SLATE);
         String[] lines = code.split("\n");
         int shown = Math.min(lines.length, 20);
-        StringBuilder sb = new StringBuilder();
+        Paragraph codePara = new Paragraph();
+        codePara.setLeading(12);
         for (int i = 0; i < shown; i++) {
             String line = lines[i];
             if (line.length() > 110) line = line.substring(0, 107) + "...";
-            sb.append(line).append("\n");
+            codePara.add(new Chunk(line + "\n", monoFont));
         }
         if (lines.length > shown) {
-            sb.append("... (").append(lines.length - shown).append("줄 생략)");
+            codePara.add(new Chunk("... (" + (lines.length - shown) + "줄 생략)", monoFont));
         }
-        c.addElement(new Paragraph(sb.toString().trim(),
-                new Font(f.mono(), 8, Font.NORMAL, SLATE)));
+        c.addElement(codePara);
         addCell(outer, c);
         return outer;
     }
