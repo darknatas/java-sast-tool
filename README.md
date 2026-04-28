@@ -5,13 +5,13 @@
 ## 🏆 Achievement & Status
 
 - **Rule Coverage**: 98.6% (69개 규칙 중 68개 검증 완료)
-- **Real-World Focus**: 상용 수준 프로젝트 대상 700건 이상의 취약점 식별 및 정제 성공
+- **Real-World Focus**: 상용 수준 프로젝트 대상 700건 이상의 취약점 식별 및 정제 성공 (733건 -> 715건)
 - **Detection Success**: 100% (SastValidator 단위 테스트 기준)
 
 ## 🚀 핵심 고도화 기능
 
 ### 1. 전문적인 PDF 보안 진단서 출력
-- **OpenPDF 기반 자동 생성**: 분석 직후 최대 300~400페이지 분량의 상세 진단서를 PDF로 즉시 출력합니다.
+- **OpenPDF 기반 자동 생성**: 분석 직후 최대 388페이지 분량의 상세 진단서를 PDF로 즉시 출력합니다.
 - **다국어 및 시각화 지원**: `NotoSansCJKkr` 폰트를 적용하여 한국어 조치 가이드와 권고 코드를 완벽하게 렌더링합니다.
 
 ### 2. 지능형 오탐(False Positive) 필터링 시스템
@@ -28,27 +28,25 @@
 - **Core**: JavaParser (AST), Jackson, Spring Boot 3.3.0
 - **Infrastructure**: AWS EC2 (t4g.medium / Unlimited Mode)
 
-
-
 ## 🏃 Quick Start
 
 ### 1. 서비스 시작 (Build & Run)
-\`\`\`bash
+```bash
 mvn clean package -DskipTests
 nohup java -jar target/sast.jar > sast.log 2>&1 &
 echo $! > sast.pid
-\`\`\`
+```
 
 ### 2. 서비스 종료 (Stop)
-\`\`\`bash
-kill \$(cat sast.pid) && rm sast.pid
-\`\`\`
+```bash
+kill $(cat sast.pid) && rm sast.pid
+```
 
 ### 3. 검증 리포트 실행 (SastValidator)
-\`\`\`bash
+```bash
 mvn test -Dtest=SastValidator
 # 모든 69개 규칙에 대한 단위 테스트 탐지 결과를 확인하실 수 있습니다.
-\`\`\`
+```
 
 ### 4. 분석 및 리포트 확인
 - **URL**: [http://15.164.190.193:5000](http://15.164.190.193:5000) 접속.
