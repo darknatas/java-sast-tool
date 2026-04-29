@@ -54,7 +54,7 @@ public class SastWebController {
 
         // 파일 유효성 검사 (IV-1.6)
         if (zipFile.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "ZIP 파일을 선택해 주세요.");
+            redirectAttributes.addFlashAttribute("error", "파일을 선택해 주세요.");
             return "redirect:/";
         }
 
@@ -90,15 +90,18 @@ public class SastWebController {
     /**
      * 마지막 분석 결과를 PDF로 다운로드
      * 세션에 저장된 AnalysisResultView를 PDFBox로 변환하여 반환
+     * 세션 없거나 생성 실패 시 → 홈으로 리다이렉트 + 플래시 메시지
      *
      * GET /report/download
      */
     @GetMapping("/report/download")
-    public ResponseEntity<byte[]> downloadPdf(HttpSession session) {
+    public Object downloadPdf(HttpSession session, RedirectAttributes redirectAttributes) {
         AnalysisResultView result = (AnalysisResultView) session.getAttribute(SESSION_KEY_RESULT);
         if (result == null) {
             log.warn("[SAST-Web] PDF 다운로드 요청 — 세션에 분석 결과 없음");
-            return ResponseEntity.notFound().build();
+            redirectAttributes.addFlashAttribute("error",
+                    "분석 세션이 만료되었습니다. ZIP 파일을 다시 업로드하여 분석을 실행해 주세요.");
+            return "redirect:/";
         }
 
         try {
@@ -114,7 +117,9 @@ public class SastWebController {
 
         } catch (Exception e) {
             log.error("[SAST-Web] PDF 생성 실패: {}", e.getMessage(), e);
-            return ResponseEntity.internalServerError().build();
+            redirectAttributes.addFlashAttribute("error",
+                    "PDF 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+            return "redirect:/";
         }
     }
 }
