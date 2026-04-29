@@ -11,11 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
-import org.apache.commons.compress.archivers.sevenz.SevenZFile;
-
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -139,52 +138,70 @@ public class SastAnalysisService {
         }
     }
 
-    // ── 7z 압축 해제 (Zip Slip 방어) ─────────────────────────────────────
+    // ── 7z 압축 해제 (7za 시스템 명령어 사용) ───────────────────────────
 
     private void extract7z(Path sevenZPath, Path destDir,
                            int[] fileCount, long[] totalBytes) throws IOException {
-        try (SevenZFile sevenZFile = SevenZFile.builder().setPath(sevenZPath).get()) {
-            SevenZArchiveEntry entry;
-            int entryCount = 0;
+        // Apache Commons Compress의 SevenZFile은 복잡한 Multi input/output stream coders를
+        // 지원하지 못하므로 시스템 7za 명령어를 직접 호출한다.
+        ProcessBuilder pb = new ProcessBuilder(
+                "7za", "x", sevenZPath.toAbsolutePath().toString(),
+                "-o" + destDir.toAbsolutePath(), "-y");
+        pb.redirectErrorStream(true);
 
-            while ((entry = sevenZFile.getNextEntry()) != null) {
-                if (++entryCount > MAX_ENTRIES) {
+        Process process;
+        try {
+            process = pb.start();
+        } catch (IOException e) {
+            throw new IOException(
+                    "7za 명령어를 실행할 수 없습니다. 시스템에 p7zip-full이 설치되어 있는지 확인하세요." +
+                    " (apt install p7zip-full / yum install p7zip)", e);
+        }
+
+        // stdout/stderr를 소비해 프로세스 블로킹 방지
+        String output;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            output = reader.lines().collect(java.util.stream.Collectors.joining("\n"));
+        }
+
+        int exitCode;
+        try {
+            exitCode = process.waitFor();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IOException("7z 압축 해제 중 인터럽트 발생", e);
+        }
+
+        if (exitCode != 0) {
+            log.error("[SAST-Web] 7za 실행 실패 (exit={}): {}", exitCode, output);
+            throw new IOException("7z 압축 해제 실패 (exit code: " + exitCode + ")\n" + output);
+        }
+
+        log.debug("[SAST-Web] 7za 출력: {}", output);
+
+        // 압축 해제 후 파일 통계 집계 및 보안 검증 (Path Traversal 사후 확인)
+        int[] entryCount = {0};
+        Path normalizedDest = destDir.normalize();
+        Files.walkFileTree(destDir, new SimpleFileVisitor<>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                if (++entryCount[0] > MAX_ENTRIES) {
                     throw new SecurityException("7z 항목 수가 허용 한도(" + MAX_ENTRIES + ")를 초과합니다.");
                 }
-
-                Path target = destDir.resolve(entry.getName()).normalize();
-                if (!target.startsWith(destDir)) {
-                    log.warn("[SECURITY] 7z Path Traversal 시도 탐지: {}", entry.getName());
-                    throw new SecurityException("7z 경로 탈출 공격이 탐지되었습니다: " + entry.getName());
+                if (!file.normalize().startsWith(normalizedDest)) {
+                    log.warn("[SECURITY] 7z Path Traversal 탐지: {}", file);
+                    throw new SecurityException("7z 경로 탈출이 탐지되었습니다: " + file);
                 }
-
-                if (entry.isDirectory()) {
-                    Files.createDirectories(target);
-                } else {
-                    // 디스크 폭탄 방어: 7z 엔트리는 항상 압축 해제 크기 제공
-                    long declared = entry.getSize();
-                    if (declared > 0 && totalBytes[0] + declared > MAX_EXTRACT_BYTES) {
-                        throw new SecurityException(
-                                "압축 해제 용량 합계가 100MB 한도를 초과합니다. 분석을 중단합니다.");
-                    }
-
-                    Files.createDirectories(target.getParent());
-                    try (InputStream is = sevenZFile.getInputStream(entry)) {
-                        long written = Files.copy(is, target, StandardCopyOption.REPLACE_EXISTING);
-                        totalBytes[0] += written;
-                    }
-
-                    if (totalBytes[0] > MAX_EXTRACT_BYTES) {
-                        throw new SecurityException(
-                                "압축 해제 용량 합계가 100MB 한도를 초과합니다. 분석을 중단합니다.");
-                    }
-
-                    if (entry.getName().endsWith(".java")) {
-                        fileCount[0]++;
-                    }
+                totalBytes[0] += attrs.size();
+                if (totalBytes[0] > MAX_EXTRACT_BYTES) {
+                    throw new SecurityException("압축 해제 용량 합계가 100MB 한도를 초과합니다. 분석을 중단합니다.");
                 }
+                if (file.toString().endsWith(".java")) {
+                    fileCount[0]++;
+                }
+                return FileVisitResult.CONTINUE;
             }
-        }
+        });
     }
 
     // ── 디렉터리 내 Java 파일 분석 ───────────────────────────────────────
