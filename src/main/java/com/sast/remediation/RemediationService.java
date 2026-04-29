@@ -41,7 +41,7 @@ public class RemediationService {
         String strategy = resolveStrategy(finding.getRuleId());
         log.debug("[Remediation] {} → 전략: {}", finding.getRuleId(), strategy);
 
-        return switch (strategy) {
+        RemediationResult result = switch (strategy) {
             case "USE_PREPARED_STATEMENT"  -> remediateSqlInjection(finding);
             case "WHITELIST_VALIDATION"    -> remediateCodeInjection(finding);
             case "PATH_CANONICALIZATION"   -> remediatePathTraversal(finding);
@@ -94,6 +94,20 @@ public class RemediationService {
             case "SAFE_API_REPLACEMENT"    -> remediateVulnerableApi(finding);
             default                        -> remediateGeneric(finding);
         };
+
+        // Enrich with static rule-level guide data from security-rules.json
+        SecurityRule rule = ruleIndex.get(finding.getRuleId());
+        if (rule != null) {
+            if (rule.getRemediation() != null) {
+                result.ruleDescription = rule.getRemediation().getDescription();
+                result.ruleGuideRef    = rule.getRemediation().getGuideRef();
+            }
+            if (rule.getCodeExamples() != null) {
+                result.codeExampleBad  = rule.getCodeExamples().getBad();
+                result.codeExampleGood = rule.getCodeExamples().getGood();
+            }
+        }
+        return result;
     }
 
     // ── [IV-1.1] SQL 삽입 ────────────────────────────────────────────────
@@ -2199,6 +2213,11 @@ public class RemediationService {
         private String       remediatedCode;
         private String       explanation;
         private List<String> references;
+        // Rule-level static guide data (populated from security-rules.json)
+        String ruleDescription;
+        String ruleGuideRef;
+        String codeExampleBad;
+        String codeExampleGood;
 
         public static Builder builder() { return new Builder(); }
 
@@ -2221,5 +2240,9 @@ public class RemediationService {
         public String getRemediatedCode()     { return remediatedCode; }
         public String getExplanation()        { return explanation; }
         public List<String> getReferences()   { return references; }
+        public String getRuleDescription()    { return ruleDescription; }
+        public String getRuleGuideRef()       { return ruleGuideRef; }
+        public String getCodeExampleBad()     { return codeExampleBad; }
+        public String getCodeExampleGood()    { return codeExampleGood; }
     }
 }
