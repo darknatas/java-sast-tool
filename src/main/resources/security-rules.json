@@ -23,13 +23,11 @@
       ],
       "remediation": {
         "strategy": "USE_PREPARED_STATEMENT",
-        "description": "SQL 질의문 내 입력값 유효성 검증 및 바인딩 방식 적용 설계",
+        "description": "SQL 질의문에 외부에서 전달된 사용자 입력값이 검증 없이 직접 포함될 경우 SQL 삽입 취약점이 발생한다. 공격자는 입력값에 SQL 메타 문자를 삽입하여 데이터베이스의 모든 데이터를 조회·변조·삭제하거나 관리자 권한을 탈취할 수 있다. 설계 단계에서 SQL 질의에 외부 입력값을 직접 연결하는 방식을 금지하고 파라미터 바인딩 방식만 허용하도록 설계해야 한다. PreparedStatement의 ?·플레이스홀더, MyBatis의 #{ } 바인딩 등 SQL 구조와 데이터를 분리하는 방식을 표준으로 적용해야 한다.",
         "guideRef": "PART3 제1절 1항 (p.47-55)",
-        "remediationCode": "// [수정] DS-1.1 DBMS 조회 설계: PreparedStatement 바인딩 방식 의무화\n// ❌ 취약: SQL 문자열에 외부 입력값 직접 연결\nString sql = \"SELECT * FROM user WHERE id='\" + id + \"'\";\nStatement stmt = con.createStatement();\nResultSet rs = stmt.executeQuery(sql);\n\n// ✅ 안전: PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM user WHERE id = ?\";\ntry (PreparedStatement ps = con.prepareStatement(sql)) {\n    ps.setString(1, id);\n    try (ResultSet rs = ps.executeQuery()) {\n        while (rs.next()) { /* 처리 */ }\n    }\n}\n// MyBatis: WHERE id = #{id}  (${id} 사용 금지)"
-      },
-      "codeExamples": {
-        "bad": "// ❌ SQL 문자열에 외부 입력값 직접 연결\nString sql = \"SELECT * FROM user WHERE id='\" + id + \"'\";\nStatement stmt = con.createStatement();\nResultSet rs = stmt.executeQuery(sql);",
-        "good": "// ✅ PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM user WHERE id = ?\";\nPreparedStatement ps = con.prepareStatement(sql);\nps.setString(1, id);\nResultSet rs = ps.executeQuery();\n// MyBatis: WHERE id = #{id}  (${id} 사용 금지)"
+        "bad_code": "// ❌ SQL 문자열에 외부 입력값 직접 연결\nString sql = \"SELECT * FROM user WHERE id='\" + id + \"'\";\nStatement stmt = con.createStatement();\nResultSet rs = stmt.executeQuery(sql);",
+        "good_code": "// ✅ PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM user WHERE id = ?\";\nPreparedStatement ps = con.prepareStatement(sql);\nps.setString(1, id);\nResultSet rs = ps.executeQuery();\n// MyBatis: WHERE id = #{id}  (${id} 사용 금지)",
+        "reference_url": "https://cwe.mitre.org/data/definitions/89.html"
       }
     },
     {
@@ -53,13 +51,11 @@
       ],
       "remediation": {
         "strategy": "PARAMETERIZED_XPATH",
-        "description": "XPath·XQuery 질의문에 사용되는 파라미터 필터링 또는 바인딩 설계",
+        "description": "XPath 또는 XQuery 질의문에 외부 입력값이 검증 없이 삽입되면 XPath 삽입 취약점이 발생한다. 공격자는 XPath 메타 문자(', \", [ ] 등)를 포함한 입력값으로 쿼리 구조를 변조하여 인증 우회, 민감 XML 데이터 전체 조회 등의 공격을 수행할 수 있다. 이 취약점은 LDAP 조회 우회, 로그인 인증 우회, 기밀 데이터 노출 등의 피해를 일으킬 수 있다. 설계 단계에서 XPath 변수 바인딩(XPathVariableResolver) 또는 입력값의 특수문자 화이트리스트 검증을 의무화해야 한다.",
         "guideRef": "PART3 제1절 2항 (p.56-62)",
-        "remediationCode": "// [수정] DS-1.2 XML 조회 설계: XPath 변수 바인딩 사용\n// ❌ 취약: 외부 입력값을 XPath 표현식에 직접 삽입\nString expr = \"/users/user[name='\" + userName + \"']\";\nxpath.evaluate(expr, doc, XPathConstants.NODESET);\n\n// ✅ 안전: XPathVariableResolver로 변수 바인딩\nXPath xp = XPathFactory.newInstance().newXPath();\nxp.setXPathVariableResolver(qn ->\n    \"name\".equals(qn.getLocalPart()) ? userName : null);\nNodeList result = (NodeList) xp.evaluate(\n    \"/users/user[name=$name]\", doc, XPathConstants.NODESET);\n// 특수문자 필터링: userName.replaceAll(\"['\\\"\\[\\]*]\", \"\")"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 XPath 표현식에 직접 삽입\nString expr = \"/users/user[name='\" + userName + \"']\";\nNodeList nl = (NodeList) xpath.evaluate(expr, doc, XPathConstants.NODESET);",
-        "good": "// ✅ 특수문자 제거 후 화이트리스트 검증\nString safe = userName.replaceAll(\"[^a-zA-Z0-9가-힣]\", \"\");\nif (!safe.matches(\"[a-zA-Z0-9가-힣]{1,50}\")) {\n    throw new IllegalArgumentException(\"허용되지 않은 입력값\");\n}\nString expr = \"/users/user[name='\" + safe + \"']\";\nNodeList nl = (NodeList) xpath.evaluate(expr, doc, XPathConstants.NODESET);"
+        "bad_code": "// ❌ 외부 입력값을 XPath 표현식에 직접 삽입\nString expr = \"/users/user[name='\" + userName + \"']\";\nNodeList nl = (NodeList) xpath.evaluate(expr, doc, XPathConstants.NODESET);",
+        "good_code": "// ✅ 특수문자 제거 후 화이트리스트 검증\nString safe = userName.replaceAll(\"[^a-zA-Z0-9가-힣]\", \"\");\nif (!safe.matches(\"[a-zA-Z0-9가-힣]{1,50}\")) {\n    throw new IllegalArgumentException(\"허용되지 않은 입력값\");\n}\nString expr = \"/users/user[name='\" + safe + \"']\";\nNodeList nl = (NodeList) xpath.evaluate(expr, doc, XPathConstants.NODESET);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/652.html"
       }
     },
     {
@@ -81,13 +77,11 @@
       ],
       "remediation": {
         "strategy": "LDAP_ENCODING",
-        "description": "LDAP 질의에 사용되는 입력값 필터링 설계",
+        "description": "LDAP 질의에 외부 입력값이 필터링 없이 직접 삽입되면 LDAP 삽입 취약점이 발생한다. 공격자는 LDAP 특수문자(*, (, ), \\, NUL)를 포함한 입력으로 필터 로직을 변조하여 인증 우회, 디렉터리 서비스의 모든 사용자 정보 조회 등의 공격이 가능하다. 이는 조직 내 Active Directory나 LDAP 서버의 사용자 계정 정보 전체 노출로 이어질 수 있다. 설계 단계에서 LDAP 필터에 사용되는 모든 입력값에 RFC 4515 기반 특수문자 인코딩을 적용하도록 설계해야 한다.",
         "guideRef": "PART3 제1절 3항 (p.63-68)",
-        "remediationCode": "// [수정] DS-1.3 LDAP 조회 설계: 특수문자 인코딩 후 사용\n// ❌ 취약: 외부 입력값을 LDAP 필터에 직접 삽입\nString filter = \"(uid=\" + userId + \")\";\nctx.search(\"ou=people,dc=example,dc=com\", filter, null);\n\n// ✅ 안전: LDAP 특수문자 인코딩 (RFC 4515)\nprivate String encodeLdap(String input) {\n    return input.replace(\"\\\\\", \"\\\\5c\")\n                .replace(\"*\",  \"\\\\2a\")\n                .replace(\"(\",  \"\\\\28\")\n                .replace(\")\",  \"\\\\29\")\n                .replace(\"\\0\", \"\\\\00\");\n}\nString safeUid = encodeLdap(userId);\nString filter = \"(uid=\" + safeUid + \")\";\nctx.search(\"ou=people,dc=example,dc=com\", filter, null);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 LDAP 필터에 직접 삽입\nString filter = \"(uid=\" + userName + \")\";\nNamingEnumeration<?> result = ctx.search(base, filter, controls);",
-        "good": "// ✅ LDAP 특수문자 이스케이프 후 삽입\nString safe = userName.replaceAll(\"[\\\\*\\\\(\\\\)\\\\\\\\\\0]\", \"\");\nString filter = \"(uid=\" + safe + \")\";\nNamingEnumeration<?> result = ctx.search(base, filter, controls);\n// 또는 Spring Security LdapUtils.escapeLdapSearchFilter() 활용"
+        "bad_code": "// ❌ 외부 입력값을 LDAP 필터에 직접 삽입\nString filter = \"(uid=\" + userName + \")\";\nNamingEnumeration<?> result = ctx.search(base, filter, controls);",
+        "good_code": "// ✅ LDAP 특수문자 이스케이프 후 삽입\nString safe = userName.replaceAll(\"[\\\\*\\\\(\\\\)\\\\\\\\\\0]\", \"\");\nString filter = \"(uid=\" + safe + \")\";\nNamingEnumeration<?> result = ctx.search(base, filter, controls);\n// 또는 Spring Security LdapUtils.escapeLdapSearchFilter() 활용",
+        "reference_url": "https://cwe.mitre.org/data/definitions/90.html"
       }
     },
     {
@@ -112,13 +106,11 @@
       ],
       "remediation": {
         "strategy": "AVOID_OS_COMMAND",
-        "description": "파일 경로·OS 명령어에 사용되는 외부 입력값 검증 설계",
+        "description": "파일 경로나 OS 명령어 문자열에 외부 입력값이 검증 없이 포함되면 경로 조작 및 명령어 삽입 취약점이 발생한다. 공격자는 '../'를 삽입하여 허용 디렉터리를 벗어나거나, '; rm -rf /'와 같은 셸 메타 문자로 임의 OS 명령어를 실행할 수 있다. 이는 서버 파일 시스템 전체 접근, 악성코드 설치, 서비스 완전 장악으로 이어질 수 있는 매우 위험한 취약점이다. 설계 단계에서 외부 입력값으로 OS 명령어를 구성하는 것을 금지하고, 불가피한 경우 화이트리스트 검증과 ProcessBuilder 배열 방식을 의무화해야 한다.",
         "guideRef": "PART3 제1절 4항 (p.69-76)",
-        "remediationCode": "// [수정] DS-1.4 시스템 자원 접근 설계: 화이트리스트 + 배열 인자 방식\n// ❌ 취약: 외부 입력값으로 OS 명령어 문자열 구성\nString cmd = \"convert \" + request.getParameter(\"file\");\nRuntime.getRuntime().exec(cmd);\n\n// ✅ 안전: 화이트리스트 검증 + ProcessBuilder 배열 방식\nString fileId = request.getParameter(\"fileId\");\nif (!fileId.matches(\"^[a-zA-Z0-9_-]{1,50}$\"))\n    throw new SecurityException(\"허용되지 않는 파일 ID\");\nProcessBuilder pb = new ProcessBuilder(\n    \"/usr/bin/convert\",\n    \"/secure/uploads/\" + fileId + \".jpg\",\n    \"-resize\", \"200x200\",\n    \"/secure/thumbs/\" + fileId + \"_thumb.jpg\");\npb.start().waitFor();\n// OS 명령어 대신 Java API 사용 권장: Files.copy(), Files.delete()"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 OS 명령어에 직접 삽입\nString cmd = \"cmd.exe /c ping \" + ipAddress;\nRuntime.getRuntime().exec(cmd);",
-        "good": "// ✅ Java API 직접 사용 (OS 명령어 우회)\nInetAddress addr = InetAddress.getByName(ipAddress);\nboolean reachable = addr.isReachable(3000);\n// 불가피하게 exec() 사용 시: 화이트리스트 검증\nif (!ipAddress.matches(\"^\\\\d{1,3}(\\\\.\\\\d{1,3}){3}$\")) {\n    throw new IllegalArgumentException(\"잘못된 IP 주소\");\n}\nString[] cmd = {\"ping\", \"-c\", \"1\", ipAddress};\nRuntime.getRuntime().exec(cmd);"
+        "bad_code": "// ❌ 외부 입력값을 OS 명령어에 직접 삽입\nString cmd = \"cmd.exe /c ping \" + ipAddress;\nRuntime.getRuntime().exec(cmd);",
+        "good_code": "// ✅ Java API 직접 사용 (OS 명령어 우회)\nInetAddress addr = InetAddress.getByName(ipAddress);\nboolean reachable = addr.isReachable(3000);\n// 불가피하게 exec() 사용 시: 화이트리스트 검증\nif (!ipAddress.matches(\"^\\\\d{1,3}(\\\\.\\\\d{1,3}){3}$\")) {\n    throw new IllegalArgumentException(\"잘못된 IP 주소\");\n}\nString[] cmd = {\"ping\", \"-c\", \"1\", ipAddress};\nRuntime.getRuntime().exec(cmd);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/78.html"
       }
     },
     {
@@ -140,13 +132,11 @@
       ],
       "remediation": {
         "strategy": "OUTPUT_ENCODING",
-        "description": "웹 서비스 응답 데이터 XSS 필터링 및 인코딩 설계",
+        "description": "웹 서비스가 외부 입력값을 HTML 응답에 인코딩 없이 출력하면 크로스사이트 스크립트(XSS) 취약점이 발생한다. 공격자는 스크립트가 포함된 입력값을 주입하여 피해자 브라우저에서 악성 JavaScript를 실행시키고, 세션 쿠키 탈취·피싱·악성코드 배포 등의 공격을 수행할 수 있다. 이 취약점은 인터넷 뱅킹 계정 탈취, 기업 인트라넷 공격 등 심각한 피해를 유발한다. 설계 단계에서 모든 외부 입력값을 출력 컨텍스트(HTML, JS, URL, CSS)에 맞게 인코딩하는 정책을 의무화해야 한다.",
         "guideRef": "PART3 제1절 5항 (p.77-82)",
-        "remediationCode": "// [수정] DS-1.5 웹 출력 설계: 컨텍스트별 출력 인코딩 의무화\n// ❌ 취약: 외부 입력값을 HTML에 그대로 출력\nString name = request.getParameter(\"name\");\nout.println(\"<div>안녕하세요, \" + name + \"님</div>\");\n\n// ✅ 안전 (HTML 컨텍스트): Spring HtmlUtils 또는 ESAPI 사용\nimport org.springframework.web.util.HtmlUtils;\nString safe = HtmlUtils.htmlEscape(name);\nout.println(\"<div>안녕하세요, \" + safe + \"님</div>\");\n\n// JSP: <c:out value=\"${name}\"/>  (EL 기본 인코딩)\n// JS 컨텍스트: ESAPI.encoder().encodeForJavaScript(name)\n// URL 파라미터: URLEncoder.encode(name, StandardCharsets.UTF_8)"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 HTML에 직접 출력 (XSS)\nout.println(\"<p>안녕하세요, \" + request.getParameter(\"name\") + \"</p>\");",
-        "good": "// ✅ HTML 인코딩 후 출력\nString name = request.getParameter(\"name\");\nString safe = name.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\")\n                  .replace(\">\", \"&gt;\").replace(\"\\\"\", \"&quot;\")\n                  .replace(\"'\", \"&#x27;\");\nout.println(\"<p>안녕하세요, \" + safe + \"</p>\");\n// 또는 OWASP Java Encoder: Encode.forHtml(name)"
+        "bad_code": "// ❌ 외부 입력값을 HTML에 직접 출력 (XSS)\nout.println(\"<p>안녕하세요, \" + request.getParameter(\"name\") + \"</p>\");",
+        "good_code": "// ✅ HTML 인코딩 후 출력\nString name = request.getParameter(\"name\");\nString safe = name.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\")\n                  .replace(\">\", \"&gt;\").replace(\"\\\"\", \"&quot;\")\n                  .replace(\"'\", \"&#x27;\");\nout.println(\"<p>안녕하세요, \" + safe + \"</p>\");\n// 또는 OWASP Java Encoder: Encode.forHtml(name)",
+        "reference_url": "https://cwe.mitre.org/data/definitions/79.html"
       }
     },
     {
@@ -168,13 +158,11 @@
       ],
       "remediation": {
         "strategy": "CSRF_TOKEN",
-        "description": "CSRF 방지를 위한 토큰 생성 및 검증 메커니즘 설계",
+        "description": "CSRF(Cross-Site Request Forgery) 취약점은 인증된 사용자의 세션을 이용해 공격자가 의도한 요청을 정상 사용자인 것처럼 서버에 전송할 수 있을 때 발생한다. 공격자는 악성 사이트에 숨겨진 폼이나 이미지 태그를 통해 피해자가 의도하지 않은 계좌이체·비밀번호 변경·게시물 삭제 등을 실행시킬 수 있다. 이는 별도의 악성코드 없이도 정상 사용자 권한으로 서버를 공격할 수 있어 매우 교묘한 취약점이다. 설계 단계에서 상태 변경 요청에 Synchronizer Token Pattern이나 SameSite 쿠키 속성을 의무화해야 한다.",
         "guideRef": "PART3 제1절 6항 (p.83-87)",
-        "remediationCode": "// [수정] DS-1.6 CSRF 방지 설계: Synchronizer Token Pattern 적용\n// ❌ 취약: POST 요청에 CSRF 토큰 검증 없음\nprotected void doPost(HttpServletRequest req, ...) {\n    userService.delete(req.getParameter(\"userId\"));\n}\n\n// ✅ 안전: 토큰 생성(세션 저장) + 요청 시 검증\n// [로그인 성공 시 토큰 생성]\nbyte[] bytes = new byte[32];\nnew SecureRandom().nextBytes(bytes);\nString token = Base64.getUrlEncoder().withoutPadding()\n    .encodeToString(bytes);\nsession.setAttribute(\"_csrf\", token);\n// [POST 처리 시]\nString req = request.getParameter(\"_csrf\");\nString ses = (String) session.getAttribute(\"_csrf\");\nif (!MessageDigest.isEqual(req.getBytes(), ses.getBytes()))\n    throw new SecurityException(\"CSRF 토큰 불일치\");\n// Spring Security: @EnableWebSecurity 설정으로 자동 적용"
-      },
-      "codeExamples": {
-        "bad": "// ❌ CSRF 토큰 없이 상태 변경 요청 처리\n@PostMapping(\"/transfer\")\npublic String transfer(String toAccount, int amount, HttpSession session) {\n    accountService.transfer(session.getAttribute(\"userId\"), toAccount, amount);\n    return \"success\";\n}",
-        "good": "// ✅ CSRF 토큰 검증\n@PostMapping(\"/transfer\")\npublic String transfer(String csrfToken, String toAccount, int amount,\n                       HttpSession session) {\n    String expected = (String) session.getAttribute(\"csrfToken\");\n    if (expected == null || !expected.equals(csrfToken)) {\n        throw new SecurityException(\"CSRF 토큰 불일치\");\n    }\n    accountService.transfer(session.getAttribute(\"userId\"), toAccount, amount);\n    return \"success\";\n}"
+        "bad_code": "// ❌ CSRF 토큰 없이 상태 변경 요청 처리\n@PostMapping(\"/transfer\")\npublic String transfer(String toAccount, int amount, HttpSession session) {\n    accountService.transfer(session.getAttribute(\"userId\"), toAccount, amount);\n    return \"success\";\n}",
+        "good_code": "// ✅ CSRF 토큰 검증\n@PostMapping(\"/transfer\")\npublic String transfer(String csrfToken, String toAccount, int amount,\n                       HttpSession session) {\n    String expected = (String) session.getAttribute(\"csrfToken\");\n    if (expected == null || !expected.equals(csrfToken)) {\n        throw new SecurityException(\"CSRF 토큰 불일치\");\n    }\n    accountService.transfer(session.getAttribute(\"userId\"), toAccount, amount);\n    return \"success\";\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/352.html"
       }
     },
     {
@@ -196,13 +184,11 @@
       ],
       "remediation": {
         "strategy": "CRLF_REMOVAL",
-        "description": "HTTP 응답분할 방지를 위한 헤더 값 검증 설계",
+        "description": "HTTP 응답 헤더에 외부 입력값이 CR(\\r), LF(\\n) 문자 필터링 없이 포함되면 HTTP 응답분할(Response Splitting) 취약점이 발생한다. 공격자는 입력값에 CRLF 시퀀스를 삽입하여 하나의 HTTP 응답을 두 개로 분리하고, 임의의 헤더·쿠키·응답 본문을 주입할 수 있다. 이를 통해 XSS 공격, 캐시 포이즈닝, 세션 하이재킹 등의 2차 공격을 유발할 수 있다. 설계 단계에서 HTTP 헤더에 사용되는 모든 입력값에서 CR/LF 및 유사 제어 문자를 제거하도록 설계해야 한다.",
         "guideRef": "PART3 제1절 7항 (p.88-92)",
-        "remediationCode": "// [수정] DS-1.7 HTTP 헤더 검증 설계: CR/LF 문자 제거\n// ❌ 취약: 외부 입력값을 HTTP 헤더에 직접 삽입\nString lang = request.getParameter(\"lang\");\nresponse.setHeader(\"Content-Language\", lang);\n\n// ✅ 안전: CR(\\r)·LF(\\n) 및 유사 제어 문자 제거\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n\\\\u0085\\\\u2028\\\\u2029]\", \"\");\n    if (!lang.matches(\"^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{2,8})*$\"))\n        lang = \"ko\";\n    response.setHeader(\"Content-Language\", lang);\n}\n// sendRedirect URL도 동일하게 CR/LF 제거 후 사용"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 HTTP 헤더에 직접 삽입 (CRLF 삽입 가능)\nString lang = request.getParameter(\"lang\");\nresponse.setHeader(\"Content-Language\", lang);",
-        "good": "// ✅ CR/LF 문자 제거 후 헤더에 설정\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n]\", \"\");\n    // 화이트리스트 검증 추가\n    if (lang.matches(\"[a-zA-Z\\\\-]{2,10}\")) {\n        response.setHeader(\"Content-Language\", lang);\n    }\n}"
+        "bad_code": "// ❌ 외부 입력값을 HTTP 헤더에 직접 삽입 (CRLF 삽입 가능)\nString lang = request.getParameter(\"lang\");\nresponse.setHeader(\"Content-Language\", lang);",
+        "good_code": "// ✅ CR/LF 문자 제거 후 헤더에 설정\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n]\", \"\");\n    // 화이트리스트 검증 추가\n    if (lang.matches(\"[a-zA-Z\\\\-]{2,10}\")) {\n        response.setHeader(\"Content-Language\", lang);\n    }\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/113.html"
       }
     },
     {
@@ -226,13 +212,11 @@
       ],
       "remediation": {
         "strategy": "BOUNDS_CHECK",
-        "description": "버퍼 접근 범위 제한 및 정수 오버플로우 방지 설계",
+        "description": "배열·버퍼의 크기나 인덱스를 외부 입력값으로 결정할 때 범위 검사가 없으면 버퍼 오버플로우 및 정수 오버플로우 취약점이 발생한다. 공격자는 비정상적으로 큰 값이나 음수, 또는 오버플로우를 유발하는 값을 입력하여 메모리 손상, 서비스 거부, 잠재적인 코드 실행을 시도할 수 있다. Java는 배열 경계 위반 시 예외를 발생시키지만, 정수 오버플로우로 인한 음수·0 크기 배열 생성은 논리적 취약점으로 이어진다. 설계 단계에서 외부 입력 정수값에 대해 허용 범위 검증과 Math.addExact/multiplyExact 같은 안전한 연산을 적용하도록 설계해야 한다.",
         "guideRef": "PART3 제1절 8항 (p.93-98)",
-        "remediationCode": "// [수정] DS-1.8 메모리 접근 설계: 정수 범위 검사 + 안전 연산\n// ❌ 취약: 입력값으로 배열 크기/인덱스를 직접 사용\nint size = Integer.parseInt(request.getParameter(\"size\"));\nbyte[] buf = new byte[size];  // 음수/대용량 가능\n\n// ✅ 안전: 범위 제한 검사\nint size = Integer.parseInt(request.getParameter(\"size\"));\nif (size < 1 || size > 1024 * 1024)\n    throw new IllegalArgumentException(\"허용 범위 초과 (1~1MB)\");\nbyte[] buf = new byte[size];\n\n// 정수 오버플로우 방지: Math.addExact / multiplyExact\nint a = Integer.parseInt(request.getParameter(\"a\"));\nint b = Integer.parseInt(request.getParameter(\"b\"));\ntry {\n    int sum = Math.addExact(a, b);\n} catch (ArithmeticException e) {\n    throw new IllegalArgumentException(\"계산 결과가 범위를 초과합니다.\");\n}"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 정수형 오버플로우로 잘못된 배열 크기 산출\nint size = width * height;   // width=65536, height=65536 → 오버플로우 → 0\nbyte[] buf = new byte[size]; // 의도하지 않은 크기",
-        "good": "// ✅ 경계 검사 후 안전하게 연산\nif (width <= 0 || height <= 0 || width > 10000 || height > 10000) {\n    throw new IllegalArgumentException(\"허용 범위 초과: \" + width + \"x\" + height);\n}\nlong size = (long) width * height;\nif (size > Integer.MAX_VALUE) {\n    throw new IllegalArgumentException(\"버퍼 크기 초과\");\n}\nbyte[] buf = new byte[(int) size];"
+        "bad_code": "// ❌ 정수형 오버플로우로 잘못된 배열 크기 산출\nint size = width * height;   // width=65536, height=65536 → 오버플로우 → 0\nbyte[] buf = new byte[size]; // 의도하지 않은 크기",
+        "good_code": "// ✅ 경계 검사 후 안전하게 연산\nif (width <= 0 || height <= 0 || width > 10000 || height > 10000) {\n    throw new IllegalArgumentException(\"허용 범위 초과: \" + width + \"x\" + height);\n}\nlong size = (long) width * height;\nif (size > Integer.MAX_VALUE) {\n    throw new IllegalArgumentException(\"버퍼 크기 초과\");\n}\nbyte[] buf = new byte[(int) size];",
+        "reference_url": "https://cwe.mitre.org/data/definitions/119.html"
       }
     },
     {
@@ -255,13 +239,11 @@
       ],
       "remediation": {
         "strategy": "SERVER_SIDE_AUTH_CHECK",
-        "description": "보안결정에 사용되는 입력값 검증 로직 설계",
+        "description": "보안 결정(인증, 권한 부여)에 클라이언트에서 전달된 파라미터(role, isAdmin 등)를 그대로 사용하면 보안 우회 취약점이 발생한다. 공격자는 HTTP 파라미터·숨겨진 폼 필드·쿠키 값을 조작하여 관리자 권한을 획득하거나 접근 제한 기능을 우회할 수 있다. 이는 시스템 전체 권한 탈취, 타인 데이터 무단 접근·변조 등 심각한 피해로 이어진다. 설계 단계에서 보안 결정은 반드시 서버 측 세션이나 SecurityContext의 데이터만 사용하고 클라이언트 입력값을 신뢰하지 않도록 설계해야 한다.",
         "guideRef": "PART3 제1절 9항 (p.99-103)",
-        "remediationCode": "// [수정] DS-1.9 보안 결정 입력값 설계: 서버 측 세션·권한 정보만 사용\n// ❌ 취약: 클라이언트가 전달한 role 파라미터로 권한 결정\nString role = request.getParameter(\"role\");\nif (\"admin\".equals(role)) { performAdminAction(); }\n\n// ✅ 안전: 서버 세션에서만 권한 확인\nHttpSession session = request.getSession(false);\nif (session == null)\n    throw new UnauthorizedException(\"로그인이 필요합니다.\");\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user == null || !\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"관리자 권한이 없습니다.\");\nperformAdminAction();\n// Spring Security: @PreAuthorize(\"hasRole('ADMIN')\")"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 클라이언트 파라미터로 보안 결정 (우회 가능)\nString role = request.getParameter(\"role\"); // 공격자가 \"admin\" 전달 가능\nif (\"admin\".equals(role)) {\n    showAdminPage(response);\n}",
-        "good": "// ✅ 서버 세션 기반 보안 결정\nHttpSession session = request.getSession(false);\nif (session == null) {\n    response.sendRedirect(\"/login\");\n    return;\n}\nString role = (String) session.getAttribute(\"role\");\nif (\"admin\".equals(role)) {\n    showAdminPage(response);\n}"
+        "bad_code": "// ❌ 클라이언트 파라미터로 보안 결정 (우회 가능)\nString role = request.getParameter(\"role\"); // 공격자가 \"admin\" 전달 가능\nif (\"admin\".equals(role)) {\n    showAdminPage(response);\n}",
+        "good_code": "// ✅ 서버 세션 기반 보안 결정\nHttpSession session = request.getSession(false);\nif (session == null) {\n    response.sendRedirect(\"/login\");\n    return;\n}\nString role = (String) session.getAttribute(\"role\");\nif (\"admin\".equals(role)) {\n    showAdminPage(response);\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/807.html"
       }
     },
     {
@@ -284,13 +266,11 @@
       ],
       "remediation": {
         "strategy": "FILE_EXTENSION_WHITELIST",
-        "description": "업로드 파일 유형·크기 검증 및 다운로드 경로 검증 설계",
+        "description": "파일 업로드 시 파일 유형·크기·저장 경로를 검증하지 않으면 위험한 파일 업로드 취약점이 발생한다. 공격자는 웹 셸(.jsp, .php 등)을 업로드하거나, '../' 경로 조작으로 임의 위치에 파일을 저장하거나, 대용량 파일로 서비스 거부 공격을 수행할 수 있다. 업로드된 웹 셸이 실행되면 서버 전체를 장악할 수 있어 CRITICAL 수준의 피해가 발생한다. 설계 단계에서 확장자 화이트리스트 검증, 저장 경로의 웹 루트 외부 설정, 파일명 랜덤화를 의무화해야 한다.",
         "guideRef": "PART3 제1절 10항 (p.104-110)",
-        "remediationCode": "// [수정] DS-1.10 파일 업/다운로드 설계: 확장자·크기·경로 검증\n// ❌ 취약: 원본 파일명 검증 없이 그대로 저장\nString name = file.getOriginalFilename();\nfile.transferTo(new File(\"/uploads/\" + name));\n\n// ✅ 안전: 확장자 화이트리스트 + 경로 검증 + 파일명 랜덤화\nSet<String> ALLOWED = Set.of(\"jpg\",\"jpeg\",\"png\",\"gif\",\"pdf\");\nString ext = FilenameUtils.getExtension(\n    file.getOriginalFilename()).toLowerCase();\nif (!ALLOWED.contains(ext))\n    throw new SecurityException(\"허용되지 않는 확장자: \" + ext);\nif (file.getSize() > 10 * 1024 * 1024)\n    throw new SecurityException(\"파일 크기 초과 (최대 10MB)\");\nString saveName = UUID.randomUUID() + \".\" + ext;\nPath dest = Paths.get(\"/var/secure-uploads\", saveName).normalize();\nif (!dest.startsWith(Paths.get(\"/var/secure-uploads\")))\n    throw new SecurityException(\"경로 탈출 시도 감지\");\nfile.transferTo(dest);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 파일 확장자·Content-Type 검증 없이 업로드 허용\nString fileName = item.getName();\nFile dest = new File(uploadDir, fileName);\nitem.write(dest); // .jsp, .php 등 실행 파일 업로드 가능",
-        "good": "// ✅ 화이트리스트 확장자 검증 + 저장명 랜덤화\nSet<String> allowed = new HashSet<>(Arrays.asList(\"jpg\", \"png\", \"pdf\"));\nString origName = item.getName();\nString ext = origName.substring(origName.lastIndexOf('.') + 1).toLowerCase();\nif (!allowed.contains(ext)) {\n    throw new SecurityException(\"허용되지 않는 파일 형식: \" + ext);\n}\nString safeName = UUID.randomUUID().toString() + \".\" + ext;\nitem.write(new File(uploadDir, safeName));"
+        "bad_code": "// ❌ 파일 확장자·Content-Type 검증 없이 업로드 허용\nString fileName = item.getName();\nFile dest = new File(uploadDir, fileName);\nitem.write(dest); // .jsp, .php 등 실행 파일 업로드 가능",
+        "good_code": "// ✅ 화이트리스트 확장자 검증 + 저장명 랜덤화\nSet<String> allowed = new HashSet<>(Arrays.asList(\"jpg\", \"png\", \"pdf\"));\nString origName = item.getName();\nString ext = origName.substring(origName.lastIndexOf('.') + 1).toLowerCase();\nif (!allowed.contains(ext)) {\n    throw new SecurityException(\"허용되지 않는 파일 형식: \" + ext);\n}\nString safeName = UUID.randomUUID().toString() + \".\" + ext;\nitem.write(new File(uploadDir, safeName));",
+        "reference_url": "https://cwe.mitre.org/data/definitions/434.html"
       }
     },
     {
@@ -312,13 +292,11 @@
       ],
       "remediation": {
         "strategy": "AUTH_GATE_FILTER",
-        "description": "중요 기능에 대한 적절한 인증 수단 적용 설계",
+        "description": "중요 기능에 적절한 인증 메커니즘이 적용되지 않으면 인증 우회 취약점이 발생한다. 공격자는 인증 없이 중요 기능 URL에 직접 접근하거나, 인증 로직이 누락된 서블릿·엔드포인트를 통해 무단으로 시스템 기능을 사용할 수 있다. 이는 개인정보 무단 조회·변조, 관리자 기능 무단 사용, 금융 거래 조작 등의 피해를 유발한다. 설계 단계에서 중요 기능 접근 전 인증 필터(AuthFilter)를 일괄 적용하는 구조를 의무화해야 한다.",
         "guideRef": "PART3 제2절 1항 (p.113-118)",
-        "remediationCode": "// [수정] DS-2.1 인증 설계: AuthFilter로 중요 기능 일괄 인증 검사\n// ❌ 취약: 각 서블릿에 인증 로직 산발 배치 (누락 위험)\n// class OrderServlet { doGet() { /* 인증 없음 */ } }\n// ✅ 안전: AuthFilter로 일괄 적용\n@WebFilter(\"/*\")\npublic class AuthFilter implements Filter {\n    private static final Set<String> PUBLIC =\n        Set.of(\"/login\", \"/css/\", \"/js/\", \"/api/health\");\n    public void doFilter(ServletRequest req, ...) {\n        String path = ((HttpServletRequest) req).getRequestURI();\n        boolean pub = PUBLIC.stream().anyMatch(path::startsWith);\n        HttpSession ses = ((HttpServletRequest)req).getSession(false);\n        if (!pub && (ses == null ||\n                ses.getAttribute(\"loginUser\") == null)) {\n            ((HttpServletResponse)res).sendRedirect(\"/login\");\n            return;\n        }\n        chain.doFilter(req, res);\n    }\n}"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 인증 없이 중요 기능 접근 허용\n@GetMapping(\"/admin/users\")\npublic List<User> listUsers() {\n    return userService.findAll(); // 로그인 여부 미확인\n}",
-        "good": "// ✅ 인증 필터 또는 어노테이션으로 접근 통제\n// Spring Security 사용 시:\n@GetMapping(\"/admin/users\")\n@PreAuthorize(\"hasRole('ADMIN')\")\npublic List<User> listUsers() {\n    return userService.findAll();\n}\n// 또는 직접 세션 확인:\nHttpSession session = request.getSession(false);\nif (session == null || session.getAttribute(\"userId\") == null) {\n    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);\n    return;\n}"
+        "bad_code": "// ❌ 인증 없이 중요 기능 접근 허용\n@GetMapping(\"/admin/users\")\npublic List<User> listUsers() {\n    return userService.findAll(); // 로그인 여부 미확인\n}",
+        "good_code": "// ✅ 인증 필터 또는 어노테이션으로 접근 통제\n// Spring Security 사용 시:\n@GetMapping(\"/admin/users\")\n@PreAuthorize(\"hasRole('ADMIN')\")\npublic List<User> listUsers() {\n    return userService.findAll();\n}\n// 또는 직접 세션 확인:\nHttpSession session = request.getSession(false);\nif (session == null || session.getAttribute(\"userId\") == null) {\n    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);\n    return;\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/306.html"
       }
     },
     {
@@ -340,13 +318,11 @@
       ],
       "remediation": {
         "strategy": "ACCOUNT_LOCKOUT",
-        "description": "반복 인증 시도 제한(계정 잠금) 메커니즘 설계",
+        "description": "로그인 시도 횟수에 제한이 없으면 무차별 대입(Brute Force) 공격에 취약해진다. 공격자는 자동화 도구로 수백만 번의 비밀번호 조합을 시도하여 계정을 탈취할 수 있으며, 특히 짧거나 단순한 비밀번호 계정은 단시간에 공략된다. 탈취된 계정으로 개인정보 유출, 금융 사기, 내부 시스템 침투 등의 2차 피해가 발생할 수 있다. 설계 단계에서 연속 실패 횟수 임계값 설정, 계정 잠금 또는 CAPTCHA 메커니즘을 의무화해야 한다.",
         "guideRef": "PART3 제2절 2항 (p.119-123)",
-        "remediationCode": "// [수정] DS-2.2 인증 시도 제한 설계: 계정 잠금 메커니즘\n// ❌ 취약: 실패 횟수 제한 없음 — if(!login()) return \"실패\";\n// ✅ 안전: 실패 횟수 추적 + 잠금\nMap<String, Integer> failMap = new ConcurrentHashMap<>();\nMap<String, Long> lockMap   = new ConcurrentHashMap<>();\nfinal int MAX = 5;\nfinal long LOCK_MS = 30 * 60 * 1000L;\nLong lockedUntil = lockMap.get(userId);\nif (lockedUntil != null && System.currentTimeMillis() < lockedUntil)\n    throw new AccountLockedException(\"계정 잠김 (30분 후 재시도)\");\nif (!authService.login(userId, password)) {\n    int fails = failMap.merge(userId, 1, Integer::sum);\n    if (fails >= MAX) {\n        lockMap.put(userId, System.currentTimeMillis() + LOCK_MS);\n        failMap.remove(userId);\n        throw new AccountLockedException(\"5회 실패 — 30분 잠금\");\n    }\n    throw new AuthException(\"실패 (\" + fails + \"/\" + MAX + \")\");\n}\nfailMap.remove(userId);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 로그인 시도 횟수 제한 없음 (무차별 대입 허용)\npublic boolean login(String id, String pw) {\n    return userDao.checkPassword(id, pw); // 실패 횟수 미추적\n}",
-        "good": "// ✅ 5회 실패 시 계정 잠금 (30분)\npublic boolean login(String id, String pw) {\n    int failCount = loginAttemptCache.getOrDefault(id, 0);\n    if (failCount >= 5) {\n        throw new LockedException(\"계정이 잠겼습니다. 30분 후 재시도하세요.\");\n    }\n    if (!userDao.checkPassword(id, pw)) {\n        loginAttemptCache.put(id, failCount + 1);\n        return false;\n    }\n    loginAttemptCache.remove(id);\n    return true;\n}"
+        "bad_code": "// ❌ 로그인 시도 횟수 제한 없음 (무차별 대입 허용)\npublic boolean login(String id, String pw) {\n    return userDao.checkPassword(id, pw); // 실패 횟수 미추적\n}",
+        "good_code": "// ✅ 5회 실패 시 계정 잠금 (30분)\npublic boolean login(String id, String pw) {\n    int failCount = loginAttemptCache.getOrDefault(id, 0);\n    if (failCount >= 5) {\n        throw new LockedException(\"계정이 잠겼습니다. 30분 후 재시도하세요.\");\n    }\n    if (!userDao.checkPassword(id, pw)) {\n        loginAttemptCache.put(id, failCount + 1);\n        return false;\n    }\n    loginAttemptCache.remove(id);\n    return true;\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/307.html"
       }
     },
     {
@@ -368,13 +344,11 @@
       ],
       "remediation": {
         "strategy": "PASSWORD_POLICY",
-        "description": "비밀번호 복잡성 정책 및 안전한 저장 방식 설계",
+        "description": "비밀번호 복잡성 정책이 없거나 평문·약한 해시로 저장하면 비밀번호 관리 취약점이 발생한다. 공격자는 단순 비밀번호를 사전 공격으로 쉽게 추측하거나, 솔트 없는 MD5/SHA-1 해시를 레인보우 테이블로 역산하여 대량 계정을 탈취할 수 있다. 유출된 비밀번호는 동일 비밀번호를 사용하는 다른 서비스에서도 악용되는 크리덴셜 스터핑 공격으로 이어진다. 설계 단계에서 8자 이상·대소문자·숫자·특수문자 조합 정책과 bcrypt/PBKDF2 기반 안전한 저장 방식을 의무화해야 한다.",
         "guideRef": "PART3 제2절 3항 (p.124-130)",
-        "remediationCode": "// [수정] DS-2.3 비밀번호 관리 설계: 복잡성 정책 + 안전한 저장\n// ❌ 취약: 비밀번호 평문 저장 또는 단순 MD5\nString hash = DigestUtils.md5Hex(password);  // 레인보우 테이블 취약\n\n// ✅ 안전: 복잡성 검증 + BCrypt/PBKDF2 저장\n// [복잡성 정책]\nPattern PW = Pattern.compile(\n    \"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,20}$\");\nif (!PW.matcher(password).matches())\n    throw new ValidationException(\n        \"8~20자, 대/소문자·숫자·특수문자 포함 필수\");\n// [BCrypt 해시 저장 — Spring Security]\nBCryptPasswordEncoder enc = new BCryptPasswordEncoder(12);\nString stored = enc.encode(password);   // 솔트 자동 포함\n// [검증]\nboolean ok = enc.matches(rawPassword, stored);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 비밀번호 복잡도 검증 없이 저장\npublic void changePassword(String newPw) {\n    userDao.updatePassword(userId, newPw); // \"1234\" 같은 단순 비밀번호 허용\n}",
-        "good": "// ✅ 복잡도 정책 적용: 8자 이상, 영문+숫자+특수문자 포함\npublic void changePassword(String newPw) {\n    if (newPw == null || newPw.length() < 8) {\n        throw new IllegalArgumentException(\"비밀번호는 8자 이상이어야 합니다.\");\n    }\n    boolean hasLetter  = newPw.matches(\".*[a-zA-Z].*\");\n    boolean hasDigit   = newPw.matches(\".*\\\\d.*\");\n    boolean hasSpecial = newPw.matches(\".*[!@#$%^&*].*\");\n    if (!hasLetter || !hasDigit || !hasSpecial) {\n        throw new IllegalArgumentException(\"영문·숫자·특수문자를 모두 포함해야 합니다.\");\n    }\n    userDao.updatePassword(userId, hash(newPw));\n}"
+        "bad_code": "// ❌ 비밀번호 복잡도 검증 없이 저장\npublic void changePassword(String newPw) {\n    userDao.updatePassword(userId, newPw); // \"1234\" 같은 단순 비밀번호 허용\n}",
+        "good_code": "// ✅ 복잡도 정책 적용: 8자 이상, 영문+숫자+특수문자 포함\npublic void changePassword(String newPw) {\n    if (newPw == null || newPw.length() < 8) {\n        throw new IllegalArgumentException(\"비밀번호는 8자 이상이어야 합니다.\");\n    }\n    boolean hasLetter  = newPw.matches(\".*[a-zA-Z].*\");\n    boolean hasDigit   = newPw.matches(\".*\\\\d.*\");\n    boolean hasSpecial = newPw.matches(\".*[!@#$%^&*].*\");\n    if (!hasLetter || !hasDigit || !hasSpecial) {\n        throw new IllegalArgumentException(\"영문·숫자·특수문자를 모두 포함해야 합니다.\");\n    }\n    userDao.updatePassword(userId, hash(newPw));\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/521.html"
       }
     },
     {
@@ -398,13 +372,11 @@
       ],
       "remediation": {
         "strategy": "LEAST_PRIVILEGE",
-        "description": "중요 자원에 대한 접근권한 최소화 및 통제 설계",
+        "description": "중요 자원(파일, DB, API)에 과도한 접근 권한을 부여하거나 자원 소유권 검증 없이 접근을 허용하면 권한 상승 취약점이 발생한다. 공격자는 다른 사용자의 자원 ID를 추측하거나, 인증만 확인하고 인가를 생략한 엔드포인트를 통해 타인의 데이터에 무단 접근할 수 있다. 이는 개인정보 대량 유출(IDOR 취약점), 기밀 파일 탈취, 시스템 설정 변경 등의 피해로 이어진다. 설계 단계에서 최소 권한 원칙(Least Privilege)을 적용하고, 자원 접근 시 소유자 또는 권한을 반드시 검증하도록 설계해야 한다.",
         "guideRef": "PART3 제2절 4항 (p.131-137)",
-        "remediationCode": "// [수정] DS-2.4 중요자원 접근통제 설계: 최소 권한 원칙\n// ❌ 취약: 파일에 모든 사용자 읽기/쓰기 권한 부여\nFile cfg = new File(\"/app/config/db.properties\");\ncfg.setReadable(true, false);  // everyone readable\ncfg.setWritable(true, false);  // everyone writable\n\n// ✅ 안전: 소유자만 접근 가능하도록 제한\nimport java.nio.file.attribute.*;\nPath cfgPath = Paths.get(\"/app/config/db.properties\");\nSet<PosixFilePermission> perms =\n    PosixFilePermissions.fromString(\"rw-------\");\nFiles.setPosixFilePermissions(cfgPath, perms);\n\n// 임시 파일도 최소 권한으로 생성\nPath temp = Files.createTempFile(\"upload_\", \".tmp\",\n    PosixFilePermissions.asFileAttribute(\n        PosixFilePermissions.fromString(\"rw-------\")));\n// 앱 실행 계정을 전용 서비스 계정으로 분리 (root 실행 금지)"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 로그인 여부만 확인, 자원 소유권 미검증\n@GetMapping(\"/document/{id}\")\npublic Document getDoc(@PathVariable Long id, HttpSession session) {\n    if (session.getAttribute(\"userId\") == null) throw new UnauthorizedException();\n    return docService.findById(id); // 타인 문서 접근 가능\n}",
-        "good": "// ✅ 자원 소유자 또는 권한 확인\n@GetMapping(\"/document/{id}\")\npublic Document getDoc(@PathVariable Long id, HttpSession session) {\n    Long userId = (Long) session.getAttribute(\"userId\");\n    if (userId == null) throw new UnauthorizedException();\n    Document doc = docService.findById(id);\n    if (!doc.getOwnerId().equals(userId)) {\n        throw new ForbiddenException(\"접근 권한이 없습니다.\");\n    }\n    return doc;\n}"
+        "bad_code": "// ❌ 로그인 여부만 확인, 자원 소유권 미검증\n@GetMapping(\"/document/{id}\")\npublic Document getDoc(@PathVariable Long id, HttpSession session) {\n    if (session.getAttribute(\"userId\") == null) throw new UnauthorizedException();\n    return docService.findById(id); // 타인 문서 접근 가능\n}",
+        "good_code": "// ✅ 자원 소유자 또는 권한 확인\n@GetMapping(\"/document/{id}\")\npublic Document getDoc(@PathVariable Long id, HttpSession session) {\n    Long userId = (Long) session.getAttribute(\"userId\");\n    if (userId == null) throw new UnauthorizedException();\n    Document doc = docService.findById(id);\n    if (!doc.getOwnerId().equals(userId)) {\n        throw new ForbiddenException(\"접근 권한이 없습니다.\");\n    }\n    return doc;\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/285.html"
       }
     },
     {
@@ -426,13 +398,11 @@
       ],
       "remediation": {
         "strategy": "EXTERNALIZE_SECRETS",
-        "description": "암호키 생성·저장·폐기 생명주기 관리 설계",
+        "description": "암호키를 소스코드에 하드코딩하거나 안전하지 않은 위치에 저장하면 암호키 유출 취약점이 발생한다. 공격자가 소스코드, Git 히스토리, 또는 설정 파일에 접근하면 암호키를 획득하여 암호화된 모든 데이터를 복호화할 수 있다. 이는 DB 전체 개인정보 복호화, 통신 데이터 도청, 디지털 서명 위조 등 치명적인 결과를 초래한다. 설계 단계에서 암호키를 환경변수, Java KeyStore, 또는 HashiCorp Vault/AWS Secrets Manager 같은 외부 키 관리 시스템에서 로드하도록 설계해야 한다.",
         "guideRef": "PART3 제2절 5항 (p.138-144)",
-        "remediationCode": "// [수정] DS-2.5 암호키 관리 설계: 외부화 + KeyStore 보관\n// ❌ 취약: 암호키를 소스코드에 하드코딩\nbyte[] keyBytes = \"MySecretKey12345\".getBytes();\nSecretKey key = new SecretKeySpec(keyBytes, \"AES\");\n\n// ✅ 안전 방법 1: 환경변수에서 로드\nString keyB64 = System.getenv(\"APP_AES_KEY\");\nSecretKey key = new SecretKeySpec(\n    Base64.getDecoder().decode(keyB64), \"AES\");\n\n// ✅ 안전 방법 2: Java KeyStore (PKCS12)\nKeyStore ks = KeyStore.getInstance(\"PKCS12\");\nks.load(new FileInputStream(\"keystore.p12\"),\n    System.getenv(\"KS_PASS\").toCharArray());\nSecretKey key = (SecretKey) ks.getKey(\"mykey\",\n    System.getenv(\"KEY_PASS\").toCharArray());\n// ✅ 안전 방법 3: HashiCorp Vault / AWS Secrets Manager"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 소스코드에 암호키 하드코딩\nprivate static final String SECRET_KEY = \"myHardCodedKey123!\";\nSecretKeySpec keySpec = new SecretKeySpec(SECRET_KEY.getBytes(), \"AES\");",
-        "good": "// ✅ 환경변수 또는 외부 키 저장소에서 키 로드\nString keyVal = System.getenv(\"APP_SECRET_KEY\");\nif (keyVal == null || keyVal.length() < 32) {\n    throw new IllegalStateException(\"암호키 환경변수(APP_SECRET_KEY) 미설정\");\n}\nSecretKeySpec keySpec = new SecretKeySpec(keyVal.getBytes(\"UTF-8\"), \"AES\");\n// 운영환경: AWS Secrets Manager / HashiCorp Vault 활용 권장"
+        "bad_code": "// ❌ 소스코드에 암호키 하드코딩\nprivate static final String SECRET_KEY = \"myHardCodedKey123!\";\nSecretKeySpec keySpec = new SecretKeySpec(SECRET_KEY.getBytes(), \"AES\");",
+        "good_code": "// ✅ 환경변수 또는 외부 키 저장소에서 키 로드\nString keyVal = System.getenv(\"APP_SECRET_KEY\");\nif (keyVal == null || keyVal.length() < 32) {\n    throw new IllegalStateException(\"암호키 환경변수(APP_SECRET_KEY) 미설정\");\n}\nSecretKeySpec keySpec = new SecretKeySpec(keyVal.getBytes(\"UTF-8\"), \"AES\");\n// 운영환경: AWS Secrets Manager / HashiCorp Vault 활용 권장",
+        "reference_url": "https://cwe.mitre.org/data/definitions/321.html"
       }
     },
     {
@@ -456,13 +426,11 @@
       ],
       "remediation": {
         "strategy": "STRONG_CRYPTO",
-        "description": "안전한 암호 알고리즘 및 충분한 키 길이 사용 설계",
+        "description": "DES, RC4, MD5, SHA-1 등 취약하거나 폐기된 암호 알고리즘을 사용하면 암호화 취약점이 발생한다. 현대의 컴퓨팅 파워로 DES는 수 시간 내에, MD5/SHA-1 해시는 레인보우 테이블이나 GPU 가속으로 짧은 시간에 공략할 수 있다. 이를 통해 암호화된 개인정보·금융정보·비밀번호가 노출되거나 디지털 서명이 위조될 수 있다. 설계 단계에서 대칭 암호화는 AES-256-GCM, 해시는 SHA-256 이상, 비대칭 암호화는 RSA-2048 이상의 안전한 알고리즘만 허용하도록 설계해야 한다.",
         "guideRef": "PART3 제2절 6항 (p.145-152)",
-        "remediationCode": "// [수정] DS-2.6 암호 알고리즘 설계: 안전한 알고리즘 선택\n// ❌ 취약: DES, RC4, MD5, SHA-1 등 취약 알고리즘 사용\nCipher c = Cipher.getInstance(\"DES/ECB/PKCS5Padding\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\n\n// ✅ 안전: AES-256-GCM (암호화), SHA-256 이상 (해시)\n// [대칭 암호화 — AES-256-GCM]\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256, new SecureRandom());\nSecretKey key = kg.generateKey();\nbyte[] iv = new byte[12];\nnew SecureRandom().nextBytes(iv);\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\ncipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));\nbyte[] enc = cipher.doFinal(plaintext.getBytes(\"UTF-8\"));\n// [해시 — SHA-256]\nbyte[] hash = MessageDigest.getInstance(\"SHA-256\").digest(data);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 취약한 암호 알고리즘 사용 (DES, MD5)\nCipher cipher = Cipher.getInstance(\"DES\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\nbyte[] hash = md.digest(password.getBytes());",
-        "good": "// ✅ 안전한 알고리즘 사용 (AES-256, SHA-256)\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\nGCMParameterSpec spec = new GCMParameterSpec(128, iv);\ncipher.init(Cipher.ENCRYPT_MODE, secretKey, spec);\n// 패스워드 해시: PBKDF2 사용\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nKeySpec ks = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(ks).getEncoded();"
+        "bad_code": "// ❌ 취약한 암호 알고리즘 사용 (DES, MD5)\nCipher cipher = Cipher.getInstance(\"DES\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\nbyte[] hash = md.digest(password.getBytes());",
+        "good_code": "// ✅ 안전한 알고리즘 사용 (AES-256, SHA-256)\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\nGCMParameterSpec spec = new GCMParameterSpec(128, iv);\ncipher.init(Cipher.ENCRYPT_MODE, secretKey, spec);\n// 패스워드 해시: PBKDF2 사용\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nKeySpec ks = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(ks).getEncoded();",
+        "reference_url": "https://cwe.mitre.org/data/definitions/327.html"
       }
     },
     {
@@ -486,13 +454,11 @@
       ],
       "remediation": {
         "strategy": "ENCRYPT_SENSITIVE_DATA",
-        "description": "중요정보 암호화 저장 및 쿠키 보안 속성 설계",
+        "description": "중요정보(비밀번호, 주민번호, 카드번호)를 평문으로 저장하거나 보안 속성 없는 쿠키에 저장하면 정보 노출 취약점이 발생한다. DB 침해 사고 발생 시 평문 저장된 모든 중요정보가 즉시 노출되고, 보안 속성 없는 쿠키는 XSS나 네트워크 스니핑으로 탈취될 수 있다. 이는 대량 개인정보 유출, 금융 사기, 신원 도용 등의 피해로 이어지며 법적 책임을 수반한다. 설계 단계에서 중요정보 암호화 저장과 쿠키의 HttpOnly·Secure·SameSite 속성 적용을 의무화해야 한다.",
         "guideRef": "PART3 제2절 7항 (p.153-159)",
-        "remediationCode": "// [수정] DS-2.7 중요정보 저장 설계: 암호화 저장 + 쿠키 보안\n// ❌ 취약: 중요정보 평문 쿠키 저장\nCookie c = new Cookie(\"userId\", userId);\nresponse.addCookie(c);\n\n// ✅ 안전: HttpOnly·Secure·SameSite 속성 + 중요정보 제거\nCookie c = new Cookie(\"SESSIONID\", session.getId());\nc.setHttpOnly(true);    // JS 접근 차단\nc.setSecure(true);      // HTTPS 전용\nc.setPath(\"/\");\nc.setMaxAge(-1);        // 세션 쿠키\n// SameSite 설정 (Set-Cookie 헤더 직접)\nresponse.addHeader(\"Set-Cookie\",\n    \"SESSIONID=\" + session.getId() +\n    \"; HttpOnly; Secure; SameSite=Strict; Path=/\");\n// DB: 주민번호·카드번호 등은 AES-256 암호화 후 저장"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 중요 정보(비밀번호) 평문 저장\nuserDao.save(new User(id, password)); // password를 그대로 DB에 저장",
-        "good": "// ✅ PBKDF2 + Salt 해시 저장\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nKeySpec ks = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(ks).getEncoded();\nString encoded = Base64.getEncoder().encodeToString(salt)\n                 + \":\" + Base64.getEncoder().encodeToString(hash);\nuserDao.save(new User(id, encoded));"
+        "bad_code": "// ❌ 중요 정보(비밀번호) 평문 저장\nuserDao.save(new User(id, password)); // password를 그대로 DB에 저장",
+        "good_code": "// ✅ PBKDF2 + Salt 해시 저장\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nKeySpec ks = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(ks).getEncoded();\nString encoded = Base64.getEncoder().encodeToString(salt)\n                 + \":\" + Base64.getEncoder().encodeToString(hash);\nuserDao.save(new User(id, encoded));",
+        "reference_url": "https://cwe.mitre.org/data/definitions/312.html"
       }
     },
     {
@@ -512,13 +478,11 @@
       ],
       "remediation": {
         "strategy": "GENERIC",
-        "description": "중요정보 전송 시 암호화 채널(TLS) 사용 설계",
+        "description": "중요정보를 HTTP 평문 채널로 전송하면 네트워크 도청 취약점이 발생한다. 공격자는 동일 네트워크에서 패킷 스니핑으로 전송 중인 로그인 자격증명, 세션 쿠키, 개인정보, 금융 데이터를 가로챌 수 있다. 무선 환경, 공용 와이파이, 내부망 중간자(MITM) 공격 등에서 특히 위험하며 탈취된 정보로 계정 탈취·금융 사기가 발생한다. 설계 단계에서 모든 중요정보 전송에 TLS 1.2 이상의 암호화 채널 사용을 의무화하고 HTTP→HTTPS 강제 리다이렉트를 적용해야 한다.",
         "guideRef": "PART3 제2절 8항 (p.160-164)",
-        "remediationCode": "// [수정] DS-2.8 중요정보 전송 설계: TLS 암호화 채널 사용 의무화\n// ❌ 취약: HTTP 평문으로 중요정보 전송\nURL url = new URL(\"http://payment.internal/api/charge\");\nHttpURLConnection conn = (HttpURLConnection) url.openConnection();\n\n// ✅ 안전: HTTPS + 기본 인증서 검증 사용\nURL url = new URL(\"https://payment.internal/api/charge\");\nHttpsURLConnection conn = (HttpsURLConnection) url.openConnection();\n// 기본 HostnameVerifier 유지 (ALLOW_ALL 절대 금지)\nconn.setHostnameVerifier(HttpsURLConnection\n    .getDefaultHostnameVerifier());\nconn.setConnectTimeout(5000);\nconn.setReadTimeout(10000);\n// Spring Boot application.yml:\n//   server.ssl.enabled: true\n//   server.ssl.protocol: TLS\n// Tomcat server.xml: SSLEnabled=\"true\", protocol=\"TLSv1.2\"\n// HTTP → HTTPS 강제 리다이렉트 설정 필수"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 중요 데이터를 평문 HTTP로 전송\n// application.properties:\n// server.port=8080  (HTTPS 미설정)\n// 결과: 로그인 자격증명이 네트워크에서 평문 노출",
-        "good": "// ✅ HTTPS 강제 및 HSTS 설정\n// Spring Security 설정:\nhttp.requiresChannel().anyRequest().requiresSecure()\n    .and()\n    .headers().httpStrictTransportSecurity()\n        .includeSubDomains(true).maxAgeInSeconds(31536000);\n// server.properties: server.ssl.enabled=true\n// 민감 쿠키: response.addHeader(\"Set-Cookie\",\n//            \"sessionId=\" + id + \"; Secure; HttpOnly; SameSite=Strict\");"
+        "bad_code": "// ❌ 중요 데이터를 평문 HTTP로 전송\n// application.properties:\n// server.port=8080  (HTTPS 미설정)\n// 결과: 로그인 자격증명이 네트워크에서 평문 노출",
+        "good_code": "// ✅ HTTPS 강제 및 HSTS 설정\n// Spring Security 설정:\nhttp.requiresChannel().anyRequest().requiresSecure()\n    .and()\n    .headers().httpStrictTransportSecurity()\n        .includeSubDomains(true).maxAgeInSeconds(31536000);\n// server.properties: server.ssl.enabled=true\n// 민감 쿠키: response.addHeader(\"Set-Cookie\",\n//            \"sessionId=\" + id + \"; Secure; HttpOnly; SameSite=Strict\");",
+        "reference_url": "https://cwe.mitre.org/data/definitions/319.html"
       }
     },
     {
@@ -543,13 +507,11 @@
       ],
       "remediation": {
         "strategy": "GENERIC_ERROR_MESSAGE",
-        "description": "예외 발생 시 시스템 정보 미노출 및 안전한 처리 흐름 설계",
+        "description": "예외 발생 시 스택트레이스·DB 오류 메시지·내부 경로 등을 클라이언트에 그대로 노출하면 정보 노출 취약점이 발생한다. 공격자는 노출된 정보에서 DB 종류·테이블 구조·서버 경로·프레임워크 버전을 파악하여 이후 공격의 정보로 활용한다. 빈 catch 블록으로 예외를 무시하면 보안 이벤트 탐지가 불가능해져 공격 시도가 기록되지 않는다. 설계 단계에서 예외 처리 시 상세 정보는 서버 로그에만 기록하고 클라이언트에는 일반 오류 메시지만 반환하는 전역 예외 처리 전략을 설계해야 한다.",
         "guideRef": "PART3 제3절 1항 (p.167-172)",
-        "remediationCode": "// [수정] DS-3.1 예외처리 설계: 내부정보 미노출 + 안전한 처리 흐름\n// ❌ 취약: 스택트레이스·DB 오류를 클라이언트에 노출\n// e.printStackTrace(); out.println(\"오류: \" + e.getMessage());\n\n// ✅ 안전: 서버 로그 기록 + 클라이언트에 일반 메시지\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 오류: {}\", e.getMessage(), e);\n    response.sendError(500, \"서비스 오류가 발생했습니다.\");\n}\n// Spring Boot 전역 처리기\n@ControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(Exception.class)\n    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)\n    public Map<String, String> handle(Exception e) {\n        log.error(\"[GLOBAL] 처리되지 않은 예외\", e);\n        return Map.of(\"error\", \"서비스 오류가 발생했습니다.\");\n    }\n}"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 상세 예외 정보를 사용자에게 노출\ntry {\n    userService.login(id, pw);\n} catch (SQLException e) {\n    response.getWriter().println(\"DB 오류: \" + e.getMessage()); // 내부 정보 노출\n}",
-        "good": "// ✅ 범용 오류 메시지 출력, 상세 정보는 로그에만 기록\ntry {\n    userService.login(id, pw);\n} catch (SQLException e) {\n    log.error(\"[LOGIN] DB 오류: {}\", e.getMessage(), e);\n    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,\n                       \"서비스 오류가 발생했습니다. 관리자에게 문의하세요.\");\n}"
+        "bad_code": "// ❌ 상세 예외 정보를 사용자에게 노출\ntry {\n    userService.login(id, pw);\n} catch (SQLException e) {\n    response.getWriter().println(\"DB 오류: \" + e.getMessage()); // 내부 정보 노출\n}",
+        "good_code": "// ✅ 범용 오류 메시지 출력, 상세 정보는 로그에만 기록\ntry {\n    userService.login(id, pw);\n} catch (SQLException e) {\n    log.error(\"[LOGIN] DB 오류: {}\", e.getMessage(), e);\n    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,\n                       \"서비스 오류가 발생했습니다. 관리자에게 문의하세요.\");\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/209.html"
       }
     },
     {
@@ -569,17 +531,15 @@
       ],
       "remediation": {
         "strategy": "SESSION_DESIGN",
-        "description": "컨트롤러에서 session.getAttribute(\"사용자키\")로 필요한 값만 추출 후 서비스 레이어에 전달하라. HttpSession 객체를 서비스 메서드 파라미터로 직접 선언하지 말 것. 세션 타임아웃은 web.xml 또는 setMaxInactiveInterval(1200)로 20분 설정. 로그인 성공 시 session.invalidate() 후 request.getSession(true)로 새 세션 발급.",
+        "description": "HttpSession 객체를 서비스·유틸 레이어로 직접 전달하거나, 세션 만료·고정 공격(Session Fixation)에 대한 방어가 없으면 세션 보안 취약점이 발생한다. 공격자는 Session Fixation 공격으로 피해자의 세션 ID를 미리 알고 있는 값으로 고정하거나, 세션 파기 없이 로그아웃된 세션을 재사용하여 다른 사용자로 위장할 수 있다. 서비스 레이어에 HttpSession이 전달되면 불필요한 세션 데이터 전체에 접근·변조가 가능해 설계 원칙을 위반한다. 설계 단계에서 컨트롤러에서 필요한 값만 추출하여 전달하고, 로그인 성공 시 새 세션을 발급하며, 타임아웃을 20분 이내로 설정해야 한다.",
         "guideRef": "PART3 제4절 1항 (p.165-170)",
-        "remediationCode": "// [수정] DS-4.1 세션 통제: HttpSession 객체 직접 전달 금지\n// ❌ 취약: 서비스 메서드가 HttpSession 전체를 받음\n// public BoardVO setMemberInfo(BoardVO vo, HttpSession session) { ... }\n\n// ✅ 안전: 컨트롤러에서 필요한 값만 추출하여 전달\n// [Controller]\nMemberVO memberVo = (MemberVO) session.getAttribute(\"admin\");\nif (memberVo == null) throw new UnauthorizedException(\"로그인이 필요합니다.\");\nvo = boardService.setMemberInfo(vo, memberVo.getId(), memberVo.getName());\n\n// [Service]\npublic BoardVO setMemberInfo(BoardVO vo, String userId, String userName) {\n    if (userId != null) {\n        vo.setRegId(userId);\n        vo.setRegName(userName);\n        vo.setUpdId(userId);\n        vo.setUpdName(userName);\n    }\n    return vo;\n}\n\n// [세션 만료 설정 — web.xml]\n// <session-config><session-timeout>20</session-timeout></session-config>\n\n// [Session Fixation 방지 — 로그인 성공 후]\nHttpSession oldSession = request.getSession(false);\nif (oldSession != null) oldSession.invalidate();\nHttpSession newSession = request.getSession(true);  // 새 ID 발급\nnewSession.setAttribute(\"admin\", authenticatedMember);"
+        "bad_code": "// ❌ 로그아웃 시 세션 미파기 → 세션 재사용 가능\n@GetMapping(\"/logout\")\npublic String logout(HttpSession session) {\n    session.removeAttribute(\"userId\"); // 세션 자체는 유지됨\n    return \"redirect:/login\";\n}",
+        "good_code": "// ✅ 로그아웃 시 세션 완전 파기 + 새 세션 발급\n@GetMapping(\"/logout\")\npublic String logout(HttpServletRequest request, HttpServletResponse response) {\n    HttpSession session = request.getSession(false);\n    if (session != null) {\n        session.invalidate(); // 세션 완전 파기\n    }\n    // 세션 쿠키 명시적 삭제\n    Cookie cookie = new Cookie(\"JSESSIONID\", null);\n    cookie.setMaxAge(0);\n    cookie.setPath(\"/\");\n    response.addCookie(cookie);\n    return \"redirect:/login\";\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/488.html"
       },
       "dangerousPatterns": [
         "getSession\\(|setMaxInactiveInterval|session\\.invalidate"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 로그아웃 시 세션 미파기 → 세션 재사용 가능\n@GetMapping(\"/logout\")\npublic String logout(HttpSession session) {\n    session.removeAttribute(\"userId\"); // 세션 자체는 유지됨\n    return \"redirect:/login\";\n}",
-        "good": "// ✅ 로그아웃 시 세션 완전 파기 + 새 세션 발급\n@GetMapping(\"/logout\")\npublic String logout(HttpServletRequest request, HttpServletResponse response) {\n    HttpSession session = request.getSession(false);\n    if (session != null) {\n        session.invalidate(); // 세션 완전 파기\n    }\n    // 세션 쿠키 명시적 삭제\n    Cookie cookie = new Cookie(\"JSESSIONID\", null);\n    cookie.setMaxAge(0);\n    cookie.setPath(\"/\");\n    response.addCookie(cookie);\n    return \"redirect:/login\";\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-1.1",
@@ -627,13 +587,11 @@
       ],
       "remediation": {
         "strategy": "USE_PREPARED_STATEMENT",
-        "description": "외부 입력값을 SQL 문자열에 직접 연결(+)하면 공격자가 SQL 문법을 주입하여 인증 우회, 데이터 탈취, 데이터 변조가 가능하다. PreparedStatement의 ?·플레이스홀더를 사용하면 SQL 구조가 컴파일 시점에 확정되어 입력값이 순수 데이터로만 처리된다. MyBatis 환경에서는 ${ } 대신 #{ } 바인딩 파라미터를 사용하라.",
+        "description": "외부에서 전달된 사용자 입력값이 적절한 검증이나 이스케이프 없이 SQL 쿼리 문자열에 직접 포함될 때 SQL 삽입 취약점이 발생한다. 공격자는 입력값에 ' OR '1'='1 같은 SQL 메타 문자를 삽입하여 인증 우회, 모든 데이터 조회·변조, 데이터베이스 관리자 권한 탈취, 나아가 OS 명령 실행까지 시도할 수 있다. 이 취약점은 OWASP Top 10에서 매년 상위에 올라오는 매우 위험한 취약점으로, 금융·의료·공공 시스템에서 대량 개인정보 유출 사고의 주요 원인 중 하나이다. 근본적인 해결책은 SQL 쿼리 구조와 데이터를 분리하는 PreparedStatement의 파라미터 바인딩 방식 또는 MyBatis의 #{} 바인딩을 사용하는 것이다.",
         "guideRef": "PART4 제1절 1항 (p.180-193)",
-        "remediationCode": "// [수정] IV-1.1 SQL 삽입 방지: PreparedStatement 사용\n// ❌ 취약: String sql = \"SELECT * FROM board WHERE id='\" + userId + \"'\";\n// ✅ 안전:\nString sql = \"SELECT * FROM board WHERE id = ?\";\ntry (PreparedStatement pstmt = con.prepareStatement(sql)) {\n    pstmt.setString(1, userId);\n    try (ResultSet rs = pstmt.executeQuery()) {\n        while (rs.next()) { /* 처리 */ }\n    }\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 실행 오류: {}\", e.getMessage(), e);\n    throw new RuntimeException(\"데이터 조회 중 오류가 발생했습니다.\", e);\n}\n// MyBatis: WHERE b_gubun = #{userId}  (${userId} 사용 금지)"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 SQL 문자열에 직접 연결\nString sql = \"SELECT * FROM board WHERE b_gubun='\" + gubun + \"'\";\nResultSet rs = stmt.executeQuery(sql);",
-        "good": "// ✅ PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM board WHERE b_gubun = ?\";\nPreparedStatement pstmt = con.prepareStatement(sql);\npstmt.setString(1, gubun);\nResultSet rs = pstmt.executeQuery();\n// MyBatis: WHERE b_gubun = #{gubun}  (${gubun} 사용 금지)"
+        "bad_code": "// ❌ 외부 입력값을 SQL 문자열에 직접 연결\nString sql = \"SELECT * FROM board WHERE b_gubun='\" + gubun + \"'\";\nResultSet rs = stmt.executeQuery(sql);",
+        "good_code": "// ✅ PreparedStatement 파라미터 바인딩\nString sql = \"SELECT * FROM board WHERE b_gubun = ?\";\nPreparedStatement pstmt = con.prepareStatement(sql);\npstmt.setString(1, gubun);\nResultSet rs = pstmt.executeQuery();\n// MyBatis: WHERE b_gubun = #{gubun}  (${gubun} 사용 금지)",
+        "reference_url": "https://cwe.mitre.org/data/definitions/89.html"
       }
     },
     {
@@ -667,13 +625,11 @@
       ],
       "remediation": {
         "strategy": "WHITELIST_VALIDATION",
-        "description": "허용된 값 목록(화이트리스트)으로 입력값을 제한하고 동적 코드 실행 금지",
+        "description": "외부 입력값이 검증 없이 스크립트 엔진(ScriptEngine.eval, GroovyShell 등)이나 리플렉션 API(Class.forName, Method.invoke)에 전달될 때 코드 삽입 취약점이 발생한다. 공격자는 임의의 Java 또는 스크립트 코드를 삽입하여 서버에서 실행함으로써 파일 시스템 접근, 프로세스 실행, 네트워크 연결 등 모든 서버 자원을 악용할 수 있다. 이는 서버 완전 장악, 데이터 탈취, 악성코드 설치, 내부망 침투 등 치명적인 피해를 초래한다. 동적 코드 실행 API 자체를 사용하지 않는 것이 최선이며, 불가피한 경우 화이트리스트 기반 입력 검증을 철저히 적용해야 한다.",
         "guideRef": "PART4 제1절 2항 (p.194-200)",
-        "remediationCode": "// [수정] IV-1.2 코드삽입 방지: 동적 코드 실행 금지 + 화이트리스트\n// ❌ 취약: 외부 입력을 ScriptEngine.eval()로 실행\nString code = request.getParameter(\"script\");\nnew ScriptEngineManager().getEngineByName(\"js\").eval(code);\n\n// ✅ 안전 방법 1: 동적 코드 실행 제거 (강력 권장)\n// eval(), exec(), Class.forName(userInput) 등 제거\n\n// ✅ 안전 방법 2: 화이트리스트 기반 분기\nString action = request.getParameter(\"action\");\nint result = switch (action) {\n    case \"add\"      -> a + b;\n    case \"subtract\" -> a - b;\n    case \"multiply\" -> a * b;\n    default -> throw new IllegalArgumentException(\n        \"허용되지 않는 연산: \" + action);\n};"
-      },
-      "codeExamples": {
-        "bad": "// ❌ ScriptEngine에 외부 입력값 직접 실행 (코드 삽입)\nScriptEngine engine = new ScriptEngineManager().getEngineByName(\"JavaScript\");\nString script = request.getParameter(\"expr\");\nengine.eval(script); // 임의 코드 실행 가능",
-        "good": "// ✅ 화이트리스트 허용 표현식만 실행\nString expr = request.getParameter(\"expr\");\nif (!expr.matches(\"[0-9+\\\\-*/(). ]+\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 표현식\");\n}\n// 안전한 수식 파서 라이브러리 사용 권장 (예: exp4j)\n// ScriptEngine 사용 자체를 피하는 것이 최선"
+        "bad_code": "// ❌ ScriptEngine에 외부 입력값 직접 실행 (코드 삽입)\nScriptEngine engine = new ScriptEngineManager().getEngineByName(\"JavaScript\");\nString script = request.getParameter(\"expr\");\nengine.eval(script); // 임의 코드 실행 가능",
+        "good_code": "// ✅ 화이트리스트 허용 표현식만 실행\nString expr = request.getParameter(\"expr\");\nif (!expr.matches(\"[0-9+\\\\-*/(). ]+\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 표현식\");\n}\n// 안전한 수식 파서 라이브러리 사용 권장 (예: exp4j)\n// ScriptEngine 사용 자체를 피하는 것이 최선",
+        "reference_url": "https://cwe.mitre.org/data/definitions/94.html"
       }
     },
     {
@@ -720,13 +676,11 @@
       ],
       "remediation": {
         "strategy": "PATH_CANONICALIZATION",
-        "description": "외부 입력 파일명/경로에 '../'(상위 디렉터리 탈출), '%2e%2e%2f'(URL 인코딩) 등이 포함되면 허용된 디렉터리를 벗어나 임의 파일 접근이 가능하다. getCanonicalPath()로 경로를 정규화한 후 허용 기본 디렉터리(base directory) 내부에 있는지 Path.startsWith()로 검증하라. String.startsWith() 사용 시 /data2가 /data로 오인되는 문제가 발생하므로 반드시 Path API 사용.",
+        "description": "외부 입력값이 검증 없이 파일 경로 구성에 사용되면 경로 조작(Path Traversal) 취약점이 발생한다. 공격자는 '../'(디렉터리 탈출 시퀀스)나 '%2e%2e%2f'(URL 인코딩) 등을 삽입하여 허용된 디렉터리를 벗어나 시스템 설정 파일(/etc/passwd), 개인키, 소스코드 등 임의 파일에 접근할 수 있다. 이는 서버 기밀 정보 전체 노출, 설정 파일 변조, 악성 파일 업로드·실행 등의 피해를 초래한다. getCanonicalPath()로 경로를 정규화한 후 허용 기본 디렉터리 내에 있는지 Path.startsWith()로 반드시 검증해야 한다.",
         "guideRef": "PART4 제1절 3항 (p.201-210)",
-        "remediationCode": "// [수정] IV-1.3 경로 조작 방지: canonicalize 후 허용 범위 검증\nString fileName = request.getParameter(\"fileName\");\nif (fileName == null || !fileName.matches(\"^[a-zA-Z0-9._-]{1,255}$\"))\n    throw new SecurityException(\"허용되지 않는 파일명\");\nFile baseDir = new File(\"/app/uploads\").getCanonicalFile();\nFile target  = new File(baseDir, fileName).getCanonicalFile();\nif (!target.toPath().startsWith(baseDir.toPath()))\n    throw new SecurityException(\"허용되지 않는 경로 접근\");\ntry (FileInputStream fis = new FileInputStream(target)) { /* 처리 */ }"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값으로 파일 경로 직접 구성 (경로 탈출 가능)\nString fileName = request.getParameter(\"file\");\nFile f = new File(\"/uploads/\" + fileName); // \"../../etc/passwd\" 가능\nFileInputStream fis = new FileInputStream(f);",
-        "good": "// ✅ 정규화 경로가 기준 디렉터리 내에 있는지 검증\nString fileName = request.getParameter(\"file\");\nFile base = new File(\"/uploads\").getCanonicalFile();\nFile target = new File(base, fileName).getCanonicalFile();\nif (!target.getPath().startsWith(base.getPath() + File.separator)) {\n    throw new SecurityException(\"허용되지 않는 경로 접근\");\n}\nFileInputStream fis = new FileInputStream(target);"
+        "bad_code": "// ❌ 외부 입력값으로 파일 경로 직접 구성 (경로 탈출 가능)\nString fileName = request.getParameter(\"file\");\nFile f = new File(\"/uploads/\" + fileName); // \"../../etc/passwd\" 가능\nFileInputStream fis = new FileInputStream(f);",
+        "good_code": "// ✅ 정규화 경로가 기준 디렉터리 내에 있는지 검증\nString fileName = request.getParameter(\"file\");\nFile base = new File(\"/uploads\").getCanonicalFile();\nFile target = new File(base, fileName).getCanonicalFile();\nif (!target.getPath().startsWith(base.getPath() + File.separator)) {\n    throw new SecurityException(\"허용되지 않는 경로 접근\");\n}\nFileInputStream fis = new FileInputStream(target);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/22.html"
       }
     },
     {
@@ -762,13 +716,11 @@
       ],
       "remediation": {
         "strategy": "OUTPUT_ENCODING",
-        "description": "출력 시 HTML 특수문자 인코딩(OWASP ESAPI 또는 Spring HtmlUtils 사용)",
+        "description": "외부 입력값이 HTML 특수문자 인코딩 없이 웹 페이지에 출력되면 크로스사이트 스크립트(XSS) 취약점이 발생한다. 공격자는 <script>alert(document.cookie)</script> 같은 스크립트를 삽입하여 피해자의 세션 쿠키를 탈취하고, 피싱 페이지로 리다이렉트하거나 키로거를 심을 수 있다. Stored XSS의 경우 악성 스크립트가 DB에 저장되어 해당 페이지를 방문하는 모든 사용자에게 실행되므로 피해 범위가 매우 넓다. 출력 컨텍스트(HTML, JavaScript, URL, CSS)에 맞는 인코딩 함수를 반드시 적용하고, JSP에서는 <c:out> 태그나 OWASP Java Encoder를 사용해야 한다.",
         "guideRef": "PART4 제1절 4항 (p.211-222)",
-        "remediationCode": "// [수정] IV-1.4 XSS 방지: 출력 컨텍스트별 인코딩 적용\n// ❌ 취약: 외부 입력을 HTML에 그대로 출력\nString name = request.getParameter(\"name\");\nout.println(\"<b>안녕하세요, \" + name + \"님</b>\");\n\n// ✅ 안전 (HTML): Spring HtmlUtils\nimport org.springframework.web.util.HtmlUtils;\nout.println(\"<b>안녕하세요, \" +\n    HtmlUtils.htmlEscape(name) + \"님</b>\");\n// JSP: <c:out value=\"${param.name}\"/>  (자동 인코딩)\n\n// ✅ 안전 (JS 컨텍스트): ESAPI\nout.println(\"<script>var x='\" +\n    ESAPI.encoder().encodeForJavaScript(name) + \"';</script>\");\n// ✅ 안전 (URL 파라미터):\nString safeUrl = URLEncoder.encode(name, StandardCharsets.UTF_8);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 HTML에 인코딩 없이 직접 출력 (XSS)\nString name = request.getParameter(\"name\");\nout.println(\"<div>\" + name + \"</div>\");",
-        "good": "// ✅ HTML 인코딩 후 출력\nString name = request.getParameter(\"name\");\nString safe = name.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\")\n                  .replace(\">\", \"&gt;\").replace(\"\\\"\", \"&quot;\")\n                  .replace(\"'\", \"&#x27;\");\nout.println(\"<div>\" + safe + \"</div>\");\n// OWASP Java Encoder: Encode.forHtml(name)"
+        "bad_code": "// ❌ 외부 입력값을 HTML에 인코딩 없이 직접 출력 (XSS)\nString name = request.getParameter(\"name\");\nout.println(\"<div>\" + name + \"</div>\");",
+        "good_code": "// ✅ HTML 인코딩 후 출력\nString name = request.getParameter(\"name\");\nString safe = name.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\")\n                  .replace(\">\", \"&gt;\").replace(\"\\\"\", \"&quot;\")\n                  .replace(\"'\", \"&#x27;\");\nout.println(\"<div>\" + safe + \"</div>\");\n// OWASP Java Encoder: Encode.forHtml(name)",
+        "reference_url": "https://cwe.mitre.org/data/definitions/79.html"
       }
     },
     {
@@ -799,13 +751,11 @@
       ],
       "remediation": {
         "strategy": "AVOID_OS_COMMAND",
-        "description": "OS 명령어 직접 실행 금지; 불가피한 경우 화이트리스트 기반 입력값 검증 적용",
+        "description": "외부 입력값이 Runtime.exec()나 ProcessBuilder에 문자열로 포함되면 OS 명령어 삽입(Command Injection) 취약점이 발생한다. 공격자는 '; rm -rf /', '&& cat /etc/passwd' 같은 셸 메타 문자를 삽입하여 서버에서 임의의 OS 명령어를 실행할 수 있다. 이 취약점은 서버 파일 시스템 완전 접근, 악성코드 설치, 백도어 생성, 내부망 횡단 등 시스템 완전 장악으로 이어지는 가장 위험한 취약점 중 하나이다. Java API로 대체할 수 없을 때만 ProcessBuilder 배열 방식을 사용하고, 입력값은 반드시 화이트리스트 정규식으로 검증해야 한다.",
         "guideRef": "PART4 제1절 5항 (p.223-231)",
-        "remediationCode": "// [수정] IV-1.5 OS 명령어 삽입 방지: 직접 실행 금지\n// ❌ 취약: 외부 입력을 Runtime.exec() 문자열에 포함\n// Runtime.getRuntime().exec(\"ls -la \" + file);  → 명령어 주입!\n\n// ✅ 안전 방법 1: Java API로 대체\n// ls → Files.list(Paths.get(dir))\n// rm → Files.deleteIfExists(path)\n// cp → Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING)\n\n// ✅ 안전 방법 2: 화이트리스트 + 배열 인자 (불가피 시)\nString fileId = request.getParameter(\"fileId\");\nif (!fileId.matches(\"^[a-zA-Z0-9_-]{1,50}$\"))\n    throw new SecurityException(\"허용되지 않는 파일 ID\");\nProcessBuilder pb = new ProcessBuilder(\n    \"/usr/bin/convert\",\n    \"/safe/uploads/\" + fileId + \".jpg\",\n    \"-thumbnail\", \"200x200\",\n    \"/safe/thumbs/\" + fileId + \"_thumb.jpg\");\npb.start().waitFor();"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 OS 명령어에 직접 삽입\nString ip = request.getParameter(\"ip\");\nString[] cmd = {\"sh\", \"-c\", \"ping -c 1 \" + ip}; // '; rm -rf /' 가능\nRuntime.getRuntime().exec(cmd);",
-        "good": "// ✅ Java API 직접 사용 + 불가피 시 화이트리스트 검증\nString ip = request.getParameter(\"ip\");\nif (!ip.matches(\"^\\\\d{1,3}(\\\\.\\\\d{1,3}){3}$\")) {\n    throw new IllegalArgumentException(\"잘못된 IP 형식\");\n}\nInetAddress addr = InetAddress.getByName(ip);\nboolean reachable = addr.isReachable(3000);\n// Runtime.exec() 사용 시 반드시 배열 형태로 전달 (쉘 해석 방지)"
+        "bad_code": "// ❌ 외부 입력값을 OS 명령어에 직접 삽입\nString ip = request.getParameter(\"ip\");\nString[] cmd = {\"sh\", \"-c\", \"ping -c 1 \" + ip}; // '; rm -rf /' 가능\nRuntime.getRuntime().exec(cmd);",
+        "good_code": "// ✅ Java API 직접 사용 + 불가피 시 화이트리스트 검증\nString ip = request.getParameter(\"ip\");\nif (!ip.matches(\"^\\\\d{1,3}(\\\\.\\\\d{1,3}){3}$\")) {\n    throw new IllegalArgumentException(\"잘못된 IP 형식\");\n}\nInetAddress addr = InetAddress.getByName(ip);\nboolean reachable = addr.isReachable(3000);\n// Runtime.exec() 사용 시 반드시 배열 형태로 전달 (쉘 해석 방지)",
+        "reference_url": "https://cwe.mitre.org/data/definitions/78.html"
       }
     },
     {
@@ -835,17 +785,15 @@
       ],
       "remediation": {
         "strategy": "FILE_EXTENSION_WHITELIST",
-        "description": "허용된 확장자 목록 검증, 저장 경로를 웹 루트 외부로 설정, 파일명 랜덤화",
+        "description": "파일 업로드 시 확장자·Content-Type·저장 경로 검증이 없으면 위험한 파일 업로드 취약점이 발생한다. 공격자는 .jsp, .php 등 실행 가능한 웹 셸 파일을 업로드하거나, '../' 경로 조작으로 웹 루트에 파일을 저장하여 서버에서 임의 코드를 실행할 수 있다. 업로드된 웹 셸이 실행 가능한 위치에 저장되면 서버 전체를 장악할 수 있어 매우 위험하다. 확장자 화이트리스트 검증, 저장 경로의 웹 루트 외부 설정, 파일명 UUID 랜덤화, 최대 파일 크기 제한을 모두 적용해야 한다.",
         "guideRef": "PART4 제1절 6항 (p.232-238)",
-        "remediationCode": "// [수정] IV-1.6 파일 업로드 보안: 확장자·크기·경로 검증\n// ❌ 취약: 원본 파일명 검증 없이 저장\nString name = file.getOriginalFilename();\nfile.transferTo(new File(\"/uploads/\" + name));\n\n// ✅ 안전: 화이트리스트 + 크기 제한 + 파일명 랜덤화\nprivate static final Set<String> ALLOWED =\n    Set.of(\"jpg\",\"jpeg\",\"png\",\"gif\",\"hwp\",\"pdf\",\"xlsx\");\nString ext = FilenameUtils.getExtension(\n    file.getOriginalFilename()).toLowerCase();\nif (!ALLOWED.contains(ext))\n    throw new SecurityException(\"허용되지 않는 확장자: \" + ext);\nif (file.getSize() > 10 * 1024 * 1024)\n    throw new SecurityException(\"파일 크기 초과 (최대 10MB)\");\nString saveName = UUID.randomUUID() + \".\" + ext;\nPath dest = Paths.get(\"/var/secure-uploads\", saveName).normalize();\nif (!dest.startsWith(Paths.get(\"/var/secure-uploads\")))\n    throw new SecurityException(\"경로 탈출 시도 감지\");\nfile.transferTo(dest);"
+        "bad_code": "// ❌ 파일 확장자 검증 없이 업로드 허용\nString fileName = fileItem.getName();\nFile dest = new File(uploadDir + \"/\" + fileName);\nfileItem.write(dest); // .jsp 등 실행 파일 업로드 가능",
+        "good_code": "// ✅ 화이트리스트 확장자 검증 + 저장명 UUID 랜덤화\nSet<String> allowed = new HashSet<>(Arrays.asList(\"jpg\", \"png\", \"gif\", \"pdf\"));\nString origName = fileItem.getName();\nint dotIdx = origName.lastIndexOf('.');\nString ext = (dotIdx >= 0) ? origName.substring(dotIdx + 1).toLowerCase() : \"\";\nif (!allowed.contains(ext)) {\n    throw new SecurityException(\"허용되지 않는 파일 형식\");\n}\nString safeName = UUID.randomUUID().toString() + \".\" + ext;\nfileItem.write(new File(uploadDir, safeName));",
+        "reference_url": "https://cwe.mitre.org/data/definitions/434.html"
       },
       "dangerousPatterns": [
         "getOriginalFilename\\(\\)|getPart\\(|MultipartFile"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 파일 확장자 검증 없이 업로드 허용\nString fileName = fileItem.getName();\nFile dest = new File(uploadDir + \"/\" + fileName);\nfileItem.write(dest); // .jsp 등 실행 파일 업로드 가능",
-        "good": "// ✅ 화이트리스트 확장자 검증 + 저장명 UUID 랜덤화\nSet<String> allowed = new HashSet<>(Arrays.asList(\"jpg\", \"png\", \"gif\", \"pdf\"));\nString origName = fileItem.getName();\nint dotIdx = origName.lastIndexOf('.');\nString ext = (dotIdx >= 0) ? origName.substring(dotIdx + 1).toLowerCase() : \"\";\nif (!allowed.contains(ext)) {\n    throw new SecurityException(\"허용되지 않는 파일 형식\");\n}\nString safeName = UUID.randomUUID().toString() + \".\" + ext;\nfileItem.write(new File(uploadDir, safeName));"
-      }
+      ]
     },
     {
       "ruleId": "IV-1.7",
@@ -873,13 +821,11 @@
       ],
       "remediation": {
         "strategy": "REDIRECT_WHITELIST",
-        "description": "리다이렉트 대상 URL을 서버 측에서 허용 목록과 비교 검증",
+        "description": "외부 입력 URL을 검증 없이 리다이렉트 대상으로 사용하면 오픈 리다이렉트(Open Redirect) 취약점이 발생한다. 공격자는 신뢰할 수 있는 도메인(bank.com)의 URL에 피싱 사이트 주소를 파라미터로 숨겨 피해자를 악성 사이트로 유도하고, 자격증명 탈취나 악성코드 배포에 활용한다. 이메일 피싱과 결합될 경우 정상 도메인 URL처럼 보이므로 탐지가 어렵다. 리다이렉트 대상 URL은 서버 측 허용 목록(도메인 화이트리스트)과 비교하거나, 절대 URL을 허용하지 않고 상대 경로만 허용해야 한다.",
         "guideRef": "PART4 제1절 7항 (p.239-243)",
-        "remediationCode": "// [수정] IV-1.7 오픈 리다이렉트 방지: 허용 도메인 화이트리스트\n// ❌ 취약: 외부 입력 URL로 무조건 리다이렉트\nString url = request.getParameter(\"returnUrl\");\nresponse.sendRedirect(url);\n\n// ✅ 안전: 허용 호스트 검증 또는 상대경로만 허용\nprivate static final Set<String> ALLOWED =\n    Set.of(\"example.com\", \"www.example.com\");\nString url = request.getParameter(\"returnUrl\");\ntry {\n    URI uri = new URI(url);\n    if (uri.isAbsolute() &&\n        !ALLOWED.contains(uri.getHost()))\n        url = \"/\";  // 허용 목록 외 → 홈으로\n} catch (URISyntaxException e) {\n    url = \"/\";\n}\nresponse.sendRedirect(url);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력 URL로 무조건 리다이렉트 (Open Redirect)\nString url = request.getParameter(\"returnUrl\");\nresponse.sendRedirect(url); // 피싱 사이트로 유도 가능",
-        "good": "// ✅ 화이트리스트 허용 도메인만 리다이렉트\nString url = request.getParameter(\"returnUrl\");\nList<String> allowedHosts = Arrays.asList(\"example.com\", \"www.example.com\");\ntry {\n    URI uri = new URI(url);\n    if (!allowedHosts.contains(uri.getHost())) {\n        url = \"/\"; // 허용되지 않으면 홈으로\n    }\n} catch (URISyntaxException e) {\n    url = \"/\";\n}\nresponse.sendRedirect(url);"
+        "bad_code": "// ❌ 외부 입력 URL로 무조건 리다이렉트 (Open Redirect)\nString url = request.getParameter(\"returnUrl\");\nresponse.sendRedirect(url); // 피싱 사이트로 유도 가능",
+        "good_code": "// ✅ 화이트리스트 허용 도메인만 리다이렉트\nString url = request.getParameter(\"returnUrl\");\nList<String> allowedHosts = Arrays.asList(\"example.com\", \"www.example.com\");\ntry {\n    URI uri = new URI(url);\n    if (!allowedHosts.contains(uri.getHost())) {\n        url = \"/\"; // 허용되지 않으면 홈으로\n    }\n} catch (URISyntaxException e) {\n    url = \"/\";\n}\nresponse.sendRedirect(url);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/601.html"
       }
     },
     {
@@ -910,17 +856,15 @@
       ],
       "remediation": {
         "strategy": "DISABLE_XML_ENTITY",
-        "description": "XML 파서에서 외부 엔티티 참조 및 DOCTYPE 선언을 비활성화",
+        "description": "기본 설정의 XML 파서는 외부 엔티티(External Entity) 참조를 허용하므로, 공격자가 제어하는 XML 데이터를 파싱하면 XXE(XML External Entity) 취약점이 발생한다. 공격자는 <!ENTITY xxe SYSTEM \"file:///etc/passwd\"> 같은 외부 엔티티를 정의하여 서버 파일 읽기, 내부 네트워크 탐색(SSRF), 서비스 거부 공격(Billion Laughs)을 수행할 수 있다. 이는 서버 기밀 파일 전체 노출, 내부망 접근, 애플리케이션 다운 등의 심각한 피해를 초래한다. XML 파서에서 DOCTYPE 선언과 외부 엔티티 참조를 완전히 비활성화해야 한다.",
         "guideRef": "PART4 제1절 8항 (p.244-250)",
-        "remediationCode": "// [수정] IV-1.8 XXE 방지: XML 파서 외부 엔티티 비활성화\n// ❌ 취약: 기본 설정 XML 파서 사용 (외부 엔티티 허용)\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\nDocument doc = dbf.newDocumentBuilder().parse(inputStream);\n\n// ✅ 안전: DOCTYPE 및 외부 엔티티 완전 비활성화\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\ndbf.setFeature(\n    \"http://apache.org/xml/features/disallow-doctype-decl\", true);\ndbf.setFeature(\n    \"http://xml.org/sax/features/external-general-entities\", false);\ndbf.setFeature(\n    \"http://xml.org/sax/features/external-parameter-entities\", false);\ndbf.setExpandEntityReferences(false);\ndbf.setXIncludeAware(false);\nDocument doc = dbf.newDocumentBuilder().parse(inputStream);"
+        "bad_code": "// ❌ XML 외부 엔티티(XXE) 미차단\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\nDocumentBuilder db = dbf.newDocumentBuilder();\nDocument doc = db.parse(xmlInput); // XXE 취약",
+        "good_code": "// ✅ DOCTYPE 및 외부 엔티티 참조 비활성화\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\ndbf.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\ndbf.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\ndbf.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\ndbf.setXIncludeAware(false);\ndbf.setExpandEntityReferences(false);\nDocumentBuilder db = dbf.newDocumentBuilder();\nDocument doc = db.parse(xmlInput);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/611.html"
       },
       "dangerousPatterns": [
         "DocumentBuilderFactory|SAXParserFactory|XMLInputFactory"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ XML 외부 엔티티(XXE) 미차단\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\nDocumentBuilder db = dbf.newDocumentBuilder();\nDocument doc = db.parse(xmlInput); // XXE 취약",
-        "good": "// ✅ DOCTYPE 및 외부 엔티티 참조 비활성화\nDocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();\ndbf.setFeature(\"http://apache.org/xml/features/disallow-doctype-decl\", true);\ndbf.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\ndbf.setFeature(\"http://xml.org/sax/features/external-parameter-entities\", false);\ndbf.setXIncludeAware(false);\ndbf.setExpandEntityReferences(false);\nDocumentBuilder db = dbf.newDocumentBuilder();\nDocument doc = db.parse(xmlInput);"
-      }
+      ]
     },
     {
       "ruleId": "IV-1.9",
@@ -949,13 +893,11 @@
       ],
       "remediation": {
         "strategy": "PARAMETERIZED_XPATH",
-        "description": "XPath 변수 바인딩 사용 또는 특수문자 필터링 적용",
+        "description": "외부 입력값이 검증 없이 XPath 표현식 문자열에 직접 포함되면 XPath 삽입 취약점이 발생한다. 공격자는 XPath 메타 문자(', \", [ ])를 삽입하여 쿼리 구조를 변조하고, 인증 우회(항상 참인 조건 삽입) 또는 XML 문서의 모든 데이터 조회가 가능하다. XML 기반 인증 시스템에서 이 취약점이 발생하면 비밀번호 없이 로그인이 가능하다. XPathVariableResolver를 통한 변수 바인딩을 사용하거나, 입력값에서 XPath 특수문자를 제거·인코딩해야 한다.",
         "guideRef": "PART4 제1절 9항 (p.251-263)",
-        "remediationCode": "// [수정] IV-1.9 XPath 삽입 방지: 변수 바인딩 사용\n// ❌ 취약: 외부 입력값을 XPath 표현식에 직접 연결\nString expr = \"//user[name='\" + name + \"' and pwd='\" + pwd + \"']\";\nxpath.evaluate(expr, doc, XPathConstants.NODESET);\n\n// ✅ 안전: XPathVariableResolver로 파라미터 바인딩\nXPath xp = XPathFactory.newInstance().newXPath();\nxp.setXPathVariableResolver(var -> {\n    if (\"name\".equals(var.getLocalPart())) return name;\n    if (\"pwd\".equals(var.getLocalPart()))  return pwd;\n    return null;\n});\nNodeList result = (NodeList) xp.evaluate(\n    \"//user[name=$name and pwd=$pwd]\", doc,\n    XPathConstants.NODESET);\n// 또는: 특수문자(\\' \\\" [ ] * /) 필터링"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 XPath 표현식에 직접 삽입\nString user = request.getParameter(\"user\");\nString expr = \"/accounts/user[name='\" + user + \"']/password\";\nString pwd = (String) xpath.evaluate(expr, doc, XPathConstants.STRING);",
-        "good": "// ✅ 특수문자 제거 + 화이트리스트 검증\nString user = request.getParameter(\"user\");\nif (!user.matches(\"[a-zA-Z0-9_]{1,30}\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 사용자명\");\n}\nString expr = \"/accounts/user[name='\" + user + \"']/password\";\nString pwd = (String) xpath.evaluate(expr, doc, XPathConstants.STRING);"
+        "bad_code": "// ❌ 외부 입력값을 XPath 표현식에 직접 삽입\nString user = request.getParameter(\"user\");\nString expr = \"/accounts/user[name='\" + user + \"']/password\";\nString pwd = (String) xpath.evaluate(expr, doc, XPathConstants.STRING);",
+        "good_code": "// ✅ 특수문자 제거 + 화이트리스트 검증\nString user = request.getParameter(\"user\");\nif (!user.matches(\"[a-zA-Z0-9_]{1,30}\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 사용자명\");\n}\nString expr = \"/accounts/user[name='\" + user + \"']/password\";\nString pwd = (String) xpath.evaluate(expr, doc, XPathConstants.STRING);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/652.html"
       }
     },
     {
@@ -984,13 +926,11 @@
       ],
       "remediation": {
         "strategy": "LDAP_ENCODING",
-        "description": "LDAP 필터에 사용되는 입력값에 LDAP 특수문자 인코딩 적용",
+        "description": "LDAP 필터에 사용되는 입력값에 LDAP 특수문자 인코딩이 적용되지 않으면 LDAP 삽입 취약점이 발생한다. 공격자는 *(와일드카드), (, ), \\, NUL 문자를 삽입하여 LDAP 필터 로직을 변조하고, 모든 사용자 정보 조회나 인증 우회를 시도할 수 있다. Active Directory나 OpenLDAP 서버의 전체 사용자 계정 정보가 노출될 수 있어 조직 전체 보안에 위협이 된다. RFC 4515 기준으로 LDAP 특수문자를 인코딩하거나 화이트리스트 정규식으로 입력값을 제한해야 한다.",
         "guideRef": "PART4 제1절 10항 (p.264-271)",
-        "remediationCode": "// [수정] IV-1.10 LDAP 삽입 방지: 특수문자 인코딩\n// ❌ 취약: 외부 입력을 LDAP 필터에 직접 사용\nString filter = \"(&(uid=\" + userId + \")(pwd=\" + pwd + \"))\";\nctx.search(base, filter, null);\n\n// ✅ 안전: LDAP 특수문자 인코딩 (RFC 4515)\nprivate String encodeLdap(String s) {\n    return s.replace(\"\\\\\", \"\\\\5c\")\n            .replace(\"*\",  \"\\\\2a\")\n            .replace(\"(\",  \"\\\\28\")\n            .replace(\")\",  \"\\\\29\")\n            .replace(\"\\0\", \"\\\\00\");\n}\nString safeUid = encodeLdap(userId);\nString filter = \"(&(uid=\" + safeUid + \"))\";\n// 비밀번호는 필터에 넣지 말고 LDAP bind 인증으로 처리\nctx.addToEnvironment(Context.SECURITY_CREDENTIALS, pwd);\nctx.search(base, filter, null);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 LDAP 필터에 직접 삽입\nString uid = request.getParameter(\"uid\");\nString filter = \"(uid=\" + uid + \")\";\nNamingEnumeration<?> ne = ctx.search(base, filter, controls);",
-        "good": "// ✅ LDAP 특수문자 이스케이프\nString uid = request.getParameter(\"uid\");\nString safe = uid.replaceAll(\"[\\\\\\\\*\\\\(\\\\)\\0/]\", \"\");\nif (!safe.matches(\"[a-zA-Z0-9._-]{1,64}\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 UID\");\n}\nString filter = \"(uid=\" + safe + \")\";\nNamingEnumeration<?> ne = ctx.search(base, filter, controls);"
+        "bad_code": "// ❌ 외부 입력값을 LDAP 필터에 직접 삽입\nString uid = request.getParameter(\"uid\");\nString filter = \"(uid=\" + uid + \")\";\nNamingEnumeration<?> ne = ctx.search(base, filter, controls);",
+        "good_code": "// ✅ LDAP 특수문자 이스케이프\nString uid = request.getParameter(\"uid\");\nString safe = uid.replaceAll(\"[\\\\\\\\*\\\\(\\\\)\\0/]\", \"\");\nif (!safe.matches(\"[a-zA-Z0-9._-]{1,64}\")) {\n    throw new IllegalArgumentException(\"허용되지 않는 UID\");\n}\nString filter = \"(uid=\" + safe + \")\";\nNamingEnumeration<?> ne = ctx.search(base, filter, controls);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/90.html"
       }
     },
     {
@@ -1017,17 +957,15 @@
       ],
       "remediation": {
         "strategy": "CSRF_TOKEN",
-        "description": "중요 기능 요청에 CSRF 토큰 생성·검증 또는 SameSite 쿠키 속성 적용",
+        "description": "상태 변경 요청(POST/PUT/DELETE)에 CSRF 토큰 검증이 없으면 CSRF(Cross-Site Request Forgery) 취약점이 발생한다. 공격자는 피해자가 방문하는 악성 사이트에 숨겨진 폼을 통해 피해자의 세션을 이용한 비밀번호 변경, 계좌이체, 계정 삭제 등의 요청을 서버에 전송할 수 있다. 피해자는 자신이 공격을 당하고 있는지 인식하지 못한 채 피해가 발생하는 매우 교묘한 공격이다. Synchronizer Token Pattern(CSRF 토큰 생성·검증) 또는 SameSite 쿠키 속성을 적용해야 한다.",
         "guideRef": "PART4 제1절 11항 (p.272-275)",
-        "remediationCode": "// [수정] IV-1.11 CSRF 방지: Synchronizer Token 패턴 구현\n// ❌ 취약: POST 요청에 CSRF 토큰 검증 없음\nprotected void doPost(HttpServletRequest req, ...) {\n    userService.delete(req.getParameter(\"userId\"));\n}\n\n// ✅ 안전: 토큰 생성 + 검증\n// [로그인 시 생성]\nbyte[] bytes = new byte[32];\nnew SecureRandom().nextBytes(bytes);\nsession.setAttribute(\"_csrf\",\n    Base64.getUrlEncoder().withoutPadding().encodeToString(bytes));\n// [폼 히든 필드]\n// <input type=\"hidden\" name=\"_csrf\" value=\"${sessionScope._csrf}\">\n// [POST 검증]\nString req = request.getParameter(\"_csrf\");\nString ses = (String) session.getAttribute(\"_csrf\");\nif (!MessageDigest.isEqual(req.getBytes(), ses.getBytes()))\n    throw new SecurityException(\"CSRF 토큰 불일치\");\n// Spring Security: 자동 처리 (@EnableWebSecurity)"
+        "bad_code": "// ❌ CSRF 토큰 없는 상태 변경 요청\n// POST /deleteAccount — 토큰 검증 없음\npublic void deleteAccount(HttpServletRequest req) {\n    String userId = (String) req.getSession().getAttribute(\"userId\");\n    userService.delete(userId);\n}",
+        "good_code": "// ✅ Synchronizer Token 패턴으로 CSRF 방어\npublic void deleteAccount(HttpServletRequest req) {\n    HttpSession session = req.getSession(false);\n    String expected = (String) session.getAttribute(\"csrfToken\");\n    String received = req.getParameter(\"csrfToken\");\n    if (expected == null || !expected.equals(received)) {\n        throw new SecurityException(\"CSRF 토큰 불일치\");\n    }\n    String userId = (String) session.getAttribute(\"userId\");\n    userService.delete(userId);\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/352.html"
       },
       "dangerousPatterns": [
         "void doPost\\(HttpServletRequest|void doPut\\(|void doDelete\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ CSRF 토큰 없는 상태 변경 요청\n// POST /deleteAccount — 토큰 검증 없음\npublic void deleteAccount(HttpServletRequest req) {\n    String userId = (String) req.getSession().getAttribute(\"userId\");\n    userService.delete(userId);\n}",
-        "good": "// ✅ Synchronizer Token 패턴으로 CSRF 방어\npublic void deleteAccount(HttpServletRequest req) {\n    HttpSession session = req.getSession(false);\n    String expected = (String) session.getAttribute(\"csrfToken\");\n    String received = req.getParameter(\"csrfToken\");\n    if (expected == null || !expected.equals(received)) {\n        throw new SecurityException(\"CSRF 토큰 불일치\");\n    }\n    String userId = (String) session.getAttribute(\"userId\");\n    userService.delete(userId);\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-1.12",
@@ -1056,13 +994,11 @@
       ],
       "remediation": {
         "strategy": "SSRF_ALLOWLIST",
-        "description": "서버 측에서 허용된 호스트 목록 검증 후 외부 요청 실행",
+        "description": "서버가 외부 입력 URL을 검증 없이 내부적으로 요청하면 SSRF(Server-Side Request Forgery) 취약점이 발생한다. 공격자는 내부망 주소(169.254.x.x, 10.x.x.x, localhost)나 클라우드 메타데이터 서비스(169.254.169.254)를 대상으로 지정하여 방화벽으로 보호된 내부 서비스에 접근하거나 클라우드 IAM 자격증명을 탈취할 수 있다. 이는 내부 API 서버 접근, 데이터베이스 직접 접속, 클라우드 환경 전체 탈취로 이어질 수 있다. 허용된 호스트 화이트리스트 검증과 내부 IP 대역 차단을 모두 적용해야 한다.",
         "guideRef": "PART4 제1절 12항 (p.276-283)",
-        "remediationCode": "// [수정] IV-1.12 SSRF 방지: 허용 호스트 화이트리스트 검증\n// ❌ 취약: 외부 입력 URL로 서버가 직접 요청\nString targetUrl = request.getParameter(\"url\");\nInputStream is = new URL(targetUrl).openStream();\n\n// ✅ 안전: 스킴·호스트 엄격 검증\nprivate static final Set<String> ALLOWED_HOSTS =\n    Set.of(\"api.partner.com\", \"cdn.example.com\");\nString targetUrl = request.getParameter(\"url\");\nURI uri = new URI(targetUrl);\nif (!\"https\".equalsIgnoreCase(uri.getScheme()))\n    throw new SecurityException(\"HTTPS만 허용\");\nString host = uri.getHost();\nif (host == null || !ALLOWED_HOSTS.contains(host.toLowerCase()))\n    throw new SecurityException(\"허용되지 않는 호스트: \" + host);\nHttpsURLConnection conn =\n    (HttpsURLConnection) uri.toURL().openConnection();"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력 URL을 서버에서 직접 요청 (SSRF)\nString url = request.getParameter(\"imageUrl\");\nURL target = new URL(url); // 내부망(169.254.x.x, 10.x.x.x) 접근 가능\nInputStream is = target.openStream();",
-        "good": "// ✅ 허용 도메인 화이트리스트 + 내부 IP 차단\nString url = request.getParameter(\"imageUrl\");\nURI uri = new URI(url);\nString host = uri.getHost();\nInetAddress addr = InetAddress.getByName(host);\nif (addr.isLoopbackAddress() || addr.isSiteLocalAddress()\n        || addr.isLinkLocalAddress()) {\n    throw new SecurityException(\"내부 네트워크 접근 불가\");\n}\nList<String> allowedHosts = Arrays.asList(\"cdn.example.com\");\nif (!allowedHosts.contains(host)) {\n    throw new SecurityException(\"허용되지 않는 호스트\");\n}"
+        "bad_code": "// ❌ 외부 입력 URL을 서버에서 직접 요청 (SSRF)\nString url = request.getParameter(\"imageUrl\");\nURL target = new URL(url); // 내부망(169.254.x.x, 10.x.x.x) 접근 가능\nInputStream is = target.openStream();",
+        "good_code": "// ✅ 허용 도메인 화이트리스트 + 내부 IP 차단\nString url = request.getParameter(\"imageUrl\");\nURI uri = new URI(url);\nString host = uri.getHost();\nInetAddress addr = InetAddress.getByName(host);\nif (addr.isLoopbackAddress() || addr.isSiteLocalAddress()\n        || addr.isLinkLocalAddress()) {\n    throw new SecurityException(\"내부 네트워크 접근 불가\");\n}\nList<String> allowedHosts = Arrays.asList(\"cdn.example.com\");\nif (!allowedHosts.contains(host)) {\n    throw new SecurityException(\"허용되지 않는 호스트\");\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/918.html"
       }
     },
     {
@@ -1091,13 +1027,11 @@
       ],
       "remediation": {
         "strategy": "CRLF_REMOVAL",
-        "description": "HTTP 헤더 값에 포함되는 입력값에서 CR(\\r), LF(\\n) 문자 제거",
+        "description": "HTTP 헤더 값에 CR(\\r), LF(\\n) 문자가 포함된 외부 입력값을 필터링 없이 설정하면 HTTP 응답분할 취약점이 발생한다. 공격자는 CRLF 시퀀스를 삽입하여 HTTP 응답을 분리하고 임의의 헤더·쿠키를 주입하거나 악성 HTML 응답을 캐시에 저장(캐시 포이즈닝)할 수 있다. 이를 통해 XSS 공격 실행, 세션 쿠키 조작, 중간자 공격 등의 2차 공격이 가능하다. setHeader·addHeader·sendRedirect에 사용하는 모든 입력값에서 CR/LF 및 유사 제어 문자(\\u0085, \\u2028, \\u2029)를 제거해야 한다.",
         "guideRef": "PART4 제1절 13항 (p.284-289)",
-        "remediationCode": "// [수정] IV-1.13 HTTP 응답분할 방지: CR/LF 문자 제거\n// ❌ 취약: 외부 입력값을 HTTP 헤더에 직접 삽입\nString lang = request.getParameter(\"lang\");\nresponse.setHeader(\"Content-Language\", lang);\n\n// ✅ 안전: CR·LF 및 유사 제어 문자 제거 후 설정\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\n        \"[\\\\r\\\\n\\\\u0085\\\\u2028\\\\u2029]\", \"\");\n    if (!lang.matches(\"^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{2,8})*$\"))\n        lang = \"ko\";\n    response.setHeader(\"Content-Language\", lang);\n}\n// sendRedirect URL도 동일하게 CR/LF 제거\nString loc = request.getParameter(\"returnUrl\");\nif (loc != null)\n    loc = loc.replaceAll(\"[\\\\r\\\\n]\", \"\");\nresponse.sendRedirect(loc);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 HTTP 헤더에 직접 삽입 (CRLF 삽입)\nString lang = request.getParameter(\"lang\");\n// lang = \"ko\\r\\nSet-Cookie: session=evil\" 같은 공격 가능\nresponse.setHeader(\"Content-Language\", lang);",
-        "good": "// ✅ CR/LF 문자 제거 + 화이트리스트 검증\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n]\", \"\");\n    if (!lang.matches(\"[a-zA-Z]{2,8}(-[a-zA-Z]{2,8})?\")) {\n        lang = \"ko\";\n    }\n    response.setHeader(\"Content-Language\", lang);\n}"
+        "bad_code": "// ❌ 외부 입력값을 HTTP 헤더에 직접 삽입 (CRLF 삽입)\nString lang = request.getParameter(\"lang\");\n// lang = \"ko\\r\\nSet-Cookie: session=evil\" 같은 공격 가능\nresponse.setHeader(\"Content-Language\", lang);",
+        "good_code": "// ✅ CR/LF 문자 제거 + 화이트리스트 검증\nString lang = request.getParameter(\"lang\");\nif (lang != null) {\n    lang = lang.replaceAll(\"[\\\\r\\\\n]\", \"\");\n    if (!lang.matches(\"[a-zA-Z]{2,8}(-[a-zA-Z]{2,8})?\")) {\n        lang = \"ko\";\n    }\n    response.setHeader(\"Content-Language\", lang);\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/113.html"
       }
     },
     {
@@ -1123,17 +1057,15 @@
       ],
       "remediation": {
         "strategy": "BOUNDS_CHECK",
-        "description": "정수 연산 전 범위 검사 또는 BigInteger 사용, Math.addExact 활용",
+        "description": "외부 입력 정수값을 범위 검사 없이 연산에 사용하면 정수형 오버플로우 취약점이 발생한다. 공격자는 Integer.MAX_VALUE에 가까운 값을 입력하여 덧셈·곱셈 결과가 오버플로우되도록 유도하고, 이로 인해 배열 크기가 음수가 되거나 금액 계산이 음수로 처리되는 논리 오류를 발생시킬 수 있다. 전자상거래에서 상품 가격·수량 오버플로우를 이용한 결제 우회나 서비스 거부 공격이 가능하다. Math.addExact/multiplyExact로 오버플로우 감지 예외를 발생시키거나, 연산 전 값의 허용 범위를 명시적으로 검증해야 한다.",
         "guideRef": "PART4 제1절 14항 (p.290-296)",
-        "remediationCode": "// [수정] IV-1.14 정수형 오버플로우 방지: 범위 검사 + 안전 연산\n// ❌ 취약: 입력값 범위 검사 없이 정수 연산\nint count = Integer.parseInt(request.getParameter(\"count\"));\nint total = count * unitPrice;  // 오버플로우 가능\n\n// ✅ 안전 방법 1: Math.multiplyExact (오버플로우 시 예외)\nint count = Integer.parseInt(request.getParameter(\"count\"));\nif (count < 1 || count > 10000)\n    throw new IllegalArgumentException(\"수량 초과 (1~10000)\");\nlong total;\ntry {\n    total = Math.multiplyExact((long) count, unitPrice);\n} catch (ArithmeticException e) {\n    throw new IllegalArgumentException(\"계산 결과 범위 초과\");\n}\n\n// ✅ 안전 방법 2: BigDecimal (금융 계산)\nBigDecimal amount = BigDecimal.valueOf(count)\n    .multiply(BigDecimal.valueOf(unitPrice));"
+        "bad_code": "// ❌ int 연산에서 정수형 오버플로우 미검증\nint price = Integer.parseInt(request.getParameter(\"price\"));\nint qty   = Integer.parseInt(request.getParameter(\"qty\"));\nint total = price * qty; // 오버플로우 시 음수 → 요금 우회 가능",
+        "good_code": "// ✅ long 타입 사용 또는 범위 사전 검증\nint price = Integer.parseInt(request.getParameter(\"price\"));\nint qty   = Integer.parseInt(request.getParameter(\"qty\"));\nif (price <= 0 || price > 1_000_000 || qty <= 0 || qty > 10_000) {\n    throw new IllegalArgumentException(\"입력값 범위 초과\");\n}\nlong total = (long) price * qty; // long으로 계산",
+        "reference_url": "https://cwe.mitre.org/data/definitions/190.html"
       },
       "dangerousPatterns": [
         "Integer\\.parseInt\\(|Long\\.parseLong\\(|\\(byte\\)\\s*\\w"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ int 연산에서 정수형 오버플로우 미검증\nint price = Integer.parseInt(request.getParameter(\"price\"));\nint qty   = Integer.parseInt(request.getParameter(\"qty\"));\nint total = price * qty; // 오버플로우 시 음수 → 요금 우회 가능",
-        "good": "// ✅ long 타입 사용 또는 범위 사전 검증\nint price = Integer.parseInt(request.getParameter(\"price\"));\nint qty   = Integer.parseInt(request.getParameter(\"qty\"));\nif (price <= 0 || price > 1_000_000 || qty <= 0 || qty > 10_000) {\n    throw new IllegalArgumentException(\"입력값 범위 초과\");\n}\nlong total = (long) price * qty; // long으로 계산"
-      }
+      ]
     },
     {
       "ruleId": "IV-1.15",
@@ -1163,13 +1095,11 @@
       ],
       "remediation": {
         "strategy": "SERVER_SIDE_AUTH_CHECK",
-        "description": "보안 결정은 서버 측 세션/SecurityContext에서만 수행, 클라이언트 입력값 사용 금지",
+        "description": "클라이언트에서 전달된 파라미터(role, isAdmin, permission 등)를 서버 측 보안 결정에 직접 사용하면 보안 결정 우회 취약점이 발생한다. 공격자는 HTTP 파라미터, 숨겨진 폼 필드, 쿠키 등을 조작하여 관리자 권한을 획득하거나 접근 제한 기능을 우회할 수 있다. 이는 관리자 기능 무단 사용, 타인 데이터 무단 접근, 시스템 설정 변경 등의 피해로 이어진다. 보안 결정은 반드시 서버 측 세션(HttpSession)이나 Spring Security의 SecurityContextHolder에서만 권한 정보를 가져와야 하며 클라이언트 입력값을 신뢰해서는 안 된다.",
         "guideRef": "PART4 제1절 15항 (p.297-302)",
-        "remediationCode": "// [수정] IV-1.15 보안 결정 입력값 방지: 클라이언트 값 사용 금지\n// ❌ 취약: 클라이언트 파라미터로 권한 결정\nString role = request.getParameter(\"role\");\nif (\"admin\".equals(role)) grantAccess();\n\n// ✅ 안전: 서버 세션·SecurityContext에서만 판단\nHttpSession session = request.getSession(false);\nif (session == null)\n    throw new UnauthorizedException(\"로그인 필요\");\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user == null || !\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"권한 없음\");\ngrantAccess();\n// Spring Security: @PreAuthorize(\"hasRole('ADMIN')\")\n// SecurityContextHolder.getContext().getAuthentication()"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 클라이언트 파라미터로 보안 결정 (은닉 필드·쿠키 조작 가능)\nString role = request.getParameter(\"role\"); // 공격자가 \"admin\" 전달\nif (\"admin\".equals(role)) { grantAdminAccess(); }",
-        "good": "// ✅ 서버 세션 기반 보안 결정\nHttpSession session = request.getSession(false);\nif (session == null) { response.sendRedirect(\"/login\"); return; }\nString role = (String) session.getAttribute(\"role\");\nif (\"admin\".equals(role)) {\n    grantAdminAccess();\n}"
+        "bad_code": "// ❌ 클라이언트 파라미터로 보안 결정 (은닉 필드·쿠키 조작 가능)\nString role = request.getParameter(\"role\"); // 공격자가 \"admin\" 전달\nif (\"admin\".equals(role)) { grantAdminAccess(); }",
+        "good_code": "// ✅ 서버 세션 기반 보안 결정\nHttpSession session = request.getSession(false);\nif (session == null) { response.sendRedirect(\"/login\"); return; }\nString role = (String) session.getAttribute(\"role\");\nif (\"admin\".equals(role)) {\n    grantAdminAccess();\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/807.html"
       }
     },
     {
@@ -1188,17 +1118,15 @@
       "sanitizers": [],
       "remediation": {
         "strategy": "SAFE_ARRAY_ACCESS",
-        "description": "배열·버퍼 접근 전 경계값 검사, Java의 경우 NIO Buffer API 활용",
+        "description": "외부 입력값으로 배열 크기나 버퍼 복사 길이를 제한 없이 결정하면 메모리 버퍼 오버플로우 취약점이 발생한다. Java는 배열 인덱스 초과 시 ArrayIndexOutOfBoundsException을 발생시키지만, 음수 길이 또는 정수 오버플로우로 인한 잘못된 크기 계산은 서비스 거부나 논리 오류를 유발한다. 악의적인 대용량 배열 할당 요청으로 서버 메모리를 고갈시키는 서비스 거부 공격도 가능하다. 배열 크기·인덱스·복사 길이에 대해 허용 범위를 명시적으로 검증하고, NIO ByteBuffer API를 활용하여 안전하게 처리해야 한다.",
         "guideRef": "PART4 제1절 16항 (p.303-308)",
-        "remediationCode": "// [수정] IV-1.16 버퍼 오버플로우 방지: 경계 검사 + NIO Buffer API\n// ❌ 취약: 외부 입력값으로 배열 크기·인덱스 지정\nint size = Integer.parseInt(request.getParameter(\"size\"));\nbyte[] buf = new byte[size];  // 음수/대용량 가능\n\n// ✅ 안전: 범위 검사 후 NIO Buffer API 사용\nint size = Integer.parseInt(request.getParameter(\"size\"));\nif (size <= 0 || size > 65536)\n    throw new IllegalArgumentException(\"크기 범위 초과: \" + size);\nByteBuffer buf = ByteBuffer.allocate(size);\n// System.arraycopy 범위 검사\nif (length < 0 || srcOff < 0 || srcOff + length > src.length)\n    throw new ArrayIndexOutOfBoundsException(\"복사 범위 초과\");\nbyte[] copy = Arrays.copyOfRange(src, srcOff, srcOff + length);"
+        "bad_code": "// ❌ 경계 검사 없이 배열 접근 (버퍼 오버플로우)\nbyte[] buf = new byte[64];\nint len = Integer.parseInt(request.getParameter(\"len\"));\nSystem.arraycopy(srcData, 0, buf, 0, len); // len > 64 시 예외",
+        "good_code": "// ✅ 배열 크기 범위 내로 복사 길이 제한\nbyte[] buf = new byte[64];\nint len = Integer.parseInt(request.getParameter(\"len\"));\nif (len < 0 || len > buf.length || len > srcData.length) {\n    throw new IllegalArgumentException(\"복사 길이 범위 초과: \" + len);\n}\nSystem.arraycopy(srcData, 0, buf, 0, len);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/119.html"
       },
       "dangerousPatterns": [
         "System\\.arraycopy\\(|byte\\[\\].*=.*new byte|ByteBuffer\\.allocate"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 경계 검사 없이 배열 접근 (버퍼 오버플로우)\nbyte[] buf = new byte[64];\nint len = Integer.parseInt(request.getParameter(\"len\"));\nSystem.arraycopy(srcData, 0, buf, 0, len); // len > 64 시 예외",
-        "good": "// ✅ 배열 크기 범위 내로 복사 길이 제한\nbyte[] buf = new byte[64];\nint len = Integer.parseInt(request.getParameter(\"len\"));\nif (len < 0 || len > buf.length || len > srcData.length) {\n    throw new IllegalArgumentException(\"복사 길이 범위 초과: \" + len);\n}\nSystem.arraycopy(srcData, 0, buf, 0, len);"
-      }
+      ]
     },
     {
       "ruleId": "IV-1.17",
@@ -1226,13 +1154,11 @@
       ],
       "remediation": {
         "strategy": "LITERAL_FORMAT_STRING",
-        "description": "String.format 첫 인자를 리터럴로 고정, 외부 입력값을 포맷 문자열로 사용 금지",
+        "description": "외부 입력값이 String.format()이나 printf()의 첫 번째 인자(포맷 문자열)로 사용되면 포맷 스트링 삽입 취약점이 발생한다. 공격자는 %n, %s, %x 같은 포맷 지정자를 삽입하여 스택 메모리 내용 노출, 비정상 종료, 임의 메모리 쓰기 등을 시도할 수 있으며, Java 환경에서는 주로 정보 노출과 서비스 거부 공격에 악용된다. 로그 시스템에서 포맷 스트링 취약점이 발생하면 공격자가 로그를 오염시켜 보안 감사를 방해할 수 있다. 포맷 문자열은 반드시 소스코드 리터럴로 고정하고, 외부 입력값은 인자(%s의 대응값)로만 전달해야 한다.",
         "guideRef": "PART4 제1절 17항 (p.309-313)",
-        "remediationCode": "// [수정] IV-1.17 포맷 스트링 삽입 방지: 포맷 문자열을 리터럴로 고정\n// ❌ 취약: 외부 입력을 String.format() 첫 인자로 사용\nString fmt = request.getParameter(\"format\");\nString out = String.format(fmt, args);  // %n, %s 등 임의 지정자 주입\n\n// ✅ 안전: 포맷 문자열은 코드에 리터럴로 고정\nString name = request.getParameter(\"name\");\nString out = String.format(\"안녕하세요, %s님!\", name);\n\n// 로그도 동일 원칙 적용\n// ❌ log.info(userInput);          → 포맷 인자 주입 가능\n// ✅ log.info(\"입력: {}\", userInput);  → 안전\n// ✅ log.info(\"입력: {}\", sanitized);  → 외부 입력도 인자로만"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 외부 입력값을 포맷 문자열로 직접 사용\nString fmt = request.getParameter(\"format\"); // \"%n%n%n...\" 공격 가능\nString output = String.format(fmt, userData);\nlog.info(fmt); // 로그에서도 동일한 문제",
-        "good": "// ✅ 포맷 문자열을 상수로 고정\nString userData = request.getParameter(\"data\");\nString output = String.format(\"%s\", userData); // 포맷 문자열 고정\nlog.info(\"수신 데이터: {}\", userData); // SLF4J {}는 포맷 삽입 불가"
+        "bad_code": "// ❌ 외부 입력값을 포맷 문자열로 직접 사용\nString fmt = request.getParameter(\"format\"); // \"%n%n%n...\" 공격 가능\nString output = String.format(fmt, userData);\nlog.info(fmt); // 로그에서도 동일한 문제",
+        "good_code": "// ✅ 포맷 문자열을 상수로 고정\nString userData = request.getParameter(\"data\");\nString output = String.format(\"%s\", userData); // 포맷 문자열 고정\nlog.info(\"수신 데이터: {}\", userData); // SLF4J {}는 포맷 삽입 불가",
+        "reference_url": "https://cwe.mitre.org/data/definitions/134.html"
       }
     },
     {
@@ -1248,17 +1174,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "AUTH_GATE_FILTER",
-        "description": "모든 중요 기능 진입 전 인증 상태 확인 필터 적용",
+        "description": "중요 기능(관리자 페이지, 금융 거래, 개인정보 처리 등)에 인증 검사 없이 접근이 허용되면 인증 우회 취약점이 발생한다. 공격자는 인증 로직이 누락된 URL에 직접 접근하거나, 각 서블릿마다 산발적으로 구현된 인증 로직의 누락 지점을 찾아 무단 접근할 수 있다. 이는 관리자 기능 무단 사용, 개인정보 대량 조회·삭제, 금융 거래 조작 등 심각한 피해를 유발한다. 모든 중요 기능에 일괄 적용되는 인증 필터(AuthFilter)나 Spring Security의 접근 제어 설정을 통해 인증 게이트를 중앙집중화해야 한다.",
         "guideRef": "PART4 제2절 1항 (p.314-318)",
-        "remediationCode": "// [수정] IV-2.1 인증 없는 중요기능 접근 방지\n// ❌ 취약: 중요 기능 앞에 인증 검사 없음\npublic void transferMoney(String toAcc, int amt) {\n    bankService.transfer(fromAcc, toAcc, amt);  // 인증 없음!\n}\n\n// ✅ 안전: 진입 전 인증·세션 확인\npublic void transferMoney(HttpServletRequest req,\n        String toAcc, int amt) {\n    HttpSession ses = req.getSession(false);\n    if (ses == null)\n        throw new UnauthorizedException(\"로그인이 필요합니다.\");\n    UserVO user = (UserVO) ses.getAttribute(\"loginUser\");\n    if (user == null)\n        throw new UnauthorizedException(\"세션이 만료되었습니다.\");\n    bankService.transfer(user.getAccountId(), toAcc, amt);\n}\n// Spring Security:\n// .authorizeRequests().antMatchers(\"/transfer/**\").authenticated()"
+        "bad_code": "// ❌ 인증 확인 없이 중요 기능 접근\n@GetMapping(\"/admin/deleteUser\")\npublic String deleteUser(String userId) {\n    userService.delete(userId); // 인증 미확인\n    return \"success\";\n}",
+        "good_code": "// ✅ 세션 인증 + 역할 권한 확인\n@GetMapping(\"/admin/deleteUser\")\npublic String deleteUser(String userId, HttpServletRequest request) {\n    HttpSession session = request.getSession(false);\n    if (session == null || !\"admin\".equals(session.getAttribute(\"role\"))) {\n        throw new SecurityException(\"접근 권한이 없습니다.\");\n    }\n    userService.delete(userId);\n    return \"success\";\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/306.html"
       },
       "dangerousPatterns": [
         "void doPost\\(HttpServletRequest|void doGet\\(HttpServletRequest"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 인증 확인 없이 중요 기능 접근\n@GetMapping(\"/admin/deleteUser\")\npublic String deleteUser(String userId) {\n    userService.delete(userId); // 인증 미확인\n    return \"success\";\n}",
-        "good": "// ✅ 세션 인증 + 역할 권한 확인\n@GetMapping(\"/admin/deleteUser\")\npublic String deleteUser(String userId, HttpServletRequest request) {\n    HttpSession session = request.getSession(false);\n    if (session == null || !\"admin\".equals(session.getAttribute(\"role\"))) {\n        throw new SecurityException(\"접근 권한이 없습니다.\");\n    }\n    userService.delete(userId);\n    return \"success\";\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.2",
@@ -1273,17 +1197,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "RBAC_CHECK",
-        "description": "기능별 권한 검사 로직 추가(RBAC/ABAC 패턴 적용)",
+        "description": "인증만 확인하고 자원에 대한 접근 권한(인가)을 검증하지 않으면 부적절한 인가 취약점이 발생한다. 공격자는 로그인 후 다른 사용자의 주문·문서·계정 ID를 추측하여 요청함으로써 타인의 데이터에 무단 접근하는 IDOR(Insecure Direct Object Reference) 공격을 수행할 수 있다. 이는 개인정보 대량 노출, 타인 계정 변조, 민감 문서 탈취 등의 피해를 초래한다. 자원 접근 시 반드시 자원 소유자와 요청자의 일치 여부를 검증하거나, RBAC(역할 기반 접근 제어) 및 ABAC(속성 기반 접근 제어) 패턴을 적용해야 한다.",
         "guideRef": "PART4 제2절 2항 (p.319-324)",
-        "remediationCode": "// [수정] IV-2.2 부적절한 인가 방지: 역할 기반 접근 제어(RBAC)\n// ❌ 취약: 로그인 여부만 확인하고 권한 미검사\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user != null) adminService.deleteUser(targetId);\n\n// ✅ 안전: 역할(Role) 검사 + 본인 리소스 검증\nUserVO user = (UserVO) session.getAttribute(\"loginUser\");\nif (user == null)\n    throw new UnauthorizedException(\"로그인 필요\");\nif (!\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"관리자만 접근 가능\");\n// 수평적 권한 상승 방지: 본인 리소스만 수정\nif (!user.getId().equals(targetId) &&\n    !\"ADMIN\".equals(user.getRole()))\n    throw new ForbiddenException(\"본인 계정만 수정 가능\");\nadminService.deleteUser(targetId);"
+        "bad_code": "// ❌ 로그인 여부만 확인, 자원 소유권 미검증 (수평적 권한 상승)\npublic Order getOrder(Long orderId, HttpSession session) {\n    if (session.getAttribute(\"userId\") == null) throw new UnauthorizedException();\n    return orderDao.findById(orderId); // 타인 주문 조회 가능\n}",
+        "good_code": "// ✅ 자원 소유자 검증\npublic Order getOrder(Long orderId, HttpSession session) {\n    Long userId = (Long) session.getAttribute(\"userId\");\n    if (userId == null) throw new UnauthorizedException();\n    Order order = orderDao.findById(orderId);\n    if (!order.getUserId().equals(userId)) {\n        throw new ForbiddenException(\"본인 주문만 조회 가능합니다.\");\n    }\n    return order;\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/285.html"
       },
       "dangerousPatterns": [
         "isAdmin\\(\\)|\\.getRole\\(\\)|hasPermission\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 로그인 여부만 확인, 자원 소유권 미검증 (수평적 권한 상승)\npublic Order getOrder(Long orderId, HttpSession session) {\n    if (session.getAttribute(\"userId\") == null) throw new UnauthorizedException();\n    return orderDao.findById(orderId); // 타인 주문 조회 가능\n}",
-        "good": "// ✅ 자원 소유자 검증\npublic Order getOrder(Long orderId, HttpSession session) {\n    Long userId = (Long) session.getAttribute(\"userId\");\n    if (userId == null) throw new UnauthorizedException();\n    Order order = orderDao.findById(orderId);\n    if (!order.getUserId().equals(userId)) {\n        throw new ForbiddenException(\"본인 주문만 조회 가능합니다.\");\n    }\n    return order;\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.3",
@@ -1298,17 +1220,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "LEAST_PRIVILEGE",
-        "description": "파일·디렉터리 권한을 최소 권한 원칙으로 설정",
+        "description": "파일이나 디렉터리에 과도한 접근 권한(모든 사용자 읽기·쓰기)이 설정되면 권한 설정 오류 취약점이 발생한다. 공격자는 world-readable로 설정된 설정 파일에서 DB 연결 정보·API 키·암호키를 탈취하거나, world-writable 디렉터리에 악성 파일을 삽입할 수 있다. 서버 취약점 없이도 파일 시스템 권한 오설정만으로 중요 정보를 탈취할 수 있는 위험이 있다. 최소 권한 원칙(rw-------)을 적용하여 소유자만 접근 가능하도록 설정하고, 임시 파일도 생성 시부터 제한된 권한을 적용해야 한다.",
         "guideRef": "PART4 제2절 3항 (p.325-329)",
-        "remediationCode": "// [수정] IV-2.3 잘못된 권한 설정 방지: 최소 권한 원칙\n// ❌ 취약: 파일에 모든 사용자 읽기/쓰기 허용\nFile cfg = new File(\"/app/config/db.properties\");\ncfg.setReadable(true, false);  // everyone readable\ncfg.setWritable(true, false);  // everyone writable\n\n// ✅ 안전: 소유자만 접근 가능\nPath cfgPath = Paths.get(\"/app/config/db.properties\");\nSet<PosixFilePermission> perms =\n    PosixFilePermissions.fromString(\"rw-------\");\nFiles.setPosixFilePermissions(cfgPath, perms);\n\n// 임시 파일도 최소 권한\nPath temp = Files.createTempFile(\"upload_\", \".tmp\",\n    PosixFilePermissions.asFileAttribute(\n        PosixFilePermissions.fromString(\"rw-------\")));\n// chmod 600 /app/config/*.properties  (배포 스크립트 적용)"
+        "bad_code": "// ❌ 민감 파일에 과도한 권한 설정\nFile configFile = new File(\"/app/config/db.properties\");\nconfigFile.setReadable(true, false);  // 모든 사용자 읽기 가능\nconfigFile.setWritable(true, false);  // 모든 사용자 쓰기 가능",
+        "good_code": "// ✅ 소유자만 읽기/쓰기 권한 부여\nFile configFile = new File(\"/app/config/db.properties\");\nconfigFile.setReadable(false, false); // 전체 읽기 제거\nconfigFile.setReadable(true, true);   // 소유자만 읽기\nconfigFile.setWritable(false, false); // 전체 쓰기 제거\nconfigFile.setWritable(true, true);   // 소유자만 쓰기\n// OS 수준: chmod 600 /app/config/db.properties",
+        "reference_url": "https://cwe.mitre.org/data/definitions/732.html"
       },
       "dangerousPatterns": [
         "setReadable\\(true|setWritable\\(true"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 민감 파일에 과도한 권한 설정\nFile configFile = new File(\"/app/config/db.properties\");\nconfigFile.setReadable(true, false);  // 모든 사용자 읽기 가능\nconfigFile.setWritable(true, false);  // 모든 사용자 쓰기 가능",
-        "good": "// ✅ 소유자만 읽기/쓰기 권한 부여\nFile configFile = new File(\"/app/config/db.properties\");\nconfigFile.setReadable(false, false); // 전체 읽기 제거\nconfigFile.setReadable(true, true);   // 소유자만 읽기\nconfigFile.setWritable(false, false); // 전체 쓰기 제거\nconfigFile.setWritable(true, true);   // 소유자만 쓰기\n// OS 수준: chmod 600 /app/config/db.properties"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.4",
@@ -1330,17 +1250,15 @@
       ],
       "remediation": {
         "strategy": "STRONG_CRYPTO",
-        "description": "AES-256, SHA-256 이상의 안전한 알고리즘으로 교체",
+        "description": "DES, RC4, 3DES, MD5, SHA-1 등 취약하거나 폐기된 암호화 알고리즘을 사용하면 암호화 우회 취약점이 발생한다. DES는 56비트 키로 현대 하드웨어에서 수 시간 내 전수 조사가 가능하고, MD5/SHA-1은 충돌 공격이 실용화되어 디지털 서명 위조에 활용될 수 있다. 이로 인해 암호화된 데이터 복호화, 해시 역산을 통한 비밀번호 탈취, 디지털 서명 위조 등의 피해가 발생한다. 대칭 암호화는 AES-256-GCM, 해시는 SHA-256 이상, 비대칭 암호화는 RSA-2048 이상으로 즉시 교체해야 한다.",
         "guideRef": "PART4 제2절 4항 (p.330-336)",
-        "remediationCode": "// [수정] IV-2.4 취약 암호화 알고리즘 → 안전한 알고리즘으로 교체\n// ❌ 취약: DES, RC4, MD5, SHA-1 등 취약 알고리즘\nCipher c = Cipher.getInstance(\"DES/ECB/PKCS5Padding\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\n\n// ✅ 안전: AES-256-GCM (암호화), SHA-256+ (해시)\n// [대칭 암호화 — AES-256-GCM]\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256, new SecureRandom());\nSecretKey key = kg.generateKey();\nbyte[] iv = new byte[12];\nnew SecureRandom().nextBytes(iv);\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\ncipher.init(Cipher.ENCRYPT_MODE, key,\n    new GCMParameterSpec(128, iv));\nbyte[] ciphertext = cipher.doFinal(plaintext);\n// [해시 — SHA-256]\nbyte[] hash = MessageDigest.getInstance(\"SHA-256\").digest(data);"
+        "bad_code": "// ❌ 취약한 암호 알고리즘 사용 (DES, 3DES, RC4, MD5)\nCipher c = Cipher.getInstance(\"DES\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\nbyte[] hash = md.digest(data.getBytes());",
+        "good_code": "// ✅ 안전한 알고리즘: AES-256/GCM, SHA-256 이상\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256);\nSecretKey key = kg.generateKey();\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\nbyte[] iv = new byte[12];\nnew SecureRandom().nextBytes(iv);\ncipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));\nbyte[] encrypted = cipher.doFinal(data.getBytes(\"UTF-8\"));",
+        "reference_url": "https://cwe.mitre.org/data/definitions/327.html"
       },
       "dangerousPatterns": [
         "getInstance.*DES|getInstance.*RC4|getInstance.*Blowfish"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 취약한 암호 알고리즘 사용 (DES, 3DES, RC4, MD5)\nCipher c = Cipher.getInstance(\"DES\");\nMessageDigest md = MessageDigest.getInstance(\"MD5\");\nbyte[] hash = md.digest(data.getBytes());",
-        "good": "// ✅ 안전한 알고리즘: AES-256/GCM, SHA-256 이상\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256);\nSecretKey key = kg.generateKey();\nCipher cipher = Cipher.getInstance(\"AES/GCM/NoPadding\");\nbyte[] iv = new byte[12];\nnew SecureRandom().nextBytes(iv);\ncipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));\nbyte[] encrypted = cipher.doFinal(data.getBytes(\"UTF-8\"));"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.5",
@@ -1355,17 +1273,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "ENCRYPT_SENSITIVE_DATA",
-        "description": "중요정보(비밀번호, 주민번호 등) 저장 전 암호화 적용",
+        "description": "비밀번호·주민번호·카드번호 등 중요정보를 평문으로 DB에 저장하거나 로그에 기록하면 정보 노출 취약점이 발생한다. DB 침해 사고 발생 시 평문으로 저장된 모든 중요정보가 즉시 노출되며, 로그 파일이 유출될 경우 서비스 이용자의 비밀번호가 모두 공격자 손에 들어간다. 유출된 비밀번호는 동일 비밀번호를 사용하는 다른 서비스 공격(크리덴셜 스터핑)에도 활용된다. 비밀번호는 BCrypt(반복 횟수 12 이상) 또는 PBKDF2WithHmacSHA256으로 솔트를 포함하여 해시 저장하고, 개인식별정보는 AES-256으로 암호화해야 한다.",
         "guideRef": "PART4 제2절 5항 (p.337-349)",
-        "remediationCode": "// [수정] IV-2.5 중요정보 암호화: 평문 저장·로그 출력 금지\n// ❌ 취약: 비밀번호·개인정보 평문 저장\nuser.setPassword(request.getParameter(\"password\"));\nuserDao.save(user);  // 평문 DB 저장\nlog.info(\"id={}, pw={}\", userId, password);  // 로그 노출!\n\n// ✅ 안전: BCrypt 해시 저장 + 로그에서 민감정보 제외\nBCryptPasswordEncoder enc = new BCryptPasswordEncoder(12);\nString hashed = enc.encode(request.getParameter(\"password\"));\nuser.setPassword(hashed);\nuserDao.save(user);\nlog.info(\"사용자 등록: id={}\", userId);  // 비밀번호 제외\n\n// 개인식별정보 암호화 저장\nString encSsn = aesEncryptService.encrypt(ssn);  // AES-256\npersonDao.saveEncryptedSsn(encSsn);"
+        "bad_code": "// ❌ 중요 정보(비밀번호)를 평문으로 저장\n// DB: INSERT INTO users (id, password) VALUES (?, ?)\npstmt.setString(2, rawPassword); // 평문 저장",
+        "good_code": "// ✅ PBKDF2 + Salt 해시 후 저장\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nPBEKeySpec spec = new PBEKeySpec(rawPassword.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\nString encoded = Base64.getEncoder().encodeToString(salt)\n                 + \":\" + Base64.getEncoder().encodeToString(hash);\npstmt.setString(2, encoded);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/312.html"
       },
       "dangerousPatterns": [
         "password.*getParameter|password.*cleartext|plainTextPassword"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 중요 정보(비밀번호)를 평문으로 저장\n// DB: INSERT INTO users (id, password) VALUES (?, ?)\npstmt.setString(2, rawPassword); // 평문 저장",
-        "good": "// ✅ PBKDF2 + Salt 해시 후 저장\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nPBEKeySpec spec = new PBEKeySpec(rawPassword.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\nString encoded = Base64.getEncoder().encodeToString(salt)\n                 + \":\" + Base64.getEncoder().encodeToString(hash);\npstmt.setString(2, encoded);"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.6",
@@ -1385,13 +1301,11 @@
       ],
       "remediation": {
         "strategy": "EXTERNALIZE_SECRETS",
-        "description": "소스코드에서 비밀정보 제거, 환경변수·외부 설정 파일·Vault 사용",
+        "description": "소스코드·설정 파일·Git 저장소에 비밀번호·API 키·암호키를 직접 기재하면 하드코딩 취약점이 발생한다. 소스코드에 접근 권한이 있는 모든 개발자와 Git 히스토리를 볼 수 있는 공격자가 비밀정보를 탈취할 수 있으며, GitHub 같은 공개 저장소에 실수로 push된 경우 수분 내에 자동 스캐너가 탐지한다. 탈취된 API 키로 인한 클라우드 비용 폭증, DB 접근권한 탈취, 외부 서비스 무단 사용 등의 피해가 발생한다. 소스코드에서 비밀정보를 완전히 제거하고 환경변수, 외부 설정 파일(Git 미포함), HashiCorp Vault 또는 AWS Secrets Manager에서 로드해야 한다.",
         "guideRef": "PART4 제2절 6항 (p.350-359)",
-        "remediationCode": "// [수정] IV-2.6 하드코드된 비밀정보 제거: 외부 설정으로 이전\n// ❌ 취약: 소스코드에 비밀정보 직접 기재\nprivate static final String DB_PASS = \"P@ssw0rd123!\";\nprivate static final String API_KEY  = \"sk-abc123xyz789\";\n\n// ✅ 안전 방법 1: 환경변수\nString dbPass = System.getenv(\"DB_PASSWORD\");\nString apiKey = System.getenv(\"EXTERNAL_API_KEY\");\n\n// ✅ 안전 방법 2: Spring @Value + 외부 설정 파일\n// application-prod.yml (Git 미포함, 배포 환경에서만)\n// db.password: ${DB_PASSWORD}\n@Value(\"${db.password}\") private String dbPassword;\n\n// ✅ 안전 방법 3: HashiCorp Vault / AWS Secrets Manager\n// VaultTemplate.read(\"secret/myapp\").get(\"password\")\n// 배포 파이프라인에 gitleaks 비밀정보 스캔 도구 통합 권장"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 소스코드에 중요 정보 하드코딩\nprivate static final String DB_PASSWORD = \"admin1234!\"; // 소스 노출 시 유출\nprivate static final String API_KEY = \"sk-abc123xyz\";   // VCS 히스토리에 잔존",
-        "good": "// ✅ 환경변수 또는 설정 파일에서 로드\nString dbPassword = System.getenv(\"DB_PASSWORD\");\nif (dbPassword == null || dbPassword.isEmpty()) {\n    throw new IllegalStateException(\"DB_PASSWORD 환경변수가 설정되지 않았습니다.\");\n}\n// application.properties 사용 시 DB에서 암호화 저장 필수\n// 운영 환경: AWS Secrets Manager / Vault 사용 권장"
+        "bad_code": "// ❌ 소스코드에 중요 정보 하드코딩\nprivate static final String DB_PASSWORD = \"admin1234!\"; // 소스 노출 시 유출\nprivate static final String API_KEY = \"sk-abc123xyz\";   // VCS 히스토리에 잔존",
+        "good_code": "// ✅ 환경변수 또는 설정 파일에서 로드\nString dbPassword = System.getenv(\"DB_PASSWORD\");\nif (dbPassword == null || dbPassword.isEmpty()) {\n    throw new IllegalStateException(\"DB_PASSWORD 환경변수가 설정되지 않았습니다.\");\n}\n// application.properties 사용 시 DB에서 암호화 저장 필수\n// 운영 환경: AWS Secrets Manager / Vault 사용 권장",
+        "reference_url": "https://cwe.mitre.org/data/definitions/321.html"
       }
     },
     {
@@ -1407,17 +1321,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "MIN_KEY_SIZE",
-        "description": "RSA 2048bit 이상, AES 128bit 이상, ECC 224bit 이상 키 길이 사용",
+        "description": "RSA 1024비트 이하, AES 56/64비트, ECC 160비트 이하 등 충분하지 않은 키 길이의 암호화를 사용하면 취약한 암호화 취약점이 발생한다. 현대의 분산 컴퓨팅 파워로 RSA-1024는 공인된 팩터링 알고리즘으로 현실적인 시간 내에 해독 가능하며, 짧은 AES 키는 전수 조사(brute force)에 취약하다. 해독된 암호화 통신이나 데이터로 인한 개인정보·금융정보 노출, 디지털 서명 위조 등의 피해가 발생한다. RSA는 2048비트 이상(권장 4096비트), AES는 128비트 이상(권장 256비트), ECC는 224비트 이상을 사용해야 한다.",
         "guideRef": "PART4 제2절 7항 (p.360-363)",
-        "remediationCode": "// [수정] IV-2.7 충분한 키 길이 사용: 최소 권고 기준 준수\n// ❌ 취약: RSA 1024bit, AES 56bit(DES) 등 짧은 키\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(1024);  // RSA 1024bit — 취약\n\n// ✅ 안전: 최소 권고 키 길이 준수\n// RSA: 2048bit 이상 (권장 4096bit)\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(2048, new SecureRandom());\n\n// AES: 128bit 이상 (권장 256bit)\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256, new SecureRandom());\nSecretKey aesKey = kg.generateKey();\n\n// ECC: 224bit 이상 (권장 256bit)\nKeyPairGenerator ecKpg = KeyPairGenerator.getInstance(\"EC\");\necKpg.initialize(new ECGenParameterSpec(\"secp256r1\"));"
+        "bad_code": "// ❌ 충분하지 않은 키 길이 사용\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(512); // RSA 512비트 — 현재 해독 가능\n\nCipher c = Cipher.getInstance(\"DES\"); // 56비트 — 취약",
+        "good_code": "// ✅ 권장 키 길이 사용\n// RSA: 2048비트 이상\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(2048);\nKeyPair keyPair = kpg.generateKeyPair();\n\n// AES: 128비트 이상 (256비트 권장)\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256);\nSecretKey aesKey = kg.generateKey();",
+        "reference_url": "https://cwe.mitre.org/data/definitions/326.html"
       },
       "dangerousPatterns": [
         "\\.initialize\\(512\\)|\\.initialize\\(1024\\)"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 충분하지 않은 키 길이 사용\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(512); // RSA 512비트 — 현재 해독 가능\n\nCipher c = Cipher.getInstance(\"DES\"); // 56비트 — 취약",
-        "good": "// ✅ 권장 키 길이 사용\n// RSA: 2048비트 이상\nKeyPairGenerator kpg = KeyPairGenerator.getInstance(\"RSA\");\nkpg.initialize(2048);\nKeyPair keyPair = kpg.generateKeyPair();\n\n// AES: 128비트 이상 (256비트 권장)\nKeyGenerator kg = KeyGenerator.getInstance(\"AES\");\nkg.init(256);\nSecretKey aesKey = kg.generateKey();"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.8",
@@ -1436,17 +1348,15 @@
       ],
       "remediation": {
         "strategy": "SECURE_RANDOM",
-        "description": "java.security.SecureRandom으로 교체",
+        "description": "보안 목적(세션 토큰, OTP, CSRF 토큰 등)으로 java.util.Random이나 Math.random()을 사용하면 예측 가능한 난수 취약점이 발생한다. java.util.Random은 시드(seed) 값이 알려지거나 추측되면 이후 생성되는 모든 난수를 예측할 수 있어, 공격자가 세션 토큰을 예측하거나 OTP를 미리 계산할 수 있다. 이는 세션 하이재킹, OTP 우회를 통한 인증 우회, CSRF 토큰 예측을 통한 CSRF 공격으로 이어진다. java.security.SecureRandom을 사용하여 암호학적으로 안전한 난수를 생성해야 한다.",
         "guideRef": "PART4 제2절 8항 (p.364-369)",
-        "remediationCode": "// [수정] IV-2.8 난수 취약점 방지: SecureRandom 사용\n// ❌ 취약: java.util.Random / Math.random() — 예측 가능\nRandom rnd = new Random();\nString token = String.valueOf(rnd.nextLong());\nint otp = (int)(Math.random() * 1_000_000);\n\n// ✅ 안전: java.security.SecureRandom 사용\nSecureRandom secRnd = new SecureRandom();\n// 세션 토큰 (128비트 무작위)\nbyte[] bytes = new byte[16];\nsecRnd.nextBytes(bytes);\nString token = Base64.getUrlEncoder()\n    .withoutPadding().encodeToString(bytes);\n// OTP (6자리)\nint otp = secRnd.nextInt(1_000_000);\nString otpStr = String.format(\"%06d\", otp);"
+        "bad_code": "// ❌ java.util.Random으로 보안 토큰 생성 (예측 가능)\nRandom rnd = new Random();\nString token = Long.toHexString(rnd.nextLong()); // 시드 예측 시 토큰 예측 가능",
+        "good_code": "// ✅ java.security.SecureRandom 사용\nSecureRandom secureRnd = new SecureRandom();\nbyte[] tokenBytes = new byte[32];\nsecureRnd.nextBytes(tokenBytes);\nString token = Base64.getUrlEncoder().withoutPadding()\n               .encodeToString(tokenBytes);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/330.html"
       },
       "dangerousPatterns": [
         "new Random\\(\\)|Math\\.random\\(\\)"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ java.util.Random으로 보안 토큰 생성 (예측 가능)\nRandom rnd = new Random();\nString token = Long.toHexString(rnd.nextLong()); // 시드 예측 시 토큰 예측 가능",
-        "good": "// ✅ java.security.SecureRandom 사용\nSecureRandom secureRnd = new SecureRandom();\nbyte[] tokenBytes = new byte[32];\nsecureRnd.nextBytes(tokenBytes);\nString token = Base64.getUrlEncoder().withoutPadding()\n               .encodeToString(tokenBytes);"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.9",
@@ -1461,17 +1371,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "PASSWORD_POLICY",
-        "description": "길이 8자 이상, 대소문자·숫자·특수문자 조합 필수 검증 로직 구현",
+        "description": "비밀번호 복잡성 정책이 없거나 너무 낮은 기준을 적용하면 취약한 비밀번호 허용 취약점이 발생한다. 사용자가 '1234', 'password', '아이디와 동일한 값' 같은 단순 비밀번호를 설정하면 사전 공격이나 무차별 대입 공격으로 단시간에 탈취된다. 취약한 비밀번호로 인한 계정 탈취는 개인정보 유출, 금융 사기, 내부 시스템 무단 접근의 출발점이 된다. 8자 이상, 대소문자·숫자·특수문자 조합 필수, 아이디와 동일 금지, 이전 비밀번호 재사용 금지 정책을 코드로 강제 검증해야 한다.",
         "guideRef": "PART4 제2절 9항 (p.370-374)",
-        "remediationCode": "// [수정] IV-2.9 비밀번호 복잡성 정책: 강력한 검증 구현\n// ❌ 취약: 길이만 검사하거나 너무 약한 기준\nif (password.length() < 4)\n    throw new ValidationException(\"너무 짧습니다.\");\n\n// ✅ 안전: 길이·문자 조합·금지 패턴 검증\nprivate static final Pattern PW = Pattern.compile(\n    \"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,20}$\");\npublic void validatePassword(String pw, String userId) {\n    if (!PW.matcher(pw).matches())\n        throw new ValidationException(\n            \"8~20자, 대/소문자·숫자·특수문자 조합 필수\");\n    if (pw.equalsIgnoreCase(userId))\n        throw new ValidationException(\"아이디와 동일한 비밀번호 금지\");\n    // 이전 비밀번호 재사용 금지 (최근 3개 이력)\n    if (pwHistoryService.isRecentPassword(userId, pw))\n        throw new ValidationException(\"이전 비밀번호 재사용 불가\");\n}"
+        "bad_code": "// ❌ 비밀번호 복잡도 검증 없이 허용\npublic void register(String id, String pw) {\n    userDao.insert(id, pw); // \"1234\", \"password\" 같은 단순 비밀번호 허용\n}",
+        "good_code": "// ✅ 복잡도 정책 강제: 8자 이상, 영문+숫자+특수문자\npublic void register(String id, String pw) {\n    if (pw == null || pw.length() < 8) throw new IllegalArgumentException(\"8자 이상 입력\");\n    if (!pw.matches(\".*[a-zA-Z].*\")) throw new IllegalArgumentException(\"영문자 포함 필요\");\n    if (!pw.matches(\".*\\\\d.*\"))     throw new IllegalArgumentException(\"숫자 포함 필요\");\n    if (!pw.matches(\".*[!@#$%^&*].*\")) throw new IllegalArgumentException(\"특수문자 포함 필요\");\n    userDao.insert(id, hash(pw));\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/521.html"
       },
       "dangerousPatterns": [
         "password\\.length\\(\\)\\s*<|minPasswordLength\\s*=\\s*[1-7]"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 비밀번호 복잡도 검증 없이 허용\npublic void register(String id, String pw) {\n    userDao.insert(id, pw); // \"1234\", \"password\" 같은 단순 비밀번호 허용\n}",
-        "good": "// ✅ 복잡도 정책 강제: 8자 이상, 영문+숫자+특수문자\npublic void register(String id, String pw) {\n    if (pw == null || pw.length() < 8) throw new IllegalArgumentException(\"8자 이상 입력\");\n    if (!pw.matches(\".*[a-zA-Z].*\")) throw new IllegalArgumentException(\"영문자 포함 필요\");\n    if (!pw.matches(\".*\\\\d.*\"))     throw new IllegalArgumentException(\"숫자 포함 필요\");\n    if (!pw.matches(\".*[!@#$%^&*].*\")) throw new IllegalArgumentException(\"특수문자 포함 필요\");\n    userDao.insert(id, hash(pw));\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.10",
@@ -1486,17 +1394,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "VERIFY_SIGNATURE",
-        "description": "전자서명 검증 실패 시 처리를 중단하고 예외 반환",
+        "description": "전자서명 검증 함수(verify())의 반환값을 확인하지 않고 처리를 계속하면 전자서명 검증 우회 취약점이 발생한다. 공격자는 서명되지 않았거나 위조된 서명을 가진 데이터를 전송할 때, verify() 반환값이 false여도 처리가 계속되면 위변조된 데이터가 정상 처리된다. 이는 메시지 위변조, 소프트웨어 업데이트 패키지 변조, 금융 거래 데이터 조작 등의 피해를 초래한다. verify() 반환값을 반드시 확인하고, false 또는 예외 발생 시 즉시 처리를 중단하고 보안 이벤트로 로깅해야 한다.",
         "guideRef": "PART4 제2절 10항 (p.375-378)",
-        "remediationCode": "// [수정] IV-2.10 전자서명 검증 결과 반드시 확인\n// ❌ 취약: verify() 반환값을 무시하고 진행\nSignature sig = Signature.getInstance(\"SHA256withRSA\");\nsig.initVerify(publicKey);\nsig.update(data);\nsig.verify(signature);  // 반환값 무시! 서명 실패도 계속 진행\nprocessData(data);\n\n// ✅ 안전: verify() 결과 검사 + 실패 시 즉시 중단\nSignature sig = Signature.getInstance(\"SHA256withRSA\");\nsig.initVerify(publicKey);\nsig.update(data);\nboolean valid = sig.verify(signature);\nif (!valid) {\n    log.warn(\"[SIG] 서명 검증 실패\");\n    throw new SecurityException(\"전자서명 검증에 실패했습니다.\");\n}\nprocessData(data);"
+        "bad_code": "// ❌ 전자서명 검증 없이 데이터 신뢰\nbyte[] data = receiveData();\nprocessData(data); // 서명 검증 없이 처리 → 위변조 감지 불가",
+        "good_code": "// ✅ RSA 서명 검증 후 데이터 처리\nbyte[] data = receiveData();\nbyte[] signature = receiveSignature();\nSignature sig = Signature.getInstance(\"SHA256withRSA\");\nsig.initVerify(publicKey);\nsig.update(data);\nif (!sig.verify(signature)) {\n    throw new SecurityException(\"전자서명 검증 실패 — 데이터 위변조 의심\");\n}\nprocessData(data);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/347.html"
       },
       "dangerousPatterns": [
         "Signature\\.getInstance|sig\\.verify\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 전자서명 검증 없이 데이터 신뢰\nbyte[] data = receiveData();\nprocessData(data); // 서명 검증 없이 처리 → 위변조 감지 불가",
-        "good": "// ✅ RSA 서명 검증 후 데이터 처리\nbyte[] data = receiveData();\nbyte[] signature = receiveSignature();\nSignature sig = Signature.getInstance(\"SHA256withRSA\");\nsig.initVerify(publicKey);\nsig.update(data);\nif (!sig.verify(signature)) {\n    throw new SecurityException(\"전자서명 검증 실패 — 데이터 위변조 의심\");\n}\nprocessData(data);"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.11",
@@ -1516,17 +1422,15 @@
       ],
       "remediation": {
         "strategy": "PROPER_CERT_VALIDATION",
-        "description": "사용자 정의 TrustManager 내 인증서 체인 및 호스트명 검증 구현",
+        "description": "checkServerTrusted()를 빈 메서드로 구현하거나 ALLOW_ALL HostnameVerifier를 사용하면 인증서 검증 우회 취약점이 발생한다. 공격자는 자체 서명 인증서나 다른 도메인 인증서를 제시하여 HTTPS 통신을 중간자(MITM) 공격으로 도청하거나 변조할 수 있다. 이는 HTTPS를 사용하더라도 로그인 자격증명, 세션 토큰, 개인정보가 공격자에게 노출되는 상황을 초래한다. JDK 기본 TrustManagerFactory를 사용하고, 사용자 정의 TrustManager에서는 X509Certificate 체인과 호스트명 검증을 반드시 구현해야 한다.",
         "guideRef": "PART4 제2절 11항 (p.379-382)",
-        "remediationCode": "// [수정] IV-2.11 인증서 검증 우회 금지: 기본 검증 사용\n// ❌ 취약: 모든 인증서를 무조건 신뢰하는 TrustManager\nTrustManager[] tm = new TrustManager[] {\n    new X509TrustManager() {\n        public void checkServerTrusted(X509Certificate[] c, String t) {}\n        public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }\n    }\n};\nSSLContext ctx = SSLContext.getInstance(\"TLS\");\nctx.init(null, tm, new SecureRandom());\n\n// ✅ 안전: JDK 기본 PKIX 검증 사용\nSSLContext ctx = SSLContext.getInstance(\"TLSv1.2\");\nTrustManagerFactory tmf = TrustManagerFactory.getInstance(\n    TrustManagerFactory.getDefaultAlgorithm());\ntmf.init((KeyStore) null);  // JDK cacerts 사용\nctx.init(null, tmf.getTrustManagers(), new SecureRandom());\n// HostnameVerifier도 기본값 유지 (ALLOW_ALL 절대 금지)"
+        "bad_code": "// ❌ 모든 인증서를 신뢰하는 TrustManager (MITM 취약)\nTrustManager[] trustAll = new TrustManager[] {\n    new X509TrustManager() {\n        public void checkClientTrusted(X509Certificate[] c, String a) {}\n        public void checkServerTrusted(X509Certificate[] c, String a) {}\n        public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }\n    }\n};",
+        "good_code": "// ✅ 기본 TrustManager 사용 (JDK 신뢰 체인 검증)\nSSLContext sslContext = SSLContext.getInstance(\"TLS\");\n// 직접 TrustManager 지정하지 않으면 JDK 기본 검증 사용\n// sslContext.init(null, null, null);\nHttpsURLConnection conn = (HttpsURLConnection) url.openConnection();\n// 자체 서명 인증서 필요 시: keystore에 CA 인증서 추가\n// keytool -importcert -alias myca -file ca.crt -keystore truststore.jks",
+        "reference_url": "https://cwe.mitre.org/data/definitions/295.html"
       },
       "dangerousPatterns": [
         "setHostnameVerifier|ALLOW_ALL_HOSTNAME_VERIFIER|X509TrustManager"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 모든 인증서를 신뢰하는 TrustManager (MITM 취약)\nTrustManager[] trustAll = new TrustManager[] {\n    new X509TrustManager() {\n        public void checkClientTrusted(X509Certificate[] c, String a) {}\n        public void checkServerTrusted(X509Certificate[] c, String a) {}\n        public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }\n    }\n};",
-        "good": "// ✅ 기본 TrustManager 사용 (JDK 신뢰 체인 검증)\nSSLContext sslContext = SSLContext.getInstance(\"TLS\");\n// 직접 TrustManager 지정하지 않으면 JDK 기본 검증 사용\n// sslContext.init(null, null, null);\nHttpsURLConnection conn = (HttpsURLConnection) url.openConnection();\n// 자체 서명 인증서 필요 시: keystore에 CA 인증서 추가\n// keytool -importcert -alias myca -file ca.crt -keystore truststore.jks"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.12",
@@ -1545,17 +1449,15 @@
       ],
       "remediation": {
         "strategy": "SECURE_COOKIE_ATTRIBUTES",
-        "description": "쿠키에 HttpOnly, Secure, SameSite 속성 설정, 중요정보 쿠키 저장 금지",
+        "description": "HttpOnly, Secure, SameSite 속성 없이 쿠키를 생성하거나 중요정보를 쿠키에 저장하면 쿠키 정보 노출 취약점이 발생한다. HttpOnly 속성이 없으면 XSS 공격으로 JavaScript에서 쿠키를 읽어 세션을 탈취할 수 있고, Secure 속성이 없으면 HTTP 통신에서 쿠키가 평문으로 전송되어 네트워크 도청에 취약하다. userId, 비밀번호 등 민감정보를 쿠키에 저장하면 하드디스크에 영구 저장되어 물리적 접근으로도 탈취 가능하다. 세션 쿠키에 HttpOnly·Secure·SameSite=Strict 속성을 모두 적용하고, 중요정보는 쿠키에 저장하지 않아야 한다.",
         "guideRef": "PART4 제2절 12항 (p.383-386)",
-        "remediationCode": "// [수정] IV-2.12 쿠키 보안 속성 설정: HttpOnly·Secure·SameSite\n// ❌ 취약: 보안 속성 없는 쿠키\nCookie c = new Cookie(\"userId\", userId);\nresponse.addCookie(c);\n\n// ✅ 안전: 모든 보안 속성 명시\nCookie c = new Cookie(\"SESSIONID\", session.getId());\nc.setHttpOnly(true);    // JS 접근 차단 (XSS 쿠키 탈취 방지)\nc.setSecure(true);      // HTTPS 전용\nc.setPath(\"/\");\nc.setMaxAge(-1);        // 세션 쿠키\n// SameSite: 서블릿 API 미지원 → 헤더 직접 설정\nresponse.addHeader(\"Set-Cookie\",\n    \"SESSIONID=\" + session.getId() +\n    \"; HttpOnly; Secure; SameSite=Strict; Path=/\");\n// 쿠키에 userId·password 등 민감정보 저장 금지"
+        "bad_code": "// ❌ HttpOnly, Secure 속성 없는 쿠키 설정\nCookie cookie = new Cookie(\"sessionId\", sessionId);\ncookie.setPath(\"/\");\nresponse.addCookie(cookie); // JS 접근 가능, HTTP 전송 가능",
+        "good_code": "// ✅ HttpOnly + Secure + SameSite 속성 설정\nCookie cookie = new Cookie(\"sessionId\", sessionId);\ncookie.setPath(\"/\");\ncookie.setHttpOnly(true);   // JS에서 접근 불가\ncookie.setSecure(true);     // HTTPS 전송만 허용\ncookie.setMaxAge(1800);     // 30분 만료\nresponse.addCookie(cookie);\n// SameSite 속성 추가 (Servlet 쿠키 API 미지원 시 헤더 직접 설정):\nresponse.addHeader(\"Set-Cookie\",\n    \"sessionId=\" + sessionId + \"; Path=/; Secure; HttpOnly; SameSite=Strict\");",
+        "reference_url": "https://cwe.mitre.org/data/definitions/539.html"
       },
       "dangerousPatterns": [
         "new Cookie\\(|addCookie\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ HttpOnly, Secure 속성 없는 쿠키 설정\nCookie cookie = new Cookie(\"sessionId\", sessionId);\ncookie.setPath(\"/\");\nresponse.addCookie(cookie); // JS 접근 가능, HTTP 전송 가능",
-        "good": "// ✅ HttpOnly + Secure + SameSite 속성 설정\nCookie cookie = new Cookie(\"sessionId\", sessionId);\ncookie.setPath(\"/\");\ncookie.setHttpOnly(true);   // JS에서 접근 불가\ncookie.setSecure(true);     // HTTPS 전송만 허용\ncookie.setMaxAge(1800);     // 30분 만료\nresponse.addCookie(cookie);\n// SameSite 속성 추가 (Servlet 쿠키 API 미지원 시 헤더 직접 설정):\nresponse.addHeader(\"Set-Cookie\",\n    \"sessionId=\" + sessionId + \"; Path=/; Secure; HttpOnly; SameSite=Strict\");"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.13",
@@ -1575,13 +1477,11 @@
       ],
       "remediation": {
         "strategy": "REMOVE_SENSITIVE_COMMENTS",
-        "description": "소스코드 주석에서 비밀번호·키·경로 등 민감정보 제거",
+        "description": "소스코드 주석에 비밀번호, API 키, DB 접속 정보, 내부 IP 주소, 시스템 구조 등 민감정보가 포함되면 정보 노출 취약점이 발생한다. 소스코드를 열람할 수 있는 모든 개발자와 Git 저장소에 접근 가능한 공격자가 주석에서 민감정보를 발견하면 즉시 악용 가능하다. 특히 공개 저장소에 push된 경우 자동 스캐너로 수분 내에 탐지되어 악용된다. 주석에서 비밀번호·키·경로·계정 정보를 완전히 제거하고 배포 파이프라인에 gitleaks 같은 비밀정보 스캔 도구를 통합해야 한다.",
         "guideRef": "PART4 제2절 13항 (p.387-390)",
-        "remediationCode": "// [수정] IV-2.13 주석의 민감정보 완전 제거\n// ❌ 취약: 주석에 비밀번호·키·내부 경로 포함\n// DB: jdbc:oracle:thin:@192.168.1.10:1521/PROD\n// 관리자: admin / P@ssw0rd123!\n// API KEY: sk-abc123xyz789abcdef\n// TODO: 배포 전 이 계정 삭제\n\n// ✅ 안전: 주석에서 민감정보 완전 제거\n// DB 접속은 환경변수 또는 Vault로 관리\n// 계정 정보는 코드·README에 기재 금지\n// API KEY는 .env 또는 Secrets Manager 사용\n// 배포 파이프라인에 gitleaks 등 비밀정보 스캔 통합\n// git history에도 민감정보 노출 시 git filter-branch 정리 필요"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 주석에 시스템 주요 정보 포함\n// DB 접속 정보: jdbc:oracle:thin:@192.168.1.100:1521:ORCL\n// 관리자 계정: admin / Admin@1234!\n// TODO: 운영 전 이 계정 삭제 필요\nConnection con = DriverManager.getConnection(url, user, pw);",
-        "good": "// ✅ 주석에서 민감 정보 제거\n// DB 연결 설정은 application.properties 또는 환경변수에서 로드\nString url  = System.getenv(\"DB_URL\");\nString user = System.getenv(\"DB_USER\");\nString pw   = System.getenv(\"DB_PASSWORD\");\nConnection con = DriverManager.getConnection(url, user, pw);"
+        "bad_code": "// ❌ 주석에 시스템 주요 정보 포함\n// DB 접속 정보: jdbc:oracle:thin:@192.168.1.100:1521:ORCL\n// 관리자 계정: admin / Admin@1234!\n// TODO: 운영 전 이 계정 삭제 필요\nConnection con = DriverManager.getConnection(url, user, pw);",
+        "good_code": "// ✅ 주석에서 민감 정보 제거\n// DB 연결 설정은 application.properties 또는 환경변수에서 로드\nString url  = System.getenv(\"DB_URL\");\nString user = System.getenv(\"DB_USER\");\nString pw   = System.getenv(\"DB_PASSWORD\");\nConnection con = DriverManager.getConnection(url, user, pw);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/615.html"
       }
     },
     {
@@ -1601,17 +1501,15 @@
       ],
       "remediation": {
         "strategy": "SALTED_HASH",
-        "description": "bcrypt, PBKDF2, Argon2 등 솔트를 포함하는 해시 함수 사용",
+        "description": "비밀번호를 솔트(salt) 없이 단순 해시(MD5, SHA-1, SHA-256)만으로 저장하면 취약한 해시 저장 취약점이 발생한다. 솔트 없는 해시는 동일 비밀번호가 동일 해시값을 생성하므로 레인보우 테이블 공격으로 대규모 역산이 가능하고, GPU를 활용한 병렬 처리로 짧은 비밀번호는 초당 수십억 개의 해시를 대조할 수 있다. DB 침해 시 사용자 비밀번호 대부분이 단시간에 복구되어 계정 탈취와 크리덴셜 스터핑 공격으로 이어진다. BCrypt(반복 횟수 12+), PBKDF2WithHmacSHA256(310,000회+), Argon2 같은 솔트를 포함하는 적응형 해시 함수를 사용해야 한다.",
         "guideRef": "PART4 제2절 14항 (p.391-394)",
-        "remediationCode": "// [수정] IV-2.14 솔트 없는 해시 방지: 적응형 해시 함수 사용\n// ❌ 취약: 솔트 없이 MD5·SHA-1 단순 해시\nString hash = DigestUtils.md5Hex(password);  // 레인보우 테이블 취약\n\n// ✅ 안전 방법 1: BCrypt (Spring Security, 권장)\nBCryptPasswordEncoder enc = new BCryptPasswordEncoder(12);\nString stored = enc.encode(rawPassword);  // 솔트 자동 포함\nboolean match = enc.matches(rawPassword, stored);\n\n// ✅ 안전 방법 2: PBKDF2WithHmacSHA256\nSecretKeyFactory skf = SecretKeyFactory\n    .getInstance(\"PBKDF2WithHmacSHA256\");\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nKeySpec spec = new PBEKeySpec(\n    password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\n// salt와 hash를 함께 저장 (구분자 사용)"
+        "bad_code": "// ❌ 솔트 없이 단순 해시 저장 (레인보우 테이블 공격 가능)\nMessageDigest md = MessageDigest.getInstance(\"SHA-256\");\nbyte[] hash = md.digest(password.getBytes(\"UTF-8\"));\nString hex = DatatypeConverter.printHexBinary(hash);\nuserDao.savePassword(userId, hex);",
+        "good_code": "// ✅ 랜덤 Salt + PBKDF2 반복 해시\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nPBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\nString stored = Base64.getEncoder().encodeToString(salt)\n                + \":\" + Base64.getEncoder().encodeToString(hash);\nuserDao.savePassword(userId, stored);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/759.html"
       },
       "dangerousPatterns": [
         "MessageDigest\\.getInstance.*MD5|MessageDigest\\.getInstance.*SHA-1"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 솔트 없이 단순 해시 저장 (레인보우 테이블 공격 가능)\nMessageDigest md = MessageDigest.getInstance(\"SHA-256\");\nbyte[] hash = md.digest(password.getBytes(\"UTF-8\"));\nString hex = DatatypeConverter.printHexBinary(hash);\nuserDao.savePassword(userId, hex);",
-        "good": "// ✅ 랜덤 Salt + PBKDF2 반복 해시\nbyte[] salt = new byte[16];\nnew SecureRandom().nextBytes(salt);\nSecretKeyFactory skf = SecretKeyFactory.getInstance(\"PBKDF2WithHmacSHA256\");\nPBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 310000, 256);\nbyte[] hash = skf.generateSecret(spec).getEncoded();\nString stored = Base64.getEncoder().encodeToString(salt)\n                + \":\" + Base64.getEncoder().encodeToString(hash);\nuserDao.savePassword(userId, stored);"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.15",
@@ -1626,17 +1524,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "CHECKSUM_VERIFY",
-        "description": "다운로드된 코드·라이브러리에 대해 체크섬(SHA-256) 검증 후 실행",
+        "description": "외부에서 다운로드한 코드나 라이브러리의 무결성을 체크섬으로 검증하지 않으면 무결성 검사 부재 취약점이 발생한다. 공격자는 DNS 스푸핑, CDN 침해, 다운로드 서버 해킹 등을 통해 정상 파일을 악성 코드가 삽입된 파일로 교체하는 공급망 공격(Supply Chain Attack)을 수행할 수 있다. 변조된 라이브러리나 업데이트 파일이 실행되면 시스템 전체를 장악당하는 치명적인 피해가 발생한다. 다운로드 전 신뢰된 소스에서 SHA-256 체크섬을 확인하고, 다운로드 후 MessageDigest.isEqual()로 일치 여부를 검증해야 한다.",
         "guideRef": "PART4 제2절 15항 (p.395-399)",
-        "remediationCode": "// [수정] IV-2.15 다운로드 무결성 검증: SHA-256 체크섬 확인\n// ❌ 취약: 다운로드 파일을 체크섬 없이 바로 실행\nFiles.copy(new URL(\"https://cdn.example.com/plugin.jar\")\n    .openStream(), Paths.get(\"plugin.jar\"),\n    StandardCopyOption.REPLACE_EXISTING);\n// 무결성 검증 없이 로드 → 공급망 공격(Supply Chain Attack)!\n\n// ✅ 안전: SHA-256 체크섬 검증 후 사용\nprivate static final String EXPECTED =\n    \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\";\nPath target = Paths.get(\"plugin.jar\");\nFiles.copy(new URL(\"https://cdn.example.com/plugin.jar\")\n    .openStream(), target, StandardCopyOption.REPLACE_EXISTING);\nbyte[] hash = MessageDigest.getInstance(\"SHA-256\")\n    .digest(Files.readAllBytes(target));\nString actual = HexFormat.of().formatHex(hash);\nif (!MessageDigest.isEqual(actual.getBytes(), EXPECTED.getBytes()))\n    throw new SecurityException(\"파일 무결성 검증 실패!\");"
+        "bad_code": "// ❌ 무결성 검사 없이 외부 코드 다운로드 후 실행\nURL fileUrl = new URL(\"http://update.example.com/agent.jar\");\nFileUtils.copyURLToFile(fileUrl, new File(\"/app/agent.jar\"));\nRuntime.getRuntime().exec(\"java -jar /app/agent.jar\");",
+        "good_code": "// ✅ SHA-256 해시 검증 후 실행\nURL fileUrl = new URL(\"https://update.example.com/agent.jar\");\nbyte[] data = downloadBytes(fileUrl);\nMessageDigest md = MessageDigest.getInstance(\"SHA-256\");\nString actual = DatatypeConverter.printHexBinary(md.digest(data)).toLowerCase();\nString expected = getExpectedHash(); // 신뢰된 소스에서 검증값 로드\nif (!expected.equals(actual)) {\n    throw new SecurityException(\"파일 무결성 검증 실패\");\n}\nFiles.write(Paths.get(\"/app/agent.jar\"), data);",
+        "reference_url": "https://cwe.mitre.org/data/definitions/494.html"
       },
       "dangerousPatterns": [
         "openStream\\(\\)|URLConnection.*getInputStream"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 무결성 검사 없이 외부 코드 다운로드 후 실행\nURL fileUrl = new URL(\"http://update.example.com/agent.jar\");\nFileUtils.copyURLToFile(fileUrl, new File(\"/app/agent.jar\"));\nRuntime.getRuntime().exec(\"java -jar /app/agent.jar\");",
-        "good": "// ✅ SHA-256 해시 검증 후 실행\nURL fileUrl = new URL(\"https://update.example.com/agent.jar\");\nbyte[] data = downloadBytes(fileUrl);\nMessageDigest md = MessageDigest.getInstance(\"SHA-256\");\nString actual = DatatypeConverter.printHexBinary(md.digest(data)).toLowerCase();\nString expected = getExpectedHash(); // 신뢰된 소스에서 검증값 로드\nif (!expected.equals(actual)) {\n    throw new SecurityException(\"파일 무결성 검증 실패\");\n}\nFiles.write(Paths.get(\"/app/agent.jar\"), data);"
-      }
+      ]
     },
     {
       "ruleId": "IV-2.16",
@@ -1651,17 +1547,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "ACCOUNT_LOCKOUT",
-        "description": "로그인 실패 횟수 임계값 설정 및 계정 잠금/CAPTCHA 메커니즘 구현",
+        "description": "로그인 실패 횟수에 제한이 없으면 무차별 대입(Brute Force) 공격과 자격증명 스터핑(Credential Stuffing) 공격에 취약해진다. 자동화 도구를 사용하면 초당 수천 번의 로그인 시도가 가능하며, 일반적인 비밀번호 목록이나 유출된 자격증명으로 많은 계정이 단시간에 탈취될 수 있다. 탈취된 계정으로 개인정보 유출, 금융 사기, 내부 시스템 침투 등의 2차 피해가 발생한다. 로그인 연속 실패 5회 시 계정 30분 잠금, CAPTCHA 도전 또는 점진적 지연(Progressive Delay) 메커니즘을 구현해야 한다.",
         "guideRef": "PART4 제2절 16항 (p.400-405)",
-        "remediationCode": "// [수정] IV-2.16 반복 인증 시도 제한: 계정 잠금 구현\n// ❌ 취약: 실패 횟수 제한 없음 — if(!login()) return \"실패\";\n// ✅ 안전: 실패 횟수 추적 + 잠금\nMap<String, Integer> failMap = new ConcurrentHashMap<>();\nMap<String, Long> lockMap   = new ConcurrentHashMap<>();\nfinal int MAX = 5;\nfinal long LOCK_MS = 30 * 60 * 1000L;\nLong lockedUntil = lockMap.get(userId);\nif (lockedUntil != null && System.currentTimeMillis() < lockedUntil)\n    throw new AccountLockedException(\"계정 잠김 (30분 후 재시도)\");\nif (!authService.login(userId, password)) {\n    int fails = failMap.merge(userId, 1, Integer::sum);\n    if (fails >= MAX) {\n        lockMap.put(userId, System.currentTimeMillis() + LOCK_MS);\n        failMap.remove(userId);\n        throw new AccountLockedException(\"5회 실패 — 30분 잠금\");\n    }\n    throw new AuthException(\"실패 (\" + fails + \"/\" + MAX + \")\");\n}\nfailMap.remove(userId);"
+        "bad_code": "// ❌ 로그인 실패 횟수 제한 없음 (무차별 대입 허용)\npublic boolean login(String id, String pw) {\n    return userDao.checkPassword(id, pw);\n}",
+        "good_code": "// ✅ 5회 실패 시 계정 30분 잠금\nprivate final Map<String, Integer> failMap = new ConcurrentHashMap<>();\nprivate final Map<String, Long>    lockMap = new ConcurrentHashMap<>();\npublic boolean login(String id, String pw) {\n    Long lockedUntil = lockMap.get(id);\n    if (lockedUntil != null && System.currentTimeMillis() < lockedUntil) {\n        throw new LockedException(\"계정 잠금 중\");\n    }\n    if (!userDao.checkPassword(id, pw)) {\n        int cnt = failMap.merge(id, 1, Integer::sum);\n        if (cnt >= 5) lockMap.put(id, System.currentTimeMillis() + 1800_000L);\n        return false;\n    }\n    failMap.remove(id); lockMap.remove(id);\n    return true;\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/307.html"
       },
       "dangerousPatterns": [
         "authenticate\\(|checkLogin\\(|verifyPassword\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 로그인 실패 횟수 제한 없음 (무차별 대입 허용)\npublic boolean login(String id, String pw) {\n    return userDao.checkPassword(id, pw);\n}",
-        "good": "// ✅ 5회 실패 시 계정 30분 잠금\nprivate final Map<String, Integer> failMap = new ConcurrentHashMap<>();\nprivate final Map<String, Long>    lockMap = new ConcurrentHashMap<>();\npublic boolean login(String id, String pw) {\n    Long lockedUntil = lockMap.get(id);\n    if (lockedUntil != null && System.currentTimeMillis() < lockedUntil) {\n        throw new LockedException(\"계정 잠금 중\");\n    }\n    if (!userDao.checkPassword(id, pw)) {\n        int cnt = failMap.merge(id, 1, Integer::sum);\n        if (cnt >= 5) lockMap.put(id, System.currentTimeMillis() + 1800_000L);\n        return false;\n    }\n    failMap.remove(id); lockMap.remove(id);\n    return true;\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-3.1",
@@ -1684,13 +1578,11 @@
       "description": "파일에 대해 exists()/isFile()/canRead() 등으로 상태를 검사(Check)한 후, 다른 연산(Use)을 수행하기 전에 다른 스레드나 프로세스가 해당 파일을 생성·삭제·교체할 수 있다(TOCTOU — Time Of Check To Time Of Use). 대표 공격 패턴: ① 심볼릭 링크 치환(exists() 후 임의 파일로 교체), ② 파일 삭제 경쟁(exists() 후 delete() 전 삭제). f.exists() → f.delete(), f.exists() → FileUtils.readFileToByteArray(f), f.exists() → new FileInputStream(f), f.exists() → f.mkdirs() 패턴이 모두 해당된다. 중간에 f.isFile() 등의 추가 검사가 있어도 동일 객체에 대한 연산이면 여전히 TOCTOU 위험이 있다.",
       "remediation": {
         "strategy": "ATOMIC_FILE_OPERATION",
-        "description": "exists() 검사 없이 직접 연산을 시도하고 예외로 실패를 처리하라. ① 파일 삭제: Files.deleteIfExists(path) 또는 try { Files.delete(path) } catch(NoSuchFileException e) {}. ② 파일 읽기: try { Files.readAllBytes(path) } catch(NoSuchFileException e) {}. ③ 파일 생성: Files.newOutputStream(path, StandardOpenOption.CREATE_NEW). 이렇게 하면 검사와 사용이 단일 시스템 콜로 원자적으로 처리된다.",
+        "description": "파일 존재 여부 검사(exists())와 실제 파일 사용 사이의 시간 간격에 다른 프로세스가 파일을 교체할 수 있어 TOCTOU(Time Of Check To Time Of Use) 경쟁 조건 취약점이 발생한다. 공격자는 검사 후 사용 전의 짧은 시간에 대상 파일을 심볼릭 링크로 교체하여 의도하지 않은 파일을 읽거나 삭제하게 만들 수 있다. 이는 중요 시스템 파일 삭제, 권한 없는 파일 내용 읽기, 임시 파일 경쟁을 통한 권한 상승 등의 피해를 초래한다. exists() 검사 없이 직접 파일 연산을 시도하고 NoSuchFileException으로 실패를 처리하는 원자적 연산 방식을 사용해야 한다.",
         "guideRef": "PART4 제3절 1항 (p.406-414)",
-        "remediationCode": "// [수정] IV-3.1 TOCTOU 방지: exists() 검사 제거 후 원자적 연산 사용\n\n// ❌ 취약 패턴 1: exists() → delete()\n// File f = new File(path);\n// if (f.exists()) { f.delete(); }  // TOCTOU!\n\n// ✅ 안전 패턴 1: 원자적 삭제\nPath filePath = Path.of(path);\ntry {\n    Files.delete(filePath);\n} catch (NoSuchFileException e) {\n    log.debug(\"[FileOp] 이미 삭제된 파일: {}\", filePath);\n} catch (IOException e) {\n    log.error(\"[FileOp] 파일 삭제 실패: {}\", filePath, e);\n}\n\n// ❌ 취약 패턴 2: exists() → FileUtils.readFileToByteArray(file)\n// File file = new File(filename);\n// if (file.exists()) {\n//     byte[] bytes = FileUtils.readFileToByteArray(file);  // TOCTOU!\n// }\n\n// ✅ 안전 패턴 2: 원자적 읽기\ntry {\n    byte[] bytes = Files.readAllBytes(Path.of(filename));\n    // ... 처리\n} catch (NoSuchFileException e) {\n    log.warn(\"[FileOp] 파일 없음: {}\", filename);\n} catch (IOException e) {\n    log.error(\"[FileOp] 파일 읽기 오류: {}\", filename, e);\n}\n\n// ❌ 취약 패턴 3: exists() → mkdirs()\n// File dir = new File(dirPath);\n// if (!dir.exists()) { dir.mkdirs(); }  // TOCTOU!\n\n// ✅ 안전 패턴 3: Files.createDirectories()(이미 존재해도 예외 없음)\nFiles.createDirectories(Path.of(dirPath));"
-      },
-      "codeExamples": {
-        "bad": "// ❌ TOCTOU: 파일 존재 검사와 삭제 사이 경쟁조건\nFile f = new File(filePath);\nif (f.exists()) {\n    // 다른 스레드가 f를 다른 파일로 교체할 수 있음\n    f.delete();\n}",
-        "good": "// ✅ 원자적 파일 삭제 + 재시도 없는 단일 호출\nPath path = Paths.get(filePath);\ntry {\n    Files.deleteIfExists(path); // 원자적 연산\n} catch (IOException e) {\n    log.error(\"[파일 삭제 실패] {}: {}\", filePath, e.getMessage(), e);\n    throw new RuntimeException(\"파일 삭제 오류\", e);\n}\n// 공유 자원 접근 시 synchronized 또는 ReentrantLock 사용"
+        "bad_code": "// ❌ TOCTOU: 파일 존재 검사와 삭제 사이 경쟁조건\nFile f = new File(filePath);\nif (f.exists()) {\n    // 다른 스레드가 f를 다른 파일로 교체할 수 있음\n    f.delete();\n}",
+        "good_code": "// ✅ 원자적 파일 삭제 + 재시도 없는 단일 호출\nPath path = Paths.get(filePath);\ntry {\n    Files.deleteIfExists(path); // 원자적 연산\n} catch (IOException e) {\n    log.error(\"[파일 삭제 실패] {}: {}\", filePath, e.getMessage(), e);\n    throw new RuntimeException(\"파일 삭제 오류\", e);\n}\n// 공유 자원 접근 시 synchronized 또는 ReentrantLock 사용",
+        "reference_url": "https://cwe.mitre.org/data/definitions/367.html"
       }
     },
     {
@@ -1706,17 +1598,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "TERMINATION_CONDITION",
-        "description": "반복문·재귀 함수에 명확한 종료 조건 및 최대 반복 횟수 제한 추가",
+        "description": "반복문이나 재귀 함수에 명확한 종료 조건이 없으면 무한 루프 또는 스택 오버플로우 취약점이 발생한다. 공격자는 재귀 종료 조건이 없는 함수를 트리거하여 StackOverflowError를 발생시키거나, 종료 조건 없는 루프로 CPU를 100% 점유시키는 서비스 거부 공격을 수행할 수 있다. 이는 애플리케이션 응답 불능, 서버 자원 고갈, 전체 서비스 중단으로 이어질 수 있다. 반복문에 명시적 최대 반복 횟수 제한을 추가하고, 재귀 함수에는 기저 조건과 최대 깊이 제한을 반드시 구현해야 한다.",
         "guideRef": "PART4 제3절 2항 (p.415-418)",
-        "remediationCode": "// [수정] IV-3.2 무한 루프·재귀 방지: 명시적 종료 조건 + 최대 횟수\n// ❌ 취약: 종료 조건 불명확한 무한 루프\n// while (true) { data = readNext(); if (data == null) continue; }\n\n// ✅ 안전: 최대 반복 횟수 + 명시적 break\nint MAX_ITER = 10000;\nfor (int iter = 0; iter < MAX_ITER; iter++) {\n    data = readNext();\n    if (data == null) break;  // 명확한 종료\n    process(data);\n}\nif (data != null)\n    log.warn(\"[LOOP] 최대 반복 횟수 초과 — 강제 종료\");\n\n// ✅ 안전: 재귀 깊이 제한\nvoid traverse(Node node, int depth) {\n    if (node == null || depth > 1000) return;\n    traverse(node.left, depth + 1);\n    traverse(node.right, depth + 1);\n}"
+        "bad_code": "// ❌ 종료 조건 없는 재귀 → StackOverflowError\npublic int factorial(int n) {\n    return n * factorial(n - 1); // n <= 0 검사 없음\n}\n// ❌ 종료 조건 없는 반복문 → 무한루프\nwhile (true) {\n    processNextItem(); // 탈출 조건 없음\n}",
+        "good_code": "// ✅ 재귀: 기저 조건 + 최대 깊이 제한\npublic int factorial(int n) {\n    if (n < 0 || n > 20) throw new IllegalArgumentException(\"범위 초과: \" + n);\n    if (n <= 1) return 1;\n    return n * factorial(n - 1);\n}\n// ✅ 반복문: 명시적 상한 조건\nint maxIter = 10_000;\nfor (int i = 0; i < maxIter && hasNextItem(); i++) {\n    processNextItem();\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/835.html"
       },
       "dangerousPatterns": [
         "while\\s*\\(\\s*true\\s*\\)|for\\s*\\(\\s*;\\s*;\\s*\\)"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 종료 조건 없는 재귀 → StackOverflowError\npublic int factorial(int n) {\n    return n * factorial(n - 1); // n <= 0 검사 없음\n}\n// ❌ 종료 조건 없는 반복문 → 무한루프\nwhile (true) {\n    processNextItem(); // 탈출 조건 없음\n}",
-        "good": "// ✅ 재귀: 기저 조건 + 최대 깊이 제한\npublic int factorial(int n) {\n    if (n < 0 || n > 20) throw new IllegalArgumentException(\"범위 초과: \" + n);\n    if (n <= 1) return 1;\n    return n * factorial(n - 1);\n}\n// ✅ 반복문: 명시적 상한 조건\nint maxIter = 10_000;\nfor (int i = 0; i < maxIter && hasNextItem(); i++) {\n    processNextItem();\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-4.1",
@@ -1736,17 +1626,15 @@
       ],
       "remediation": {
         "strategy": "GENERIC_ERROR_MESSAGE",
-        "description": "사용자에게 일반 오류 메시지만 출력, 상세 오류는 서버 로그에만 기록",
+        "description": "예외 발생 시 스택트레이스, DB 오류 메시지, 서버 내부 경로, SQL 쿼리 등 시스템 내부 정보가 사용자에게 노출되면 오류 메시지 정보 노출 취약점이 발생한다. 공격자는 오류 메시지에서 사용하는 DB 종류·버전, 테이블 구조, 파일 시스템 경로, 프레임워크 정보를 수집하여 이후 공격의 정보로 활용한다. 정보 수집 단계에서 확보한 내부 정보는 SQL 삽입, 경로 조작, 취약한 버전 공격 등을 더욱 효과적으로 만든다. 예외 처리 시 상세 오류는 서버 로그(SLF4J)에만 기록하고, 사용자에게는 '서비스 오류가 발생했습니다' 같은 일반 메시지만 반환해야 한다.",
         "guideRef": "PART4 제4절 1항 (p.419-424)",
-        "remediationCode": "// [수정] IV-4.1 오류 메시지 정보노출 방지: 일반 메시지 반환\n// ❌ 취약: 스택트레이스·DB 오류를 클라이언트에 노출\n// e.printStackTrace(); out.println(\"오류: \" + e.getMessage());\n\n// ✅ 안전: 서버 로그 상세 기록 + 클라이언트에 일반 메시지\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 오류: {}\", e.getMessage(), e);\n    response.sendError(500, \"서비스 처리 중 오류가 발생했습니다.\");\n}\n// Spring Boot 전역 처리기\n@ControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(Exception.class)\n    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)\n    public Map<String, String> handle(Exception e) {\n        log.error(\"[GLOBAL] 처리되지 않은 예외\", e);\n        return Map.of(\"error\", \"서비스 오류가 발생했습니다.\");\n    }\n}"
+        "bad_code": "// ❌ 예외 상세 정보를 사용자에게 직접 노출\ntry {\n    Connection con = DriverManager.getConnection(url, user, pw);\n} catch (SQLException e) {\n    out.println(\"오류: \" + e.getMessage()); // DB 구조·경로 노출\n}",
+        "good_code": "// ✅ 범용 메시지 출력, 상세 정보는 서버 로그에만 기록\ntry {\n    Connection con = DriverManager.getConnection(url, user, pw);\n} catch (SQLException e) {\n    log.error(\"[DB] 연결 오류: {}\", e.getMessage(), e);\n    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,\n                       \"서비스 오류가 발생했습니다.\");\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/209.html"
       },
       "dangerousPatterns": [
         "e\\.printStackTrace\\(\\)|out\\.print.*getMessage"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 예외 상세 정보를 사용자에게 직접 노출\ntry {\n    Connection con = DriverManager.getConnection(url, user, pw);\n} catch (SQLException e) {\n    out.println(\"오류: \" + e.getMessage()); // DB 구조·경로 노출\n}",
-        "good": "// ✅ 범용 메시지 출력, 상세 정보는 서버 로그에만 기록\ntry {\n    Connection con = DriverManager.getConnection(url, user, pw);\n} catch (SQLException e) {\n    log.error(\"[DB] 연결 오류: {}\", e.getMessage(), e);\n    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,\n                       \"서비스 오류가 발생했습니다.\");\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-4.2",
@@ -1764,13 +1652,11 @@
       ],
       "remediation": {
         "strategy": "HANDLE_ALL_EXCEPTIONS",
-        "description": "빈 catch 블록 제거, 모든 예외에 대한 적절한 처리·로깅 구현",
+        "description": "예외가 발생했을 때 빈 catch 블록으로 무시하거나 아무 처리를 하지 않으면 오류 상황 대응 부재 취약점이 발생한다. 보안 관련 예외(인증 실패, 파일 접근 오류 등)가 조용히 무시되면 공격 시도가 탐지되지 않고, 중요한 처리 실패가 정상인 것처럼 보여 데이터 정합성이 깨질 수 있다. 결제 처리 실패가 무시되어 상품이 발송되거나, 인증 실패가 무시되어 접근이 허용되는 등의 치명적인 논리 오류가 발생할 수 있다. 모든 catch 블록에서 적절한 로깅과 예외 전파 또는 명시적 오류 처리를 구현해야 하며, 빈 catch 블록은 절대 허용되지 않는다.",
         "guideRef": "PART4 제4절 2항 (p.425-428)",
-        "remediationCode": "// [수정] IV-4.2 빈 catch 블록 금지: 모든 예외 처리 또는 전파\n// ❌ 취약: 빈 catch 블록으로 예외 무시 (IV-4.2 위반)\n// try { performOperation(); } catch (Exception e) { }\n\n// ✅ 안전 방법 1: 로그 기록 + 예외 전파\ntry {\n    performOperation();\n} catch (IOException e) {\n    log.error(\"[IO] 작업 실패: {}\", e.getMessage(), e);\n    throw new ServiceException(\"파일 처리 오류\", e);\n}\n\n// ✅ 안전 방법 2: checked → unchecked 변환\ntry {\n    riskyMethod();\n} catch (CheckedException e) {\n    throw new RuntimeException(\"예상치 못한 오류\", e);\n}\n// 예외 삼킴(swallowing)은 반드시 명시적 이유와 로그가 있어야 함"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 오류 상황을 빈 catch 블록으로 무시 (가이드 IV-4.2 위반)\ntry {\n    processPayment(order);\n} catch (PaymentException e) {\n    // 아무 처리 없음 — 결제 실패가 조용히 무시됨\n}",
-        "good": "// ✅ 오류 로깅 + 적절한 응답 처리\ntry {\n    processPayment(order);\n} catch (PaymentException e) {\n    log.error(\"[결제 오류] orderId={}: {}\", order.getId(), e.getMessage(), e);\n    // 트랜잭션 롤백\n    transactionManager.rollback(status);\n    throw new ServiceException(\"결제 처리 중 오류가 발생했습니다.\", e);\n}"
+        "bad_code": "// ❌ 오류 상황을 빈 catch 블록으로 무시 (가이드 IV-4.2 위반)\ntry {\n    processPayment(order);\n} catch (PaymentException e) {\n    // 아무 처리 없음 — 결제 실패가 조용히 무시됨\n}",
+        "good_code": "// ✅ 오류 로깅 + 적절한 응답 처리\ntry {\n    processPayment(order);\n} catch (PaymentException e) {\n    log.error(\"[결제 오류] orderId={}: {}\", order.getId(), e.getMessage(), e);\n    // 트랜잭션 롤백\n    transactionManager.rollback(status);\n    throw new ServiceException(\"결제 처리 중 오류가 발생했습니다.\", e);\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/390.html"
       }
     },
     {
@@ -1786,17 +1672,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "SPECIFIC_EXCEPTION_HANDLING",
-        "description": "포괄적 예외(Exception) 대신 구체적 예외 타입으로 세분화하여 처리",
+        "description": "Exception이나 Throwable 같은 포괄적 예외 타입으로 모든 예외를 한 번에 처리하면 부적절한 예외 처리 취약점이 발생한다. OutOfMemoryError, StackOverflowError 같은 심각한 시스템 오류도 일반 예외와 함께 묻혀 적절한 처리 없이 넘어갈 수 있으며, 예외 종류별 맞춤 처리가 불가능해진다. 구체적인 예외 타입을 파악하지 못하면 디버깅이 어려워지고 보안 이벤트(SQL 예외, 인증 예외 등)를 구분하여 모니터링할 수 없다. FileNotFoundException, SQLException, SecurityException 등 구체적인 예외 타입별로 분리하여 처리하고 각각에 맞는 로깅과 응답을 구현해야 한다.",
         "guideRef": "PART4 제4절 3항 (p.429-432)",
-        "remediationCode": "// [수정] IV-4.3 포괄적 예외 처리 개선: 구체적 예외 타입 처리\n// ❌ 취약: Exception 하나로 모든 예외 처리 (원인 파악 불가)\n// try { openFile(); parseXml(); queryDB();\n// } catch (Exception e) { log.error(\"오류\", e); }\n// ✅ 안전: 구체적 예외 타입별 처리\ntry {\n    openFile();\n} catch (FileNotFoundException e) {\n    log.warn(\"[FILE] 파일 없음: {}\", path);\n    throw new BusinessException(\"파일을 찾을 수 없습니다.\", e);\n} catch (IOException e) {\n    log.error(\"[IO] 파일 읽기 실패\", e);\n    throw new ServiceException(\"파일 읽기 오류\", e);\n}\ntry {\n    queryDB();\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 실패: SQLSTATE={}\", e.getSQLState(), e);\n    throw new DataAccessException(\"데이터 조회 오류\", e);\n}"
+        "bad_code": "// ❌ Exception/Throwable을 통째로 catch → 심각한 오류도 삼킴\ntry {\n    riskyOperation();\n} catch (Exception e) {\n    log.warn(\"오류 발생\"); // OutOfMemoryError, NPE 등도 무시\n}",
+        "good_code": "// ✅ 구체적 예외 타입 별도 처리\ntry {\n    riskyOperation();\n} catch (IOException e) {\n    log.error(\"[IO 오류]: {}\", e.getMessage(), e);\n    throw new ServiceException(\"파일 처리 오류\", e);\n} catch (IllegalArgumentException e) {\n    log.warn(\"[입력값 오류]: {}\", e.getMessage());\n    throw e;\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/754.html"
       },
       "dangerousPatterns": [
         "catch\\s*\\(\\s*Exception\\s+\\w|catch\\s*\\(\\s*Throwable\\s+\\w"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ Exception/Throwable을 통째로 catch → 심각한 오류도 삼킴\ntry {\n    riskyOperation();\n} catch (Exception e) {\n    log.warn(\"오류 발생\"); // OutOfMemoryError, NPE 등도 무시\n}",
-        "good": "// ✅ 구체적 예외 타입 별도 처리\ntry {\n    riskyOperation();\n} catch (IOException e) {\n    log.error(\"[IO 오류]: {}\", e.getMessage(), e);\n    throw new ServiceException(\"파일 처리 오류\", e);\n} catch (IllegalArgumentException e) {\n    log.warn(\"[입력값 오류]: {}\", e.getMessage());\n    throw e;\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-5.1",
@@ -1811,17 +1695,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "NULL_CHECK",
-        "description": "객체 사용 전 null 검사 추가 또는 Optional 패턴 활용",
+        "description": "메서드 반환값이나 컬렉션 조회 결과에 대한 null 검사 없이 메서드를 호출하면 NullPointerException(NPE) 취약점이 발생한다. 공격자는 null을 반환하도록 유도하는 입력값을 제공하여 NPE를 발생시키고, 이로 인한 서비스 거부 공격을 수행하거나 예외 처리 로직의 보안 검사를 우회할 수 있다. NPE는 애플리케이션 충돌과 서비스 중단을 유발하며, 오류 메시지가 노출되면 내부 코드 구조 파악에도 활용된다. 메서드 호출 전 null 검사, Optional 패턴, Objects.requireNonNull() 등을 활용하여 null 역참조를 방지해야 한다.",
         "guideRef": "PART4 제5절 1항 (p.433-444)",
-        "remediationCode": "// [수정] IV-5.1 NullPointerException 방지: null 검사 또는 Optional\n// ❌ 취약: null 검사 없이 메서드 호출\nString userId = request.getParameter(\"userId\");\nString upper = userId.toUpperCase();  // userId=null → NPE\n\n// ✅ 안전 방법 1: 명시적 null 검사\nString userId = request.getParameter(\"userId\");\nif (userId == null || userId.isBlank())\n    throw new IllegalArgumentException(\"userId가 필요합니다.\");\nString upper = userId.toUpperCase();\n\n// ✅ 안전 방법 2: Optional 패턴\nString upper = Optional.ofNullable(request.getParameter(\"userId\"))\n    .filter(s -> !s.isBlank())\n    .map(String::toUpperCase)\n    .orElseThrow(() -> new IllegalArgumentException(\"userId 필요\"));\n\n// ✅ 안전 방법 3: Objects.requireNonNull\nString userId = Objects.requireNonNull(\n    request.getParameter(\"userId\"), \"userId는 필수입니다.\");"
+        "bad_code": "// ❌ null 반환값 검사 없이 메서드 호출 (NullPointerException)\nString value = map.get(\"key\"); // null일 수 있음\nint len = value.length();       // NullPointerException 발생",
+        "good_code": "// ✅ null 검사 후 사용\nString value = map.get(\"key\");\nif (value == null) {\n    log.warn(\"[MAP] 키 'key'에 해당하는 값 없음\");\n    return;\n}\nint len = value.length();\n// 또는 getOrDefault() 활용:\nString val2 = map.getOrDefault(\"key\", \"\");",
+        "reference_url": "https://cwe.mitre.org/data/definitions/476.html"
       },
       "dangerousPatterns": [
         "\\.get\\(\\)\\.\\w|getResult\\(\\)\\.get\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ null 반환값 검사 없이 메서드 호출 (NullPointerException)\nString value = map.get(\"key\"); // null일 수 있음\nint len = value.length();       // NullPointerException 발생",
-        "good": "// ✅ null 검사 후 사용\nString value = map.get(\"key\");\nif (value == null) {\n    log.warn(\"[MAP] 키 'key'에 해당하는 값 없음\");\n    return;\n}\nint len = value.length();\n// 또는 getOrDefault() 활용:\nString val2 = map.getOrDefault(\"key\", \"\");"
-      }
+      ]
     },
     {
       "ruleId": "IV-5.2",
@@ -1841,17 +1723,15 @@
       ],
       "remediation": {
         "strategy": "TRY_WITH_RESOURCES",
-        "description": "try-with-resources 구문으로 자원 자동 해제 보장",
+        "description": "파일 스트림, DB 커넥션, 네트워크 소켓 등의 자원을 사용 후 명시적으로 해제하지 않으면 자원 누수(Resource Leak) 취약점이 발생한다. 예외 발생 시 finally 블록 없이 자원을 해제하지 않으면 자원이 반환되지 않아 DB 커넥션 풀 고갈, 파일 디스크립터 부족, 메모리 부족 등으로 서비스가 점진적으로 저하된다. 공격자는 의도적으로 예외를 유발하는 요청을 반복하여 자원 고갈로 인한 서비스 거부 공격을 수행할 수 있다. try-with-resources 구문을 사용하여 AutoCloseable 자원이 예외 발생 여부와 무관하게 자동 해제되도록 보장해야 한다.",
         "guideRef": "PART4 제5절 2항 (p.445-453)",
-        "remediationCode": "// [수정] IV-5.2 자원 누수 방지: try-with-resources 사용\n// ❌ 취약: finally 없어 자원 해제 누락 가능\n// Connection con = null; PreparedStatement ps = null;\n// try { con = ds.getConnection(); ps = con.prepareStatement(sql);\n//     ps.executeQuery(); } catch (SQLException e) { ... }\n// 커넥션 누수!\n\n// ✅ 안전: try-with-resources로 자동 해제\ntry (Connection con = ds.getConnection();\n     PreparedStatement ps = con.prepareStatement(sql);\n     ResultSet rs = ps.executeQuery()) {\n    while (rs.next()) { /* 처리 */ }\n} catch (SQLException e) {\n    log.error(\"[DB] 쿼리 실패\", e);\n    throw new ServiceException(\"데이터 조회 오류\", e);\n}\n// AutoCloseable 구현 자원 모두 적용 가능\n// (InputStream, OutputStream, Connection, Session 등)"
+        "bad_code": "// ❌ finally 블록 없이 스트림 미해제 → 자원 누수\npublic void readFile(String path) throws IOException {\n    FileInputStream fis = new FileInputStream(path);\n    int b;\n    while ((b = fis.read()) != -1) { process(b); }\n    // fis.close() 누락 — 예외 발생 시 자원 영구 누수\n}",
+        "good_code": "// ✅ try-with-resources로 자동 해제 (JDK 7+)\npublic void readFile(String path) throws IOException {\n    try (FileInputStream fis = new FileInputStream(path)) {\n        int b;\n        while ((b = fis.read()) != -1) { process(b); }\n    } // 블록 종료 시 자동으로 fis.close() 호출\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/772.html"
       },
       "dangerousPatterns": [
         "new FileInputStream\\(|getConnection\\(\\)|new BufferedReader\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ finally 블록 없이 스트림 미해제 → 자원 누수\npublic void readFile(String path) throws IOException {\n    FileInputStream fis = new FileInputStream(path);\n    int b;\n    while ((b = fis.read()) != -1) { process(b); }\n    // fis.close() 누락 — 예외 발생 시 자원 영구 누수\n}",
-        "good": "// ✅ try-with-resources로 자동 해제 (JDK 7+)\npublic void readFile(String path) throws IOException {\n    try (FileInputStream fis = new FileInputStream(path)) {\n        int b;\n        while ((b = fis.read()) != -1) { process(b); }\n    } // 블록 종료 시 자동으로 fis.close() 호출\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-5.3",
@@ -1866,17 +1746,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "NULL_AFTER_CLOSE",
-        "description": "자원 해제 후 변수를 null로 설정하여 재사용 방지",
+        "description": "자원(파일 스트림, 커넥션 등)을 close()로 해제한 후 동일 참조를 통해 계속 사용하면 해제된 자원 사용 취약점이 발생한다. close() 이후 read()나 write()를 호출하면 IOException이 발생하고, 예외 처리가 부적절하면 비정상 동작이나 서비스 중단으로 이어진다. 해제된 DB 커넥션을 재사용하면 데이터 일관성이 깨지거나 예기치 않은 트랜잭션 문제가 발생할 수 있다. try-with-resources로 자원 스코프를 블록 내로 제한하거나, close() 후 변수를 null로 설정하여 의도치 않은 재사용을 컴파일 타임에 방지해야 한다.",
         "guideRef": "PART4 제5절 3항 (p.454-458)",
-        "remediationCode": "// [수정] IV-5.3 해제된 자원 재사용 방지\n// ❌ 취약: close() 후 동일 변수를 재사용\n// InputStream is = new FileInputStream(\"file.txt\");\n// is.readAllBytes(); is.close(); is.read();  // IOException!\n\n// ✅ 안전 방법 1: try-with-resources로 스코프 제한\ntry (InputStream is = new FileInputStream(\"file.txt\")) {\n    byte[] data = is.readAllBytes();\n}  // is 자동 해제 — 블록 외부에서 접근 불가\n\n// ✅ 안전 방법 2: close() 후 null 할당\nInputStream is = null;\ntry {\n    is = new FileInputStream(\"file.txt\");\n    byte[] data = is.readAllBytes();\n} finally {\n    if (is != null) { is.close(); is = null; }\n}\n// is.read() → NullPointerException → 의도적 오류로 조기 발견"
+        "bad_code": "// ❌ 자원 해제 후 재사용 시도\nInputStream is = getStream();\nis.close();\n// ... 다른 코드 ...\nint b = is.read(); // IOException: Stream closed",
+        "good_code": "// ✅ 자원 해제 후 참조를 null로 설정하고 재사용 방지\nInputStream is = getStream();\ntry {\n    int b = is.read();\n    processData(b);\n} finally {\n    try { is.close(); } catch (IOException e) { log.warn(\"close 오류\", e); }\n    is = null; // 해제 후 참조 제거\n}\n// is 이후 사용 코드에서 null 체크 필요",
+        "reference_url": "https://cwe.mitre.org/data/definitions/416.html"
       },
       "dangerousPatterns": [
         "\\.close\\(\\);"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 자원 해제 후 재사용 시도\nInputStream is = getStream();\nis.close();\n// ... 다른 코드 ...\nint b = is.read(); // IOException: Stream closed",
-        "good": "// ✅ 자원 해제 후 참조를 null로 설정하고 재사용 방지\nInputStream is = getStream();\ntry {\n    int b = is.read();\n    processData(b);\n} finally {\n    try { is.close(); } catch (IOException e) { log.warn(\"close 오류\", e); }\n    is = null; // 해제 후 참조 제거\n}\n// is 이후 사용 코드에서 null 체크 필요"
-      }
+      ]
     },
     {
       "ruleId": "IV-5.4",
@@ -1891,17 +1769,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "INITIALIZE_VARIABLES",
-        "description": "모든 변수를 선언 시 명시적으로 초기화",
+        "description": "변수를 선언만 하고 초기화 없이 사용하면 초기화되지 않은 변수 사용 취약점이 발생한다. Java 컴파일러는 지역 변수의 미초기화 사용을 감지하지만, 조건 분기가 복잡한 경우나 필드 변수(null로 기본 초기화)는 런타임에 NullPointerException이나 논리 오류를 유발할 수 있다. 미초기화 변수를 보안 결정 로직에서 사용하면 기본값(null, 0, false)으로 인한 접근 허용이나 인증 우회 논리 오류가 발생할 수 있다. 모든 변수를 선언 시 명시적으로 초기화하고, 조건에 따라 값이 달라지는 경우 항상 기본값을 할당한 후 조건 분기를 처리해야 한다.",
         "guideRef": "PART4 제5절 4항 (p.459-461)",
-        "remediationCode": "// [수정] IV-5.4 초기화되지 않은 변수 방지: 선언 시 명시 초기화\n// ❌ 취약: 선언만 하고 초기화 없이 사용 (NPE·논리 오류 위험)\nprivate String result;      // null\nprivate List<String> items; // null\nprivate int count;          // 0이지만 명시 권장\n\n// ✅ 안전: 선언 시 명시적 초기화\nprivate String result = \"\";\nprivate List<String> items = new ArrayList<>();\nprivate int count = 0;\n\n// 지역 변수: 컴파일러가 미초기화 사용 감지 (단, 복잡한 분기에서 누락 가능)\nString status;\nif (condition) status = \"OK\";\nelse           status = \"FAIL\";  // else 없으면 컴파일 오류\nlog.info(\"상태: {}\", status);"
+        "bad_code": "// ❌ 변수 초기화 전 사용 시도\nint result;\nif (condition) {\n    result = compute();\n}\nSystem.out.println(result); // condition이 false면 초기화 안 됨",
+        "good_code": "// ✅ 선언 시 기본값으로 초기화\nint result = 0; // 기본값 명시\nif (condition) {\n    result = compute();\n}\nlog.info(\"결과: {}\", result);\n// 또는 else 분기로 항상 초기화 보장:\nint result2 = condition ? compute() : -1;",
+        "reference_url": "https://cwe.mitre.org/data/definitions/457.html"
       },
       "dangerousPatterns": [
         "private int \\w+;|private String \\w+;|private Object \\w+;"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 변수 초기화 전 사용 시도\nint result;\nif (condition) {\n    result = compute();\n}\nSystem.out.println(result); // condition이 false면 초기화 안 됨",
-        "good": "// ✅ 선언 시 기본값으로 초기화\nint result = 0; // 기본값 명시\nif (condition) {\n    result = compute();\n}\nlog.info(\"결과: {}\", result);\n// 또는 else 분기로 항상 초기화 보장:\nint result2 = condition ? compute() : -1;"
-      }
+      ]
     },
     {
       "ruleId": "IV-5.5",
@@ -1929,13 +1805,11 @@
       ],
       "remediation": {
         "strategy": "SAFE_DESERIALIZATION",
-        "description": "역직렬화 필터(ObjectInputFilter) 적용 또는 JSON/XML 등 안전한 형식으로 교체",
+        "description": "신뢰할 수 없는 출처의 직렬화 데이터를 ObjectInputStream.readObject()로 역직렬화하면 역직렬화 취약점이 발생한다. 공격자는 가젯 체인(gadget chain)을 활용한 악성 직렬화 페이로드를 전송하여 역직렬화 과정에서 임의 코드를 실행할 수 있으며, Apache Commons Collections 등 인기 라이브러리에서 이 공격이 실증된 바 있다. 이는 서버에서 임의 명령 실행(RCE), 파일 시스템 접근, 내부망 침투 등 시스템 완전 장악으로 이어지는 매우 위험한 취약점이다. Java 직렬화 사용 자체를 JSON/XML로 대체하거나, 불가피한 경우 ObjectInputFilter로 역직렬화 허용 클래스를 화이트리스트 방식으로 엄격히 제한해야 한다.",
         "guideRef": "PART4 제5절 5항 (p.462-468)",
-        "remediationCode": "// [수정] IV-5.5 역직렬화 취약점 방지: 필터 적용 또는 JSON 대체\n// ❌ 취약: 신뢰할 수 없는 입력을 무제한 역직렬화\nObjectInputStream ois = new ObjectInputStream(req.getInputStream());\nObject obj = ois.readObject();  // 임의 클래스 인스턴스화 → RCE!\n\n// ✅ 안전 방법 1: ObjectInputFilter (Java 9+)\nObjectInputStream ois = new ObjectInputStream(req.getInputStream());\nois.setObjectInputFilter(info -> {\n    Class<?> c = info.serialClass();\n    if (c == null) return ObjectInputFilter.Status.UNDECIDED;\n    if (c == MyData.class) return ObjectInputFilter.Status.ALLOWED;\n    return ObjectInputFilter.Status.REJECTED;  // 나머지 모두 차단\n});\nMyData data = (MyData) ois.readObject();\n\n// ✅ 안전 방법 2: JSON 역직렬화로 교체 (권장)\nString json = new String(req.getInputStream().readAllBytes(),\n    StandardCharsets.UTF_8);\nMyData data = new ObjectMapper().readValue(json, MyData.class);"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 신뢰할 수 없는 데이터 역직렬화 (RCE 가능)\nObjectInputStream ois = new ObjectInputStream(request.getInputStream());\nObject obj = ois.readObject(); // 악의적 직렬화 페이로드 실행 가능",
-        "good": "// ✅ 역직렬화 금지 또는 허용 클래스 화이트리스트 적용\n// 방법 1: Java 직렬화 대신 JSON 사용 (권장)\nObjectMapper mapper = new ObjectMapper();\nMyDto dto = mapper.readValue(request.getInputStream(), MyDto.class);\n\n// 방법 2: 화이트리스트 기반 ObjectInputStream 사용\nObjectInputStream ois = new ObjectInputStream(input) {\n    protected Class<?> resolveClass(ObjectStreamClass desc)\n            throws IOException, ClassNotFoundException {\n        if (!desc.getName().startsWith(\"com.myapp.\"))\n            throw new InvalidClassException(\"허용되지 않는 클래스\", desc.getName());\n        return super.resolveClass(desc);\n    }\n};"
+        "bad_code": "// ❌ 신뢰할 수 없는 데이터 역직렬화 (RCE 가능)\nObjectInputStream ois = new ObjectInputStream(request.getInputStream());\nObject obj = ois.readObject(); // 악의적 직렬화 페이로드 실행 가능",
+        "good_code": "// ✅ 역직렬화 금지 또는 허용 클래스 화이트리스트 적용\n// 방법 1: Java 직렬화 대신 JSON 사용 (권장)\nObjectMapper mapper = new ObjectMapper();\nMyDto dto = mapper.readValue(request.getInputStream(), MyDto.class);\n\n// 방법 2: 화이트리스트 기반 ObjectInputStream 사용\nObjectInputStream ois = new ObjectInputStream(input) {\n    protected Class<?> resolveClass(ObjectStreamClass desc)\n            throws IOException, ClassNotFoundException {\n        if (!desc.getName().startsWith(\"com.myapp.\"))\n            throw new InvalidClassException(\"허용되지 않는 클래스\", desc.getName());\n        return super.resolveClass(desc);\n    }\n};",
+        "reference_url": "https://cwe.mitre.org/data/definitions/502.html"
       }
     },
     {
@@ -1951,17 +1825,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "SESSION_ISOLATION",
-        "description": "스레드 로컬 또는 요청별 세션 격리, 공유 객체에 사용자 데이터 저장 금지",
+        "description": "HttpSession 객체를 서비스 레이어에 직접 전달하거나, 로그아웃 시 세션을 완전히 파기하지 않으면 세션 데이터 노출 취약점이 발생한다. 세션 객체를 서비스 레이어에 전달하면 세션의 모든 데이터에 불필요하게 접근·변조가 가능하고, 세션 파기 없이 로그아웃하면 같은 브라우저를 사용하는 다음 사용자가 이전 세션에 접근할 수 있다. 공공 컴퓨터나 공유 단말에서 로그아웃 후 세션 재사용으로 타인 계정에 접근하는 심각한 개인정보 침해가 발생한다. 로그아웃 시 session.invalidate()로 세션을 완전히 파기하고, 서비스 레이어에는 필요한 속성값만 추출하여 전달해야 한다.",
         "guideRef": "PART4 제6절 1항 (p.469-475)",
-        "remediationCode": "// [수정] IV-6.1 세션 데이터 격리: static 세션 공유 금지\n// ❌ 취약: static 필드에 세션 저장 (스레드 간 데이터 혼용)\n// class UserService { private static HttpSession s; }  // 위험!\n\n// ✅ 안전: 요청 단위로 세션 조회, static 공유 금지\npublic class UserService {\n    public UserVO getUser(HttpServletRequest req) {\n        HttpSession ses = req.getSession(false);\n        return ses != null\n            ? (UserVO) ses.getAttribute(\"loginUser\") : null;\n    }\n}\n// ThreadLocal 사용 시 반드시 finally에서 제거\nThreadLocal<UserVO> holder = new ThreadLocal<>();\ntry {\n    holder.set(getUser(request));\n    processRequest();\n} finally {\n    holder.remove();  // 스레드 풀 재사용 시 이전 데이터 노출 방지\n}"
+        "bad_code": "// ❌ 로그아웃 후 세션 데이터 잔존 → 세션 재사용으로 타인 정보 노출\n@GetMapping(\"/logout\")\npublic String logout(HttpSession session) {\n    session.removeAttribute(\"userId\"); // 세션 자체가 유지됨\n    return \"redirect:/login\";\n}",
+        "good_code": "// ✅ 세션 완전 파기 후 새 세션 발급\n@GetMapping(\"/logout\")\npublic String logout(HttpServletRequest request) {\n    HttpSession session = request.getSession(false);\n    if (session != null) {\n        session.invalidate();\n    }\n    return \"redirect:/login\";\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/488.html"
       },
       "dangerousPatterns": [
         "static.*HttpSession|public static.*Session"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 로그아웃 후 세션 데이터 잔존 → 세션 재사용으로 타인 정보 노출\n@GetMapping(\"/logout\")\npublic String logout(HttpSession session) {\n    session.removeAttribute(\"userId\"); // 세션 자체가 유지됨\n    return \"redirect:/login\";\n}",
-        "good": "// ✅ 세션 완전 파기 후 새 세션 발급\n@GetMapping(\"/logout\")\npublic String logout(HttpServletRequest request) {\n    HttpSession session = request.getSession(false);\n    if (session != null) {\n        session.invalidate();\n    }\n    return \"redirect:/login\";\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-6.2",
@@ -1980,13 +1852,11 @@
       ],
       "remediation": {
         "strategy": "REMOVE_DEBUG_CODE",
-        "description": "배포 전 디버그 출력 코드 제거 및 로깅 프레임워크(SLF4J) 사용",
+        "description": "배포된 운영 코드에 System.out.println(), e.printStackTrace(), 하드코딩된 테스트 비밀번호, 백도어 코드 등이 남아 있으면 디버그 코드 잔존 취약점이 발생한다. System.out.println()으로 출력된 민감정보(SQL, 사용자 데이터)는 서버 로그에 평문으로 저장되고, e.printStackTrace()는 스택트레이스를 통해 내부 구조를 노출한다. 하드코딩된 마스터 비밀번호나 테스트 계정이 배포되면 공격자가 이를 발견하여 시스템에 무단 접근할 수 있다. 배포 전 디버그 코드를 완전히 제거하고 SLF4J/Logback 표준 로거로 교체하며, 로그 레벨을 운영 환경에서 WARN 이상으로 설정해야 한다.",
         "guideRef": "PART4 제6절 2항 (p.476-480)",
-        "remediationCode": "// [수정] IV-6.2 디버그 코드 제거: SLF4J 표준 로거로 교체\n// ❌ 취약: 배포 코드에 남은 디버그 출력\nSystem.out.println(\"userId = \" + userId);\nSystem.out.println(\"DB 쿼리: \" + sql);\ne.printStackTrace();  // 스택트레이스 노출 위험\n\n// ✅ 안전: SLF4J/Logback 표준 로거 사용\nprivate static final Logger log =\n    LoggerFactory.getLogger(MyService.class);\n\n// 개발 디버깅 (운영 환경에서 DEBUG 자동 비활성)\nlog.debug(\"userId={}\", userId);\nlog.debug(\"SQL: {}\", sql);\n\n// 예외 처리 (스택트레이스는 서버 로그에만)\n} catch (Exception e) {\n    log.error(\"[SERVICE] 처리 오류: {}\", e.getMessage(), e);\n    throw new ServiceException(\"서비스 오류\", e);\n}\n// logback.xml: <root level=\"WARN\"> (운영), <root level=\"DEBUG\"> (개발)"
-      },
-      "codeExamples": {
-        "bad": "// ❌ 운영 코드에 디버그 코드 잔존\npublic void processOrder(Order order) {\n    System.out.println(\"[DEBUG] order=\" + order);\n    e.printStackTrace(); // 스택트레이스 직접 출력\n    // TODO: 테스트용 마스터 비밀번호 제거 필요\n    if (\"masterkey\".equals(inputPw)) return; // 백도어\n}",
-        "good": "// ✅ 디버그 코드 제거 + 로깅 레벨로 대체\npublic void processOrder(Order order) {\n    log.debug(\"[주문 처리] orderId={}\", order.getId());\n    // System.out, printStackTrace, 하드코딩 비밀번호 없음\n    orderService.process(order);\n}"
+        "bad_code": "// ❌ 운영 코드에 디버그 코드 잔존\npublic void processOrder(Order order) {\n    System.out.println(\"[DEBUG] order=\" + order);\n    e.printStackTrace(); // 스택트레이스 직접 출력\n    // TODO: 테스트용 마스터 비밀번호 제거 필요\n    if (\"masterkey\".equals(inputPw)) return; // 백도어\n}",
+        "good_code": "// ✅ 디버그 코드 제거 + 로깅 레벨로 대체\npublic void processOrder(Order order) {\n    log.debug(\"[주문 처리] orderId={}\", order.getId());\n    // System.out, printStackTrace, 하드코딩 비밀번호 없음\n    orderService.process(order);\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/489.html"
       }
     },
     {
@@ -2002,17 +1872,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "DEFENSIVE_COPY",
-        "description": "private 배열 반환 시 Arrays.copyOf()로 방어적 복사 후 반환",
+        "description": "public 메서드에서 private 배열의 직접 참조를 반환하면 내부 상태 변조 취약점이 발생한다. 반환받은 배열 참조를 통해 호출자가 배열 원소를 직접 수정하면 객체의 내부 불변 상태가 외부에서 변조되어 캡슐화 원칙이 깨진다. 보안 관련 설정(허용 역할 목록, 화이트리스트)이 저장된 배열이 외부에서 변조되면 접근 제어 우회나 보안 정책 변경이 가능하다. Arrays.copyOf()로 방어적 복사본을 반환하거나, Collections.unmodifiableList()를 통해 불변 뷰를 반환하여 내부 상태를 보호해야 한다.",
         "guideRef": "PART4 제6절 3항 (p.481-486)",
-        "remediationCode": "// [수정] IV-6.3 private 배열 직접 반환 금지: 방어적 복사\n// ❌ 취약: private 배열 참조를 그대로 반환 → 외부에서 수정 가능\npublic class Config {\n    private String[] allowedRoles = {\"USER\", \"ADMIN\"};\n    public String[] getAllowedRoles() {\n        return allowedRoles;  // 외부: allowedRoles[0]=\"HACKER\" 가능!\n    }\n}\n\n// ✅ 안전 방법 1: Arrays.copyOf()로 방어적 복사\npublic class Config {\n    private String[] allowedRoles = {\"USER\", \"ADMIN\"};\n    public String[] getAllowedRoles() {\n        return Arrays.copyOf(allowedRoles, allowedRoles.length);\n    }\n}\n// ✅ 안전 방법 2: 불변 컬렉션 반환 (권장)\npublic List<String> getAllowedRoleList() {\n    return Collections.unmodifiableList(Arrays.asList(allowedRoles));\n}"
+        "bad_code": "// ❌ private 배열을 외부에서 수정 가능한 참조로 반환\nprivate String[] sensitiveData = {\"key1\", \"key2\"};\n\npublic String[] getData() {\n    return sensitiveData; // 참조 반환 → 외부에서 배열 원소 변경 가능\n}",
+        "good_code": "// ✅ 방어적 복사본 반환\nprivate String[] sensitiveData = {\"key1\", \"key2\"};\n\npublic String[] getData() {\n    return Arrays.copyOf(sensitiveData, sensitiveData.length);\n}\n// 또는 Collections.unmodifiableList() 활용 (List 사용 시)",
+        "reference_url": "https://cwe.mitre.org/data/definitions/495.html"
       },
       "dangerousPatterns": [
         "public\\s+\\w+\\[\\]\\s+get\\w+\\(\\)"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ private 배열을 외부에서 수정 가능한 참조로 반환\nprivate String[] sensitiveData = {\"key1\", \"key2\"};\n\npublic String[] getData() {\n    return sensitiveData; // 참조 반환 → 외부에서 배열 원소 변경 가능\n}",
-        "good": "// ✅ 방어적 복사본 반환\nprivate String[] sensitiveData = {\"key1\", \"key2\"};\n\npublic String[] getData() {\n    return Arrays.copyOf(sensitiveData, sensitiveData.length);\n}\n// 또는 Collections.unmodifiableList() 활용 (List 사용 시)"
-      }
+      ]
     },
     {
       "ruleId": "IV-6.4",
@@ -2027,17 +1895,15 @@
       "taintAnalysis": false,
       "remediation": {
         "strategy": "DEFENSIVE_COPY_INPUT",
-        "description": "외부 배열을 private 필드에 할당 시 Arrays.copyOf()로 방어적 복사",
+        "description": "외부에서 전달받은 배열을 방어적 복사 없이 private 필드에 직접 할당하면 내부 상태 변조 취약점이 발생한다. 호출자가 원본 배열 참조를 유지하므로 전달 후에도 배열 원소를 수정하면 객체의 내부 상태가 의도하지 않게 변경된다. 보안 설정이나 권한 목록을 담은 배열이 외부에서 변조되면 접근 제어가 우회될 수 있으며 객체 불변성이 깨진다. Arrays.copyOf()로 방어적 복사를 수행하여 내부 필드에 저장하고, null 입력에 대한 방어 코드도 함께 적용해야 한다.",
         "guideRef": "PART4 제6절 4항 (p.487-491)",
-        "remediationCode": "// [수정] IV-6.4 외부 배열 직접 할당 금지: 방어적 복사\n// ❌ 취약: 파라미터 배열을 private 필드에 직접 할당\n// class Config { private String[] roles;\n//   public void setRoles(String[] r) { this.roles = r; } }\n// 호출자가 r[0]=\"HACKER\"로 수정하면 내부도 변경됨!\n\n// ✅ 안전: Arrays.copyOf()로 방어적 복사\npublic class Config {\n    private String[] allowedRoles;\n    public void setAllowedRoles(String[] roles) {\n        if (roles == null)\n            throw new IllegalArgumentException(\"roles must not be null\");\n        this.allowedRoles = Arrays.copyOf(roles, roles.length);\n    }\n}\n// 또는 불변 리스트로 받기 (권장)\npublic void setRoles(List<String> roles) {\n    this.allowedRoles = roles.toArray(new String[0]);\n}"
+        "bad_code": "// ❌ 외부에서 전달받은 배열을 private 필드에 직접 할당\nprivate int[] permissions;\n\npublic void setPermissions(int[] perm) {\n    this.permissions = perm; // 외부가 perm을 수정하면 내부 상태도 변경됨\n}",
+        "good_code": "// ✅ 방어적 복사 후 내부 필드에 저장\nprivate int[] permissions;\n\npublic void setPermissions(int[] perm) {\n    if (perm == null) throw new IllegalArgumentException(\"권한 배열은 null 불가\");\n    this.permissions = Arrays.copyOf(perm, perm.length);\n}",
+        "reference_url": "https://cwe.mitre.org/data/definitions/496.html"
       },
       "dangerousPatterns": [
         "this\\.\\w+\\s*=\\s*\\w+;"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 외부에서 전달받은 배열을 private 필드에 직접 할당\nprivate int[] permissions;\n\npublic void setPermissions(int[] perm) {\n    this.permissions = perm; // 외부가 perm을 수정하면 내부 상태도 변경됨\n}",
-        "good": "// ✅ 방어적 복사 후 내부 필드에 저장\nprivate int[] permissions;\n\npublic void setPermissions(int[] perm) {\n    if (perm == null) throw new IllegalArgumentException(\"권한 배열은 null 불가\");\n    this.permissions = Arrays.copyOf(perm, perm.length);\n}"
-      }
+      ]
     },
     {
       "ruleId": "IV-7.1",
@@ -2057,17 +1923,15 @@
       ],
       "remediation": {
         "strategy": "IP_BASED_CHECK",
-        "description": "DNS 역방향 조회 결과 대신 IP 주소 기반으로 보안 결정 수행",
+        "description": "DNS 역방향 조회(getHostName(), getCanonicalHostName()) 결과를 신뢰하여 보안 결정에 사용하면 DNS 조회 의존 취약점이 발생한다. 공격자는 자신이 제어하는 DNS 서버를 통해 IP 주소의 역방향 조회 결과를 조작(DNS 스푸핑)하여 신뢰할 수 있는 호스트명을 반환하게 만들고, IP 기반 접근 제어를 우회할 수 있다. 이는 내부망 전용 기능에 외부 공격자가 접근하거나, 화이트리스트로 보호된 기능이 무단으로 사용되는 피해를 초래한다. 보안 결정은 DNS 조회 결과가 아닌 직접 연결된 IP 주소(request.getRemoteAddr())와 서버 측 화이트리스트를 비교하는 방식으로 수행해야 한다.",
         "guideRef": "PART4 제7절 1항 (p.492-496)",
-        "remediationCode": "// [수정] IV-7.1 DNS lookup 기반 보안 결정 금지: IP 직접 비교\n// ❌ 취약: 역방향 DNS 조회(getHostName)로 보안 결정\nInetAddress addr = InetAddress.getByName(clientIp);\nString host = addr.getHostName();\nif (\"trusted.internal.com\".equals(host))\n    grantAccess();  // DNS 스푸핑으로 우회 가능!\n\n// ✅ 안전: IP 주소 화이트리스트로 직접 비교\nprivate static final Set<String> TRUSTED =\n    Set.of(\"192.168.1.10\", \"192.168.1.11\", \"10.0.0.5\");\nString clientIp = request.getRemoteAddr();\nif (!TRUSTED.contains(clientIp))\n    throw new ForbiddenException(\"접근 금지 IP: \" + clientIp);\ngrantAccess();\n// X-Forwarded-For는 조작 가능 — 직접 연결 IP 사용\n// 프록시 환경: 신뢰할 수 있는 프록시만 허용 후 IP 추출"
+        "bad_code": "// ❌ DNS lookup 결과로 보안 결정 (DNS 스푸핑 가능)\nString ip = InetAddress.getByName(\"trusted.internal.com\").getHostAddress();\nif (\"10.0.0.5\".equals(ip)) {\n    grantAccess(); // DNS 스푸핑 시 공격자 IP가 신뢰됨\n}",
+        "good_code": "// ✅ IP 주소를 설정 파일에서 직접 로드하여 비교\n// application.properties: trusted.ip=10.0.0.5\nString trustedIp = config.getProperty(\"trusted.ip\");\nString remoteIp  = request.getRemoteAddr();\nif (!trustedIp.equals(remoteIp)) {\n    throw new SecurityException(\"허가되지 않은 접근 IP: \" + remoteIp);\n}\ngrantAccess();",
+        "reference_url": "https://cwe.mitre.org/data/definitions/350.html"
       },
       "dangerousPatterns": [
         "InetAddress\\.getByName\\(|getHostName\\(\\)|getCanonicalHostName\\(\\)"
-      ],
-      "codeExamples": {
-        "bad": "// ❌ DNS lookup 결과로 보안 결정 (DNS 스푸핑 가능)\nString ip = InetAddress.getByName(\"trusted.internal.com\").getHostAddress();\nif (\"10.0.0.5\".equals(ip)) {\n    grantAccess(); // DNS 스푸핑 시 공격자 IP가 신뢰됨\n}",
-        "good": "// ✅ IP 주소를 설정 파일에서 직접 로드하여 비교\n// application.properties: trusted.ip=10.0.0.5\nString trustedIp = config.getProperty(\"trusted.ip\");\nString remoteIp  = request.getRemoteAddr();\nif (!trustedIp.equals(remoteIp)) {\n    throw new SecurityException(\"허가되지 않은 접근 IP: \" + remoteIp);\n}\ngrantAccess();"
-      }
+      ]
     },
     {
       "ruleId": "IV-7.2",
@@ -2086,17 +1950,15 @@
       ],
       "remediation": {
         "strategy": "SAFE_API_REPLACEMENT",
-        "description": "보안 취약점이 알려진 API를 안전한 대체 API로 교체",
+        "description": "Runtime.exec(String), Thread.stop(), 폐기된(deprecated) API를 사용하면 취약한 API 사용 취약점이 발생한다. Runtime.exec(String)은 셸을 통해 명령을 실행하므로 OS 명령어 삽입에 취약하고, Thread.stop()은 데드락과 데이터 손상을 유발하며, 구버전 날짜 API는 타임존 처리 오류로 인한 논리 취약점을 만들 수 있다. 취약한 API를 통한 OS 명령어 삽입은 서버 완전 장악으로 이어지고, 불안정한 API 사용은 예측 불가능한 동작으로 보안 우회를 야기한다. Runtime.exec()는 배열 인자 방식 또는 ProcessBuilder로, Thread.stop()은 인터럽트 메커니즘으로, 날짜 처리는 java.time API로 대체해야 한다.",
         "guideRef": "PART4 제7절 2항 (p.497-505)",
-        "remediationCode": "// [수정] IV-7.2 취약한 API 대체: 안전한 Java API 사용\n// ❌ 취약: 보안 취약점이 있는 레거시 API\nRuntime.getRuntime().exec(\"cmd \" + userInput);  // OS 명령어 주입\nThread.stop();                                  // deprecated(데드락 위험)\nDate d = new Date(year, month, day);            // deprecated\n\n// ✅ 안전: 권장 대체 API\n// OS 명령어 → ProcessBuilder 배열 방식\nnew ProcessBuilder(\"/usr/bin/safe-tool\",\n    \"--arg\", sanitizedInput).start();\n\n// 스레드 종료 → 협력적 종료\nvolatile boolean running = true;\n// while (running) { ... }  / running = false;\n\n// 날짜 → java.time API\nLocalDate date = LocalDate.of(year, month, day);\nZonedDateTime now = ZonedDateTime.now(ZoneId.of(\"Asia/Seoul\"));\n// System.loadLibrary → 검증된 경로 + 화이트리스트"
+        "bad_code": "// ❌ 취약하거나 위험한 API 사용\n// Thread.stop()          — 비결정적 상태 유발\n// System.runFinalizersOnExit(true) — 비권고 API\n// Runtime.exec(String)   — 쉘 삽입 위험 (배열 형태 미사용)\nRuntime.getRuntime().exec(\"ls \" + userInput);",
+        "good_code": "// ✅ 안전한 대안 API 사용\n// Thread.stop() 대신 → 인터럽트 메커니즘\nthread.interrupt();\n\n// Runtime.exec(String) 대신 → 배열 형태 사용\nString[] cmd = {\"ls\", \"-l\", safeDir};\nProcess proc = Runtime.getRuntime().exec(cmd);\n\n// 또는 ProcessBuilder 사용 (권장)\nProcessBuilder pb = new ProcessBuilder(\"ls\", \"-l\", safeDir);\npb.redirectErrorStream(true);\nProcess p = pb.start();",
+        "reference_url": "https://cwe.mitre.org/data/definitions/676.html"
       },
       "dangerousPatterns": [
         "Runtime\\.exec\\(|System\\.loadLibrary\\("
-      ],
-      "codeExamples": {
-        "bad": "// ❌ 취약하거나 위험한 API 사용\n// Thread.stop()          — 비결정적 상태 유발\n// System.runFinalizersOnExit(true) — 비권고 API\n// Runtime.exec(String)   — 쉘 삽입 위험 (배열 형태 미사용)\nRuntime.getRuntime().exec(\"ls \" + userInput);",
-        "good": "// ✅ 안전한 대안 API 사용\n// Thread.stop() 대신 → 인터럽트 메커니즘\nthread.interrupt();\n\n// Runtime.exec(String) 대신 → 배열 형태 사용\nString[] cmd = {\"ls\", \"-l\", safeDir};\nProcess proc = Runtime.getRuntime().exec(cmd);\n\n// 또는 ProcessBuilder 사용 (권장)\nProcessBuilder pb = new ProcessBuilder(\"ls\", \"-l\", safeDir);\npb.redirectErrorStream(true);\nProcess p = pb.start();"
-      }
+      ]
     }
   ]
 }
