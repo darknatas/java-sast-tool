@@ -37,12 +37,24 @@ public class TaintAnalysisEngine {
     // ── Sanitizer Signatures ─────────────────────────────────────────────
 
     private static final Set<String> SANITIZER_METHODS = new HashSet<>(Arrays.asList(
-            "prepareStatement", "setString", "setInt", "setLong", "setObject",
-            "setParameter", "escapeSQL",
-            "escapeHtml", "encodeForHTML", "htmlEscape", "encodeHTML",
-            "getCanonicalPath", "normalize",
+            // SQL 파라미터화
+            "prepareStatement", "setString", "setInt", "setLong", "setDouble",
+            "setFloat", "setBoolean", "setObject", "setParameter", "escapeSQL", "escapeString",
+            // HTML/XSS — Apache Commons Text, OWASP ESAPI, Spring, Guava
+            "escapeHtml", "escapeHtml4", "escapeHtml3",
+            "encodeForHTML", "htmlEscape", "encodeHTML", "escapeXml",
+            "escapeXml10", "escapeXml11",
+            "encodeForJavaScript", "encodeForCSS", "encodeForURL",
+            "stripXss", "sanitizeHtml", "toSafeHtml", "cleanHtml",
+            // 경로 정규화
+            "getCanonicalPath", "normalize", "toRealPath",
+            // LDAP / XPath / HTTP
             "encodeForLDAP", "encodeForXPath", "encodeForHTTP",
-            "encode", "canonicalize"
+            // 범용 인코딩·검증
+            "encode", "canonicalize", "sanitize", "validate",
+            "encodeBase64", "escapeForRegex", "stripTags",
+            // 커스텀 검증 패턴 (이름이 동사+Input/Value 형태인 일반 메서드)
+            "validateInput", "cleanInput", "purify"
     ));
 
     // ── Method-Call Sink Signatures (Rule별 매핑) ─────────────────────────
@@ -102,6 +114,8 @@ public class TaintAnalysisEngine {
 
     private final Map<String, TaintInfo> taintSet = new LinkedHashMap<>();
     private final List<Finding> findings = new ArrayList<>();
+    // 동일 (ruleId, file, sinkLine) 중복 Finding 방지
+    private final Set<String> reportedKeys = new HashSet<>();
     private String currentFile;
     private SecurityRule currentRule;
 
@@ -113,6 +127,7 @@ public class TaintAnalysisEngine {
                                  List<SecurityRule> rules) {
         this.currentFile = filePath;
         findings.clear();
+        reportedKeys.clear();
 
         for (SecurityRule rule : rules) {
             // DS-4.1: 세션 객체가 서비스 레이어 메서드 파라미터로 선언된 패턴을 구조적으로 탐지
@@ -209,6 +224,9 @@ public class TaintAnalysisEngine {
 
             if (isSourceCall(init)) {
                 taintSet.put(varName, new TaintInfo(init.toString(), line, new ArrayList<>()));
+            } else if (isSanitizerCall(init)) {
+                // Sanitizer 호출 결과를 변수에 대입 → 변수는 안전
+                taintSet.remove(varName);
             } else if (init instanceof ObjectCreationExpr) {
                 // new Foo(taintedArg) → 오염 전파 (생성된 객체 변수도 오염)
                 propagateTaintFromCtor((ObjectCreationExpr) init, varName, line);
@@ -219,8 +237,6 @@ public class TaintAnalysisEngine {
                         origin != null ? origin.sourceExpr : init.toString(),
                         origin != null ? origin.sourceLine : line,
                         propagators));
-            } else if (isSanitizerCall(init) && taintSet.containsKey(varName)) {
-                taintSet.remove(varName);
             }
         }
 
@@ -236,6 +252,9 @@ public class TaintAnalysisEngine {
 
             if (isSourceCall(val)) {
                 taintSet.put(varName, new TaintInfo(val.toString(), line, new ArrayList<>()));
+            } else if (isSanitizerCall(val)) {
+                // Sanitizer 결과를 재대입 → 변수 오염 해제
+                taintSet.remove(varName);
             } else if (val instanceof ObjectCreationExpr) {
                 propagateTaintFromCtor((ObjectCreationExpr) val, varName, line);
             } else if (isTainted(val)) {
@@ -245,7 +264,8 @@ public class TaintAnalysisEngine {
                         origin != null ? origin.sourceExpr : val.toString(),
                         origin != null ? origin.sourceLine : line,
                         propagators));
-            } else if (isSanitizerCall(val)) {
+            } else {
+                // 오염되지 않은 값으로 재대입 → 이전 오염 해제
                 taintSet.remove(varName);
             }
         }
@@ -284,29 +304,32 @@ public class TaintAnalysisEngine {
             // ① Sink 탐지
             Set<String> sinks = RULE_SINKS.getOrDefault(currentRule.getRuleId(), Collections.emptySet());
             if (sinks.contains(methodName)) {
-                boolean argFired = false;
-                for (Expression argExpr : n.getArguments()) {
-                    if (isTainted(argExpr)) {
-                        String taintedVar = firstTaintedVar(argExpr);
-                        TaintInfo info = taintSet.get(taintedVar);
-                        reportFinding(info, taintedVar, n.toString(), line);
-                        argFired = true;
-                    }
-                }
-                // 인자에 오염 없으면 scope(수신 객체) 오염 여부 확인
-                // — ois.readObject(), url.openConnection() 패턴
-                if (!argFired) {
-                    n.getScope().ifPresent(scope -> {
-                        if (isTainted(scope)) {
-                            String taintedVar = firstTaintedVar(scope);
+                // IV-1.4: System.out / System.err 출력은 웹 응답이 아니므로 XSS Sink 제외
+                if (!("IV-1.4".equals(currentRule.getRuleId()) && isSystemOutputScope(n))) {
+                    boolean argFired = false;
+                    for (Expression argExpr : n.getArguments()) {
+                        if (isTainted(argExpr)) {
+                            String taintedVar = firstTaintedVar(argExpr);
                             TaintInfo info = taintSet.get(taintedVar);
                             reportFinding(info, taintedVar, n.toString(), line);
+                            argFired = true;
                         }
-                    });
+                    }
+                    // 인자에 오염 없으면 scope(수신 객체) 오염 여부 확인
+                    // — ois.readObject(), url.openConnection() 패턴
+                    if (!argFired) {
+                        n.getScope().ifPresent(scope -> {
+                            if (isTainted(scope)) {
+                                String taintedVar = firstTaintedVar(scope);
+                                TaintInfo info = taintSet.get(taintedVar);
+                                reportFinding(info, taintedVar, n.toString(), line);
+                            }
+                        });
+                    }
                 }
             }
 
-            // ② Sanitizer — 관련 변수 오염 제거
+            // ② Sanitizer — 관련 인자 변수 오염 제거
             if (SANITIZER_METHODS.contains(methodName)) {
                 for (Expression argExpr : n.getArguments()) {
                     if (argExpr instanceof NameExpr) {
@@ -363,11 +386,13 @@ public class TaintAnalysisEngine {
         }
         if (expr instanceof MethodCallExpr) {
             MethodCallExpr call = (MethodCallExpr) expr;
-            boolean scopeTainted = call.getScope()
-                    .filter(s -> s instanceof NameExpr
-                              && taintSet.containsKey(((NameExpr) s).getNameAsString()))
-                    .isPresent();
-            boolean argTainted = call.getArguments().stream().anyMatch(this::isTainted);
+            // Sanitizer 호출 결과는 항상 안전 — 오탐 방지 핵심 규칙
+            if (SANITIZER_METHODS.contains(call.getNameAsString())) return false;
+            // Source 직접 호출은 오염 처리 — 체이닝 탐지: request.getParameter("id").trim()
+            if (SOURCE_METHODS.contains(call.getNameAsString())) return true;
+            // scope 또는 인자에 오염값이 있으면 결과도 오염 (재귀 탐지)
+            boolean scopeTainted = call.getScope().map(this::isTainted).orElse(false);
+            boolean argTainted   = call.getArguments().stream().anyMatch(this::isTainted);
             return scopeTainted || argTainted;
         }
         if (expr instanceof ObjectCreationExpr) {
@@ -378,6 +403,11 @@ public class TaintAnalysisEngine {
         }
         if (expr instanceof CastExpr) {
             return isTainted(((CastExpr) expr).getExpression());
+        }
+        // 삼항 연산자: tainted != null ? tainted : "default" 패턴
+        if (expr instanceof ConditionalExpr) {
+            ConditionalExpr ce = (ConditionalExpr) expr;
+            return isTainted(ce.getThenExpr()) || isTainted(ce.getElseExpr());
         }
         return false;
     }
@@ -411,8 +441,28 @@ public class TaintAnalysisEngine {
         return vars.isEmpty() ? "<unknown>" : vars.get(0);
     }
 
+    /**
+     * IV-1.4 XSS: System.out / System.err 스코프 메서드 호출 여부 확인.
+     * 이들은 웹 응답 출력이 아니므로 XSS Sink에서 제외한다.
+     */
+    private boolean isSystemOutputScope(MethodCallExpr call) {
+        return call.getScope()
+                .filter(s -> s instanceof FieldAccessExpr)
+                .map(s -> (FieldAccessExpr) s)
+                .filter(fa -> "out".equals(fa.getNameAsString()) || "err".equals(fa.getNameAsString()))
+                .map(FieldAccessExpr::getScope)
+                .filter(s -> s instanceof NameExpr)
+                .map(s -> ((NameExpr) s).getNameAsString())
+                .filter("System"::equals)
+                .isPresent();
+    }
+
     private void reportFinding(TaintInfo info, String taintedVar,
                                String sinkExpr, int sinkLine) {
+        // 동일 규칙·파일·라인에서 중복 Finding 생성 방지
+        String dedupKey = currentRule.getRuleId() + ":" + currentFile + ":" + sinkLine;
+        if (!reportedKeys.add(dedupKey)) return;
+
         String sourceExpr = info != null ? info.sourceExpr : "unknown";
         int    sourceLine = info != null ? info.sourceLine : -1;
         List<String> props = info != null ? info.propagators : Collections.emptyList();
