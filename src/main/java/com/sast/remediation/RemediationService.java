@@ -101,9 +101,15 @@ public class RemediationService {
             if (rule.getRemediation() != null) {
                 result.ruleDescription = rule.getRemediation().getDescription();
                 result.ruleGuideRef    = rule.getRemediation().getGuideRef();
+                // Primary: bad_code / good_code inside remediation object
+                result.codeExampleBad  = rule.getRemediation().getBadCode();
+                result.codeExampleGood = rule.getRemediation().getGoodCode();
             }
-            if (rule.getCodeExamples() != null) {
-                result.codeExampleBad  = rule.getCodeExamples().getBad();
+            // Fallback: separate codeExamples field (future-compatibility)
+            if (result.codeExampleBad == null && rule.getCodeExamples() != null) {
+                result.codeExampleBad = rule.getCodeExamples().getBad();
+            }
+            if (result.codeExampleGood == null && rule.getCodeExamples() != null) {
                 result.codeExampleGood = rule.getCodeExamples().getGood();
             }
         }

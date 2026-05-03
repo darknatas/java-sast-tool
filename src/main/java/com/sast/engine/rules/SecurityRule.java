@@ -1,6 +1,7 @@
 package com.sast.engine.rules;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,15 +52,25 @@ public class SecurityRule {
         private String guideRef;
         private String remediationCode;
 
+        @JsonProperty("bad_code")
+        private String badCode;
+
+        @JsonProperty("good_code")
+        private String goodCode;
+
         public String getStrategy()        { return strategy; }
         public String getDescription()     { return description; }
         public String getGuideRef()        { return guideRef; }
         public String getRemediationCode() { return remediationCode; }
+        public String getBadCode()         { return badCode; }
+        public String getGoodCode()        { return goodCode; }
 
         public void setStrategy(String v)        { this.strategy = v; }
         public void setDescription(String v)     { this.description = v; }
         public void setGuideRef(String v)        { this.guideRef = v; }
         public void setRemediationCode(String v) { this.remediationCode = v; }
+        public void setBadCode(String v)         { this.badCode = v; }
+        public void setGoodCode(String v)        { this.goodCode = v; }
     }
 
     // ── Getters ──────────────────────────────────────────────────────────

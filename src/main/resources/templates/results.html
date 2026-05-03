@@ -28,14 +28,22 @@
         .accordion-header-wrap { display: flex; align-items: stretch; }
         .accordion-header-wrap .accordion-button { flex: 1 1 auto; width: auto !important; min-width: 0; }
         .accordion-header-wrap .detail-btn-wrap { display: flex; align-items: center; padding: 0 .6rem; border-left: 1px solid rgba(0,0,0,.125); flex-shrink: 0; }
-        /* 상세 모달 코드 블록 */
-        .code-bad  { background: #fff5f5; border: 1px solid #ffc5c5; border-radius: .5rem; }
-        .code-good { background: #f0fff4; border: 1px solid #9be9a8; border-radius: .5rem; }
-        .code-bad  pre, .code-good pre { margin: 0; }
-        .code-bad  pre code.hljs,
-        .code-good pre code.hljs { background: transparent; }
-        .modal-xl { --bs-modal-width: 860px; }
+        /* 상세 모달 */
+        .modal-xl { --bs-modal-width: 920px; }
         .guide-ref-badge { font-size: .78rem; }
+        /* 권고 수정 가이드 탭 */
+        .guide-tabs .nav-link { font-size: .85rem; font-weight: 600; }
+        .guide-tabs .nav-link.tab-bad  { color: #dc3545; }
+        .guide-tabs .nav-link.tab-good { color: #198754; }
+        .guide-tabs .nav-link.tab-bad.active  { color: #dc3545 !important; border-bottom-color: #dc3545; }
+        .guide-tabs .nav-link.tab-good.active { color: #198754 !important; border-bottom-color: #198754; }
+        /* 코드 카드 (나쁜/좋은 예시) */
+        .code-bad  { background: #fff5f5; border: 1px solid #ffc5c5; border-radius: 0 0 .5rem .5rem; }
+        .code-good { background: #f0fff4; border: 1px solid #9be9a8; border-radius: 0 0 .5rem .5rem; }
+        .code-bad pre, .code-good pre { margin: 0; }
+        .code-bad  pre code.hljs,
+        .code-good pre code.hljs { background: transparent !important; }
+        .guide-code-scroll { max-height: 300px; overflow-y: auto; }
     </style>
 </head>
 <body>
@@ -341,25 +349,75 @@
                     </div>
                 </div>
 
-                <!-- 취약 코드 예시 (codeExamples.bad) -->
-                <div th:if="${item.remediation != null and item.remediation.codeExampleBad != null}"
-                     class="mb-4">
-                    <div class="section-label text-danger">
-                        <i class="bi bi-x-circle me-1"></i>취약 코드 예시 (행안부 가이드)
-                    </div>
-                    <div class="code-bad p-3">
-                        <pre class="mb-0"><code class="language-java modal-code" th:text="${item.remediation.codeExampleBad}"></code></pre>
-                    </div>
-                </div>
-
-                <!-- 안전 코드 예시 (codeExamples.good) -->
-                <div th:if="${item.remediation != null and item.remediation.codeExampleGood != null}"
+                <!-- 권고 수정 가이드 (bad_code / good_code 탭 비교) -->
+                <div th:if="${item.remediation != null and (item.remediation.codeExampleBad != null or item.remediation.codeExampleGood != null)}"
                      class="mb-3">
-                    <div class="section-label text-success">
-                        <i class="bi bi-check-circle me-1"></i>안전 코드 예시 (행안부 가이드)
+                    <div class="section-label">
+                        <i class="bi bi-book-half me-1"></i>권고 수정 가이드
                     </div>
-                    <div class="code-good p-3">
-                        <pre class="mb-0"><code class="language-java modal-code" th:text="${item.remediation.codeExampleGood}"></code></pre>
+
+                    <!-- 탭 헤더 -->
+                    <ul class="nav nav-tabs guide-tabs mb-0" role="tablist"
+                        th:id="'guide-tabs-' + ${stat.index}">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link tab-bad active"
+                                    type="button"
+                                    data-bs-toggle="tab"
+                                    role="tab"
+                                    th:attr="data-bs-target='#guide-bad-' + ${stat.index},
+                                             aria-controls='guide-bad-' + ${stat.index}">
+                                <i class="bi bi-x-circle-fill me-1"></i>나쁜 예시
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link tab-good"
+                                    type="button"
+                                    data-bs-toggle="tab"
+                                    role="tab"
+                                    th:attr="data-bs-target='#guide-good-' + ${stat.index},
+                                             aria-controls='guide-good-' + ${stat.index}">
+                                <i class="bi bi-check-circle-fill me-1"></i>좋은 예시
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- 탭 콘텐츠 -->
+                    <div class="tab-content" th:id="'guide-tab-content-' + ${stat.index}">
+
+                        <!-- 나쁜 예시 패널 -->
+                        <div class="tab-pane fade show active"
+                             role="tabpanel"
+                             th:id="'guide-bad-' + ${stat.index}">
+                            <div class="code-bad p-3">
+                                <div th:if="${item.remediation.codeExampleBad != null}"
+                                     class="guide-code-scroll">
+                                    <pre class="mb-0"><code class="language-java modal-code"
+                                          th:text="${item.remediation.codeExampleBad}"></code></pre>
+                                </div>
+                                <p th:unless="${item.remediation.codeExampleBad != null}"
+                                   class="text-muted text-center py-3 mb-0 small">
+                                    <i class="bi bi-info-circle me-1"></i>예시 코드가 없습니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 좋은 예시 패널 -->
+                        <div class="tab-pane fade"
+                             role="tabpanel"
+                             th:id="'guide-good-' + ${stat.index}">
+                            <div class="code-good p-3">
+                                <div th:if="${item.remediation.codeExampleGood != null}"
+                                     class="guide-code-scroll">
+                                    <pre class="mb-0"><code class="language-java modal-code"
+                                          th:text="${item.remediation.codeExampleGood}"></code></pre>
+                                </div>
+                                <p th:unless="${item.remediation.codeExampleGood != null}"
+                                   class="text-muted text-center py-3 mb-0 small">
+                                    <i class="bi bi-info-circle me-1"></i>예시 코드가 없습니다.
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -418,8 +476,14 @@
     });
 
     document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
-        tab.addEventListener('shown.bs.tab', () => {
+        tab.addEventListener('shown.bs.tab', e => {
+            // 아코디언 내 코드 하이라이팅
             document.querySelectorAll('pre code.language-java:not(.modal-code)').forEach(safeHighlight);
+            // 모달 내 가이드 탭 전환 시 해당 패널 코드 하이라이팅
+            const targetSel = e.target.getAttribute('data-bs-target');
+            if (targetSel) {
+                document.querySelectorAll(targetSel + ' code.modal-code').forEach(safeHighlight);
+            }
         });
     });
 
@@ -430,8 +494,8 @@
             if (!modalId) return;
             const modalEl = document.querySelector(modalId);
             if (!modalEl) return;
-            // 모달 내 코드 블록 최초 1회 하이라이팅
-            modalEl.querySelectorAll('code.modal-code').forEach(safeHighlight);
+            // 모달 열릴 때 현재 활성 탭의 코드 블록 하이라이팅 (show active 패널만)
+            modalEl.querySelectorAll('.tab-pane.show.active code.modal-code').forEach(safeHighlight);
             new bootstrap.Modal(modalEl).show();
         });
     });
