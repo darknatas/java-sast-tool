@@ -23,7 +23,7 @@
 
 ## 테스트 환경
 
-- **서버 주소**: `http://localhost:5000` (외부: `http://15.164.190.193:5000`)
+- **서버 주소**: `http://localhost:5000` (외부: `http://teskim-vibecoding.ddns.net:5000`)
 - **테스트 픽스처**: `src/test/java/com/sast/fixtures/vulnerable/` 내 Java 파일 사용
 - **상태 기호**: ⬜ 미수행 · ✅ 통과 · ❌ 실패
 

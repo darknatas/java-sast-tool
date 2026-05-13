@@ -77,7 +77,7 @@ tail -f sast.log
 # ... Started SastApplication in X.XXX seconds
 ```
 
-브라우저에서 `http://15.164.190.193:5000` 에 접속합니다.
+브라우저에서 `http://teskim-vibecoding.ddns.net:5000` 에 접속합니다.
 
 > **주의:** EC2 보안 그룹에서 TCP 포트 5000 인바운드 규칙을 허용해야 합니다.
 
@@ -87,7 +87,7 @@ tail -f sast.log
 
 ### 2.1 웹 UI 모드 (권장)
 
-1. 브라우저에서 `http://15.164.190.193:5000` 접속
+1. 브라우저에서 `http://teskim-vibecoding.ddns.net:5000` 접속
 2. 분석할 Java 프로젝트를 **ZIP 또는 7z**으로 압축
 3. 업로드 영역에 파일을 드래그하거나 클릭하여 선택
 4. **"분석 시작"** 버튼 클릭
