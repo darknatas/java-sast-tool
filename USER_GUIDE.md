@@ -111,7 +111,7 @@ tail -f sast.log
 # ... Started SastApplication in X.XXX seconds
 ```
 
-브라우저에서 `http://<EC2-Public-IP>:5000` 에 접속합니다.
+브라우저에서 `http://15.164.190.193:5000` 에 접속합니다.
 
 > **주의:** EC2 보안 그룹에서 TCP 포트 5000 인바운드 규칙을 허용해야 합니다.
 
