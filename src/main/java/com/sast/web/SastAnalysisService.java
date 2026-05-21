@@ -37,7 +37,7 @@ public class SastAnalysisService {
 
     private static final Logger log         = LoggerFactory.getLogger(SastAnalysisService.class);
     private static final int    MAX_ENTRIES       = 10_000;              // ZIP 폭탄 방지 (IV-1.6)
-    private static final long   MAX_EXTRACT_BYTES = 100L * 1024 * 1024; // 디스크 폭탄 방지: 100MB
+    private static final long   MAX_EXTRACT_BYTES = 300L * 1024 * 1024; // 디스크 폭탄 방지: 300MB
 
     private SASTEngine         engine;
     private RemediationService remediationService;
@@ -116,7 +116,7 @@ public class SastAnalysisService {
                     long declared = entry.getSize();
                     if (declared > 0 && totalBytes[0] + declared > MAX_EXTRACT_BYTES) {
                         throw new SecurityException(
-                                "압축 해제 용량 합계가 100MB 한도를 초과합니다. 분석을 중단합니다.");
+                                "압축 해제 용량 합계가 300MB 한도를 초과합니다. 분석을 중단합니다.");
                     }
 
                     Files.createDirectories(target.getParent());
@@ -126,7 +126,7 @@ public class SastAnalysisService {
                     // 사후 크기 체크 (선제 체크가 불가능했던 경우 커버)
                     if (totalBytes[0] > MAX_EXTRACT_BYTES) {
                         throw new SecurityException(
-                                "압축 해제 용량 합계가 100MB 한도를 초과합니다. 분석을 중단합니다.");
+                                "압축 해제 용량 합계가 300MB 한도를 초과합니다. 분석을 중단합니다.");
                     }
 
                     if (entry.getName().endsWith(".java")) {
@@ -194,7 +194,7 @@ public class SastAnalysisService {
                 }
                 totalBytes[0] += attrs.size();
                 if (totalBytes[0] > MAX_EXTRACT_BYTES) {
-                    throw new SecurityException("압축 해제 용량 합계가 100MB 한도를 초과합니다. 분석을 중단합니다.");
+                    throw new SecurityException("압축 해제 용량 합계가 300MB 한도를 초과합니다. 분석을 중단합니다.");
                 }
                 if (file.toString().endsWith(".java")) {
                     fileCount[0]++;
