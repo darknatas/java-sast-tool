@@ -170,4 +170,63 @@
 - **Markdown / JSON 리포트** (`ReportGenerator`) — 항목별 진단번호·위험도·취약 코드·권고 수정 코드·오염 흐름 포함
 - **PDF 진단서** (`PdfReportGenerator`) — 웹 UI(`http://<서버IP>:5000`)에서 다운로드 가능
 
-> 상세 사용 방법은 `user_manual.md`(또는 PDF/DOCX) 문서를 참고하세요.
+---
+
+## 5. 사용 방법
+
+### 5.1 빌드
+
+분석 도구는 Java 17 + Maven 환경에서 빌드하며, 웹 서버와 CLI가 하나의 Fat JAR로 패키징됩니다.
+
+```bash
+# 전체 빌드 + 테스트
+mvn clean package
+
+# 빠른 빌드 (테스트 생략)
+mvn clean package -DskipTests
+
+# 산출물: target/sast.jar
+```
+
+### 5.2 웹 UI로 분석하기 (권장)
+
+브라우저에서 ZIP 파일을 업로드하면 분석 결과를 대시보드로 확인하고 PDF 진단서를 내려받을 수 있습니다.
+
+```bash
+# 서버 실행 (포트 5000, 백그라운드)
+nohup java -jar target/sast.jar > sast.log 2>&1 &
+echo $! > sast.pid
+
+# 기동 확인 ("Started SastApplication ..." 로그 확인)
+tail -f sast.log
+
+# 서비스 종료
+kill $(cat sast.pid) && rm sast.pid
+```
+
+**사용 절차:**
+
+1. 분석할 Java 프로젝트의 소스코드를 **ZIP으로 압축**합니다. (업로드 용량 제한: 300MB)
+2. 브라우저에서 `http://<서버IP>:5000` 에 접속합니다.
+3. ZIP 파일을 업로드하고 **분석 시작**을 클릭합니다.
+4. 분석이 완료되면 결과 대시보드에서 위험도별 요약과 항목별 상세(취약 코드, 오염 흐름, 권고 수정 코드)를 확인합니다.
+5. **리포트 다운로드** 버튼으로 PDF 진단서를 내려받습니다.
+
+### 5.3 CLI로 분석하기 (CI/CD·서버리스 환경)
+
+웹 서버 없이 명령 한 줄로 분석을 실행할 수 있어 CI/CD 파이프라인에 통합하기 적합합니다.
+
+```bash
+# 형식: java -cp target/sast.jar com.sast.SASTEngine <소스 디렉터리> <리포트 출력 경로>
+java -cp target/sast.jar com.sast.SASTEngine ./src/main/java ./report.md
+
+# 실행 결과: report.md + report.json + report.pdf 자동 생성
+```
+
+> **주의:** `java -jar`(웹 서버)와 `java -cp ... com.sast.SASTEngine`(CLI)은 서로 다른 진입점입니다.
+
+### 5.4 오탐(False Positive) 억제
+
+실제 위험이 없다고 판단한 항목은 `src/main/resources/sast-suppressions.json`에 억제 규칙을 추가하면 이후 분석 결과에서 제외됩니다. 테스트 코드 경로는 기본적으로 분석에서 제외됩니다.
+
+> 화면 캡처를 포함한 상세 사용 방법은 `user_manual.md`(또는 PDF/DOCX) 문서를 참고하세요.
